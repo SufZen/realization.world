@@ -1,7 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { ButtonLink } from "@/components/button-link";
-import { EditorialMedia } from "@/components/editorial-media";
+import Image from "next/image";
 import { ProcessRibbon } from "@/components/process-ribbon";
 import { SectionHeading } from "@/components/section-heading";
 import { VentureCard } from "@/components/venture-card";
@@ -12,6 +12,9 @@ export default function HomePage() {
   return (
     <>
       <section className="home-hero">
+        <div className="home-hero__bg" aria-hidden="true">
+          <Image src="/media/hero-physical-world.png" alt="" fill priority sizes="100vw" />
+        </div>
         <div className="container-wide home-hero__grid">
           <div className="home-hero__content">
             <p className="eyebrow">REAL ESTATE · VENTURES · SYSTEMS</p>
@@ -25,14 +28,6 @@ export default function HomePage() {
               <ButtonLink href="/ventures" variant="outline">Explore the portfolio</ButtonLink>
             </div>
           </div>
-          <EditorialMedia
-            src="/media/hero-physical-world.png"
-            alt="A multidisciplinary team shaping a physical site model at an architectural worktable"
-            label="FROM REALITY → TO VENTURE"
-            caption="Physical opportunity. Digital leverage. An operating future."
-            priority
-            className="home-hero__media"
-          />
         </div>
       </section>
 
