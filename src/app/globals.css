@@ -237,6 +237,7 @@ button { cursor: pointer; }
 .audience-card > span:last-child { margin-top: auto; padding-top: 2rem; font-size: .78rem; font-weight: 700; text-decoration: underline; text-underline-offset: .25rem; }
 
 .insights-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: rgb(255 255 255 / 20%); border: 1px solid rgb(255 255 255 / 20%); }
+@media (max-width: 1000px) { .insights-grid { grid-template-columns: 1fr; } }
 .insight-card { display: grid; min-height: 330px; grid-template-columns: 72px 1fr; gap: 1.5rem; padding: 2rem; background: #000; color: #fff; }
 .insight-card__icon { display: grid; width: 56px; height: 56px; place-items: center; border: 1px solid rgb(255 255 255 / 34%); border-radius: 50%; color: var(--color-yellow); }
 .insight-card .eyebrow { color: var(--color-yellow); }

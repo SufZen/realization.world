@@ -38,6 +38,7 @@ export default async function InsightPage({ params }: PageProps<"/insights/[slug
           <aside className="article-meta">
             <p className="eyebrow">{insight.published}</p>
             <p>{insight.readTime}</p>
+            <a href="/asaf">By Asaf Eyzenkot</a>
             <Link href="/insights"><ArrowLeft className="r-flip-x" size={16} /> All insights</Link>
           </aside>
           <div className="article-content">

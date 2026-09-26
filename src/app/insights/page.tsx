@@ -19,12 +19,12 @@ export default function InsightsPage() {
         index="06"
         eyebrow="INSIGHTS"
         title="Field notes. | Real systems."
-        intro="Ideas for building, proving and transferring physical-world ventures."
+        intro="Notes from real projects: | property, development and AI in practice."
         theme="light"
       />
       <section className="section surface-dark">
         <div className="container-wide">
-          <SectionHeading eyebrow="FIELD NOTES" title="Built from reality." intro="Venture architecture, physical systems, markets and governance." inverse />
+          <SectionHeading eyebrow="FIELD NOTES" title="Built from reality." intro="Written by Asaf Eyzenkot (Suf Zen), | from the work itself." inverse />
           <div className="insights-grid">
             {insights.map(({ slug, category, title, excerpt, published, readTime, icon: Icon }) => (
               <Link className="insight-card" href={`/insights/${slug}`} key={slug}>
