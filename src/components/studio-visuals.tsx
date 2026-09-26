@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import { Lines } from "./lines";
 
 const systemNodes = [
   ["01", "Signal", "A valuable reality is stuck."],
@@ -15,7 +16,7 @@ export function StudioSystemMap() {
         <article className="system-map__node" key={title}>
           <div className="system-map__signal" aria-hidden="true"><i /></div>
           <span>{number}</span>
-          <h3>{title}</h3>
+          <h3><Lines text={title} /></h3>
           <p>{text}</p>
           {index < systemNodes.length - 1 && <b aria-hidden="true">→</b>}
         </article>

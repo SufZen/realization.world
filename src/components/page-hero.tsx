@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Lines } from "./lines";
 
 type PageHeroProps = {
   eyebrow: string;
@@ -16,8 +17,8 @@ export function PageHero({ eyebrow, title, intro, index = "R/W", actions, theme 
       <div className="container-wide page-hero__grid">
         <div className="page-hero__content">
           <div className="eyebrow-line"><span>{index}</span><p className="eyebrow">{eyebrow}</p></div>
-          <h1>{title}</h1>
-          <p className="page-hero__intro">{intro}</p>
+          <h1><Lines text={title} /></h1>
+          <p className="page-hero__intro"><Lines text={intro} /></p>
           {actions && <div className="button-row">{actions}</div>}
         </div>
         {aside || <div className="page-hero__mark" aria-hidden="true"><span>R</span><i /></div>}

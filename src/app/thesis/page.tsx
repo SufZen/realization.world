@@ -5,6 +5,7 @@ import { PageHero } from "@/components/page-hero";
 import { SectionHeading } from "@/components/section-heading";
 import { thesisDomains } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
+import { Lines } from "@/components/lines";
 
 export const metadata: Metadata = pageMetadata(
   "Thesis",
@@ -13,12 +14,12 @@ export const metadata: Metadata = pageMetadata(
 );
 
 const principles = [
-  ["Potential precedes product", "We begin with a consequential physical reality—not a software feature in search of a market."],
-  ["Systems unlock value", "The blocker is rarely one missing service. It is usually a fragmented system of rights, context, workflows and incentives."],
-  ["Digital creates leverage", "Technology matters when it organizes the real-world process, preserves context and makes coordinated action possible."],
-  ["Evidence earns expansion", "A venture advances through observed demand, workable economics, regulatory feasibility and an operator path."],
-  ["Operation is a distinct craft", "The team best suited to imagine and validate a venture may not be the team best suited to run it at scale."],
-  ["Clarity compounds trust", "Ownership, operation, licensing, data control, venture status and evidence must remain visible."],
+  ["Potential precedes product", "We begin with a real physical need, | not a software feature looking for a market."],
+  ["Systems unlock value", "The blocker is rarely one missing service. | It is a fragmented system."],
+  ["Digital creates leverage", "Technology matters when it organizes | the real-world process."],
+  ["Evidence earns expansion", "A venture advances on demand, economics, | regulation and an operator path."],
+  ["Operation is a distinct craft", "The team that imagines a venture | may not be the one to run it."],
+  ["Clarity compounds trust", "Ownership, operation, data and status | stay visible."],
 ] as const;
 
 export default function ThesisPage() {
@@ -27,8 +28,8 @@ export default function ThesisPage() {
       <PageHero
         index="01"
         eyebrow="OUR THESIS"
-        title="Value hides in broken systems."
-        intro="Assets and essential processes stay stuck when rights, people, technology and operations fail to connect. That missing system is the opportunity."
+        title="Value hides | in broken systems."
+        intro="Assets stay stuck when rights, people and operations don’t connect. | That missing system is the opportunity."
         actions={<><ButtonLink href="/how-we-build" variant="dark">See how we build</ButtonLink><ButtonLink href="/bring-an-opportunity" variant="outline">Bring a case</ButtonLink></>}
         theme="brand"
         aside={<EditorialMedia src="/media/hero-physical-world.png" alt="A team mapping a physical-world venture around an architectural model" label="THE MISSING LAYER" className="page-hero__media" />}
@@ -39,14 +40,14 @@ export default function ThesisPage() {
           <SectionHeading
             eyebrow="WHERE WE LOOK"
             title="Where systems shape reality."
-            intro="We focus where a better system can change a durable physical outcome."
+            intro="We focus where a better system | changes a lasting physical outcome."
           />
           <div className="content-grid">
             {thesisDomains.map(({ title, text, icon: Icon }) => (
               <article className="content-card" key={title}>
                 <div className="content-card__icon"><Icon size={24} strokeWidth={1.5} /></div>
-                <h3>{title}</h3>
-                <p>{text}</p>
+                <h3><Lines text={title} /></h3>
+                <p><Lines text={text} /></p>
               </article>
             ))}
           </div>
@@ -65,8 +66,8 @@ export default function ThesisPage() {
             {principles.map(([title, text], index) => (
               <article className="principle" key={title}>
                 <span className="principle__index">0{index + 1}</span>
-                <h3>{title}</h3>
-                <p>{text}</p>
+                <h3><Lines text={title} /></h3>
+                <p><Lines text={text} /></p>
               </article>
             ))}
           </div>
@@ -79,7 +80,7 @@ export default function ThesisPage() {
         <div className="container-wide">
           <SectionHeading
             eyebrow="A DELIBERATE BOUNDARY"
-            title="Build the venture. End the dependency."
+            title="Build the venture. | End the dependency."
             intro="The outcome is a defined system with clear ownership and an operating future."
           />
           <div className="fit-grid">

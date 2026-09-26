@@ -4,9 +4,9 @@ import { ButtonLink } from "@/components/button-link";
 import { EditorialMedia } from "@/components/editorial-media";
 import { ProcessRibbon } from "@/components/process-ribbon";
 import { SectionHeading } from "@/components/section-heading";
-import { StudioSystemMap } from "@/components/studio-visuals";
 import { VentureCard } from "@/components/venture-card";
-import { framework, insights, partnerPaths, projects, ventures } from "@/content/site";
+import { framework, partnerPaths, projects, ventures } from "@/content/site";
+import { Lines } from "@/components/lines";
 
 export default function HomePage() {
   return (
@@ -33,16 +33,15 @@ export default function HomePage() {
             priority
             className="home-hero__media"
           />
-          <p className="spaced-caps home-hero__tagline">PHYSICAL POTENTIAL. DIGITAL SYSTEMS. REALIZED VALUE.</p>
         </div>
       </section>
 
       <section className="manifesto">
         <div className="container-wide manifesto__grid">
-          <p className="eyebrow">THE UNREALIZED PROBLEM</p>
+          <p className="eyebrow">THE PROBLEM</p>
           <div>
-            <h2>The value is there. The system isn’t.</h2>
-            <p>We build the missing layer between an underused reality and a venture that can change it.</p>
+            <h2><Lines text="The value is there. | The system isn’t." /></h2>
+            <p><Lines text="We build the missing layer | between an underused place and a working venture." /></p>
           </div>
         </div>
       </section>
@@ -52,7 +51,7 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="PROVEN GROUND"
             title="Real estate is where we start."
-            intro="Residential development in Portugal is the core of our work—and the evidence behind what we build next."
+            intro="Residential development in Portugal is our core. | It is the evidence behind what we build next."
           />
           <div className="project-list">
             {projects.map((project) => (
@@ -79,12 +78,11 @@ export default function HomePage() {
               <article className="framework-card" key={title}>
                 <div className="framework-card__icon"><Icon size={25} strokeWidth={1.5} /></div>
                 <p className="eyebrow">0{index + 1}</p>
-                <h3>{title}</h3>
-                <p>{text}</p>
+                <h3><Lines text={title} /></h3>
+                <p><Lines text={text} /></p>
               </article>
             ))}
           </div>
-          <StudioSystemMap />
         </div>
       </section>
 
@@ -93,7 +91,7 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="HOW WE BUILD"
             title="Founder-led. Built to transfer."
-            intro="Vision, architecture and validation stay close. Scale moves to the right operator."
+            intro="Vision and validation stay with us. | Scale moves to the right operator."
           />
           <ProcessRibbon />
           <div className="button-row"><ButtonLink href="/how-we-build" variant="dark">See the full model</ButtonLink></div>
@@ -105,7 +103,7 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="VENTURES"
             title="The ventures prove the thesis."
-            intro="Clear problem. Working system. Visible status. Defined operator path."
+            intro="Clear problem. Working system. | Visible status."
           />
           <div className="ventures-grid">
             {ventures.map((venture, index) => <VentureCard venture={venture} featured={index === 0} key={venture.slug} />)}
@@ -121,41 +119,15 @@ export default function HomePage() {
             intro="Start with the role you can play."
           />
           <div className="audience-grid">
-            {partnerPaths.map(({ slug, title, summary, icon: Icon }, index) => (
+            {partnerPaths.map(({ slug, title, summary, icon: Icon }) => (
               <Link className="audience-card" href={`/partners/${slug}`} key={slug}>
-                <span className="audience-card__number">0{index + 1}</span>
                 <Icon size={32} strokeWidth={1.5} aria-hidden="true" />
-                <h3>{title}</h3>
-                <p>{summary}</p>
+                <h3><Lines text={title} /></h3>
+                <p><Lines text={summary} /></p>
                 <span>Follow this path</span>
               </Link>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="section surface-dark">
-        <div className="container-wide">
-          <SectionHeading
-            eyebrow="INSIGHTS"
-            title="Field notes. Real systems."
-            intro="Venture architecture, market evidence and transfer."
-            inverse
-          />
-          <div className="insights-grid">
-            {insights.slice(0, 2).map(({ slug, category, title, excerpt, published, readTime, icon: Icon }) => (
-              <Link className="insight-card" href={`/insights/${slug}`} key={slug}>
-                <div className="insight-card__icon"><Icon size={25} strokeWidth={1.5} /></div>
-                <div>
-                  <p className="eyebrow">{category}</p>
-                  <h3>{title}</h3>
-                  <p>{excerpt}</p>
-                  <div className="insight-card__meta"><span>{published}</span><span>{readTime}</span></div>
-                </div>
-              </Link>
-            ))}
-          </div>
-          <div className="button-row"><ButtonLink href="/insights" variant="light">Read all insights</ButtonLink></div>
         </div>
       </section>
 
@@ -164,7 +136,7 @@ export default function HomePage() {
           <div>
             <p className="eyebrow">A POTENTIAL REALITY</p>
             <h2>See what others miss?</h2>
-            <p>Share the asset, the rights and what keeps it stuck.</p>
+            <p><Lines text="Share the asset, the rights | and what keeps it stuck." /></p>
           </div>
           <Link className="button button--dark" href="/bring-an-opportunity">Bring an opportunity <ArrowUpRight size={18} aria-hidden="true" /></Link>
         </div>

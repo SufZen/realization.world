@@ -71,3 +71,15 @@ Pushing this source does not deploy the site. Production deployment will be conf
 ## Important disclaimer
 
 Site strategy and content are not legal, securities, trademark, tax, regulatory, privacy, licensing, investment, or SEO advice. Appropriate professional review is required in each market before launch or promotion of a venture.
+
+## Typography — line-break rule (applies to every page)
+
+Text breaks where a reader would pause, never where the box happens to end.
+
+1. **Break at punctuation or between phrases.** Mark break points in copy with ` | ` and render it with `<Lines text=… />` (`src/components/lines.tsx`); each part becomes its own line. In static HTML (`public/asaf/`) use `<span class="ln">`.
+2. **Never split a unit** (names, places, dates, numbers with units, emails, fixed phrases): `<span class="nw">`.
+3. **No line may end on a weak word** (a, an, the, and, or, of, in, to, for, with, &) and **no one-word last line** (orphan).
+4. **One short sentence per line** in detail text; split long sentences.
+5. **An authored line in a heading or lead must fit on one line** from 768 px up — shorten or re-split, don't shrink the font. In narrow card text a balanced wrap inside a line is acceptable as long as rule 3 holds.
+6. Safety net in CSS: `text-wrap: balance` on headings and `.ln`, `text-wrap: pretty` on paragraphs.
+7. **Verify before shipping:** run `tools/linebreak-check.js` in the browser console at 1440, 1024, 880 and 390 px on every changed page; it must report `problems: []`.

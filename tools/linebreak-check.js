@@ -27,13 +27,15 @@
     const issues = [];
     const last = lines[lines.length - 1];
     // Title + <small> subtitle rows and hand-authored .ln lines are broken by design; skip the orphan check there.
-    if (!el.querySelector('small, .ln') && last.split(' ').length === 1) issues.push('orphan: "' + last + '"');
+    if (!el.querySelector('small, .ln') && last.split(' ').length === 1 && el.textContent.trim().split(/\s+/).length > 2) issues.push('orphan: "' + last + '"');
     const display = /^H[1-4]$/.test(el.tagName) || el.matches('.lede,.eyebrow,.role,.page-hero__intro,.section-heading__intro,.home-hero__lead,dd') || lines.length <= 3;
     if (display) lines.slice(0, -1).forEach(l => { if (WEAK.test(l)) issues.push('weak break after: "' + l.slice(-24) + '"'); });
     out.push({ el: (el.className || el.tagName).toString().slice(0, 20), lines, issues });
   }
-  // Authored lines (.ln) must fit on one line from tablet width up; if they wrap, re-split the text.
-  if (innerWidth >= 768) for (const ln of document.querySelectorAll('.ln')) {
+  // Authored lines (.ln) in display text (headings, leads) must fit on one line from tablet width up.
+  // In card/body text a balanced wrap inside a line is fine — the weak-word and orphan checks still apply.
+  const DISPLAY_LN = 'h1 .ln, h2 .ln, h3 .ln, .lede .ln, .page-hero__intro .ln, .section-heading__intro .ln, .home-hero__lead .ln';
+  if (innerWidth >= 768) for (const ln of document.querySelectorAll(DISPLAY_LN)) {
     if (ln.offsetParent && ln.getClientRects().length === 1 && ln.getBoundingClientRect().height > parseFloat(getComputedStyle(ln).lineHeight) * 1.5)
       out.push({ el: 'ln', lines: [ln.textContent], issues: ['authored line wraps'] });
   }

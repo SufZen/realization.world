@@ -40,7 +40,7 @@ export const processSteps = [
   {
     number: "02",
     title: "Architect",
-    text: "Design the venture and its operating logic.",
+    text: "Design the venture | and its operating logic.",
   },
   {
     number: "03",
@@ -50,29 +50,29 @@ export const processSteps = [
   {
     number: "04",
     title: "Validate",
-    text: "Test demand, economics and delivery in reality.",
+    text: "Test demand, economics | and delivery in reality.",
   },
   {
     number: "05",
     title: "Transfer",
-    text: "Place it with the right operator.",
+    text: "Place it | with the right operator.",
   },
 ] as const;
 
 export const framework = [
   {
     title: "Physical potential",
-    text: "An asset, place or essential system with value locked inside it.",
+    text: "An asset, place or essential system | with value locked inside it.",
     icon: Building2,
   },
   {
     title: "Digital systems",
-    text: "Workflows and intelligence that make complexity operable.",
+    text: "Workflows and intelligence | that make complexity operable.",
     icon: Network,
   },
   {
     title: "Realized value",
-    text: "A functioning venture with ownership, evidence and an operator.",
+    text: "A working venture | with ownership, evidence and an operator.",
     icon: Sparkles,
   },
 ] satisfies Array<{ title: string; text: string; icon: IconComponent }>;
@@ -101,18 +101,18 @@ export const ventures: Venture[] = [
     name: "Realization Portugal",
     eyebrow: "PROPERTY RESOLUTION VENTURE · PORTUGAL",
     descriptor:
-      "A coordinated system for resolving properties immobilized by inheritance, documentation and co-owner deadlock.",
+      "A coordinated system for properties stuck | in inheritance, paperwork or co-owner deadlock.",
     stage: "In development",
     problem:
-      "Homes with real value can remain stuck because ownership, documentation and licensed professional processes are fragmented.",
+      "Homes with real value stay stuck | when ownership and paperwork | are fragmented.",
     system:
-      "A guided diagnosis, Resolution Blueprint, Clara and a coordinated path through the relevant licensed professionals.",
+      "A guided diagnosis and Clara, | coordinated with licensed professionals.",
     realizationRole:
-      "Research, venture architecture, product, technology, validation design and transfer planning.",
+      "Research, venture architecture, | product and technology.",
     operator:
-      "A dedicated local operator and licensed professionals carry the operating and regulated responsibilities.",
+      "A local operator and licensed professionals | carry the regulated responsibilities.",
     evidence:
-      "Case studies are published once they are documented and cleared for publication.",
+      "Case studies are published | once documented and cleared.",
     ask: "Bring a property case · Operate this venture · Partner with capital",
     icon: KeyRound,
     image: "/media/venture-portugal.png",
@@ -123,18 +123,18 @@ export const ventures: Venture[] = [
     name: "RealizeOS",
     eyebrow: "AI OPERATING SYSTEM · BUILT BY REALIZATION",
     descriptor:
-      "The AI operating system we built to run Realization—free for others to use.",
+      "The AI operating system we built to run Realization. | Free for others to use.",
     stage: "Active",
     problem:
-      "Knowledge, context and action are fragmented across AI tools and disconnected workflows.",
+      "Knowledge, context and action | are scattered across disconnected AI tools.",
     system:
-      "FABRIC, a knowledge graph, agents, routines, venture identity and a local event log organized as an operating system.",
+      "A knowledge graph, agents, routines | and an event log, working as one system.",
     realizationRole:
-      "Built for our own operations, and improved as we use it.",
+      "Built for our own operations, | and improved as we use it.",
     operator:
-      "Free to use and source-available under the Business Source License 1.1. No paid service or licence sales.",
+      "Free to use and source-available (BSL 1.1). | No paid service or licence sales.",
     evidence:
-      "Used in Realization’s own research, documentation and coordination.",
+      "Used in Realization’s own research, | documentation and coordination.",
     ask: "Explore the code · Use it freely",
     icon: Cpu,
     image: "/media/venture-realizeos.png",
@@ -157,7 +157,7 @@ export const futureVenture = {
   name: "Future venture",
   eyebrow: "NEXT PHYSICAL-WORLD SYSTEM",
   descriptor:
-    "A reserved space for opportunities that pass the studio’s problem, model, regulatory and operator validation gates.",
+    "Reserved for the next opportunity | that passes our validation gates.",
   stage: "Exploring" as const,
   icon: Orbit,
 };
@@ -168,17 +168,17 @@ export const partnerPaths = [
     title: "Opportunity owners",
     headline: "Bring what others cannot unlock.",
     summary:
-      "For owners of assets, places or operating systems who can see the potential—but need a venture architecture to unlock it.",
+      "For owners of assets, places or systems | who see the potential, but need a venture to unlock it.",
     promise:
-      "A clear fit assessment, not an open-ended engagement. Strong opportunities may advance to a focused discovery and validation path.",
+      "A clear fit assessment, | not an open-ended engagement.",
     cta: "Bring an opportunity",
     href: "/bring-an-opportunity",
     icon: Landmark,
     steps: [
-      ["Recognize", "An asset or system has meaningful value, rights and a visible blocker."],
-      ["Evidence", "Review what Realization builds and the maturity we need to see."],
-      ["Brief", "Share ownership, constraint, beneficiaries, timing and capital context."],
-      ["Fit", "Receive a route to discovery, a partner referral or a clear decline."],
+      ["Recognize", "The asset has value, rights | and a visible blocker."],
+      ["Evidence", "See what we build | and the maturity we look for."],
+      ["Brief", "Share ownership, constraints, | timing and capital context."],
+      ["Fit", "Get a route to discovery, | a referral or a clear no."],
     ],
   },
   {
@@ -186,17 +186,17 @@ export const partnerPaths = [
     title: "Operators",
     headline: "Take a proven system further.",
     summary:
-      "For experienced operators who want a validated system—not a raw idea—and can bring team, market access and execution discipline.",
+      "For experienced operators | who want a validated system, not a raw idea.",
     promise:
-      "Transparent status, capabilities required and a structured transfer conversation covering governance and economics.",
+      "Transparent status | and a structured transfer conversation.",
     cta: "Explore operator fit",
     href: "/bring-an-opportunity?path=operator",
     icon: Factory,
     steps: [
-      ["Enter", "Find a venture whose market and operating problem match your capability."],
-      ["Inspect", "Review status, model, needs, licensing and evidence available."],
-      ["Profile", "Share operating history, team, geography, capital and constraints."],
-      ["Discuss", "Evaluate transfer, licensing or operating-partner structures."],
+      ["Enter", "Find a venture that matches | your operating capability."],
+      ["Inspect", "Review status, model, | needs and evidence."],
+      ["Profile", "Share your history, team, | geography and capital."],
+      ["Discuss", "Agree the transfer | or partnership structure."],
     ],
   },
   {
@@ -204,17 +204,17 @@ export const partnerPaths = [
     title: "Capital partners",
     headline: "Back evidence. Not theatre.",
     summary:
-      "For angels, family offices, funds, corporates and project-capital partners aligned with the physical-world thesis.",
+      "For angels, family offices, funds and corporates | aligned with the physical-world thesis.",
     promise:
-      "Opportunity-specific briefs and data rooms only where mandate, stage, geography and instrument align.",
+      "Briefs and data rooms | only where mandate and stage align.",
     cta: "Share your mandate",
     href: "/bring-an-opportunity?path=capital",
     icon: CircleDollarSign,
     steps: [
-      ["Thesis", "Start with the studio’s focus and the type of value it is designed to create."],
-      ["Evidence", "Review problem, validation, operator path and current venture status."],
-      ["Profile", "Share ticket, stage, geography, instrument and involvement."],
-      ["Match", "Move to a relevant brief and controlled data room when approved."],
+      ["Thesis", "Start with our focus | and the value we create."],
+      ["Evidence", "Review the problem, validation | and operator path."],
+      ["Profile", "Share ticket, stage, | geography and instrument."],
+      ["Match", "Move to a relevant brief | once approved."],
     ],
   },
   {
@@ -222,17 +222,17 @@ export const partnerPaths = [
     title: "Corporate & public partners",
     headline: "Turn a challenge into a venture.",
     summary:
-      "For organizations with authority, data and a consequential physical-world problem that can support a time-boxed validation.",
+      "For organizations with authority and data | and a physical-world problem worth a pilot.",
     promise:
-      "A venture pathway with defined outcomes, governance and handoff—not an indefinite consultancy programme.",
+      "A venture pathway with defined outcomes, | not an open-ended consultancy.",
     cta: "Frame a strategic venture",
     href: "/bring-an-opportunity?path=corporate",
     icon: Handshake,
     steps: [
-      ["Frame", "Name the system-level problem, decision owner, data and affected users."],
-      ["Structure", "Define a venture model instead of an open-ended service project."],
-      ["Validate", "Run a time-boxed pilot with explicit targets and governance."],
-      ["Scale", "Form a strategic venture or transfer to the right operator."],
+      ["Frame", "Name the problem, | its owner and the data."],
+      ["Structure", "Define a venture model, | not a service project."],
+      ["Validate", "Run a time-boxed pilot | with clear targets."],
+      ["Scale", "Form a venture | or hand it to an operator."],
     ],
   },
 ] as const;
@@ -242,9 +242,9 @@ export const markets = [
     slug: "israel",
     name: "Israel",
     label: "ISRAEL–EUROPE BRIDGE",
-    headline: "Israeli capability. European opportunity.",
+    headline: "Israeli capability. | European opportunity.",
     summary:
-      "Israel is the relationship side of the bridge—connecting capital, technology, operators and entrepreneurial networks with focused opportunities in Europe.",
+      "The relationship side of the bridge: | capital, technology, operators and networks.",
     role: "Capital, technology & partnerships",
     language: "Hebrew-first on realization.co.il",
     status: "Active bridge",
@@ -256,7 +256,7 @@ export const markets = [
     label: "CORE EUROPEAN MARKET",
     headline: "Opportunity grounded in place.",
     summary:
-      "Portugal is a main European market for Realization: a place to source physical-world opportunities, build local partnerships and develop ventures in real operating conditions.",
+      "Where we source opportunities, | build partnerships and develop projects.",
     role: "European opportunity market",
     language: "Portuguese-first; English counterpart",
     status: "Active market",
@@ -281,7 +281,7 @@ export const insights: Insight[] = [
     category: "Venture architecture",
     title: "Design beyond founder dependence",
     excerpt:
-      "A physical-world venture becomes durable when its operating logic, rights and evidence can travel to the right operator.",
+      "A venture lasts when its logic, rights and evidence | can travel to the right operator.",
     readTime: "6 min read",
     published: "Field note 01",
     icon: Blocks,
@@ -313,7 +313,7 @@ export const insights: Insight[] = [
     category: "Physical-world systems",
     title: "Turn physical friction into a system",
     excerpt:
-      "Software creates leverage when it organizes a real-world process—not when it merely adds another interface.",
+      "Software creates leverage when it organizes a real process, | not when it adds another interface.",
     readTime: "5 min read",
     published: "Field note 02",
     icon: Cpu,
@@ -343,9 +343,9 @@ export const insights: Insight[] = [
   {
     slug: "evidence-before-expansion",
     category: "Markets",
-    title: "Evidence before expansion",
+    title: "Evidence | before expansion",
     excerpt:
-      "A country domain is not a strategy. A market earns an identity when the problem, model, regulation and operator all align.",
+      "A country domain is not a strategy. | A market earns an identity through evidence.",
     readTime: "4 min read",
     published: "Field note 03",
     icon: Globe2,
@@ -375,7 +375,7 @@ export const insights: Insight[] = [
     category: "Studio practice",
     title: "Governance is part of the product",
     excerpt:
-      "Ownership, licensing and accountability are not legal footnotes. They shape whether a venture can be trusted and transferred.",
+      "Ownership and accountability are not footnotes. | They decide whether a venture can be trusted.",
     readTime: "5 min read",
     published: "Field note 04",
     icon: Scale,
@@ -403,10 +403,10 @@ export const insights: Insight[] = [
 ];
 
 export const thesisDomains = [
-  { title: "Places & property", text: "Ownership, use, regeneration and spatial value.", icon: Building2 },
-  { title: "Infrastructure", text: "Systems that connect essential physical activity.", icon: Network },
-  { title: "Water & energy", text: "Resource systems where efficiency and resilience compound.", icon: Waves },
-  { title: "Construction", text: "Methods, data and coordination that make building work better.", icon: Factory },
-  { title: "Public systems", text: "Shared challenges with clear authority, beneficiaries and evidence.", icon: Landmark },
-  { title: "Operating intelligence", text: "Digital infrastructure that helps physical-world teams act.", icon: Cpu },
+  { title: "Places & property", text: "Ownership, use, regeneration | and spatial value.", icon: Building2 },
+  { title: "Infrastructure", text: "Systems that connect | essential physical activity.", icon: Network },
+  { title: "Water & energy", text: "Resource systems where efficiency | and resilience compound.", icon: Waves },
+  { title: "Construction", text: "Methods, data and coordination | that make building work better.", icon: Factory },
+  { title: "Public systems", text: "Shared challenges | with clear authority and evidence.", icon: Landmark },
+  { title: "Operating intelligence", text: "Digital infrastructure | that helps physical-world teams act.", icon: Cpu },
 ] satisfies Array<{ title: string; text: string; icon: IconComponent }>;

@@ -1,4 +1,5 @@
 import { processSteps } from "@/content/site";
+import { Lines } from "./lines";
 
 export function ProcessRibbon({ compact = false }: { compact?: boolean }) {
   return (
@@ -8,7 +9,7 @@ export function ProcessRibbon({ compact = false }: { compact?: boolean }) {
           <div className="process-step__number">{step.number}</div>
           <div>
             <h3>{step.title}</h3>
-            {!compact && <p>{step.text}</p>}
+            {!compact && <p><Lines text={step.text} /></p>}
           </div>
         </article>
       ))}

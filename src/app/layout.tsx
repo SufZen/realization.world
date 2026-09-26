@@ -21,13 +21,14 @@ const openSans = Open_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Realization — Physical-World Venture Studio",
+    default: "Realization — Real estate, ventures and systems",
     template: "%s · Realization",
   },
-  description: "A physical-world venture studio that identifies, builds and validates technology-enabled ventures around overlooked physical and spatial systems.",
+  description: "Realization develops real estate in Portugal and builds the ventures and systems around it, with an Israeli capital and partnership network.",
   applicationName: "Realization",
-  category: "Venture studio",
+  category: "Real estate",
   keywords: [
+    "real estate development Portugal",
     "physical-world venture studio",
     "venture architecture",
     "physical-world systems",
@@ -40,14 +41,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: siteUrl,
-    title: "Realization — Physical-World Venture Studio",
-    description: "Realizing untapped potential in the physical world through venture architecture, technology and operating partnerships.",
+    title: "Realization — Real estate, ventures and systems",
+    description: "Realization develops real estate in Portugal and builds the ventures and systems around it, with an Israeli capital and partnership network.",
     siteName: "Realization",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Realization — Physical-World Venture Studio",
-    description: "Realizing untapped potential in the physical world through venture architecture, technology and operating partnerships.",
+    title: "Realization — Real estate, ventures and systems",
+    description: "Realization develops real estate in Portugal and builds the ventures and systems around it, with an Israeli capital and partnership network.",
   },
 };
 
@@ -69,7 +70,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "@type": "Organization",
               name: "Realization",
               url: siteUrl,
-              description: "Physical-world venture studio identifying, building and validating technology-enabled ventures around overlooked physical and spatial systems.",
+              description: "Realization develops real estate in Portugal and builds the ventures and systems around it.",
               founder: { "@type": "Person", name: "Asaf Eyzenkot (Suf Zen)" },
               email: "hello@realization.world",
               areaServed: ["Europe", "Portugal", "Israel"],

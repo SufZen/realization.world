@@ -5,6 +5,7 @@ import { PageHero } from "@/components/page-hero";
 import { SectionHeading } from "@/components/section-heading";
 import { markets } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
+import { Lines } from "@/components/lines";
 
 export function generateStaticParams() {
   return markets.map((market) => ({ slug: market.slug }));
@@ -24,9 +25,9 @@ export default async function MarketPage({ params }: PageProps<"/markets/[slug]"
   const isIsrael = market.slug === "israel";
   const isPortugal = market.slug === "portugal";
   const tracks = isIsrael
-    ? [["Capital", "Connect aligned Israeli investors with evidence-backed European opportunities."], ["Technology", "Match useful Israeli technology with real physical-world problems and operating contexts."], ["Operators", "Bring entrepreneurial speed, sector expertise and execution capability into the right venture."], ["Partnerships", "Build durable relationships across investors, founders, local teams and asset owners."]]
+    ? [["Capital", "Aligned Israeli investors, | matched to evidence-backed opportunities."], ["Technology", "Useful Israeli technology, | matched to real physical-world problems."], ["Operators", "Entrepreneurial speed and sector expertise | for the right venture."], ["Partnerships", "Durable relationships | across investors, founders and owners."]]
     : isPortugal
-      ? [["Opportunity sourcing", "Find valuable assets, places and systems where a better operating model can unlock value."], ["Local context", "Work with the rights, regulations and relationships that shape what is possible in Portugal."], ["Operating partners", "Build with accountable local teams, including the Realization Portugal network."], ["Cross-border fit", "Connect the right opportunities with Israeli capital, technology and venture capability."]]
+      ? [["Opportunity sourcing", "Assets and places | where a better model unlocks value."], ["Local context", "Rights, regulation and relationships | that shape what is possible."], ["Operating partners", "Accountable local teams, | including the Realization Portugal network."], ["Cross-border fit", "The right opportunities, | connected to Israeli capital and technology."]]
       : [];
 
   return (
@@ -47,13 +48,13 @@ export default async function MarketPage({ params }: PageProps<"/markets/[slug]"
       </div>
       <section className="section">
         <div className="container-wide">
-          <SectionHeading eyebrow="MARKET PATHS" title={isIsrael ? "How Israel powers the bridge." : isPortugal ? "How Portugal makes opportunity real." : "How this market works."} intro="Each market contributes a distinct part of the venture system." />
+          <SectionHeading eyebrow="MARKET PATHS" title={isIsrael ? "How Israel powers the bridge." : isPortugal ? "How Portugal makes opportunity real." : "How this market works."} intro="Each market plays a distinct role." />
           <div className="market-tracks">
-            {tracks.map(([title, text]) => <article className="market-track" key={title}><h3>{title}</h3><p>{text}</p></article>)}
+            {tracks.map(([title, text]) => <article className="market-track" key={title}><h3><Lines text={title} /></h3><p><Lines text={text} /></p></article>)}
           </div>
         </div>
       </section>
-      <section className="section surface-muted"><div className="container-wide"><SectionHeading eyebrow="CLARITY" title={isIsrael ? "The origin side of the bridge." : isPortugal ? "A core European market." : "Market status."} intro={isIsrael ? "Israel contributes relationships, capital, technology and entrepreneurial capability. Realization connects those strengths to specific opportunities in Europe." : isPortugal ? "Portugal is both a broad opportunity market and the home of Realization Portugal, a distinct property-resolution venture with its own operating responsibilities." : "Market status is subject to validation."} /></div></section>
+      <section className="section surface-muted"><div className="container-wide"><SectionHeading eyebrow="CLARITY" title={isIsrael ? "The origin side of the bridge." : isPortugal ? "A core European market." : "Market status."} intro={isIsrael ? "Israel brings relationships, capital and technology. | Realization connects them to specific opportunities." : isPortugal ? "A broad opportunity market, | and home of the Realization Portugal venture." : "Market status is subject to validation."} /></div></section>
     </>
   );
 }

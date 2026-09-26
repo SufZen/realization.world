@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { OpportunityForm } from "@/components/opportunity-form";
 import { PageHero } from "@/components/page-hero";
 import { pageMetadata } from "@/lib/metadata";
+import { Lines } from "@/components/lines";
 
 export const metadata: Metadata = pageMetadata(
   "Bring an Opportunity",
@@ -39,7 +40,7 @@ export default function BringOpportunityPage() {
           </Suspense>
         </div>
       </section>
-      <section className="section surface-muted"><div className="container-wide"><div className="fit-grid"><article className="fit-list"><h3>What happens next</h3><p style={{ marginTop: "1rem" }}>We review for thesis, rights, consequence and a plausible validation path. A fit may lead to focused discovery. A non-fit may be declined or, where appropriate, redirected.</p></article><article className="fit-list"><h3>What this is not</h3><p style={{ marginTop: "1rem" }}>Submitting a brief does not create confidentiality, representation, an investment offer or a professional advisory relationship. Do not include secrets or sensitive personal data.</p></article></div></div></section>
+      <section className="section surface-muted"><div className="container-wide"><div className="fit-grid"><article className="fit-list"><h3>What happens next</h3><p style={{ marginTop: "1rem" }}><Lines text="We review thesis, rights and a plausible validation path. | A fit leads to discovery; a non-fit gets a clear answer." /></p></article><article className="fit-list"><h3>What this is not</h3><p style={{ marginTop: "1rem" }}><Lines text="A brief creates no confidentiality, investment offer | or advisory relationship. Leave out sensitive data." /></p></article></div></div></section>
     </>
   );
 }

@@ -5,6 +5,7 @@ import { SectionHeading } from "@/components/section-heading";
 import { VentureCard } from "@/components/venture-card";
 import { futureVenture, ventures } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
+import { Lines } from "@/components/lines";
 
 export const metadata: Metadata = pageMetadata(
   "Ventures",
@@ -19,8 +20,8 @@ export default function VenturesPage() {
       <PageHero
         index="03"
         eyebrow="VENTURES & PORTFOLIO"
-        title="Built to become real."
-        intro="Not assignments. Ventures with a problem, a system, a status and an operating path."
+        title="Built | to become real."
+        intro="Not assignments. | Ventures with a problem, a system and a path."
         actions={<ButtonLink href="/bring-an-opportunity" variant="dark">Bring the next opportunity</ButtonLink>}
         theme="brand"
       />
@@ -30,7 +31,7 @@ export default function VenturesPage() {
           <SectionHeading
             eyebrow="CURRENT PORTFOLIO"
             title="Two ventures. One method."
-            intro="Property resolution in Portugal. Operating intelligence for physical-world teams."
+            intro="Property resolution in Portugal. | Operating intelligence for physical-world teams."
           />
           <div className="ventures-grid">
             {ventures.map((venture, index) => <VentureCard venture={venture} featured={index === 0} key={venture.slug} />)}
@@ -49,14 +50,14 @@ export default function VenturesPage() {
             <div className="venture-card__top"><div className="venture-card__icon"><FutureIcon size={27} strokeWidth={1.5} /></div><span className="status status--verify">{futureVenture.stage}</span></div>
             <p className="eyebrow">{futureVenture.eyebrow}</p>
             <h3>{futureVenture.name}</h3>
-            <p>{futureVenture.descriptor}</p>
+            <p><Lines text={futureVenture.descriptor} /></p>
           </article>
         </div>
       </section>
 
       <section className="section surface-dark">
         <div className="container-wide">
-          <SectionHeading eyebrow="PORTFOLIO GOVERNANCE" title="Status tells the truth." intro="One lifecycle language separates a hypothesis from an operation." inverse />
+          <SectionHeading eyebrow="PORTFOLIO GOVERNANCE" title="Status tells the truth." intro="One lifecycle language | separates a hypothesis from an operation." inverse />
           <div className="process-ribbon process-ribbon--compact">
             {["Exploring", "Validating", "Building", "Partnering", "Operating"].map((status, index) => <article className="process-step" key={status}><div className="process-step__number">0{index + 1}</div><div><h3>{status}</h3></div></article>)}
           </div>

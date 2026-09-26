@@ -4,6 +4,7 @@ import { PageHero } from "@/components/page-hero";
 import { SectionHeading } from "@/components/section-heading";
 import { partnerPaths } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
+import { Lines } from "@/components/lines";
 
 export const metadata: Metadata = pageMetadata(
   "Partners",
@@ -30,7 +31,7 @@ export default function PartnersPage() {
                 <Icon strokeWidth={1.4} aria-hidden="true" />
                 <p className="eyebrow">{title}</p>
                 <h3>{headline}</h3>
-                <p>{summary}</p>
+                <p><Lines text={summary} /></p>
                 <span>Follow this path</span>
               </Link>
             ))}

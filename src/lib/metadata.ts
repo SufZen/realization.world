@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import { plain } from "@/components/lines";
 import { siteUrl } from "@/content/site";
 
-export function pageMetadata(title: string, description: string, path: string): Metadata {
+export function pageMetadata(rawTitle: string, rawDescription: string, path: string): Metadata {
+  const title = plain(rawTitle);
+  const description = plain(rawDescription);
   const url = `${siteUrl}${path}`;
   return {
     title,

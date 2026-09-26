@@ -5,6 +5,7 @@ import { PageHero } from "@/components/page-hero";
 import { SectionHeading } from "@/components/section-heading";
 import { partnerPaths } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
+import { Lines } from "@/components/lines";
 
 export function generateStaticParams() {
   return partnerPaths.map((path) => ({ slug: path.slug }));
@@ -23,20 +24,20 @@ export default async function PartnerPage({ params }: PageProps<"/partners/[slug
   const Icon = path.icon;
   const fit = {
     "opportunity-owners": [
-      ["Strong fit", "A meaningful physical asset or system; credible rights or authority; a specific blocker; identifiable beneficiaries; willingness to share evidence."],
-      ["Not yet", "A generic idea, no route to rights or access, a request for normal agency work, or an expectation of indefinite founder operation."],
+      ["Strong fit", "A meaningful asset, clear rights, | a specific blocker and shared evidence."],
+      ["Not yet", "A generic idea, no access to rights, | or a request for agency work."],
     ],
     operators: [
-      ["Strong fit", "Relevant operating history, accountable leadership, local or sector capability, a team-building path and comfort with structured governance."],
-      ["Not yet", "Interest without operating capacity, unclear accountability, dependence on the studio for day-to-day execution or no route to required licensing."],
+      ["Strong fit", "Relevant operating history, accountable leadership | and a path to build a team."],
+      ["Not yet", "Interest without capacity, | or reliance on the studio to run it."],
     ],
     capital: [
-      ["Strong fit", "A defined mandate, stage, geography, ticket and instrument—plus patience for evidence-led physical-world venture building."],
-      ["Not yet", "A request for broad deal flow, unclear source of funds, mismatched time horizon or an expectation of public claims beyond verified evidence."],
+      ["Strong fit", "A defined mandate, stage, geography and ticket, | and patience for evidence."],
+      ["Not yet", "A request for broad deal flow, | or claims beyond verified evidence."],
     ],
     "corporate-public": [
-      ["Strong fit", "A decision owner, affected users, access to relevant data, a time-boxed validation budget and a credible route to operation."],
-      ["Not yet", "An undefined innovation brief, no authority to test, procurement without venture intent or an open-ended transformation programme."],
+      ["Strong fit", "A decision owner, users, data | and a time-boxed pilot budget."],
+      ["Not yet", "An undefined innovation brief | or an open-ended programme."],
     ],
   }[path.slug];
 
@@ -53,17 +54,17 @@ export default async function PartnerPage({ params }: PageProps<"/partners/[slug
       />
       <section className="section">
         <div className="container-wide">
-          <SectionHeading eyebrow="YOUR JOURNEY" title="A path to a useful decision." intro={path.promise} />
+          <SectionHeading eyebrow="YOUR JOURNEY" title="A path | to a useful decision." intro={path.promise} />
           <div className="journey-grid">
-            {path.steps.map(([title, text], index) => <article className="journey-step" key={title}><span className="journey-step__number">0{index + 1}</span><h3>{title}</h3><p>{text}</p></article>)}
+            {path.steps.map(([title, text], index) => <article className="journey-step" key={title}><span className="journey-step__number">0{index + 1}</span><h3><Lines text={title} /></h3><p><Lines text={text} /></p></article>)}
           </div>
         </div>
       </section>
       <section className="section surface-muted">
         <div className="container-wide">
-          <SectionHeading eyebrow="FIT" title="Qualify before we build." intro="Clear boundaries protect the opportunity, the partner and the studio." />
+          <SectionHeading eyebrow="FIT" title="Qualify before we build." intro="Clear boundaries protect | everyone involved." />
           <div className="fit-grid">
-            {fit.map(([title, text]) => <article className="fit-list" key={title}><h3>{title}</h3><p style={{ marginTop: "1rem" }}>{text}</p></article>)}
+            {fit.map(([title, text]) => <article className="fit-list" key={title}><h3><Lines text={title} /></h3><p style={{ marginTop: "1rem" }}><Lines text={text} /></p></article>)}
           </div>
           <div className="button-row"><ButtonLink href={path.href} variant="dark">{path.cta}</ButtonLink></div>
         </div>

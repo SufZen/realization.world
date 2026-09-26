@@ -15,7 +15,7 @@ export function BrandMark({ compact = false, inverse = false }: BrandMarkProps) 
       {!compact && (
         <span className="brand-mark__type">
           <strong className={inverse ? "text-white" : ""}>Realization</strong>
-          <small className={inverse ? "text-white-muted" : ""}>Physical-World Venture Studio</small>
+          <small className={inverse ? "text-white-muted" : ""}>Real estate · Ventures · Systems</small>
         </span>
       )}
     </Link>

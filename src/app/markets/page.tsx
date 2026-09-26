@@ -5,6 +5,7 @@ import { SectionHeading } from "@/components/section-heading";
 import { MarketRoleMap } from "@/components/studio-visuals";
 import { markets } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
+import { Lines } from "@/components/lines";
 
 export const metadata: Metadata = pageMetadata(
   "Markets",
@@ -18,8 +19,8 @@ export default function MarketsPage() {
       <PageHero
         index="05"
         eyebrow="MARKETS"
-        title="Israel meets European opportunity."
-        intro="We connect Israeli capital, technology and entrepreneurial capability with active physical-world opportunities in Portugal."
+        title="Israel meets | European opportunity."
+        intro="Israeli capital, technology and entrepreneurship, | connected to real opportunities in Portugal."
         theme="dark"
       />
       <section className="section">
@@ -32,14 +33,14 @@ export default function MarketsPage() {
                 <Icon strokeWidth={1.4} aria-hidden="true" />
                 <p className="eyebrow">{label}</p>
                 <h3>{name}</h3>
-                <p>{headline} {summary}</p>
+                <p><strong className="ln"><Lines text={headline} /></strong> <Lines text={summary} /></p>
                 <span>{status} · Explore market</span>
               </Link>
             ))}
           </div>
         </div>
       </section>
-      <section className="section surface-brand"><div className="container-wide"><SectionHeading eyebrow="OUR ROLE" title="Cross-border reach. Local responsibility." intro="Realization creates the connection and venture architecture. Trusted local partners carry context, execution and continuity." /></div></section>
+      <section className="section surface-brand"><div className="container-wide"><SectionHeading eyebrow="OUR ROLE" title="Cross-border reach. | Local responsibility." intro="We create the connection and the architecture. | Local partners carry the execution." /></div></section>
     </>
   );
 }

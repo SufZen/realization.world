@@ -2,6 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { primaryNavigation } from "@/content/site";
 import { BrandMark } from "./brand-mark";
+import { Lines } from "./lines";
 
 export function SiteFooter() {
   return (
@@ -10,7 +11,7 @@ export function SiteFooter() {
         <div className="site-footer__identity">
           <BrandMark />
           <p className="spaced-caps">PHYSICAL POTENTIAL. DIGITAL SYSTEMS. REALIZED VALUE.</p>
-          <p>Realizing untapped potential in the physical world.</p>
+          <p><Lines text="Realizing untapped potential | in the physical world." /></p>
         </div>
         <div className="site-footer__nav">
           <p className="eyebrow">Explore</p>
@@ -38,7 +39,7 @@ export function SiteFooter() {
       <div className="container-wide site-footer__legal">
         <p>© {new Date().getFullYear()} Realization. All rights reserved.</p>
         <p>
-          Nothing on this site is an offer of securities or investment advice.
+          <Lines text="Nothing on this site is an offer | of securities or investment advice." />
         </p>
       </div>
     </footer>

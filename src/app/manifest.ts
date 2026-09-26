@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Realization — Physical-World Venture Studio",
+    name: "Realization — Real estate, ventures and systems",
     short_name: "Realization",
     description: "Realizing untapped potential in the physical world.",
     start_url: "/",
