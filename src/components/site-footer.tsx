@@ -29,7 +29,10 @@ export function SiteFooter() {
             Bring an opportunity <ArrowUpRight aria-hidden="true" />
           </Link>
           <a href="mailto:hello@realization.world">hello@realization.world</a>
-          <p>Israel ↔ Portugal · Spain research</p>
+          <a href="https://wa.me/972528289437" rel="noopener">WhatsApp</a>
+          <a href="https://schedule.realization.co.il/30-minute-intro-meeting-asaf" rel="noopener">Book a 30-min intro</a>
+          <a href="/asaf">Founder · Asaf Eyzenkot</a>
+          <p>Israel ↔ Portugal</p>
         </div>
       </div>
       <div className="container-wide site-footer__legal">

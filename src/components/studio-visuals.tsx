@@ -50,11 +50,10 @@ export function EvidenceTrack() {
 
 export function MarketRoleMap() {
   return (
-    <div className="market-role-map" aria-label="Realization connects Israeli capital, technology and partners with active opportunities in Portugal and future research in Spain">
+    <div className="market-role-map" aria-label="Realization connects Israeli capital, technology and partners with active opportunities in Portugal">
       <div className="market-role-map__studio"><span>ISRAEL ↔ EUROPE</span><strong>Realization</strong></div>
       <article><span>01 · CONNECT</span><strong>Israel</strong><p>Capital · technology · partners</p></article>
       <article><span>02 · REALIZE</span><strong>Portugal</strong><p>Opportunity · local operation</p></article>
-      <article><span>03 · RESEARCH</span><strong>Spain</strong><p>Hypothesis · evidence · operator path</p></article>
     </div>
   );
 }

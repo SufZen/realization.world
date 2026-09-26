@@ -252,18 +252,6 @@ export const markets = [
     status: "Active market",
     icon: Waves,
   },
-  {
-    slug: "spain",
-    name: "Spain",
-    label: "FUTURE MARKET · RESEARCH",
-    headline: "Evidence before expansion.",
-    summary:
-      "Spain is reserved for research into physical-world and property-resolution opportunities. A dedicated venture identity follows only after the problem, model, regulation and operator are validated.",
-    role: "Future opportunity research",
-    language: "Spanish at launch; English research page",
-    status: "Reserved · not operating",
-    icon: Building2,
-  },
 ] as const;
 
 export type Insight = {

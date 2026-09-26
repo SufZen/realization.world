@@ -34,7 +34,6 @@ export const metadata: Metadata = {
     "venture validation",
     "Realization Portugal",
     "Israel Europe venture bridge",
-    "Spain opportunity research",
     "RealizeOS",
   ],
   alternates: { canonical: siteUrl },

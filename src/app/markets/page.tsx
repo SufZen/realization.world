@@ -8,7 +8,7 @@ import { pageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = pageMetadata(
   "Markets",
-  "How Realization connects Israeli capital, technology and partners with active physical-world opportunities in Portugal and evidence-led research in Spain.",
+  "How Realization connects Israeli capital, technology and partners with active physical-world opportunities in Portugal.",
   "/markets",
 );
 
@@ -19,12 +19,12 @@ export default function MarketsPage() {
         index="05"
         eyebrow="MARKETS"
         title="Israel meets European opportunity."
-        intro="We connect Israeli capital, technology and entrepreneurial capability with active physical-world opportunities in Portugal—and research future potential in Spain."
+        intro="We connect Israeli capital, technology and entrepreneurial capability with active physical-world opportunities in Portugal."
         theme="dark"
       />
       <section className="section">
         <div className="container-wide">
-          <SectionHeading eyebrow="MARKET ARCHITECTURE" title="One bridge. One active market. One future hypothesis." intro="Israel connects. Portugal operates. Spain remains evidence-led research until the model, regulation and operator are validated." />
+          <SectionHeading eyebrow="MARKET ARCHITECTURE" title="One bridge. One active market." intro="Israel connects. Portugal operates." />
           <MarketRoleMap />
           <div className="market-grid">
             {markets.map(({ slug, name, label, headline, summary, status, icon: Icon }) => (

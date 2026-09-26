@@ -42,9 +42,9 @@ export default function AboutPage() {
             <h2>Asaf Eyzenkot<br />(Suf Zen)</h2>
             <h3>Connecting the abstract with the tangible.</h3>
             <p>Asaf’s perspective is shaped by a lifelong drive to understand the logic behind complex systems and make that logic clear, useful and real. Realization brings that approach into the physical world: identify the latent value, design the missing system and prove it through action.</p>
-            <p>An operating lens spanning Israel and Portugal—and future market research in Spain—gives the studio a practical cross-market view. It also reinforces a core boundary: local continuity belongs to strong local and sector operators.</p>
+            <p>An operating lens spanning Israel and Portugal gives the studio a practical cross-market view. It also reinforces a core boundary: local continuity belongs to strong local and sector operators.</p>
             <p>The founder leads vision, research, venture architecture, product logic and validation. The aim is not to remain the permanent operator. It is to build ventures whose knowledge, ownership and operating systems can outlast founder dependency.</p>
-            <div className="button-row"><ButtonLink href="/how-we-build" variant="dark">How the role works</ButtonLink></div>
+            <div className="button-row"><a className="button button--dark" href="/asaf"><span>Founder profile</span></a><ButtonLink href="/how-we-build" variant="outline">How the role works</ButtonLink></div>
           </div>
         </div>
       </section>
