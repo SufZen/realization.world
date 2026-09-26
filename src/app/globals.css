@@ -334,7 +334,8 @@ button { cursor: pointer; }
 .article-shell { display: grid; grid-template-columns: 220px minmax(0, 760px); gap: clamp(2rem, 7vw, 7rem); }
 .article-meta { position: sticky; top: 110px; align-self: start; padding-top: .25rem; }
 .article-meta p + p { margin-top: .75rem; }
-.article-meta a { display: inline-flex; align-items: center; gap: .4rem; margin-top: 2rem; color: #000; font-size: .8rem; font-weight: 700; text-decoration: underline; text-underline-offset: .25rem; }
+.article-meta a + a { margin-top: .9rem; }
+.article-meta a { display: flex; width: fit-content; align-items: center; gap: .4rem; margin-top: 2rem; color: #000; font-size: .8rem; font-weight: 700; text-decoration: underline; text-underline-offset: .25rem; }
 .article-content { display: grid; gap: 3.25rem; }
 .article-content section h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); }
 .article-content section p { margin-top: 1.2rem; font-size: 1.06rem; line-height: 1.85; }
