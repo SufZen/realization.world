@@ -76,7 +76,7 @@ h1{font-weight:800;font-size:clamp(44px,7.4vw,86px);line-height:1;letter-spacing
 .domains{margin:8px 0 0;font-weight:700;font-size:15px;color:var(--paper);display:flex;flex-wrap:wrap;gap:4px 0}
 .domains span{white-space:nowrap}
 .domains span+span::before{content:"·";color:var(--marigold);padding:0 10px}
-.lede{color:var(--night-text);font-size:clamp(17px,1.8vw,20px);max-width:36ch;margin:18px 0 0}
+.lede{color:var(--night-text);font-size:clamp(17px,1.8vw,20px);margin:18px 0 0}
 .portrait{width:300px;height:300px;border-radius:50%;border:8px solid var(--marigold);overflow:hidden;background:#333}
 .portrait img{width:100%;height:100%;object-fit:cover}
 .actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
@@ -86,7 +86,7 @@ h1{font-weight:800;font-size:clamp(44px,7.4vw,86px);line-height:1;letter-spacing
 .btn:hover{transform:translateY(-1px)}
 
 /* Signature: an architectural drawing title block — the corner box that states the facts of the sheet */
-.titleblock{position:relative;margin-top:-44px;box-shadow:6px 6px 0 var(--marigold);background:var(--paper);border:2px solid var(--ink);display:grid;grid-template-columns:repeat(5,1fr)}
+.titleblock{position:relative;margin-top:-44px;box-shadow:6px 6px 0 var(--marigold);background:var(--paper);border:2px solid var(--ink);display:grid;grid-template-columns:1.35fr 1fr 1fr 1fr 1fr}
 .titleblock div{padding:14px 16px;border-right:1px solid var(--ink)}
 .titleblock div:last-child{border-right:0}
 .titleblock dt{margin:0}
@@ -94,6 +94,11 @@ h1{font-weight:800;font-size:clamp(44px,7.4vw,86px);line-height:1;letter-spacing
 .titleblock .avail{background:var(--marigold)}
 .titleblock .avail .label{color:var(--ink)}
 
+/* Line-break rules (see README "Typography"): authored breaks at punctuation, units never split, no orphans */
+h1,h2,h3,.role,.lede,summary .name{text-wrap:balance}
+p,dd,.detail{text-wrap:pretty}
+.ln{display:block}
+.nw{white-space:nowrap}
 section{padding-top:80px}
 h2{font-weight:800;font-size:clamp(26px,3.2vw,36px);line-height:1.1;letter-spacing:-.01em;margin:10px 0 0}
 h3{font-weight:700;font-size:18px;line-height:1.3;margin:0}
@@ -117,7 +122,7 @@ summary .plus::before,summary .plus::after{content:"";position:absolute;left:50%
 summary .plus::after{transform:translate(-50%,-50%) rotate(90deg)}
 details[open] summary .plus{transform:rotate(45deg);background:var(--marigold);border-color:var(--marigold)}
 summary:hover .plus{background:var(--marigold);border-color:var(--marigold)}
-.detail{padding:0 44px 20px 0;color:var(--graphite);font-size:15px;max-width:68ch}
+.detail{padding:0 44px 20px 0;color:var(--graphite);font-size:15px;max-width:72ch}
 .detail p{margin:0}.detail p+p{margin-top:6px}
 .when{font:600 13px/1.6 var(--mono);color:var(--graphite);margin-right:10px}
 
@@ -143,21 +148,24 @@ footer{background:var(--ink);color:#9A9A9A;font-size:14px;padding:0 0 32px}
 footer .wrap{border-top:1px solid #333;padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 footer a{text-decoration:none}footer a:hover{color:var(--marigold)}
 
-@media (max-width:860px){
+@media (max-width:1000px){
   .hero{grid-template-columns:1fr;gap:28px}
   .portrait{width:180px;height:180px;order:-1;border-width:6px}
   .mast{padding-bottom:40px}
   .titleblock{margin-top:24px;grid-template-columns:1fr 1fr}
-  .titleblock div{border-bottom:1px solid var(--ink)}
-  .titleblock div:nth-child(2n){border-right:0}
-  .titleblock .avail{grid-column:1/-1;border-bottom:0}
+  .titleblock div{border-right:0;border-bottom:1px solid var(--ink)}
+  .titleblock .mode{grid-column:1/-1;order:1}
+  .titleblock .eng{order:2;border-right:1px solid var(--ink)}
+  .titleblock .lang{order:3}
+  .titleblock .contract{grid-column:1/-1;order:4}
+  .titleblock .avail{grid-column:1/-1;order:5;border-bottom:0}
   .pillars{grid-template-columns:1fr}
   .pillars p,.pillars p+p{padding:16px 0;border-left:0;border-bottom:1px solid var(--rule)}
   summary{grid-template-columns:1fr 28px}
   summary .tag{display:none}
   .detail{padding-right:0}
-  .links{grid-template-columns:1fr 1fr}
-  .links a,.links a+a{padding:16px 12px 16px 0;border-left:0;border-bottom:1px solid #333}
+  .links{grid-template-columns:1fr}
+  .links a,.links a+a{padding:14px 0;border-left:0;border-bottom:1px solid #333}
   section{padding-top:56px}
 }
 @media (prefers-reduced-motion:reduce){.btn:hover{transform:none}summary .plus{transition:none}}
@@ -177,7 +185,7 @@ footer a{text-decoration:none}footer a:hover{color:var(--marigold)}
         <p class="role">Founder-operator</p>
         <p class="domains"><span>Real estate development</span> <span>Business operations</span> <span>AI-enabled systems</span></p>
         <!-- Hero sentence: option 3, chosen by Asaf 26 Sep 2026. -->
-        <p class="lede">Clear structure, coordinated people, lean systems. That&#8217;s how I make complex work run.</p>
+        <p class="lede"><span class="ln">Clear structure, coordinated people, lean systems.</span><span class="ln">That&#8217;s how I make complex work run.</span></p>
         <div class="actions">
           <a class="btn primary" href="https://wa.me/972528289437" rel="noopener">WhatsApp <span aria-hidden="true">↗</span></a>
           <a class="btn ghost" href="https://schedule.realization.co.il/30-minute-intro-meeting-asaf" rel="noopener">Book a 30-min intro</a>
@@ -191,11 +199,11 @@ footer a{text-decoration:none}footer a:hover{color:var(--marigold)}
 <main id="main">
   <div class="wrap">
     <dl class="titleblock" aria-label="Engagement summary">
-      <div><dt class="label">Work mode</dt><dd>Remote + in person<br>Lisbon area &amp; Barcelona</dd></div>
-      <div><dt class="label">Engagement</dt><dd>B2B · fractional<br>or project</dd></div>
-      <div><dt class="label">Contracting</dt><dd>Realization<br>Unipessoal LDA</dd></div>
-      <div><dt class="label">Languages</dt><dd>English fluent<br>Hebrew native</dd></div>
-      <div class="avail"><dt class="label">Start</dt><dd>Early October 2026</dd></div>
+      <div class="mode"><dt class="label">Work mode</dt><dd>Remote + in person<br><span class="nw">Lisbon area &amp; Barcelona</span></dd></div>
+      <div class="eng"><dt class="label">Engagement</dt><dd>B2B<br><span class="nw">Fractional · Project</span></dd></div>
+      <div class="contract"><dt class="label">Contracting</dt><dd>Realization<br>Unipessoal LDA</dd></div>
+      <div class="lang"><dt class="label">Languages</dt><dd>English fluent<br>Hebrew native</dd></div>
+      <div class="avail"><dt class="label">Start</dt><dd><span class="nw">Early October 2026</span></dd></div>
     </dl>
   </div>
 
@@ -203,9 +211,9 @@ footer a{text-decoration:none}footer a:hover{color:var(--marigold)}
     <p class="label">What I bring</p>
     <h2 id="bring">Three disciplines, one operator.</h2>
     <div class="pillars">
-      <p><strong>Operations and delivery</strong>Scopes, plans and coordinated execution across specialists.</p>
-      <p><strong>Real estate development</strong>Development and investment in Portugal, grounded in architecture.</p>
-      <p><strong>AI-enabled systems</strong>Practical AI workflows, and teaching teams to use them.</p>
+      <p><strong>Operations and delivery</strong><span class="ln">Scopes, plans and execution,</span><span class="ln">coordinated across specialists.</span></p>
+      <p><strong>Real estate development</strong><span class="ln">Development and investment,</span><span class="ln">in Portugal, rooted in architecture.</span></p>
+      <p><strong>AI-enabled systems</strong><span class="ln">Practical AI workflows,</span><span class="ln">and teams trained to use them.</span></p>
     </div>
   </section>
 
@@ -213,10 +221,10 @@ footer a{text-decoration:none}footer a:hover{color:var(--marigold)}
     <p class="label">Selected work</p>
     <h2 id="work">What I run and have built.</h2>
     <div class="rows">
-      <details><summary><span class="name">Arena<small>GP manager and shareholder · Barreiro</small></span><span class="tag">Ongoing</span><span class="plus" aria-hidden="true"></span></summary><div class="detail"><p>11-unit residential building. I manage the development company, connecting investment objectives, architecture, professional inputs and execution.</p></div></details>
+      <details><summary><span class="name">Arena<small>GP manager and shareholder · Barreiro</small></span><span class="tag">Ongoing</span><span class="plus" aria-hidden="true"></span></summary><div class="detail"><p><span class="nw">11-unit</span> residential building in Barreiro.</p><p>I manage the development company, from investment and design to execution.</p></div></details>
       <details><summary><span class="name">Realization<small>Founder and owner</small></span><span class="tag">2019 –</span><span class="plus" aria-hidden="true"></span></summary><div class="detail"><p>Real estate operations and business architecture in Portugal.</p><p><a href="https://realization.world/">realization.world</a></p></div></details>
-      <details><summary><span class="name">RealizeOS<small>Builder</small></span><span class="tag">Internal system</span><span class="plus" aria-hidden="true"></span></summary><div class="detail"><p>The AI operations system behind Realization&#8217;s own work: business context connected to agentic workflows. Later extended to independent users and clients.</p></div></details>
-      <details><summary><span class="name">realization.pt<small>Founder, product lead</small></span><span class="tag">In development</span><span class="plus" aria-hidden="true"></span></summary><div class="detail"><p>A platform for Portugal&#8217;s abandoned and problematic properties. I shape concept and product; a development lead owns software delivery.</p></div></details>
+      <details><summary><span class="name">RealizeOS<small>Builder</small></span><span class="tag">Internal system</span><span class="plus" aria-hidden="true"></span></summary><div class="detail"><p>The AI operations system behind Realization&#8217;s own work.</p><p>Later extended to independent users and clients.</p></div></details>
+      <details><summary><span class="name">realization.pt<small>Founder, product lead</small></span><span class="tag">In development</span><span class="plus" aria-hidden="true"></span></summary><div class="detail"><p>A platform for Portugal&#8217;s <span class="nw">abandoned and problematic properties</span>.</p><p>I lead concept and product; a development lead owns software delivery.</p></div></details>
       <details><summary><span class="name">BOA Architecture<small>Co-founder and partner</small></span><span class="tag">2023 –</span><span class="plus" aria-hidden="true"></span></summary><div class="detail"><p>Investment-oriented architecture firm in Portugal.</p></div></details>
       <!-- PROOF SLOT: add mini case studies as further <details> rows (problem · role · action · result), confirmed facts only. -->
     </div>
@@ -227,9 +235,9 @@ footer a{text-decoration:none}footer a:hover{color:var(--marigold)}
     <h2 id="path">How I got here.</h2>
     <div class="rows">
       <details><summary><span class="name"><span class="when">2006–10</span>Intelligence Officer, IDF<small>Special operations engineering unit (Yahalom)</small></span><span class="plus" aria-hidden="true"></span></summary><div class="detail"><p>Honours graduate of a visual intelligence programme.</p></div></details>
-      <details><summary><span class="name"><span class="when">2015–18</span>Architecture and visualisation<small>Nofar · Orly Shrem · Axelrod Architects</small></span><span class="plus" aria-hidden="true"></span></summary><div class="detail"><p>Owner of Oculus Visualizations (3D architectural visualisation). B.Arch studies, Tel Aviv University.</p></div></details>
-      <details><summary><span class="name"><span class="when">2018–20</span>Purple Balcony · Burtucala<small>Co-founder</small></span><span class="plus" aria-hidden="true"></span></summary><div class="detail"><p>Real estate development (2018–2020) and an investor–local partner venture (founded 2019, concluded).</p></div></details>
-      <details><summary><span class="name"><span class="when">Recent</span>AI Architect training, BrainAI<small>AI Game Changer programme</small></span><span class="plus" aria-hidden="true"></span></summary><div class="detail"><p>Completed the advanced programme, then taught selected sessions. Also: NAMBA business management (Jolt); real estate development and entrepreneurship (RES College, Practica College).</p></div></details>
+      <details><summary><span class="name"><span class="when">2015–18</span>Architecture and visualisation<small>Nofar · Orly Shrem · Axelrod Architects</small></span><span class="plus" aria-hidden="true"></span></summary><div class="detail"><p>Owner of Oculus Visualizations, a 3D architectural visualisation studio.</p><p>B.Arch studies, <span class="nw">Tel Aviv University</span>.</p></div></details>
+      <details><summary><span class="name"><span class="when">2018–20</span>Purple Balcony · Burtucala<small>Co-founder</small></span><span class="plus" aria-hidden="true"></span></summary><div class="detail"><p>Purple Balcony: real estate development, <span class="nw">2018–2020</span>.</p><p>Burtucala: investors matched with local partners, <span class="nw">2019 – concluded</span>.</p></div></details>
+      <details><summary><span class="name"><span class="when">Recent</span>AI Architect training, BrainAI<small>AI Game Changer programme</small></span><span class="plus" aria-hidden="true"></span></summary><div class="detail"><p>Completed the advanced programme, then taught selected sessions.</p><p>Also: business management (NAMBA, Jolt).</p><p>Real estate development <span class="nw">and entrepreneurship</span> <span class="nw">(RES College, Practica College)</span>.</p></div></details>
     </div>
   </section>
 
@@ -240,7 +248,7 @@ footer a{text-decoration:none}footer a:hover{color:var(--marigold)}
       <div class="links">
         <a class="wa" href="https://wa.me/972528289437" rel="noopener"><span class="label">WhatsApp · preferred</span><strong>+972 52 828 9437</strong></a>
         <a href="https://schedule.realization.co.il/30-minute-intro-meeting-asaf" rel="noopener"><span class="label">Intro call · 30 min</span><strong>Book a time ↗</strong></a>
-        <a href="mailto:asaf@realization.world?subject=Engagement%20enquiry"><span class="label">Email</span><strong>asaf@realization.world</strong></a>
+        <a href="mailto:asaf@realization.world?subject=Engagement%20enquiry"><span class="label">Email</span><strong class="nw">asaf@realization.world</strong></a>
         <a href="https://www.linkedin.com/in/sufzen" rel="noopener"><span class="label">LinkedIn</span><strong>in/sufzen</strong></a>
       </div>
       <details class="booking" id="book">
