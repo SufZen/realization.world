@@ -19,6 +19,10 @@ Apply these on the active site branch:
    The Lab app ships no `robots.txt` of its own.
 3. **Route collision check.** Don't create any `src/app/livelab` route or `public/livelab` folder in this app.
 
+## One intake, two forms
+
+The Live Lab form (`/livelab/submit`) is now the Live Lab edition of this site's opportunity brief. It uses the same four paths (`opportunity`, `operator`, `capital`, `corporate`), the same "rights, evidence or constraints" question and the same email subject shape (`Realization opportunity brief — <path> (Live Lab) — <name>`). Notifications go to `hello@realization.world`. If the path options in `src/components/opportunity-form.tsx` change, mirror them in the Lab repo (`pathOptions` in `src/content/site.ts` and `briefPaths` in `src/lib/submissions/schema.ts`).
+
 ## Strategy note
 
 The brand strategy (`docs/strategy/realization-brand-strategy.html`) doesn't mention the Live Lab. Its role (Discover room, field-notes engine, or partner roundtable) is being decided in `docs/live-lab-strategy-alignment.md` in the Live Lab repo. Until then the Lab is presented as "A program of Realization" and links back to realization.world.
