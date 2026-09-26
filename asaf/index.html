@@ -32,11 +32,12 @@
   "url": "https://realization.world/asaf/",
   "image": "https://realization.world/asaf/asaf-eyzenkot.jpg",
   "email": "mailto:asaf@realization.world",
-  "telephone": "+351933904208",
+  "telephone": "+972528289437",
+  "contactPoint": [{"@type": "ContactPoint", "contactType": "business", "telephone": "+972528289437", "url": "https://wa.me/972528289437", "availableLanguage": ["English", "Hebrew"]}],
   "address": {"@type": "PostalAddress", "addressLocality": "Setúbal", "addressRegion": "Lisbon metropolitan area", "addressCountry": "PT"},
   "workLocation": [{"@type": "Place", "name": "Lisbon metropolitan area, Portugal"}, {"@type": "Place", "name": "Barcelona, Spain"}, {"@type": "VirtualLocation", "name": "Remote"}],
   "nationality": {"@type": "Country", "name": "Portugal"},
-  "worksFor": {"@type": "Organization", "name": "Realization Unipessoal LDA", "url": "https://www.realization.co.il/"},
+  "worksFor": {"@type": "Organization", "name": "Realization Unipessoal LDA", "url": "https://realization.world/"},
   "alumniOf": [{"@type": "CollegeOrUniversity", "name": "Tel Aviv University"}],
   "knowsLanguage": ["English", "Hebrew", "Portuguese", "Spanish"],
   "knowsAbout": ["Real estate development", "Property investment", "Business operations", "Operating models", "Project coordination", "Workflow design", "AI systems architecture", "Agentic workflows", "Knowledge transfer"],
@@ -91,63 +92,65 @@ h1{font-weight:800;font-size:clamp(44px,7.4vw,86px);line-height:1;letter-spacing
 .titleblock .avail{background:var(--marigold)}
 .titleblock .avail .label{color:var(--ink)}
 
-section{padding-top:88px}
-h2{font-weight:800;font-size:clamp(28px,3.6vw,40px);line-height:1.1;letter-spacing:-.01em;margin:10px 0 0}
-.intro{color:var(--graphite);max-width:60ch;margin:14px 0 0}
+section{padding-top:80px}
+h2{font-weight:800;font-size:clamp(26px,3.2vw,36px);line-height:1.1;letter-spacing:-.01em;margin:10px 0 0}
+h3{font-weight:700;font-size:18px;line-height:1.3;margin:0}
 
-.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:36px;border-top:2px solid var(--ink)}
-.pillars article{padding:24px 24px 0 0}
-.pillars article+article{padding-left:24px;border-left:1px solid var(--rule)}
-h3{font-weight:700;font-size:20px;line-height:1.3;margin:0}
-.pillars p{color:var(--graphite);margin:10px 0 0;font-size:16px}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);margin-top:28px;border-top:2px solid var(--ink)}
+.pillars p{margin:0;padding:18px 20px 0 0;color:var(--graphite);font-size:15px}
+.pillars p+p{padding-left:20px;border-left:1px solid var(--rule)}
+.pillars strong{display:block;color:var(--ink);font-size:17px;margin-bottom:4px}
 
-.work{margin-top:36px;border-top:2px solid var(--ink)}
-.item{display:grid;grid-template-columns:240px 1fr;gap:32px;padding:28px 0;border-bottom:1px solid var(--rule)}
-.item .meta p{margin:6px 0 0;font-size:15px;color:var(--graphite)}
-.tag{display:inline-block;margin-top:10px;padding:3px 10px;background:var(--marigold-soft);border-left:3px solid var(--marigold);font:600 12px/1.5 var(--mono);text-transform:uppercase;letter-spacing:.05em}
-.item .body p{margin:0}
-.item .body p+p{margin-top:8px;color:var(--graphite);font-size:16px}
+/* Expandable rows: a quiet list by default, detail on demand */
+.rows{margin-top:28px;border-top:2px solid var(--ink)}
+details{border-bottom:1px solid var(--rule)}
+summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:1fr auto 28px;align-items:center;gap:16px;padding:18px 0}
+summary::-webkit-details-marker{display:none}
+summary:focus-visible{outline:3px solid var(--marigold);outline-offset:2px}
+summary .name{font-weight:700;font-size:18px}
+summary .name small{display:block;font-weight:400;font-size:14px;color:var(--graphite)}
+summary .tag{font:600 11px/1.5 var(--mono);text-transform:uppercase;letter-spacing:.05em;padding:3px 10px;background:var(--marigold-soft);border-left:3px solid var(--marigold);white-space:nowrap}
+summary .plus{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--ink);position:relative;transition:transform .2s ease,background .2s ease}
+summary .plus::before,summary .plus::after{content:"";position:absolute;left:50%;top:50%;width:11px;height:1.5px;background:var(--ink);transform:translate(-50%,-50%)}
+summary .plus::after{transform:translate(-50%,-50%) rotate(90deg)}
+details[open] summary .plus{transform:rotate(45deg);background:var(--marigold);border-color:var(--marigold)}
+summary:hover .plus{background:var(--marigold);border-color:var(--marigold)}
+.detail{padding:0 44px 20px 0;color:var(--graphite);font-size:15px;max-width:68ch}
+.detail p{margin:0}.detail p+p{margin-top:6px}
+.when{font:600 13px/1.6 var(--mono);color:var(--graphite);margin-right:10px}
 
-.engage{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:36px}
-.engage ul{list-style:none;padding:0;margin:0;border-top:2px solid var(--ink)}
-.engage li{padding:14px 0;border-bottom:1px solid var(--rule)}
-.engage li strong{display:block}
-.engage li span{color:var(--graphite);font-size:16px}
-
-.timeline{margin-top:36px;border-top:2px solid var(--ink)}
-.row{display:grid;grid-template-columns:140px 1fr;gap:24px;padding:18px 0;border-bottom:1px solid var(--rule)}
-.row .when{font:600 14px/1.6 var(--mono);color:var(--graphite)}
-.row p{margin:4px 0 0;color:var(--graphite);font-size:16px}
-
-.contact{background:var(--ink);color:var(--paper);margin-top:96px;padding-top:72px;padding-bottom:72px}
+.contact{background:var(--ink);color:var(--paper);margin-top:96px;padding-top:64px;padding-bottom:64px}
 .contact h2{color:var(--paper)}
-.contact .intro{color:var(--night-text)}
 .contact .label{color:#BDBDBD}
-.links{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:36px;border-top:2px solid var(--marigold)}
+.links{display:grid;grid-template-columns:repeat(4,1fr);margin-top:28px;border-top:2px solid var(--marigold)}
 .links a{display:block;padding:18px 18px 18px 0;text-decoration:none}
 .links a+a{padding-left:18px;border-left:1px solid #333}
 .links strong{display:block;font-size:16px;margin-top:4px;word-break:break-word}
 .links a:hover strong{color:var(--marigold)}
+.links .wa strong{color:var(--marigold)}
+.note{margin:22px 0 0;color:#9A9A9A;font-size:14px}
 footer{background:var(--ink);color:#9A9A9A;font-size:14px;padding:0 0 32px}
 footer .wrap{border-top:1px solid #333;padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+footer a{text-decoration:none}footer a:hover{color:var(--marigold)}
 
 @media (max-width:860px){
-  .hero{grid-template-columns:1fr;gap:32px}
-  .portrait{width:200px;height:200px;order:-1;border-width:6px}
+  .hero{grid-template-columns:1fr;gap:28px}
+  .portrait{width:180px;height:180px;order:-1;border-width:6px}
   .mast{padding-bottom:40px}
   .titleblock{margin-top:24px;grid-template-columns:1fr 1fr}
   .titleblock div{border-bottom:1px solid var(--ink)}
   .titleblock div:nth-child(2n){border-right:0}
   .titleblock .avail{grid-column:1/-1;border-bottom:0}
-  .pillars,.engage{grid-template-columns:1fr}
-  .pillars article,.pillars article+article{padding:22px 0;border-left:0;border-bottom:1px solid var(--rule)}
-  .item,.row{grid-template-columns:1fr;gap:8px}
+  .pillars{grid-template-columns:1fr}
+  .pillars p,.pillars p+p{padding:16px 0;border-left:0;border-bottom:1px solid var(--rule)}
+  summary{grid-template-columns:1fr 28px}
+  summary .tag{display:none}
+  .detail{padding-right:0}
   .links{grid-template-columns:1fr 1fr}
   .links a,.links a+a{padding:16px 12px 16px 0;border-left:0;border-bottom:1px solid #333}
-  section{padding-top:64px}
-  .contact{padding-top:56px}
+  section{padding-top:56px}
 }
-@media (prefers-reduced-motion:reduce){.btn:hover{transform:none}}
+@media (prefers-reduced-motion:reduce){.btn:hover{transform:none}summary .plus{transition:none}}
 @media print{.mast,.contact,footer{background:#fff;color:#000}.actions,.skip{display:none}}
 </style>
 </head>
@@ -156,17 +159,17 @@ footer .wrap{border-top:1px solid #333;padding-top:20px;display:flex;justify-con
 
 <header class="mast">
   <div class="wrap">
-    <a class="brand" href="/"><img src="/assets/brand/butterfly-mark.png" width="34" height="34" alt="">REALIZATION</a>
+    <a class="brand" href="https://realization.world/"><img src="/assets/brand/butterfly-mark.png" width="34" height="34" alt="">REALIZATION</a>
     <div class="hero">
       <div>
         <h1>Asaf Eyzenkot</h1>
         <p class="role">Founder-operator</p>
         <p class="domains"><span>Real estate development</span> <span>Business operations</span> <span>AI-enabled systems</span></p>
-        <!-- TODO(Asaf): the one sentence a recruiter should remember. ≤ 20 words. Replace the line below. -->
-        <p class="lede">I turn multi-party projects into clear plans and coordinated delivery, and I use AI to run them lean.</p>
+        <!-- Hero sentence: option 1 of 3 (see HANDOFF.md). -->
+        <p class="lede">I bring order to complex projects, aligning people, plans and systems until the work gets done.</p>
         <div class="actions">
-          <a class="btn primary" href="/asaf/Asaf_Eyzenkot_CV.pdf" download>Download CV <span aria-hidden="true">↓</span></a>
-          <a class="btn ghost" href="mailto:asaf@realization.world?subject=Engagement%20enquiry">Email Asaf</a>
+          <a class="btn primary" href="https://wa.me/972528289437" rel="noopener">WhatsApp <span aria-hidden="true">↗</span></a>
+          <a class="btn ghost" href="mailto:asaf@realization.world?subject=Engagement%20enquiry">Email</a>
         </div>
       </div>
       <div class="portrait"><img src="/asaf/asaf-eyzenkot.jpg" width="480" height="480" alt="Portrait of Asaf Eyzenkot" fetchpriority="high"></div>
@@ -177,9 +180,9 @@ footer .wrap{border-top:1px solid #333;padding-top:20px;display:flex;justify-con
 <main id="main">
   <div class="wrap">
     <dl class="titleblock" aria-label="Engagement summary">
-      <div><dt class="label">Available in</dt><dd>Lisbon metro area<br>&amp; Barcelona · based in Setúbal</dd></div>
-      <div><dt class="label">Engagement</dt><dd>Remote B2B, fractional or project</dd></div>
-      <div><dt class="label">Contracting</dt><dd>Realization Unipessoal LDA</dd></div>
+      <div><dt class="label">Available in</dt><dd>Lisbon metro area<br>&amp; Barcelona</dd></div>
+      <div><dt class="label">Engagement</dt><dd>Remote B2B<br>fractional or project</dd></div>
+      <div><dt class="label">Contracting</dt><dd>Realization<br>Unipessoal LDA</dd></div>
       <div><dt class="label">Languages</dt><dd>English fluent<br>Hebrew native</dd></div>
       <div class="avail"><dt class="label">Available</dt><dd>Early October 2026</dd></div>
     </dl>
@@ -188,99 +191,54 @@ footer .wrap{border-top:1px solid #333;padding-top:20px;display:flex;justify-con
   <section class="wrap" aria-labelledby="bring">
     <p class="label">What I bring</p>
     <h2 id="bring">Three disciplines, one operator.</h2>
-    <p class="intro">I have spent my career where property, business and technology meet. The common thread is organising complex information and coordinating specialists so work actually moves.</p>
     <div class="pillars">
-      <article>
-        <h3>Operations and delivery</h3>
-        <p>Translate commercial needs into scopes, operating plans and coordinated execution across investors, architects, legal, financial and technical specialists.</p>
-      </article>
-      <article>
-        <h3>Real estate development</h3>
-        <p>Development and investment experience in Portugal, grounded in architectural training: from site and feasibility thinking to running a residential project company.</p>
-      </article>
-      <article>
-        <h3>AI-enabled systems</h3>
-        <p>Build practical AI workflows around real business information, then teach teams to use them. AI is how I work faster, not a product I sell.</p>
-      </article>
+      <p><strong>Operations and delivery</strong>Scopes, plans and coordinated execution across specialists.</p>
+      <p><strong>Real estate development</strong>Development and investment in Portugal, grounded in architecture.</p>
+      <p><strong>AI-enabled systems</strong>Practical AI workflows, and teaching teams to use them.</p>
     </div>
   </section>
 
   <section class="wrap" aria-labelledby="work">
     <p class="label">Selected work</p>
     <h2 id="work">What I run and have built.</h2>
-    <div class="work">
-      <article class="item">
-        <div class="meta"><h3>Arena</h3><p>Barreiro, Portugal</p><span class="tag">Ongoing</span></div>
-        <div class="body"><p><strong>GP manager and shareholder</strong> in the company developing an 11-unit residential building.</p><p>Connects investment objectives, architectural decisions, professional inputs and development execution.</p></div>
-      </article>
-      <article class="item">
-        <div class="meta"><h3>Realization</h3><p>Founder and owner</p><span class="tag">2019 – present</span></div>
-        <div class="body"><p>Real estate operations and business architecture in Portugal.</p><p>Connects property opportunities with investment analysis, planning considerations and local professional expertise.</p></div>
-      </article>
-      <article class="item">
-        <div class="meta"><h3>RealizeOS</h3><p>Builder</p><span class="tag">Internal system</span></div>
-        <div class="body"><p>An <strong>AI operations system</strong> built for Realization's own work, connecting business context with agentic workflows.</p><p>Later extended for use by independent users and Realization clients.</p></div>
-      </article>
-      <article class="item">
-        <div class="meta"><h3>realization.pt</h3><p>Founder, product lead</p><span class="tag">In development</span></div>
-        <div class="body"><p>A platform focused on Portugal's abandoned and problematic properties.</p><p>I shape the concept and product; a development lead owns software delivery.</p></div>
-      </article>
-      <article class="item">
-        <div class="meta"><h3>BOA Architecture</h3><p>Co-founder and partner</p><span class="tag">2023 – present</span></div>
-        <div class="body"><p>A Portuguese <strong>investment-oriented architecture firm</strong>, connecting design work with an investor's perspective.</p></div>
-      </article>
-      <!-- PROOF SLOT: add 2–3 mini case studies here when ready (problem · my role · what I did · result). Only confirmed, disclosable facts.
-      <article class="item">
-        <div class="meta"><h3>Case title</h3><p>Context</p><span class="tag">Case study</span></div>
-        <div class="body"><p><strong>Problem.</strong> …</p><p><strong>What I did.</strong> …</p><p><strong>Result.</strong> …</p></div>
-      </article>
-      -->
-    </div>
-  </section>
-
-  <section class="wrap" aria-labelledby="engage">
-    <p class="label">How I engage</p>
-    <h2 id="engage">Built for remote, non-exclusive work.</h2>
-    <div class="engage">
-      <p class="intro" style="margin:0">I take fractional roles, scoped projects and expert-pool assignments. I start by understanding how work currently flows, agree a small set of priorities, and leave behind documentation and systems the team can maintain without me.</p>
-      <ul>
-        <li><strong>Operations and implementation</strong><span>Fractional operator, integrator, project lead</span></li>
-        <li><strong>Real estate expertise</strong><span>Development, investment and property-scenario review</span></li>
-        <li><strong>AI enablement and knowledge transfer</strong><span>Workflow design, training, AI-output evaluation</span></li>
-      </ul>
+    <div class="rows">
+      <details><summary><span class="name">Arena<small>GP manager and shareholder · Barreiro</small></span><span class="tag">Ongoing</span><span class="plus" aria-hidden="true"></span></summary><div class="detail"><p>11-unit residential building. I manage the development company, connecting investment objectives, architecture, professional inputs and execution.</p></div></details>
+      <details><summary><span class="name">Realization<small>Founder and owner</small></span><span class="tag">2019 –</span><span class="plus" aria-hidden="true"></span></summary><div class="detail"><p>Real estate operations and business architecture in Portugal.</p><p><a href="https://realization.world/">realization.world</a></p></div></details>
+      <details><summary><span class="name">RealizeOS<small>Builder</small></span><span class="tag">Internal system</span><span class="plus" aria-hidden="true"></span></summary><div class="detail"><p>The AI operations system behind Realization&#8217;s own work: business context connected to agentic workflows. Later extended to independent users and clients.</p></div></details>
+      <details><summary><span class="name">realization.pt<small>Founder, product lead</small></span><span class="tag">In development</span><span class="plus" aria-hidden="true"></span></summary><div class="detail"><p>A platform for Portugal&#8217;s abandoned and problematic properties. I shape concept and product; a development lead owns software delivery.</p></div></details>
+      <details><summary><span class="name">BOA Architecture<small>Co-founder and partner</small></span><span class="tag">2023 –</span><span class="plus" aria-hidden="true"></span></summary><div class="detail"><p>Investment-oriented architecture firm in Portugal.</p></div></details>
+      <!-- PROOF SLOT: add mini case studies as further <details> rows (problem · role · action · result), confirmed facts only. -->
     </div>
   </section>
 
   <section class="wrap" aria-labelledby="path">
     <p class="label">Background</p>
     <h2 id="path">How I got here.</h2>
-    <div class="timeline">
-      <div class="row"><div class="when">2006 – 2010</div><div><h3>Intelligence Officer, IDF</h3><p>Special operations engineering unit (Yahalom). Honours graduate of a visual intelligence programme.</p></div></div>
-      <div class="row"><div class="when">2015 – 2018</div><div><h3>Architecture and visualisation</h3><p>Nofar, Orly Shrem and Axelrod Architects; owner of Oculus Visualizations (3D architectural visualisation). B.Arch studies, Tel Aviv University.</p></div></div>
-      <div class="row"><div class="when">2018 – 2020</div><div><h3>Purple Balcony, co-founder</h3><p>Real estate development company in Portugal.</p></div></div>
-      <div class="row"><div class="when">2019 →</div><div><h3>Realization and Burtucala</h3><p>Founded Realization; co-founded Burtucala, connecting international property investors with local partners (concluded).</p></div></div>
-      <div class="row"><div class="when">2023 →</div><div><h3>BOA Architecture, co-founder</h3><p>Investment-oriented architecture firm in Portugal.</p></div></div>
-      <div class="row"><div class="when">Recent</div><div><h3>AI Architect training, BrainAI</h3><p>Completed the advanced AI Game Changer programme, then taught selected sessions in it. Business management (NAMBA, Jolt); real estate development and entrepreneurship (RES College, Practica College).</p></div></div>
+    <div class="rows">
+      <details><summary><span class="name"><span class="when">2006–10</span>Intelligence Officer, IDF<small>Special operations engineering unit (Yahalom)</small></span><span class="plus" aria-hidden="true"></span></summary><div class="detail"><p>Honours graduate of a visual intelligence programme.</p></div></details>
+      <details><summary><span class="name"><span class="when">2015–18</span>Architecture and visualisation<small>Nofar · Orly Shrem · Axelrod Architects</small></span><span class="plus" aria-hidden="true"></span></summary><div class="detail"><p>Owner of Oculus Visualizations (3D architectural visualisation). B.Arch studies, Tel Aviv University.</p></div></details>
+      <details><summary><span class="name"><span class="when">2018–20</span>Purple Balcony · Burtucala<small>Co-founder</small></span><span class="plus" aria-hidden="true"></span></summary><div class="detail"><p>Real estate development (2018–2020) and an investor–local partner venture (founded 2019, concluded).</p></div></details>
+      <details><summary><span class="name"><span class="when">Recent</span>AI Architect training, BrainAI<small>AI Game Changer programme</small></span><span class="plus" aria-hidden="true"></span></summary><div class="detail"><p>Completed the advanced programme, then taught selected sessions. Also: NAMBA business management (Jolt); real estate development and entrepreneurship (RES College, Practica College).</p></div></details>
     </div>
   </section>
 
   <section class="contact" aria-labelledby="contact">
     <div class="wrap">
       <p class="label">Contact</p>
-      <h2 id="contact">Let's talk about the role.</h2>
-      <p class="intro">Email is the fastest way to reach me. A CV tailored to your role is available on request.</p>
+      <h2 id="contact">Let&#8217;s talk about the role.</h2>
       <div class="links">
+        <a class="wa" href="https://wa.me/972528289437" rel="noopener"><span class="label">WhatsApp · preferred</span><strong>+972 52 828 9437</strong></a>
         <a href="mailto:asaf@realization.world?subject=Engagement%20enquiry"><span class="label">Email</span><strong>asaf@realization.world</strong></a>
-        <a href="tel:+351933904208"><span class="label">Phone</span><strong>+351 933 904 208</strong></a>
         <a href="https://www.linkedin.com/in/sufzen" rel="noopener"><span class="label">LinkedIn</span><strong>in/sufzen</strong></a>
-        <a href="/asaf/Asaf_Eyzenkot_CV.pdf" download><span class="label">CV</span><strong>Download PDF ↓</strong></a>
+        <a href="tel:+351933904208"><span class="label">Phone (PT)</span><strong>+351 933 904 208</strong></a>
       </div>
+      <p class="note">A CV tailored to your role is available on request.</p>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap"><span>Asaf Eyzenkot · Realization Unipessoal LDA · Portugal</span><a href="https://wa.me/972528289437" rel="noopener">WhatsApp</a></div>
+  <div class="wrap"><span>Asaf Eyzenkot · Realization Unipessoal LDA</span><a href="https://realization.world/">realization.world</a></div>
 </footer>
 </body>
 </html>
