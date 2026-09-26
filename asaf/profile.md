@@ -1,5 +1,7 @@
 # Asaf Eyzenkot
 
+Also known as **Suf Zen** (international business name; used on all social profiles).
+
 Founder-operator: real estate development, business operations and AI-enabled systems.
 
 - Work mode: Works remotely, and in person in the Lisbon metropolitan area (Portugal) and Barcelona (Spain). Based in Setúbal, Portugal. Portuguese citizen.
