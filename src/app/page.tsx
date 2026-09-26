@@ -6,7 +6,7 @@ import { ProcessRibbon } from "@/components/process-ribbon";
 import { SectionHeading } from "@/components/section-heading";
 import { StudioSystemMap } from "@/components/studio-visuals";
 import { VentureCard } from "@/components/venture-card";
-import { framework, insights, partnerPaths, ventures } from "@/content/site";
+import { framework, insights, partnerPaths, projects, ventures } from "@/content/site";
 
 export default function HomePage() {
   return (
@@ -14,10 +14,11 @@ export default function HomePage() {
       <section className="home-hero">
         <div className="container-wide home-hero__grid">
           <div className="home-hero__content">
-            <p className="eyebrow">PHYSICAL-WORLD VENTURE STUDIO</p>
-            <h1>Untapped potential. <em>Realized.</em></h1>
+            <p className="eyebrow">REAL ESTATE · VENTURES · SYSTEMS</p>
+            <h1><span className="ln">Untapped potential.</span> <em className="ln">Realized.</em></h1>
             <p className="home-hero__lead">
-              We build technology-enabled ventures around overlooked physical-world opportunities—active in Portugal and connected to an Israeli capital and partnership network.
+              <span className="ln">We develop real estate in Portugal</span>
+              <span className="ln">and build the ventures and systems around it.</span>
             </p>
             <div className="button-row">
               <ButtonLink href="/bring-an-opportunity">Bring an opportunity</ButtonLink>
@@ -42,6 +43,25 @@ export default function HomePage() {
           <div>
             <h2>The value is there. The system isn’t.</h2>
             <p>We build the missing layer between an underused reality and a venture that can change it.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container-wide">
+          <SectionHeading
+            eyebrow="PROVEN GROUND"
+            title="Real estate is where we start."
+            intro="Residential development in Portugal is the core of our work—and the evidence behind what we build next."
+          />
+          <div className="project-list">
+            {projects.map((project) => (
+              <article className="project-row" key={project.name}>
+                <div><h3>{project.name}</h3><p>{project.location}</p></div>
+                <p>{project.type}<br />{project.role}</p>
+                <span className="status status--active">{project.status}</span>
+              </article>
+            ))}
           </div>
         </div>
       </section>

@@ -2,9 +2,11 @@
 // Paste into the browser console (or run via DevTools automation) at 1440, 1024 and 390 px widths.
 // Reports every multi-line text block and flags: orphans (last line of 1 word) and
 // lines that end on a weak word (a, an, the, and, or, of, in, to, for, with, &) — i.e. a phrase split mid-way.
+// Scope: weak-word breaks are checked on display text (headings, leads, eyebrows, and any block of <= 3 lines);
+// long body paragraphs (4+ lines) only get the orphan check — breaking after 'and' is normal in running text.
 (() => {
   const WEAK = /\b(a|an|the|and|or|of|in|on|to|for|with|by|at|&|·)$/i;
-  const sel = 'h1,h2,h3,.role,.lede,dd,.pillars p,summary .name,.detail p,.intro,.note,.links strong,p';
+  const sel = 'h1,h2,h3,h4,.eyebrow,.role,.lede,dd,.pillars p,summary .name,.detail p,.intro,.note,.links strong,p';
   const seen = new Set(), out = [];
   for (const el of document.querySelectorAll(sel)) {
     if (!el.offsetParent || seen.has(el) || [...seen].some(s => s.contains(el))) continue;
@@ -24,9 +26,10 @@
     if (lines.length < 2) continue;
     const issues = [];
     const last = lines[lines.length - 1];
-    // Title + <small> subtitle rows are two lines by design; only check the main text for orphans there.
-    if (!el.querySelector('small') && last.split(' ').length === 1) issues.push('orphan: "' + last + '"');
-    lines.slice(0, -1).forEach(l => { if (WEAK.test(l)) issues.push('weak break after: "' + l.slice(-24) + '"'); });
+    // Title + <small> subtitle rows and hand-authored .ln lines are broken by design; skip the orphan check there.
+    if (!el.querySelector('small, .ln') && last.split(' ').length === 1) issues.push('orphan: "' + last + '"');
+    const display = /^H[1-4]$/.test(el.tagName) || el.matches('.lede,.eyebrow,.role,.page-hero__intro,.section-heading__intro,.home-hero__lead,dd') || lines.length <= 3;
+    if (display) lines.slice(0, -1).forEach(l => { if (WEAK.test(l)) issues.push('weak break after: "' + l.slice(-24) + '"'); });
     out.push({ el: (el.className || el.tagName).toString().slice(0, 20), lines, issues });
   }
   // Authored lines (.ln) must fit on one line from tablet width up; if they wrap, re-split the text.

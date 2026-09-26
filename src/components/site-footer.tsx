@@ -38,7 +38,7 @@ export function SiteFooter() {
       <div className="container-wide site-footer__legal">
         <p>© {new Date().getFullYear()} Realization. All rights reserved.</p>
         <p>
-          Strategic content only. Not legal, securities, trademark, tax, regulatory or SEO advice. Venture status and results are subject to verification.
+          Nothing on this site is an offer of securities or investment advice.
         </p>
       </div>
     </footer>

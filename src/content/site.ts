@@ -82,7 +82,7 @@ export type Venture = {
   name: string;
   eyebrow: string;
   descriptor: string;
-  stage: "Active" | "Validation status to confirm" | "Exploring";
+  stage: "Active" | "In development" | "Exploring";
   problem: string;
   system: string;
   realizationRole: string;
@@ -102,7 +102,7 @@ export const ventures: Venture[] = [
     eyebrow: "PROPERTY RESOLUTION VENTURE · PORTUGAL",
     descriptor:
       "A coordinated system for resolving properties immobilized by inheritance, documentation and co-owner deadlock.",
-    stage: "Validation status to confirm",
+    stage: "In development",
     problem:
       "Homes with real value can remain stuck because ownership, documentation and licensed professional processes are fragmented.",
     system:
@@ -110,9 +110,9 @@ export const ventures: Venture[] = [
     realizationRole:
       "Research, venture architecture, product, technology, validation design and transfer planning.",
     operator:
-      "The operating legal entity, licensed professional responsibilities and data-controller role must be stated before public launch.",
+      "A dedicated local operator and licensed professionals carry the operating and regulated responsibilities.",
     evidence:
-      "Only documented, permissioned and measurable cases should be published. Outcomes and operating status remain to be verified.",
+      "Case studies are published once they are documented and cleared for publication.",
     ask: "Bring a property case · Operate this venture · Partner with capital",
     icon: KeyRound,
     image: "/media/venture-portugal.png",
@@ -121,27 +121,37 @@ export const ventures: Venture[] = [
   {
     slug: "realizeos",
     name: "RealizeOS",
-    eyebrow: "AI OPERATIONS PLATFORM",
+    eyebrow: "AI OPERATING SYSTEM · BUILT BY REALIZATION",
     descriptor:
-      "AI operations infrastructure for physical-world businesses—and the operating layer used to build Realization ventures.",
+      "The AI operating system we built to run Realization—free for others to use.",
     stage: "Active",
     problem:
       "Knowledge, context and action are fragmented across AI tools and disconnected workflows.",
     system:
       "FABRIC, a knowledge graph, agents, routines, venture identity and a local event log organized as an operating system.",
     realizationRole:
-      "Thesis, architecture, product development and validation through real physical-world operations.",
+      "Built for our own operations, and improved as we use it.",
     operator:
-      "Designed for self-hosting, enterprise licensing and implementation by qualified partners—not a permanent founder-run service.",
+      "Free to use and source-available under the Business Source License 1.1. No paid service or licence sales.",
     evidence:
-      "Version history, deployments, verified workflows, time saved and confirmed customer use should form the evidence base.",
-    ask: "Deploy · Explore the architecture · Become an implementation partner",
+      "Used in Realization’s own research, documentation and coordination.",
+    ask: "Explore the code · Use it freely",
     icon: Cpu,
     image: "/media/venture-realizeos.png",
     imageAlt: "Operators connecting field equipment beside a tablet and process map",
-    externalHref: "https://realizeos.ai",
+    externalHref: "https://github.com/SufZen/RealizeOS-5",
   },
 ];
+
+export const projects = [
+  {
+    name: "Arena",
+    location: "Barreiro, Portugal",
+    type: "Residential development",
+    role: "GP manager and shareholder",
+    status: "Ongoing",
+  },
+] as const;
 
 export const futureVenture = {
   name: "Future venture",
