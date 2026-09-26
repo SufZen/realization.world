@@ -1,0 +1,1003 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="אסטרטגיית המותג, הדומיינים וארכיטקטורת האתרים של Realization">
+  <title>Realization — אסטרטגיית מותג, דומיינים ואתרים</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4f1e9;
+      --surface: #fffdf8;
+      --surface-2: #ebe6da;
+      --ink: #19231f;
+      --muted: #5c6862;
+      --line: #d5cfc1;
+      --brand: #0d6d5d;
+      --brand-dark: #084c42;
+      --brand-soft: #d9ece6;
+      --gold: #bd7b2b;
+      --gold-soft: #f3e4cd;
+      --blue: #315f78;
+      --blue-soft: #dce8ee;
+      --red: #9c463d;
+      --red-soft: #f3ded9;
+      --shadow: 0 18px 45px rgba(31, 43, 37, .08);
+      --radius: 22px;
+      --max: 1240px;
+    }
+
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #101714;
+      --surface: #17211d;
+      --surface-2: #202c27;
+      --ink: #edf4ef;
+      --muted: #abbab2;
+      --line: #34433c;
+      --brand: #55c3ab;
+      --brand-dark: #8cdbc9;
+      --brand-soft: #173f36;
+      --gold: #e4ae64;
+      --gold-soft: #46341f;
+      --blue: #7eb2ca;
+      --blue-soft: #223b47;
+      --red: #e49488;
+      --red-soft: #442824;
+      --shadow: 0 18px 45px rgba(0, 0, 0, .24);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 8% 3%, color-mix(in srgb, var(--brand) 12%, transparent), transparent 28rem),
+        radial-gradient(circle at 92% 28%, color-mix(in srgb, var(--gold) 10%, transparent), transparent 24rem),
+        var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.65;
+    }
+
+    a { color: var(--brand-dark); }
+    a:hover { text-decoration-thickness: 2px; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    img, svg { max-width: 100%; }
+    .ltr { direction: ltr; unicode-bidi: embed; }
+    .nowrap { white-space: nowrap; }
+    .skip-link {
+      position: absolute;
+      inset-inline-start: 1rem;
+      top: -4rem;
+      padding: .7rem 1rem;
+      background: var(--ink);
+      color: var(--bg);
+      z-index: 1000;
+      border-radius: 0 0 10px 10px;
+    }
+    .skip-link:focus { top: 0; }
+
+    .progress {
+      position: fixed;
+      inset: 0 0 auto;
+      height: 4px;
+      background: transparent;
+      z-index: 110;
+    }
+    .progress span {
+      display: block;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--brand), var(--gold));
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: color-mix(in srgb, var(--bg) 86%, transparent);
+      border-bottom: 1px solid color-mix(in srgb, var(--line) 75%, transparent);
+    }
+    .topbar-inner {
+      max-width: var(--max);
+      margin: auto;
+      min-height: 68px;
+      padding: .75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      color: var(--ink);
+      text-decoration: none;
+      min-width: max-content;
+    }
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--brand);
+      background: var(--surface);
+      box-shadow: inset 0 0 0 6px var(--brand-soft);
+      color: var(--brand-dark);
+      font-weight: 700;
+    }
+    .brand-text strong { display: block; letter-spacing: .04em; }
+    .brand-text small { display: block; color: var(--muted); font-size: .72rem; }
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: .25rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      margin-inline-start: auto;
+    }
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: .48rem .66rem;
+      border-radius: 10px;
+      white-space: nowrap;
+      font-size: .88rem;
+    }
+    .nav a:hover, .nav a.active { background: var(--surface-2); color: var(--ink); }
+    .icon-button {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink);
+      border-radius: 12px;
+      min-width: 42px;
+      min-height: 42px;
+      display: grid;
+      place-items: center;
+    }
+
+    main { overflow: hidden; }
+    .shell { max-width: var(--max); margin: auto; padding: 0 1.25rem; }
+    .hero {
+      min-height: 640px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, .85fr);
+      align-items: center;
+      gap: clamp(2rem, 6vw, 6rem);
+      padding: clamp(4rem, 9vw, 8rem) 0;
+    }
+    .eyebrow {
+      display: inline-flex;
+      gap: .5rem;
+      align-items: center;
+      color: var(--brand-dark);
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      direction: ltr;
+    }
+    .eyebrow::before { content: ""; width: 42px; height: 1px; background: currentColor; }
+    h1, h2, h3, h4 { margin: 0; line-height: 1.15; }
+    h1 { font-size: clamp(2.8rem, 6.5vw, 6.6rem); letter-spacing: -.055em; max-width: 15ch; }
+    h1.ltr { text-align: left; }
+    h2 { font-size: clamp(2rem, 4vw, 3.8rem); letter-spacing: -.035em; max-width: 18ch; }
+    h3 { font-size: clamp(1.15rem, 2vw, 1.55rem); }
+    .hero p { font-size: clamp(1.1rem, 1.7vw, 1.35rem); color: var(--muted); max-width: 58ch; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.6rem; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .55rem;
+      border-radius: 13px;
+      padding: .82rem 1.15rem;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 650;
+    }
+    .button.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+    .button:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,0,0,.08); }
+    .hero-visual { position: relative; min-height: 470px; display: grid; place-items: center; }
+    .orbit {
+      position: absolute;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+    }
+    .orbit.one { width: 450px; height: 450px; }
+    .orbit.two { width: 320px; height: 320px; transform: rotate(18deg); }
+    .orbit.three { width: 190px; height: 190px; transform: rotate(-14deg); }
+    .core {
+      position: relative;
+      width: 132px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--bg);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+      z-index: 2;
+    }
+    .satellite {
+      position: absolute;
+      padding: .55rem .8rem;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      font-size: .82rem;
+      z-index: 3;
+    }
+    .s1 { top: 8%; inset-inline-start: 15%; }
+    .s2 { top: 30%; inset-inline-end: 1%; }
+    .s3 { bottom: 17%; inset-inline-end: 10%; }
+    .s4 { bottom: 7%; inset-inline-start: 18%; }
+    .s5 { top: 42%; inset-inline-start: -2%; }
+
+    .quick-view {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: -2rem;
+      position: relative;
+      z-index: 4;
+    }
+    .quick-card, .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .quick-card { padding: 1.35rem; }
+    .quick-card strong { display: block; color: var(--brand-dark); margin-bottom: .35rem; }
+    .quick-card p { margin: 0; color: var(--muted); }
+
+    section { padding: clamp(4.5rem, 9vw, 8rem) 0; scroll-margin-top: 90px; }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(300px, 1.1fr);
+      gap: 2rem;
+      align-items: end;
+      margin-bottom: 2.5rem;
+    }
+    .section-head p { margin: 0; color: var(--muted); font-size: 1.06rem; max-width: 65ch; }
+    .section-kicker { color: var(--brand-dark); font-weight: 700; margin-bottom: .55rem; }
+    .highlight {
+      border-inline-start: 4px solid var(--gold);
+      background: linear-gradient(90deg, transparent, var(--gold-soft));
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .architecture {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+      text-align: center;
+    }
+    .parent-node {
+      max-width: 560px;
+      width: 100%;
+      margin: auto;
+      padding: 1.4rem;
+      border-radius: var(--radius);
+      color: var(--bg);
+      background: var(--ink);
+      box-shadow: var(--shadow);
+    }
+    .parent-node .role { opacity: .72; }
+    .connector { width: 1px; height: 44px; background: var(--line); margin: auto; position: relative; }
+    .connector::after {
+      content: "";
+      position: absolute;
+      width: min(72vw, 840px);
+      height: 1px;
+      background: var(--line);
+      top: 43px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .children {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      position: relative;
+    }
+    .child-node { padding: 1.3rem; min-height: 210px; position: relative; text-align: start; }
+    .child-node::before { content: ""; position: absolute; width: 1px; height: 25px; background: var(--line); top: -25px; left: 50%; }
+    .node-type { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .06em; color: var(--brand-dark); direction: ltr; }
+    .child-node h3 { margin: .45rem 0 .7rem; }
+    .child-node p { margin: 0; color: var(--muted); font-size: .94rem; }
+    .endorsement {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: .75rem;
+      margin-top: 2rem;
+    }
+    .endorsement > div { border-top: 2px solid var(--line); padding-top: .9rem; }
+    .endorsement code { color: var(--brand-dark); font-weight: 700; }
+
+    .domain-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(110px, 1fr));
+      gap: .65rem;
+      align-items: stretch;
+      margin: 2rem 0;
+    }
+    .domain-pill {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 1rem .65rem;
+      text-align: center;
+      min-height: 112px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: .3rem;
+    }
+    .domain-pill.primary { background: var(--brand-soft); border-color: var(--brand); }
+    .domain-pill.future { background: var(--surface-2); border-style: dashed; }
+    .domain-pill.redirect { opacity: .72; }
+    .domain-pill strong { direction: ltr; }
+    .domain-pill small { color: var(--muted); }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+    table { width: 100%; border-collapse: collapse; min-width: 980px; }
+    th, td { padding: 1rem; text-align: start; vertical-align: top; border-bottom: 1px solid var(--line); }
+    th { color: var(--brand-dark); font-size: .84rem; background: var(--surface-2); }
+    tr:last-child td { border-bottom: 0; }
+    td code { direction: ltr; display: inline-block; color: var(--brand-dark); font-weight: 700; }
+    .status { display: inline-block; padding: .15rem .52rem; border-radius: 999px; font-size: .75rem; font-weight: 700; }
+    .status.now { color: var(--brand-dark); background: var(--brand-soft); }
+    .status.fix { color: var(--red); background: var(--red-soft); }
+    .status.later { color: var(--gold); background: var(--gold-soft); }
+
+    .israel-focus {
+      background: var(--ink);
+      color: var(--bg);
+      border-radius: 32px;
+      padding: clamp(1.5rem, 5vw, 4rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .israel-focus::after {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border: 1px solid color-mix(in srgb, var(--bg) 20%, transparent);
+      border-radius: 50%;
+      inset-inline-end: -170px;
+      top: -180px;
+    }
+    .israel-focus h2 { color: inherit; position: relative; z-index: 1; }
+    .israel-focus p { color: color-mix(in srgb, var(--bg) 74%, transparent); position: relative; z-index: 1; }
+    .israel-focus .eyebrow { color: var(--brand); }
+    .israel-grid { display: grid; grid-template-columns: .95fr 1.05fr; gap: 2.5rem; margin-top: 2rem; position: relative; z-index: 1; }
+    .strengths { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; }
+    .strength {
+      padding: 1rem;
+      border: 1px solid color-mix(in srgb, var(--bg) 20%, transparent);
+      border-radius: 16px;
+      background: color-mix(in srgb, var(--bg) 5%, transparent);
+    }
+    .strength strong { display: block; margin-bottom: .25rem; }
+    .strength span { color: color-mix(in srgb, var(--bg) 70%, transparent); font-size: .9rem; }
+    .capital-flow { display: grid; gap: .7rem; align-content: center; }
+    .flow-step { display: grid; grid-template-columns: 36px 1fr; gap: .8rem; align-items: center; }
+    .flow-step b { width: 36px; aspect-ratio: 1; border-radius: 50%; border: 1px solid var(--brand); display: grid; place-items: center; color: var(--brand); }
+    .flow-step span { padding: .72rem 1rem; border-radius: 12px; background: color-mix(in srgb, var(--bg) 7%, transparent); }
+    .flow-arrow { height: 18px; width: 1px; background: color-mix(in srgb, var(--bg) 25%, transparent); margin-inline-start: 18px; }
+
+    .tracks { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2rem; }
+    .track { padding: 1.3rem; border-top: 4px solid var(--brand); }
+    .track:nth-child(2) { border-top-color: var(--gold); }
+    .track:nth-child(3) { border-top-color: var(--blue); }
+    .track:nth-child(4) { border-top-color: var(--red); }
+    .track p { color: var(--muted); margin-bottom: 0; }
+
+    .tabs { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.5rem 0; }
+    .tab-button {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--muted);
+      padding: .65rem .9rem;
+      border-radius: 999px;
+    }
+    .tab-button[aria-selected="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .journey {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      align-items: stretch;
+    }
+    .journey-step {
+      padding: 1.25rem;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      position: relative;
+    }
+    .journey-step:first-child { border-radius: 0 var(--radius) var(--radius) 0; }
+    .journey-step:last-child { border-radius: var(--radius) 0 0 var(--radius); }
+    .journey-step + .journey-step { border-inline-start: 0; }
+    .journey-step .num { color: var(--brand-dark); font-weight: 800; font-size: .8rem; }
+    .journey-step p { color: var(--muted); margin-bottom: 0; }
+
+    .portfolio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .venture { padding: 1.5rem; display: grid; gap: 1.15rem; }
+    .venture-head { display: flex; justify-content: space-between; gap: 1rem; align-items: flex-start; }
+    .venture h3 { font-size: 1.6rem; }
+    .venture .descriptor { color: var(--brand-dark); direction: ltr; font-size: .82rem; }
+    .venture dl { display: grid; grid-template-columns: 120px 1fr; gap: .7rem 1rem; margin: 0; }
+    .venture dt { color: var(--muted); font-weight: 700; }
+    .venture dd { margin: 0; }
+    .venture .ask { border-top: 1px solid var(--line); padding-top: 1rem; color: var(--brand-dark); font-weight: 700; }
+
+    .model-steps { display: grid; grid-template-columns: repeat(5, 1fr); margin: 2rem 0; }
+    .model-step { position: relative; padding: 1rem .8rem 1rem; text-align: center; }
+    .model-step::before { content: ""; position: absolute; height: 2px; background: var(--line); top: 29px; right: 0; left: 0; }
+    .model-step:first-child::before { right: 50%; }
+    .model-step:last-child::before { left: 50%; }
+    .model-step b { position: relative; z-index: 1; display: grid; place-items: center; width: 58px; aspect-ratio: 1; border-radius: 50%; margin: auto; background: var(--surface); border: 2px solid var(--brand); color: var(--brand-dark); }
+    .model-step strong { display: block; margin-top: .8rem; direction: ltr; }
+    .model-step small { color: var(--muted); }
+
+    .ia-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .ia-card { padding: 1.4rem; }
+    .ia-card h3 { direction: ltr; text-align: start; margin-bottom: 1rem; }
+    .tree { list-style: none; margin: 0; padding: 0; }
+    .tree li { position: relative; padding: .42rem 1.2rem .42rem 0; border-inline-start: 1px solid var(--line); }
+    .tree li::before { content: ""; width: .8rem; height: 1px; background: var(--line); position: absolute; inset-inline-start: 0; top: 1.2rem; }
+    .tree li:last-child { border-inline-start-color: transparent; }
+    .tree code { direction: ltr; display: inline-block; }
+
+    .wireframe { background: var(--surface); border: 1px solid var(--line); border-radius: 28px; overflow: hidden; box-shadow: var(--shadow); }
+    .wireframe-bar { padding: .7rem 1rem; background: var(--surface-2); display: flex; align-items: center; justify-content: space-between; gap: 1rem; border-bottom: 1px solid var(--line); }
+    .browser-dots { display: flex; gap: .35rem; direction: ltr; }
+    .browser-dots span { width: 9px; height: 9px; border-radius: 50%; background: var(--line); }
+    .wf-section { padding: 1.4rem; border-bottom: 1px solid var(--line); }
+    .wf-section:last-child { border-bottom: 0; }
+    .wf-hero { min-height: 230px; display: grid; place-items: center; text-align: center; background: linear-gradient(135deg, var(--brand-soft), var(--surface)); }
+    .wf-hero h3 { font-size: clamp(1.8rem, 4vw, 3.4rem); max-width: 15ch; }
+    .wf-label { color: var(--brand-dark); font-weight: 800; font-size: .76rem; letter-spacing: .05em; }
+    .wf-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem; margin-top: .8rem; }
+    .wf-block { min-height: 90px; border: 1px dashed var(--line); border-radius: 12px; padding: .8rem; color: var(--muted); }
+
+    .seo-map { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .seo-site { text-align: center; padding: 1.2rem; }
+    .seo-site .lang { font-size: 2rem; font-weight: 800; color: var(--brand-dark); }
+    .seo-site p { color: var(--muted); }
+    .seo-rules { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; margin-top: 1rem; }
+    .rule { display: flex; gap: .7rem; align-items: flex-start; padding: .8rem 0; border-bottom: 1px solid var(--line); }
+    .rule b { color: var(--brand-dark); }
+
+    .timeline { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2rem; }
+    .timeline::before { content: ""; position: absolute; height: 2px; background: var(--line); top: 21px; left: 8%; right: 8%; }
+    .phase { position: relative; padding-top: 3.2rem; }
+    .phase::before { content: ""; position: absolute; top: 12px; inset-inline-start: 50%; width: 18px; height: 18px; border-radius: 50%; background: var(--surface); border: 4px solid var(--brand); transform: translateX(50%); z-index: 1; }
+    .phase:nth-child(2)::before { border-color: var(--gold); }
+    .phase:nth-child(3)::before { border-color: var(--blue); }
+    .phase:nth-child(4)::before { border-color: var(--red); }
+    .phase-card { padding: 1.2rem; height: 100%; }
+    .phase-card ul { margin-bottom: 0; padding-right: 1.1rem; }
+
+    details { border-bottom: 1px solid var(--line); }
+    summary { cursor: pointer; padding: 1rem 0; font-weight: 700; list-style: none; display: flex; justify-content: space-between; gap: 1rem; }
+    summary::after { content: "+"; color: var(--brand-dark); font-size: 1.2rem; }
+    details[open] summary::after { content: "−"; }
+    details > div { padding-bottom: 1rem; color: var(--muted); }
+    .questions { counter-reset: q; }
+    .question { display: grid; grid-template-columns: 48px 1fr; gap: 1rem; padding: 1.2rem 0; border-bottom: 1px solid var(--line); }
+    .question::before { counter-increment: q; content: counter(q); width: 42px; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; background: var(--brand-soft); color: var(--brand-dark); font-weight: 800; }
+    .question p { color: var(--muted); margin: .35rem 0 0; }
+
+    .audit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .audit-card { padding: 1.25rem; }
+    .audit-card h3 { direction: ltr; text-align: start; }
+    .audit-card ul { padding-right: 1.1rem; color: var(--muted); }
+    .source-list { display: grid; gap: .7rem; }
+    .source-list a { padding: .85rem 0; border-bottom: 1px solid var(--line); text-decoration: none; display: flex; justify-content: space-between; gap: 1rem; }
+    .source-list a::after { content: "↗"; direction: ltr; }
+
+    footer { padding: 3rem 0; border-top: 1px solid var(--line); color: var(--muted); }
+    footer .footer-inner { display: flex; justify-content: space-between; gap: 2rem; align-items: flex-start; }
+    footer p { max-width: 80ch; margin: 0; }
+    .print-button { min-width: max-content; }
+
+    @media (max-width: 980px) {
+      .nav { display: none; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-visual { min-height: 420px; }
+      .quick-view, .children, .endorsement, .tracks, .seo-map, .timeline { grid-template-columns: repeat(2, 1fr); }
+      .connector::after { display: none; }
+      .child-node::before { display: none; }
+      .section-head, .israel-grid { grid-template-columns: 1fr; }
+      .domain-grid { grid-template-columns: repeat(4, 1fr); }
+      .journey { grid-template-columns: repeat(2, 1fr); gap: .7rem; }
+      .journey-step, .journey-step:first-child, .journey-step:last-child { border-radius: 14px; border: 1px solid var(--line); }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .timeline::before { display: none; }
+      .phase { padding-top: 0; }
+      .phase::before { display: none; }
+    }
+
+    @media (max-width: 680px) {
+      .shell { padding: 0 1rem; }
+      .brand-text small { display: none; }
+      h1 { font-size: clamp(2.5rem, 15vw, 4.4rem); }
+      .hero { padding-top: 3.5rem; }
+      .hero-visual { min-height: 330px; }
+      .orbit.one { width: 315px; height: 315px; }
+      .orbit.two { width: 230px; height: 230px; }
+      .orbit.three { width: 145px; height: 145px; }
+      .core { width: 108px; font-size: .86rem; }
+      .satellite { font-size: .69rem; padding: .4rem .55rem; }
+      .quick-view, .children, .endorsement, .tracks, .ia-grid, .seo-map, .seo-rules, .timeline, .audit-grid { grid-template-columns: 1fr; }
+      .domain-grid { grid-template-columns: repeat(2, 1fr); }
+      .strengths { grid-template-columns: 1fr; }
+      .journey { grid-template-columns: 1fr; }
+      .model-steps { grid-template-columns: 1fr; }
+      .model-step { display: grid; grid-template-columns: 58px 1fr; text-align: start; gap: .8rem; align-items: center; }
+      .model-step::before { width: 2px; height: 100%; top: 0; right: 28px; left: auto; }
+      .model-step:first-child::before { right: 28px; top: 50%; }
+      .model-step:last-child::before { left: auto; right: 28px; bottom: 50%; height: 50%; }
+      .model-step strong { margin: 0; }
+      .venture dl { grid-template-columns: 1fr; gap: .2rem; }
+      .venture dd { margin-bottom: .65rem; }
+      .wf-grid { grid-template-columns: 1fr; }
+      footer .footer-inner { flex-direction: column; }
+    }
+
+    @media print {
+      :root { --bg: #fff; --surface: #fff; --surface-2: #f3f3f3; --ink: #111; --muted: #444; --line: #bbb; --shadow: none; }
+      .topbar, .progress, .hero-actions, .tabs, .print-button { display: none !important; }
+      body { background: #fff; font-size: 10.5pt; }
+      section { padding: 2rem 0; break-inside: avoid; }
+      .hero { min-height: auto; padding: 2rem 0; }
+      .hero-visual { display: none; }
+      .card, .quick-card, .wireframe, .israel-focus { box-shadow: none; break-inside: avoid; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">דלגו לתוכן</a>
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand-lockup" href="#top" aria-label="Realization — חזרה לראש העמוד">
+        <span class="brand-mark" aria-hidden="true">R</span>
+        <span class="brand-text"><strong class="ltr">REALIZATION</strong><small class="ltr">Physical-World Venture Studio</small></span>
+      </a>
+      <nav class="nav" aria-label="ניווט במסמך">
+        <a href="#architecture">מותג</a>
+        <a href="#domains">דומיינים</a>
+        <a href="#israel">ישראל</a>
+        <a href="#platform">RealizeOS</a>
+        <a href="#sites">אתרים</a>
+        <a href="#audiences">קהלים</a>
+        <a href="#portfolio">פורטפוליו</a>
+        <a href="#roadmap">יישום</a>
+      </nav>
+      <button class="icon-button" id="themeToggle" type="button" aria-label="החלפת מצב צבע" aria-pressed="false">◐</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="shell" id="top">
+      <section class="hero" aria-labelledby="heroTitle">
+        <div>
+          <span class="eyebrow">Physical-World Venture Studio</span>
+          <h1 class="ltr" id="heroTitle">Realizing untapped potential in the physical world.</h1>
+          <p>אסטרטגיית מותג, דומיינים וארכיטקטורת אתרים הממקמת את Realization כסטודיו שבונה ומאמת מיזמים — ומעביר אותם למפעילים הנכונים כדי שיוכלו לצמוח.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#summary">עיקרי האסטרטגיה</a>
+            <a class="button" href="#israel">הזרוע הישראלית</a>
+          </div>
+        </div>
+        <div class="hero-visual" role="img" aria-label="Realization במרכז מערכת המחברת נכסים, מקומות, תשתיות, אנרגיה ומים">
+          <div class="orbit one"></div><div class="orbit two"></div><div class="orbit three"></div>
+          <div class="core"><span class="ltr">REALIZATION</span></div>
+          <span class="satellite s1">נכסים</span>
+          <span class="satellite s2">תשתיות</span>
+          <span class="satellite s3">מים ואנרגיה</span>
+          <span class="satellite s4">ערים ומקומות</span>
+          <span class="satellite s5">בנייה וקיימות</span>
+        </div>
+      </section>
+
+      <div class="quick-view" id="summary">
+        <article class="quick-card"><strong>המודל</strong><p>מותג־על אחד, עם מיזמים ומוצרים עצמאיים למחצה תחת endorsement ברור.</p></article>
+        <article class="quick-card"><strong>התפקיד</strong><p>Realization מזהה, מתכננת, בונה ומאמתת; שותפים תפעוליים מפעילים ומרחיבים.</p></article>
+        <article class="quick-card"><strong>ישראל</strong><p>מקור אסטרטגי של הון, מפעילים, טכנולוגיה ויכולת יזמית עבור פורטפוליו גלובלי.</p></article>
+      </div>
+
+      <section id="architecture" aria-labelledby="architectureTitle">
+        <div class="section-head">
+          <div><div class="section-kicker">01 · ארכיטקטורת מותג</div><h2 id="architectureTitle">Hybrid endorsed architecture</h2></div>
+          <p>לא branded house שמטשטש אחריות, ולא house of brands שמוותר על האמון שנצבר. Realization היא מותג־האם; כל מיזם מקבל זהות, מפעיל וסטטוס ברורים.</p>
+        </div>
+        <div class="architecture">
+          <div class="parent-node"><strong class="ltr">REALIZATION</strong><div class="role ltr">Physical-World Venture Studio · realization.world</div></div>
+          <div class="connector" aria-hidden="true"></div>
+          <div class="children">
+            <article class="child-node card"><span class="node-type">MARKET GATEWAY</span><h3>Realization Israel</h3><p>רשת משקיעים ושותפויות ישראלית. אינה מיזם נפרד ואינה אתר שירותים.</p></article>
+            <article class="child-node card"><span class="node-type">PORTFOLIO VENTURE</span><h3>Realization Portugal</h3><p>מערכת לפתרון נכסים תקועים וירושות בפורטוגל, המיועדת להעברה למפעיל.</p></article>
+            <article class="child-node card"><span class="node-type">ENDORSED PLATFORM</span><h3 class="ltr">RealizeOS</h3><p>מוצר עצמאי ושכבת הפעלה פנימית לבניית מיזמים ועסקים בעולם הפיזי.</p></article>
+            <article class="child-node card"><span class="node-type">PRIORITY MARKET</span><h3>ספרד · ברצלונה</h3><p>יעד ההתרחבות הראשי ומוקד הפעילות הראשון; זהות מיזם עצמאית רק לאחר אימות הבעיה, המודל, הרגולציה והמפעיל.</p></article>
+          </div>
+        </div>
+        <div class="endorsement" aria-label="מערכת ה-endorsement">
+          <div><code>A Realization venture</code><br><small>מחקר, אינקובציה ובנייה</small></div>
+          <div><code>Built by Realization</code><br><small>מיזם שהבשיל או הועבר</small></div>
+          <div><code>Operated by [Partner]</code><br><small>האחריות התפעולית בפועל</small></div>
+          <div><code>A Realization portfolio company</code><br><small>רק כאשר קיימת החזקת הון</small></div>
+        </div>
+        <div class="highlight"><strong>עיקרון יסוד:</strong> יש להפריד בכל מקום בין מי שבנה את המיזם, מי מפעיל אותו, מי מחזיק בו ומי בעל הרישיון או האחריות הרגולטורית.</div>
+      </section>
+
+      <section id="domains" aria-labelledby="domainsTitle">
+        <div class="section-head">
+          <div><div class="section-kicker">02 · אסטרטגיית דומיינים</div><h2 id="domainsTitle">לכל דומיין תפקיד אחד ברור</h2></div>
+          <p>הדומיינים אינם גרסאות מתורגמות של אותו אתר. כל אחד משרת קהל, כוונת חיפוש ושלב עסקי שונים, עם canonical ובעלות סמנטית משלו.</p>
+        </div>
+        <div class="domain-grid" aria-label="מפת הדומיינים">
+          <div class="domain-pill primary"><strong>realization.world</strong><small>מותג־האם הגלובלי</small></div>
+          <div class="domain-pill primary"><strong>realization.co.il</strong><small>הון ושותפויות מישראל</small></div>
+          <div class="domain-pill"><strong>realization.pt</strong><small>מיזם פורטוגלי פעיל</small></div>
+          <div class="domain-pill primary"><strong>realization.es</strong><small>שער אימות לספרד ולברצלונה</small></div>
+          <div class="domain-pill"><strong>realizeos.ai</strong><small>מוצר קנוני</small></div>
+          <div class="domain-pill redirect"><strong>realizeos.com</strong><small>308 → .ai</small></div>
+          <div class="domain-pill redirect"><strong>realizeos.io</strong><small>308 → .ai</small></div>
+        </div>
+        <div class="table-wrap" role="region" aria-label="טבלת אסטרטגיית דומיינים" tabindex="0">
+          <table>
+            <thead><tr><th>דומיין</th><th>מטרה וקהל</th><th>שפה ותוכן</th><th>Canonical / Redirect</th><th>תזמון והערה</th></tr></thead>
+            <tbody>
+              <tr><td><code>realization.world</code></td><td>הסטודיו הגלובלי: בעלי הזדמנויות, מפעילים, משקיעים, חברות ומגזר ציבורי.</td><td>אנגלית; תזה, מודל, פורטפוליו, שותפויות ותובנות.</td><td>Self-canonical לכל URL; HTTPS ו־host יחיד.</td><td><span class="status fix">דחוף</span> תיקון TLS והשקת MVP.</td></tr>
+              <tr><td><code>realization.co.il</code></td><td>רשת הון ושותפויות: אנג'לים, family offices, VC/CVC, מפעילים ומומחים.</td><td>עברית ראשית; תזה, portfolio, מסלולי הון ושותפות, briefings.</td><td>תוכן ישראלי ייחודי ו־self-canonical; ללא שכפול של .world.</td><td><span class="status now">30 יום</span> מעבר מאתר שירותים ל־partnership hub.</td></tr>
+              <tr><td><code>realization.pt</code></td><td>בעלי נכסים, יורשים, משקיעים ומפעיל מקומי בפורטוגל.</td><td>פורטוגזית ראשית; אנגלית ב־<code>/en/</code>.</td><td>Self-canonical ו־hreflang <code>pt-PT/en</code>.</td><td><span class="status now">פעיל</span> להוסיף endorsement ו־operator ברור.</td></tr>
+              <tr><td><code>realization.es</code></td><td>שער השוק הספרדי: אימות הזדמנויות, מפעילים ושותפים בברצלונה.</td><td>ספרדית ראשית ואנגלית תומכת; קטלאנית כאשר קיימים תוכן וקהל מקומיים אמיתיים.</td><td>Self-canonical לתוכן ספרדי מקורי; עד השקת העמוד, 302/307 לעמוד Spain ב־.world.</td><td><span class="status now">כעת</span> לתקן TLS ולהשיק עמוד validation רזה; אתר מיזם מלא רק לאחר הוכחת מודל ומפעיל.</td></tr>
+              <tr><td><code>realizeos.ai</code></td><td>מוצר RealizeOS: לקוחות, מפתחים, enterprise ושותפי הטמעה.</td><td>אנגלית; מוצר, architecture, deployment, docs ורישוי.</td><td>Canonical ראשי.</td><td><span class="status now">פעיל</span> לעדכן רישוי, CTA וקישור למותג־האם.</td></tr>
+              <tr><td><code>realizeos.com</code></td><td>הגנה מותגית וכתובת קלה לזכירה.</td><td>ללא תוכן עצמאי.</td><td>308 שומר־נתיב ל־.ai.</td><td><span class="status now">תקין עקרונית</span></td></tr>
+              <tr><td><code>realizeos.io</code></td><td>הגנה מותגית עבור קהל טכנולוגי.</td><td>ללא תוכן עצמאי.</td><td>308 שומר־נתיב ל־.ai.</td><td><span class="status now">תקין עקרונית</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="israel" aria-labelledby="israelTitle">
+        <div class="israel-focus">
+          <span class="eyebrow">Realization Israel · Venture & Capital Partnerships</span>
+          <h2 id="israelTitle">מחברים הון, יזמות וטכנולוגיה ישראליים להזדמנויות בעולם הפיזי.</h2>
+          <div class="israel-grid">
+            <div>
+              <p>ישראל אינה חייבת להיות שוק היעד של כל מיזם. היתרון שלה הוא כמקור אסטרטגי של משקיעים, מפעילים, טכנולוגיה וקשרים גלובליים עבור פורטפוליו בינלאומי.</p>
+              <div class="strengths">
+                <div class="strength"><strong>הון חכם</strong><span>אנג'לים, family offices, קרנות, CVCs ומוסדיים.</span></div>
+                <div class="strength"><strong>מהירות יזמית</strong><span>נוחות עם אי־ודאות וקבלת החלטות מהירה.</span></div>
+                <div class="strength"><strong>יכולת טכנולוגית</strong><span>AI, data, מים, אנרגיה, בנייה ומערכות מורכבות.</span></div>
+                <div class="strength"><strong>אוריינטציה גלובלית</strong><span>רשתות וקשרים המתרחבים מעבר לשוק המקומי.</span></div>
+              </div>
+            </div>
+            <div class="capital-flow" aria-label="משפך המשקיעים והשותפים">
+              <div class="flow-step"><b>1</b><span>תזה ציבורית ופורטפוליו ברור</span></div><div class="flow-arrow"></div>
+              <div class="flow-step"><b>2</b><span>פרופיל משקיע או שותף מובנה</span></div><div class="flow-arrow"></div>
+              <div class="flow-step"><b>3</b><span>Qualification והתאמה להזדמנות</span></div><div class="flow-arrow"></div>
+              <div class="flow-step"><b>4</b><span>Opportunity brief ושיחת היכרות</span></div><div class="flow-arrow"></div>
+              <div class="flow-step"><b>5</b><span>Data room ותהליך ספציפי למיזם</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tracks" aria-label="ארבעת מסלולי השותפות בישראל">
+          <article class="track"><h3 class="ltr">Venture Equity</h3><p>השקעה בחברה או במוצר סקיילבילי, כגון RealizeOS.</p></article>
+          <article class="track"><h3 class="ltr">Project & Asset Capital</h3><p>הון המוצמד לנכס, פרויקט או SPV מסוים.</p></article>
+          <article class="track"><h3 class="ltr">Operating Partnerships</h3><p>הפעלה, רישוי, הפצה או הרחבה של venture קיים.</p></article>
+          <article class="track"><h3 class="ltr">Technology Partnerships</h3><p>טכנולוגיה, נתונים, R&amp;D, pilot sites ומומחיות ענפית.</p></article>
+        </div>
+
+        <div class="highlight"><strong>המסר המבדל:</strong> היכולת הישראלית לבנות מיזמים אינה צריכה להישאר בעולם התוכנה. Realization מתרגמת venture thinking לטכנולוגיה, נכסים ומערכות בעולם הפיזי.</div>
+      </section>
+
+      <section id="platform" aria-labelledby="platformTitle">
+        <div class="section-head">
+          <div><div class="section-kicker">03 · פלטפורמת RealizeOS</div><h2 id="platformTitle">מוצר עצמאי, שכבת הפעלה והוכחת יכולת</h2></div>
+          <p>RealizeOS הוא גם המנוע הפנימי של Realization וגם מוצר מסחרי לעסקים בעולם הפיזי. הוא צריך להיות endorsed product — לא מותג־אם חלופי ולא שירות אישי מתמשך של המייסד.</p>
+        </div>
+        <div class="portfolio-grid">
+          <article class="venture card">
+            <div class="venture-head"><div><span class="descriptor">RECOMMENDED POSITION</span><h3 class="ltr">RealizeOS</h3></div><span class="status now">Built by Realization</span></div>
+            <dl>
+              <dt>מיצוב</dt><dd class="ltr">AI operations infrastructure for physical-world businesses.</dd>
+              <dt>תפקיד פנימי</dt><dd>ניהול ידע, סוכנים, workflows וזהות מיזם.</dd>
+              <dt>מודל מסחרי</dt><dd>Self-hosting, enterprise licensing והטמעה על ידי שותפים מוסמכים.</dd>
+              <dt>דומיין</dt><dd><code>realizeos.ai</code> נשאר canonical; ‎.com ו־‎.io מפנים אליו.</dd>
+              <dt>CTA</dt><dd class="ltr">Deploy · Explore the Architecture · Become an Implementation Partner</dd>
+            </dl>
+          </article>
+          <article class="venture card">
+            <div class="venture-head"><div><span class="descriptor">IMMEDIATE CORRECTIONS</span><h3>דיוק מסחרי ומשפטי</h3></div><span class="status fix">לתיקון</span></div>
+            <dl>
+              <dt>רישוי</dt><dd>BSL 1.1 אינו Open Source לפני Change Date; להשתמש ב־<span class="ltr">source-available</span> או לשנות רישיון.</dd>
+              <dt>שירות</dt><dd>להחליף “we build, deploy and run it” במודל implementation partners.</dd>
+              <dt>אמינות</dt><dd>להסיר מבצע שפג ולהוסיף metrics מאומתים לשימוש בפועל.</dd>
+              <dt>קישור מותג</dt><dd>להחליף את הקישור ל־.co.il בקישור ל־<code>realization.world</code>.</dd>
+            </dl>
+          </article>
+        </div>
+      </section>
+
+      <section id="sites" aria-labelledby="sitesTitle">
+        <div class="section-head">
+          <div><div class="section-kicker">04 · ארכיטקטורת אתרים</div><h2 id="sitesTitle">אתרים שמשרתים כוונה, לא ארגון פנימי</h2></div>
+          <p>הניווט בכל אתר נבנה לפי המשימה שהמשתמש מנסה להשלים. אין צורך ב־Services או Properties באתר־האם; אלה קטגוריות שמחזירות את המותג למודל consultancy ו־marketplace.</p>
+        </div>
+        <div class="ia-grid">
+          <article class="ia-card card"><h3>realization.world</h3><ul class="tree"><li><code>/thesis</code> — התזה</li><li><code>/how-we-build</code> — מודל הבנייה וההעברה</li><li><code>/ventures</code> — פורטפוליו</li><li><code>/partners</code> — Owners, Operators, Capital, Corporate/Public</li><li><code>/markets</code> — Israel, Portugal, Spain</li><li><code>/insights</code> — ידע ושדה</li><li><code>/bring-an-opportunity</code> — הגשת הזדמנות</li></ul></article>
+          <article class="ia-card card"><h3>realization.co.il</h3><ul class="tree"><li><code>/thesis</code> — למה ישראל ולמה העולם הפיזי</li><li><code>/portfolio</code> — הזדמנויות ציבוריות ברמת overview</li><li><code>/investors</code> — Venture ו־Project Capital</li><li><code>/partners</code> — Operators, Technology, Corporate</li><li><code>/insights</code> — תזה בעברית</li><li><code>/events</code> — briefings ו־roundtables</li><li><code>/join</code> — פרופיל משקיע או שותף</li></ul></article>
+          <article class="ia-card card"><h3>realization.pt</h3><ul class="tree"><li><code>/</code> — פורטוגזית ראשית</li><li><code>/en/</code> — אנגלית</li><li><code>/how-it-works</code> — התהליך</li><li><code>/situations</code> — ירושה, deadlock, מסמכים</li><li><code>/cases</code> — מקרים מאומתים</li><li><code>/investors</code> — מסלול הון מקומי</li><li><code>/trust</code> — רישוי, operator ופרטיות</li></ul></article>
+          <article class="ia-card card"><h3>realizeos.ai</h3><ul class="tree"><li><code>/product</code> — המוצר</li><li><code>/architecture</code> — FABRIC והמערכת</li><li><code>/use-cases</code> — ענפים ושימושים</li><li><code>/security</code> — deployment ובעלות על נתונים</li><li><code>/developers</code> — docs ו־GitHub</li><li><code>/licensing</code> — BSL ומסלול enterprise</li><li><code>/partners</code> — שותפי הטמעה</li></ul></article>
+        </div>
+
+        <h3 style="margin: 3rem 0 1rem;">רצף דף הבית של <span class="ltr">realization.world</span></h3>
+        <div class="wireframe" aria-label="Wireframe טקסטואלי לדף הבית של realization.world">
+          <div class="wireframe-bar"><div class="browser-dots" aria-hidden="true"><span></span><span></span><span></span></div><strong class="ltr">realization.world</strong></div>
+          <div class="wf-section wf-hero"><div><span class="wf-label ltr">PHYSICAL-WORLD VENTURE STUDIO</span><h3 class="ltr">Realizing untapped potential in the physical world.</h3><p>Physical potential → digital systems → realized value.</p></div></div>
+          <div class="wf-section"><span class="wf-label">הבעיה</span><h3>ערך רב בעולם הפיזי נשאר לא ממומש מפני שחסרה המערכת שתפעיל אותו.</h3></div>
+          <div class="wf-section"><span class="wf-label">המסגרת</span><div class="wf-grid"><div class="wf-block ltr">Physical Potential</div><div class="wf-block ltr">Digital Systems</div><div class="wf-block ltr">Realized Value</div></div></div>
+          <div class="wf-section"><span class="wf-label">המודל</span><p class="ltr">Discover → Architect → Build → Validate → Transfer</p></div>
+          <div class="wf-section"><span class="wf-label">הוכחה</span><div class="wf-grid"><div class="wf-block ltr">Realization Portugal</div><div class="wf-block ltr">RealizeOS</div><div class="wf-block">הזדמנות עתידית</div></div></div>
+          <div class="wf-section"><span class="wf-label">מסלולי קהל</span><div class="wf-grid"><div class="wf-block ltr">Bring an Opportunity</div><div class="wf-block ltr">Operate a Venture</div><div class="wf-block ltr">Partner with Capital</div></div></div>
+        </div>
+      </section>
+
+      <section id="model" aria-labelledby="modelTitle">
+        <div class="section-head">
+          <div><div class="section-kicker">05 · מודל העבודה</div><h2 id="modelTitle">המייסד מוביל בנקודת המינוף הגבוהה</h2></div>
+          <p>החזון, המחקר, עיצוב המיזם, ארכיטקטורת המערכת, הטכנולוגיה וה־validation נשארים בליבת Realization. הפעלה שוטפת עוברת לשותף בעל יכולת להתמיד ולהתרחב.</p>
+        </div>
+        <div class="model-steps" aria-label="חמשת שלבי בניית המיזם">
+          <div class="model-step"><b>1</b><div><strong>Discover</strong><small>איתור פוטנציאל לא ממומש</small></div></div>
+          <div class="model-step"><b>2</b><div><strong>Architect</strong><small>מערכת, מודל ושותפים</small></div></div>
+          <div class="model-step"><b>3</b><div><strong>Build</strong><small>מוצר, workflow וטכנולוגיה</small></div></div>
+          <div class="model-step"><b>4</b><div><strong>Validate</strong><small>ביקוש, כלכלה והיתכנות</small></div></div>
+          <div class="model-step"><b>5</b><div><strong>Transfer</strong><small>העברה למפעיל ושימור זכויות</small></div></div>
+        </div>
+        <div class="highlight ltr"><strong>Founder-led where vision and architecture matter most. Partner-operated where scale and continuity matter most.</strong></div>
+      </section>
+
+      <section id="audiences" aria-labelledby="audiencesTitle">
+        <div class="section-head">
+          <div><div class="section-kicker">06 · מסעות קהל</div><h2 id="audiencesTitle">כל קהל מקבל מסלול והבטחה שונים</h2></div>
+          <p>בחרו קהל כדי לראות את המסע הרצוי. מטרת האתר אינה לייצר כמה שיותר פגישות, אלא לזהות התאמה איכותית ולהוביל כל אדם ל־next step הנכון.</p>
+        </div>
+        <div class="tabs" role="tablist" aria-label="בחירת מסע קהל">
+          <button class="tab-button" role="tab" aria-selected="true" aria-controls="ownerPanel" id="ownerTab">בעלי הזדמנות</button>
+          <button class="tab-button" role="tab" aria-selected="false" aria-controls="operatorPanel" id="operatorTab">מפעילים</button>
+          <button class="tab-button" role="tab" aria-selected="false" aria-controls="capitalPanel" id="capitalTab">משקיעים</button>
+          <button class="tab-button" role="tab" aria-selected="false" aria-controls="corporatePanel" id="corporateTab">חברות ומגזר ציבורי</button>
+          <button class="tab-button" role="tab" aria-selected="false" aria-controls="israeliPanel" id="israeliTab">רשת ישראלית</button>
+        </div>
+        <div class="tab-panel active" role="tabpanel" id="ownerPanel" aria-labelledby="ownerTab"><div class="journey"><div class="journey-step"><span class="num">01 · כניסה</span><h3 class="ltr">Bring an Opportunity</h3><p>בעל נכס או מערכת מזהה פוטנציאל תקוע.</p></div><div class="journey-step"><span class="num">02 · ראיה</span><h3>קריטריונים ומקרים</h3><p>מבין מה Realization כן ולא בונה.</p></div><div class="journey-step"><span class="num">03 · סינון</span><h3>Opportunity brief</h3><p>זכויות, חסם, נהנים, זמן והון.</p></div><div class="journey-step"><span class="num">04 · תוצאה</span><h3>בדיקת התאמה</h3><p>המשך למחקר, partner route או דחייה מנומקת.</p></div></div></div>
+        <div class="tab-panel" role="tabpanel" id="operatorPanel" aria-labelledby="operatorTab"><div class="journey"><div class="journey-step"><span class="num">01 · כניסה</span><h3 class="ltr">Operate a Venture</h3><p>מפעיל מחפש מערכת מוכנה ולא רעיון גולמי.</p></div><div class="journey-step"><span class="num">02 · ראיה</span><h3>סטטוס וצרכים</h3><p>מודל, שוק, capabilities ורישוי.</p></div><div class="journey-step"><span class="num">03 · סינון</span><h3>Operator profile</h3><p>יכולת ביצוע, הון, צוות וגאוגרפיה.</p></div><div class="journey-step"><span class="num">04 · תוצאה</span><h3>Transfer discussion</h3><p>בדיקת התאמה, governance וכלכלה.</p></div></div></div>
+        <div class="tab-panel" role="tabpanel" id="capitalPanel" aria-labelledby="capitalTab"><div class="journey"><div class="journey-step"><span class="num">01 · כניסה</span><h3 class="ltr">Partner with Capital</h3><p>משקיע מזהה התאמה לתזה.</p></div><div class="journey-step"><span class="num">02 · ראיה</span><h3>Portfolio evidence</h3><p>בעיה, validation, operator ומודל.</p></div><div class="journey-step"><span class="num">03 · סינון</span><h3>Investor profile</h3><p>ticket, stage, geography ו־instrument.</p></div><div class="journey-step"><span class="num">04 · תוצאה</span><h3>Brief ו־data room</h3><p>רק עבור הזדמנות רלוונטית ומאושרת.</p></div></div></div>
+        <div class="tab-panel" role="tabpanel" id="corporatePanel" aria-labelledby="corporateTab"><div class="journey"><div class="journey-step"><span class="num">01 · כניסה</span><h3 class="ltr">Build a Strategic Venture</h3><p>בעיה מערכתית עם בעל סמכות ונתונים.</p></div><div class="journey-step"><span class="num">02 · ראיה</span><h3>Venture, not consulting</h3><p>מודל חדש במקום פרויקט שירות פתוח.</p></div><div class="journey-step"><span class="num">03 · סינון</span><h3>Time-boxed validation</h3><p>pilot, יעדים, governance והעברה.</p></div><div class="journey-step"><span class="num">04 · תוצאה</span><h3>שותפות אסטרטגית</h3><p>venture משותף או operator transfer.</p></div></div></div>
+        <div class="tab-panel" role="tabpanel" id="israeliPanel" aria-labelledby="israeliTab"><div class="journey"><div class="journey-step"><span class="num">01 · כניסה</span><h3>תזה בעברית</h3><p>הון וטכנולוגיה ישראליים לעולם הפיזי.</p></div><div class="journey-step"><span class="num">02 · פרופיל</span><h3>משקיע או שותף</h3><p>מנדט, יכולות, geography ומעורבות.</p></div><div class="journey-step"><span class="num">03 · מערכת יחסים</span><h3>Briefing רבעוני</h3><p>הזדמנות אחת, evidence ו־current ask.</p></div><div class="journey-step"><span class="num">04 · התאמה</span><h3>חיבור ממוקד</h3><p>הון, operator, pilot או technology.</p></div></div></div>
+      </section>
+
+      <section id="portfolio" aria-labelledby="portfolioTitle">
+        <div class="section-head">
+          <div><div class="section-kicker">07 · מודל פורטפוליו</div><h2 id="portfolioTitle">מבעיה לא ממומשת למערכת שפועלת</h2></div>
+          <p>כל venture מוצג כ־case study מובנה: בעיה, פוטנציאל, מערכת, מודל, מפעיל, תפקיד Realization, evidence, סטטוס והבקשה הנוכחית.</p>
+        </div>
+        <div class="portfolio-grid">
+          <article class="venture card">
+            <div class="venture-head"><div><span class="descriptor">PROPERTY RESOLUTION VENTURE · PORTUGAL</span><h3 class="ltr">Realization Portugal</h3></div><span class="status later">סטטוס לאישור</span></div>
+            <dl>
+              <dt>הבעיה</dt><dd>בתים בעלי ערך נשארים תקועים בגלל ירושה, מסמכים, co-owner deadlock ותהליכים מקצועיים מפוצלים.</dd>
+              <dt>המערכת</dt><dd>אבחון מונחה, Resolution Blueprint, Clara ותהליך מתואם עם אנשי מקצוע מורשים.</dd>
+              <dt>Realization</dt><dd>מחקר, venture architecture, מוצר, טכנולוגיה, validation והעברה.</dd>
+              <dt>מפעיל</dt><dd>יש להציג ישות משפטית, בעל רישיון ו־data controller במפורש.</dd>
+              <dt>Evidence</dt><dd>לפרסם רק cases מתועדים, מאושרים ומדידים.</dd>
+            </dl>
+            <div class="ask ltr">Bring a Property Case · Operate This Venture · Partner with Capital</div>
+          </article>
+          <article class="venture card">
+            <div class="venture-head"><div><span class="descriptor">AI OPERATIONS PLATFORM</span><h3 class="ltr">RealizeOS</h3></div><span class="status now">Active</span></div>
+            <dl>
+              <dt>הבעיה</dt><dd>ידע, הקשר ופעולות מתפזרים בין כלי AI ו־workflows שאינם מחוברים.</dd>
+              <dt>המערכת</dt><dd>FABRIC, knowledge graph, agents, routines, identity ו־event log מקומי.</dd>
+              <dt>Realization</dt><dd>תזה, ארכיטקטורה, פיתוח ואימות דרך פעולות אמיתיות בעולם הפיזי.</dd>
+              <dt>מודל</dt><dd>רישוי, self-hosting ושותפי implementation — לא support שוטף של המייסד.</dd>
+              <dt>Evidence</dt><dd>גרסאות, deployments, workflows, זמן שנחסך ולקוחות מאומתים.</dd>
+            </dl>
+            <div class="ask ltr">Deploy · Explore the Architecture · Become an Implementation Partner</div>
+          </article>
+        </div>
+      </section>
+
+      <section id="seo" aria-labelledby="seoTitle">
+        <div class="section-head">
+          <div><div class="section-kicker">08 · SEO ורב־לשוניות</div><h2 id="seoTitle">שפה, מדינה וכוונת חיפוש נשארות מופרדות</h2></div>
+          <p>כל אתר מחזיק נושא משלו. canonical אינו כלי לחיבור מותגים שונים, ו־hreflang משמש רק לגרסאות מקבילות של אותו תוכן.</p>
+        </div>
+        <div class="seo-map">
+          <article class="seo-site card"><div class="lang">EN</div><h3 class="ltr">realization.world</h3><p>Physical-world venture studio ותזה גלובלית.</p></article>
+          <article class="seo-site card"><div class="lang">HE</div><h3 class="ltr">realization.co.il</h3><p>שותפויות, הון ויזמות ישראליים.</p></article>
+          <article class="seo-site card"><div class="lang">PT</div><h3 class="ltr">realization.pt</h3><p>פתרון נכסים תקועים בפורטוגל.</p></article>
+          <article class="seo-site card"><div class="lang">ES</div><h3 class="ltr">realization.es</h3><p>שער ספרדי לאימות פעילות בברצלונה; לא אתר מיזם מלא לפני הוכחה.</p></article>
+        </div>
+        <div class="seo-rules">
+          <div class="rule"><b>✓</b><span>URL נפרד לכל שפה, עם קישור החלפה גלוי.</span></div>
+          <div class="rule"><b>✓</b><span>Self-canonical לכל עמוד ייחודי.</span></div>
+          <div class="rule"><b>✓</b><span>hreflang הדדי רק בין תרגומים אמיתיים.</span></div>
+          <div class="rule"><b>✓</b><span>Redirects ברמת URL, ללא שרשראות.</span></div>
+          <div class="rule"><b>×</b><span>לא לבצע redirect אוטומטי לפי IP או שפת דפדפן.</span></div>
+          <div class="rule"><b>×</b><span>לא לשכפל אתר אנגלי זהה ב־.world וב־.co.il.</span></div>
+        </div>
+      </section>
+
+      <section id="migration" aria-labelledby="migrationTitle">
+        <div class="section-head">
+          <div><div class="section-kicker">09 · הגירה</div><h2 id="migrationTitle">מ־consultancy site לאקוסיסטם מדויק</h2></div>
+          <p>מכיוון ש־.co.il נשאר פעיל כמרכז ישראלי, זו אינה העברה מלאה של הדומיין. יש למפות עמודים בנפרד ולא להשתמש ב־Search Console Change of Address לכל האתר.</p>
+        </div>
+        <div class="table-wrap" role="region" aria-label="מפת redirects מומלצת" tabindex="0">
+          <table>
+            <thead><tr><th>URL קיים</th><th>יעד מומלץ</th><th>היגיון</th></tr></thead>
+            <tbody>
+              <tr><td><code>/</code></td><td>דף הבית הישראלי החדש</td><td>הדומיין נשאר market-facing hub.</td></tr>
+              <tr><td><code>/about</code></td><td><code>realization.world/about</code></td><td>סיפור הסטודיו הגלובלי שייך למותג־האם.</td></tr>
+              <tr><td><code>/services</code></td><td><code>.co.il/partners</code> או <code>.world/how-we-build</code></td><td>להחליף שירותים במודל שותפות ובניית venture.</td></tr>
+              <tr><td><code>/services/introduction-meeting</code></td><td><code>.co.il/join</code></td><td>פרופיל והתאמה במקום פגישת ייעוץ כללית.</td></tr>
+              <tr><td><code>/propertiesforsale</code></td><td><code>realization.pt</code> או URL ספציפי</td><td>נכסים שייכים למיזם הפורטוגלי.</td></tr>
+              <tr><td><code>/collaborate</code></td><td><code>.co.il/partners</code></td><td>מסלולי operator, technology ו־capital.</td></tr>
+              <tr><td><code>/blog</code></td><td><code>realization.world/insights</code></td><td>תובנות גלובליות עוברות לאתר־האם; עבריות נשארות ב־.co.il.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="highlight"><strong>DNS ודוא"ל:</strong> יש לייצא MX, SPF, DKIM, DMARC ו־verification records לפני כל שינוי. <span class="ltr">hello@realization.world</span> יהפוך לכתובת הראשית, אך <span class="ltr">info@realization.co.il</span> צריך להמשיך לקבל דוא"ל ללא הגבלת זמן.</div>
+      </section>
+
+      <section id="governance" aria-labelledby="governanceTitle">
+        <div class="section-head">
+          <div><div class="section-kicker">10 · ממשל מותג</div><h2 id="governanceTitle">כללים שמאפשרים לגדול בלי לאבד בהירות</h2></div>
+          <p>המטרה היא למנוע מצב שבו כל venture חדש הופך לעוד “Realization Country”, או שבו המייסד נשאר מזוהה כמפעיל בכל הפעילויות.</p>
+        </div>
+        <div>
+          <details open><summary>שם, זהות ו־endorsement</summary><div>Realization נשמר כשם ה־studio. venture שפונה לקהל עצמאי יכול לקבל שם ודומיין משלו. ה־endorsement משתנה לפי lifecycle, ואינו מחליף גילוי ברור של owner ו־operator.</div></details>
+          <details><summary>סטטוס אחיד לפורטפוליו</summary><div class="ltr">Exploring · Validating · Building · Partnering · Operating · Transferred · Archived</div></details>
+          <details><summary>סטנדרט הוכחה</summary><div>אין testimonials אנונימיים או generic. כל claim מספרי כולל מקור, תאריך, הגדרה ומתודולוגיה; כל case כולל אישור פרסום.</div></details>
+          <details><summary>נכסים דיגיטליים</summary><div>דומיינים, repositories, social handles, analytics, mailing lists ו־email identities נשמרים במרשם מרכזי עם owner ותנאי transfer.</div></details>
+          <details><summary>משפט ורגולציה</summary><div>כל venture מגדיר legal entity, data controller, רישוי, AML/KYC, privacy, זכויות IP והצגת השקעות לפני השקה ציבורית.</div></details>
+        </div>
+      </section>
+
+      <section id="roadmap" aria-labelledby="roadmapTitle">
+        <div class="section-head">
+          <div><div class="section-kicker">11 · Roadmap</div><h2 id="roadmapTitle">מהתיקון הדחוף למערכת שניתנת להרחבה</h2></div>
+          <p>היישום מתחיל בתיקון אמון ותשתית, ממשיך בהשקת מותג־האם והזרוע הישראלית, ומבשיל למערך transfer, data rooms ושותפי הפעלה.</p>
+        </div>
+        <div class="timeline">
+          <article class="phase"><div class="phase-card card"><h3>מיידי</h3><ul><li>תיקון TLS ב־.world וב־.es</li><li>הגדרת תזה ושערי אימות לברצלונה</li><li>אישור brand architecture</li><li>תיקון BSL ומבצע RealizeOS</li><li>הסרת testimonials גנריים</li><li>הגדרת operator ו־legal entity</li></ul></div></article>
+          <article class="phase"><div class="phase-card card"><h3>30 יום</h3><ul><li>השקת MVP של .world</li><li>עמוד validation ב־.es ומפת שותפים בברצלונה</li><li>הפיכת .co.il ל־partnership hub</li><li>שני case studies ראשונים</li><li>URL map ו־redirects</li><li>GA4, Search Console ו־sitemaps</li></ul></div></article>
+          <article class="phase"><div class="phase-card card"><h3>90 יום</h3><ul><li>פיילוט, LOI או ראיית ביקוש ראשונה בברצלונה</li><li>Investor/operator profiles</li><li>Opportunity intake</li><li>Data room מאובטח</li><li>Transfer package</li><li>Implementation partners ל־RealizeOS</li></ul></div></article>
+          <article class="phase"><div class="phase-card card"><h3>בהמשך</h3><ul><li>ישות או מותג מיזם ספרדי רק לאחר מעבר שערי ההוכחה</li><li>שם עצמאי למיזם פורטוגל</li><li>P&amp;L והנהלה ל־RealizeOS</li><li>רישום סימני מסחר</li><li>רשת מפעילים בינלאומית</li></ul></div></article>
+        </div>
+      </section>
+
+      <section id="questions" aria-labelledby="questionsTitle">
+        <div class="section-head">
+          <div><div class="section-kicker">12 · החלטות מייסד</div><h2 id="questionsTitle">חמש תשובות שיפתחו את כל ההמשך</h2></div>
+          <p>Copy, design, redirects ו־CTA יכולים להיגזר מהחלטות אלו. אין צורך להמתין לשלמות — אך יש צורך בגבולות ברורים.</p>
+        </div>
+        <div class="questions">
+          <article class="question"><div><h3>מי מחזיק במה?</h3><p>המותג, ה־IP, כל domain, הנתונים והזכויות שיעברו למפעיל.</p></div></article>
+          <article class="question"><div><h3>מה הסטטוס האמיתי של פורטוגל?</h3><p>Validation, הכנסות, רישוי, operator, מוכנות להעברה ומה נשאר בידי Realization.</p></div></article>
+          <article class="question"><div><h3>מהו היעד של RealizeOS?</h3><p>מוצר רישוי, חברה עצמאית, IP של הסטודיו או שילוב — ומהו הרישיון הרצוי.</p></div></article>
+          <article class="question"><div><h3>אילו הוכחות מותר לפרסם?</h3><p>שמות, מספרים, תוצאות, לקוחות, case studies ונתוני שימוש.</p></div></article>
+          <article class="question"><div><h3>מהם סדרי העדיפויות ל־24 חודשים?</h3><p>שניים או שלושה תחומים, מדינות וקבוצות שותפים שיקבלו קדימות.</p></div></article>
+        </div>
+      </section>
+
+      <section id="evidence" aria-labelledby="evidenceTitle">
+        <div class="section-head">
+          <div><div class="section-kicker">13 · ראיות ומקורות</div><h2 id="evidenceTitle">מה נצפה ומה עדיין דורש אימות</h2></div>
+          <p>האסטרטגיה מבוססת על בדיקת האתרים הפעילים ב־8–9 באוגוסט 2026 ועל מקורות רשמיים. טענות תפעוליות ורגולטוריות באתרי המיזמים לא אומתו עצמאית.</p>
+        </div>
+        <div class="audit-grid">
+          <article class="audit-card card"><h3>realization.co.il</h3><ul><li>Venture studio and consultancy</li><li>Book a Consultation ו־Services</li><li>On-going support</li><li>Properties בתוך מותג־האם</li><li>Testimonials גנריים</li></ul></article>
+          <article class="audit-card card"><h3>realization.pt</h3><ul><li>Clara ו־Resolution Blueprint</li><li>AMI ופרטי ישות משפטית מוצגים</li><li>אנגלית ופורטוגזית ללא URLs ברורים שנצפו</li><li>אין canonical/hreflang גלויים בבדיקה</li></ul></article>
+          <article class="audit-card card"><h3>realizeos.ai</h3><ul><li>מוצר עשיר ומובחן</li><li>BSL 1.1 מתואר כ־Open Source</li><li>Founder-led setup ו־managed service</li><li>מבצע שפג</li><li>הפניה למותג־האם ב־.co.il</li></ul></article>
+        </div>
+        <h3 style="margin: 2.5rem 0 1rem;">מקורות מרכזיים</h3>
+        <div class="source-list">
+          <a href="https://www.realization.co.il/" target="_blank" rel="noopener">האתר הקיים של Realization</a>
+          <a href="https://realization.pt/" target="_blank" rel="noopener">Realization Portugal</a>
+          <a href="https://realizeos.ai/" target="_blank" rel="noopener">RealizeOS</a>
+          <a href="https://innovationisrael.org.il/report/part-3-investors/" target="_blank" rel="noopener">רשות החדשנות — משקיעים בישראל, 2026</a>
+          <a href="https://innovationisrael.org.il/en/report/the-state-of-high-tech-2025/" target="_blank" rel="noopener">רשות החדשנות — State of High-Tech 2025</a>
+          <a href="https://developers.google.com/search/docs/advanced/crawling/managing-multi-regional-sites" target="_blank" rel="noopener">Google — Multilingual and multi-regional sites</a>
+          <a href="https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes" target="_blank" rel="noopener">Google — Site moves and migrations</a>
+          <a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls" target="_blank" rel="noopener">Google — Canonicalization</a>
+          <a href="https://mariadb.com/bsl11/" target="_blank" rel="noopener">Business Source License 1.1</a>
+          <a href="https://www.wipo.int/en/web/global-brand-database" target="_blank" rel="noopener">WIPO Global Brand Database</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <p><strong>הבהרה:</strong> זהו מסמך אסטרטגי למותג, דומיינים, מוצר וארכיטקטורת מידע. הוא אינו חוות דעת משפטית, מיסויית, רגולטורית או הבטחת SEO. הצגת הזדמנויות השקעה, סיווג משקיעים, AML/KYC, פרטיות, רישוי מקרקעין, העברת IP וסימני מסחר דורשים ייעוץ מקצועי בכל שוק.</p>
+      <button class="button print-button" type="button" onclick="window.print()">הדפסה / שמירה כ־PDF</button>
+    </div>
+  </footer>
+
+  <script>
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('realization-strategy-theme');
+    if (savedTheme === 'dark') {
+      root.dataset.theme = 'dark';
+      themeToggle.setAttribute('aria-pressed', 'true');
+    }
+    themeToggle.addEventListener('click', () => {
+      const dark = root.dataset.theme !== 'dark';
+      root.dataset.theme = dark ? 'dark' : 'light';
+      themeToggle.setAttribute('aria-pressed', String(dark));
+      localStorage.setItem('realization-strategy-theme', dark ? 'dark' : 'light');
+    });
+
+    const progressBar = document.getElementById('progressBar');
+    const updateProgress = () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+      progressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+    };
+    document.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+
+    const tabs = [...document.querySelectorAll('[role="tab"]')];
+    const panels = [...document.querySelectorAll('[role="tabpanel"]')];
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(item => item.setAttribute('aria-selected', 'false'));
+        panels.forEach(panel => panel.classList.remove('active'));
+        tab.setAttribute('aria-selected', 'true');
+        document.getElementById(tab.getAttribute('aria-controls')).classList.add('active');
+      });
+      tab.addEventListener('keydown', event => {
+        if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+        event.preventDefault();
+        const direction = event.key === 'ArrowLeft' ? 1 : -1;
+        tabs[(index + direction + tabs.length) % tabs.length].focus();
+      });
+    });
+
+    const navLinks = [...document.querySelectorAll('.nav a')];
+    const observedSections = navLinks.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`));
+      });
+    }, { rootMargin: '-25% 0px -65% 0px', threshold: 0 });
+    observedSections.forEach(section => sectionObserver.observe(section));
+  </script>
+</body>
+</html>

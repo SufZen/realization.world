@@ -1,29 +1,73 @@
 # realization.world
 
-Static site served by GitHub Pages at https://realization.world. No build step, no dependencies.
+Production website for **Realization**, a **Physical-World Venture Studio** realizing untapped potential in the physical world. The site uses Next.js App Router, TypeScript, accessible responsive components, first-party metadata, and a standalone Docker build for Coolify.
 
-| Path | What it is |
-|---|---|
-| `index.html` | Realization holding page (placeholder until the brand site exists) |
-| `asaf/index.html` | Asaf Eyzenkot's professional profile — https://realization.world/asaf/ |
-| `asaf/profile.md` | Plain-text version of the profile, for AI tools and screeners |
-| `llms.txt` | Pointer for AI crawlers |
-| `assets/brand/` | Poppins (OFL, Latin subset woff2) and the butterfly mark |
+The repository also retains the existing `/asaf/` founder profile, its plain-text source and line-break audit utility, the supplied brand assets, and the existing root holding page. The Next.js application and retained static materials are both part of this project.
 
-## Updating
+## Local development
 
-- **Text change:** edit `asaf/index.html` and `asaf/profile.md` (keep them in sync), commit, push. Live in about a minute.
-- **No public CV** by design: each recruiter receives a role-specific CV; the page offers one on request.
-- Case studies and testimonials: a commented `PROOF SLOT` in `asaf/index.html` is ready to fill.
+Requires Node.js 20.9 or newer.
 
-## Typography — line-break rule (applies to every page)
+```bash
+npm ci
+npm run dev
+```
 
-Text breaks where a reader would pause, never where the box happens to end.
+Open `http://localhost:3000`.
 
-1. **Break at punctuation or between phrases.** Short display text (hero lines, pillar text, box values) is authored line by line: wrap each line in `<span class="ln">` (renders as its own line). Example: `Clear structure, coordinated people, lean systems.` / `That's how I make complex work run.` — two lines, split at the full stop.
-2. **Never split a unit.** Names, places, dates, numbers with units, emails and fixed phrases stay whole: wrap in `<span class="nw">` (no wrap). E.g. `Lisbon area & Barcelona`, `Early October 2026`, `Tel Aviv University`, `11-unit`.
-3. **No line may end on a weak word** (a, an, the, and, or, of, in, to, for, with, &) and **no one-word last line** (orphan).
-4. **One sentence per line in detail text** where sentences are short; split long sentences into two.
-5. **An authored line must fit on one line** from 768 px up. If it wraps, shorten or re-split it — don't shrink the font.
-6. CSS safety net (already in place): `text-wrap: balance` on headings and short display text, `text-wrap: pretty` on paragraphs.
-7. **Verify before shipping:** run `tools/linebreak-check.js` in the browser console at 1440, 1024, 880 and 390 px. It must report `problems: []`.
+Quality checks:
+
+```bash
+npm run lint
+npm run build
+npm audit --omit=dev
+```
+
+The health endpoint is available at `GET /api/health`.
+
+## Site structure
+
+- `/` — Realization studio homepage
+- `/thesis` — physical-world venture thesis
+- `/how-we-build` — Discover → Architect → Build → Validate → Transfer
+- `/ventures` — portfolio index
+- `/ventures/realization-portugal` and `/ventures/realizeos` — venture case studies
+- `/partners/*` — opportunity owner, operator, capital, and corporate/public journeys
+- `/markets/*` — Israeli capital and partnership bridge, active Portugal market, and Spain research page
+- `/insights/*` — editorial structure and field notes
+- `/about` — studio and founder role
+- `/bring-an-opportunity` — structured opportunity brief
+- `/asaf/` — retained founder profile
+
+## Editing content
+
+Shared navigation, venture, audience, market, and insight content lives in `src/content/site.ts`. Page-specific narrative lives in `src/app/**/page.tsx`. Brand styling and tokens live in `src/app/globals.css`.
+
+For changes to the `/asaf/` profile, edit `asaf/index.html` and `asaf/profile.md` together. The profile's `tools/linebreak-check.js` can be run in the browser console at 1440, 1024, 880, and 390 px; it should report `problems: []`.
+
+The opportunity form opens a structured email to `hello@realization.world` and does not store submissions. Add server-side intake only after its destination, retention policy, privacy notice, and security controls are approved.
+
+## Content and claim governance
+
+Realization Portugal and RealizeOS pages mark unresolved status, operator, licensing, customer, deployment, and outcome claims for verification. Before publishing a claim, record its source, date, definition, methodology, and permission to publish.
+
+The parent studio, Realization Portugal, RealizeOS, the Israeli capital and partnership bridge, and future ventures must remain distinct. State “Built by Realization,” “Operated by [Partner],” ownership, licensing, and data-controller responsibilities separately.
+
+The source strategy and supplied design archive are kept under `docs/`; see [`docs/README.md`](docs/README.md) for descriptions and checksums.
+
+## Future Coolify deployment
+
+The multi-stage `Dockerfile` uses Next.js standalone output and runs as a non-root user on port `3000`.
+
+1. Connect this repository in Coolify and select Dockerfile deployment.
+2. Expose container port `3000`.
+3. Configure the domain and HTTPS at the platform proxy.
+4. Set the health check path to `/api/health`.
+5. Start with one application instance. If scaling with dynamic caching or Server Actions, configure shared cache and a consistent `NEXT_SERVER_ACTIONS_ENCRYPTION_KEY`.
+6. Keep a reverse proxy in front of Node.js and configure request limits and rate limiting there.
+
+Pushing this source does not deploy the site. Production deployment will be configured separately through Coolify.
+
+## Important disclaimer
+
+Site strategy and content are not legal, securities, trademark, tax, regulatory, privacy, licensing, investment, or SEO advice. Appropriate professional review is required in each market before launch or promotion of a venture.
