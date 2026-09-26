@@ -6,8 +6,10 @@ Founder-operator: real estate development, business operations and AI-enabled sy
 - Engagement: remote B2B, fractional or project-based, non-exclusive. Contracting through Realization Unipessoal LDA.
 - Availability: early October 2026, flexible start.
 - Languages: English (fluent), Hebrew (native), Portuguese and Spanish (basic).
-- Contact: asaf@realization.world · +351 933 904 208 · https://www.linkedin.com/in/sufzen
-- CV: https://realization.world/asaf/Asaf_Eyzenkot_CV.pdf
+- Contact (preferred): WhatsApp +972 52 828 9437 (https://wa.me/972528289437)
+- Also: asaf@realization.world · +351 933 904 208 · https://www.linkedin.com/in/sufzen
+- Company: Realization Unipessoal LDA — https://realization.world
+- CV: a CV tailored to each role is provided directly; available on request.
 
 ## Summary
 
