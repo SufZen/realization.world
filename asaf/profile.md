@@ -2,11 +2,12 @@
 
 Founder-operator: real estate development, business operations and AI-enabled systems.
 
-- Location: based in Setúbal, Portugal. Available on-site across the Lisbon metropolitan area and in Barcelona, Spain; remote otherwise. Portuguese citizen.
-- Engagement: remote B2B, fractional or project-based, non-exclusive. Contracting through Realization Unipessoal LDA.
+- Work mode: Works remotely, and in person in the Lisbon metropolitan area (Portugal) and Barcelona (Spain). Based in Setúbal, Portugal. Portuguese citizen.
+- Engagement: B2B, fractional or project-based, non-exclusive. Contracting through Realization Unipessoal LDA.
 - Availability: early October 2026, flexible start.
 - Languages: English (fluent), Hebrew (native), Portuguese and Spanish (basic).
 - Contact (preferred): WhatsApp +972 52 828 9437 (https://wa.me/972528289437)
+- Intro call (30 min): https://schedule.realization.co.il/30-minute-intro-meeting-asaf
 - Also: asaf@realization.world · +351 933 904 208 · https://www.linkedin.com/in/sufzen
 - Company: Realization Unipessoal LDA — https://realization.world
 - CV: a CV tailored to each role is provided directly; available on request.
