@@ -16,3 +16,9 @@ Static site served by GitHub Pages at https://realization.world. No build step, 
 - **Text change:** edit `asaf/index.html` and `asaf/profile.md` (keep them in sync), commit, push. Live in about a minute.
 - **New CV:** replace `asaf/Asaf_Eyzenkot_CV.pdf` with the new master PDF, same filename.
 - Case studies and testimonials: a commented `PROOF SLOT` in `asaf/index.html` is ready to fill.
+
+## Branches
+
+- `main` — **live**. The VPS pulls it every 5 minutes (`/opt/realization-world/update.sh`).
+- `structure` — draft of the full brand site (home, services, projects, markets, contact) with dashed PLACEHOLDER blocks and `noindex`. Merge into `main` only when placeholders are replaced with content from the strategy/domain-roles document.
+- Shared design system for multi-page content: `assets/site.css`. `/asaf` stays self-contained.

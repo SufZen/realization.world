@@ -1,0 +1,65 @@
+/* Realization design system — shared by all realization.world pages (except /asaf, which is self-contained). */
+@font-face{font-family:Poppins;font-weight:400;font-display:swap;src:url(/assets/brand/poppins-regular.woff2) format("woff2")}
+@font-face{font-family:Poppins;font-weight:700;font-display:swap;src:url(/assets/brand/poppins-bold.woff2) format("woff2")}
+@font-face{font-family:Poppins;font-weight:800;font-display:swap;src:url(/assets/brand/poppins-extrabold.woff2) format("woff2")}
+:root{
+  --ink:#111111; --paper:#FFFFFF; --marigold:#FDCC33; --marigold-soft:#FFF5D1;
+  --graphite:#555555; --rule:#DADADA; --night-text:#E8E8E8;
+  --mono:ui-monospace,"SFMono-Regular","Cascadia Mono",Consolas,monospace;
+  --wrap:1080px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.65 Poppins,system-ui,sans-serif}
+img{max-width:100%;display:block}
+a{color:inherit}
+a:focus-visible{outline:3px solid var(--marigold);outline-offset:3px}
+.wrap{max-width:var(--wrap);margin-left:auto;margin-right:auto;padding-left:24px;padding-right:24px}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:16px;background:var(--marigold);padding:8px 12px;z-index:9}
+.label{font:600 12px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--graphite)}
+
+/* Header */
+.site-header{background:var(--ink);color:var(--paper)}
+.site-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:20px;padding-bottom:20px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;letter-spacing:.06em;color:var(--marigold);font-size:15px}
+.brand img{width:34px;height:34px}
+.nav{display:flex;flex-wrap:wrap;gap:4px 22px;font-size:15px}
+.nav a{text-decoration:none;color:var(--night-text)}
+.nav a:hover,.nav a[aria-current=page]{color:var(--marigold)}
+
+/* Page hero */
+.page-hero{background:var(--ink);color:var(--paper);padding-top:56px;padding-bottom:72px}
+h1{font-weight:800;font-size:clamp(38px,6vw,68px);line-height:1.05;letter-spacing:-.02em;margin:10px 0 0}
+.page-hero .lede{color:var(--night-text);font-size:clamp(17px,1.8vw,20px);max-width:48ch;margin:18px 0 0}
+.page-hero .label{color:var(--marigold)}
+
+/* Sections */
+.section{padding-top:80px}
+h2{font-weight:800;font-size:clamp(26px,3.4vw,38px);line-height:1.1;letter-spacing:-.01em;margin:10px 0 0}
+h3{font-weight:700;font-size:20px;line-height:1.3;margin:0}
+.intro{color:var(--graphite);max-width:60ch;margin:14px 0 0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);margin-top:32px;border-top:2px solid var(--ink)}
+.grid > *{padding:24px 24px 0 0}
+.grid > * + *{padding-left:24px;border-left:1px solid var(--rule)}
+.grid p{color:var(--graphite);margin:10px 0 0;font-size:16px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none;border:2px solid var(--marigold);background:var(--marigold);color:var(--ink)}
+
+/* Placeholder: visible only on the structure branch; content comes from the strategy document */
+.ph{margin-top:16px;padding:14px 16px;border:2px dashed var(--marigold);background:var(--marigold-soft);font:600 13px/1.5 var(--mono);color:var(--ink)}
+.ph::before{content:"PLACEHOLDER — ";color:#8a6d00}
+
+/* Footer */
+.site-footer{background:var(--ink);color:#9A9A9A;font-size:14px;margin-top:96px;padding:48px 0 32px}
+.site-footer .cols{display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px}
+.site-footer h2{font:600 12px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#BDBDBD;margin:0 0 10px}
+.site-footer ul{list-style:none;padding:0;margin:0}
+.site-footer li{margin:4px 0}
+.site-footer a{text-decoration:none;color:var(--night-text)}
+.site-footer a:hover{color:var(--marigold)}
+.site-footer .legal{border-top:1px solid #333;margin-top:32px;padding-top:16px}
+
+@media (max-width:860px){
+  .grid,.site-footer .cols{grid-template-columns:1fr}
+  .grid > *,.grid > * + *{padding:20px 0;border-left:0;border-bottom:1px solid var(--rule)}
+  .section{padding-top:56px}
+}
