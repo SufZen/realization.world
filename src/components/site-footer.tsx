@@ -16,6 +16,8 @@ export function SiteFooter() {
         <div className="site-footer__nav">
           <p className="eyebrow">Explore</p>
           {primaryNavigation.map((item) => <Link href={item.href} key={item.href}>{item.label}</Link>)}
+          {/* Separate app behind Traefik: plain <a> so the browser does a full load. */}
+          <a href="/livelab">Live Lab</a>
         </div>
         <div className="site-footer__nav">
           <p className="eyebrow">Work with us</p>
