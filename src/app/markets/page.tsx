@@ -6,6 +6,7 @@ import { MarketRoleMap } from "@/components/studio-visuals";
 import { markets } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 import { Lines } from "@/components/lines";
+import { MarketBridgeDiagram } from "@/components/diagrams";
 
 export const metadata: Metadata = pageMetadata(
   "Markets",
@@ -22,6 +23,7 @@ export default function MarketsPage() {
         title="Israel meets | European opportunity."
         intro="Israeli capital, technology and entrepreneurship, | connected to real opportunities in Portugal."
         theme="dark"
+        aside={<figure className="page-hero__diagram diagram"><MarketBridgeDiagram /></figure>}
       />
       <section className="section">
         <div className="container-wide">

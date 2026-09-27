@@ -7,6 +7,7 @@ import { PageHero } from "@/components/page-hero";
 import { insights } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 import { Lines } from "@/components/lines";
+import { insightDiagrams } from "@/components/diagrams";
 
 export function generateStaticParams() {
   return insights.map((insight) => ({ slug: insight.slug }));
@@ -23,6 +24,7 @@ export default async function InsightPage({ params }: PageProps<"/insights/[slug
   const insight = insights.find((entry) => entry.slug === slug);
   if (!insight) notFound();
   const Icon = insight.icon;
+  const Cover = insightDiagrams[insight.slug];
   return (
     <>
       <PageHero
@@ -31,7 +33,7 @@ export default async function InsightPage({ params }: PageProps<"/insights/[slug
         title={insight.title}
         intro={insight.excerpt}
         theme="dark"
-        aside={<div className="page-hero__mark" aria-hidden="true"><span><Icon size={38} strokeWidth={1.4} /></span><i /></div>}
+        aside={Cover ? <figure className="page-hero__diagram diagram"><Cover /></figure> : <div className="page-hero__mark" aria-hidden="true"><span><Icon size={38} strokeWidth={1.4} /></span><i /></div>}
       />
       <article className="section">
         <div className="container article-shell">

@@ -7,6 +7,7 @@ import { SectionHeading } from "@/components/section-heading";
 import { ventures } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 import { Lines } from "@/components/lines";
+import { AreaGapDiagram } from "@/components/diagrams";
 
 export function generateStaticParams() {
   return ventures.map((venture) => ({ slug: venture.slug }));
@@ -57,6 +58,15 @@ export default async function VenturePage({ params }: PageProps<"/ventures/[slug
           </div>
         </div>
       </section>
+
+      {isPortugal && (
+        <section className="section surface-muted">
+          <div className="container-wide diagram-row">
+            <SectionHeading eyebrow="THE PROBLEM, DRAWN" title="Three areas. | One building." intro="When registry, licence and building disagree, | the property cannot move." />
+            <figure className="diagram diagram--panel"><AreaGapDiagram /><figcaption>Only the yellow part exists on paper.</figcaption></figure>
+          </div>
+        </section>
+      )}
 
       <section className="section surface-dark">
         <div className="container-wide">

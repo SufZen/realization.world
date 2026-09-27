@@ -35,8 +35,8 @@ export default function AboutPage() {
 
       <section className="section">
         <div className="container-wide about-founder">
-          <div className="founder-mark" aria-label="Realization monarch butterfly mark">
-            <Image src="/brand/butterfly-mark.png" alt="Realization monarch butterfly" width={548} height={548} sizes="(max-width: 760px) 44vw, 20vw" />
+          <div className="founder-mark">
+            <Image className="founder-portrait" src="/asaf/asaf-eyzenkot.jpg" alt="Asaf Eyzenkot (Suf Zen), founder of Realization" width={480} height={480} sizes="(max-width: 760px) 60vw, 26vw" />
           </div>
           <div className="about-founder__copy">
             <p className="eyebrow">FOUNDER</p>

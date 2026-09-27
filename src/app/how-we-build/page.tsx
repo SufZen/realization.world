@@ -6,6 +6,7 @@ import { SectionHeading } from "@/components/section-heading";
 import { EvidenceTrack } from "@/components/studio-visuals";
 import { pageMetadata } from "@/lib/metadata";
 import { Lines } from "@/components/lines";
+import { GatesFunnelDiagram } from "@/components/diagrams";
 
 export const metadata: Metadata = pageMetadata(
   "How We Build",
@@ -32,6 +33,7 @@ export default function HowWeBuildPage() {
         intro="Judgment shapes the system. Evidence moves it forward. | The right operator carries it on."
         actions={<ButtonLink href="/bring-an-opportunity">Test an opportunity</ButtonLink>}
         theme="dark"
+        aside={<figure className="page-hero__diagram diagram"><GatesFunnelDiagram /></figure>}
       />
 
       <section className="section">
