@@ -7,6 +7,7 @@ import { markets } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 import { Lines } from "@/components/lines";
 import { MarketBridgeDiagram } from "@/components/diagrams";
+import { Compass } from "lucide-react";
 
 export const metadata: Metadata = pageMetadata(
   "Markets",
@@ -20,14 +21,14 @@ export default function MarketsPage() {
       <PageHero
         index="05"
         eyebrow="MARKETS"
-        title="Israel meets | European opportunity."
-        intro="Israeli capital, technology and entrepreneurship, | connected to real opportunities in Portugal."
+        title="From Israel, | through Portugal, | into Europe."
+        intro="Israeli capital and technology. | A working base in Portugal. Spain next."
         theme="dark"
         aside={<figure className="page-hero__diagram diagram"><MarketBridgeDiagram /></figure>}
       />
       <section className="section">
         <div className="container-wide">
-          <SectionHeading eyebrow="MARKET ARCHITECTURE" title="One bridge. One active market." intro="Israel connects. Portugal operates." />
+          <SectionHeading eyebrow="MARKET ARCHITECTURE" title="One bridge. | One base." intro="Israel connects. Portugal operates. | Europe is where we build next." />
           <MarketRoleMap />
           <div className="market-grid">
             {markets.map(({ slug, name, label, headline, summary, status, icon: Icon }) => (
@@ -39,6 +40,13 @@ export default function MarketsPage() {
                 <span>{status} · Explore market</span>
               </Link>
             ))}
+            <a className="market-card market-card--next" href="/bring-an-opportunity">
+              <Compass strokeWidth={1.4} aria-hidden="true" />
+              <p className="eyebrow">NEXT · EUROPE</p>
+              <h3>Spain</h3>
+              <p><strong className="ln"><Lines text="Building relationships | from Barcelona." /></strong> <Lines text="Open to partners, projects | and conversations in Spain." /></p>
+              <span>Expanding · Start a conversation</span>
+            </a>
           </div>
         </div>
       </section>

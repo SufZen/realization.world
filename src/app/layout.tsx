@@ -73,7 +73,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               description: "Realization develops real estate in Portugal and builds the ventures and systems around it.",
               founder: { "@type": "Person", name: "Asaf Eyzenkot (Suf Zen)" },
               email: "hello@realization.world",
-              areaServed: ["Europe", "Portugal", "Israel"],
+              areaServed: ["Portugal", "Spain", "Europe", "Israel"],
             }),
           }}
         />

@@ -7,6 +7,7 @@ import { SectionHeading } from "@/components/section-heading";
 import { VentureCard } from "@/components/venture-card";
 import { framework, partnerPaths, projects, ventures } from "@/content/site";
 import { Lines } from "@/components/lines";
+import { MarketBridgeDiagram } from "@/components/diagrams";
 
 export default function HomePage() {
   return (
@@ -103,6 +104,20 @@ export default function HomePage() {
           <div className="ventures-grid">
             {ventures.map((venture, index) => <VentureCard venture={venture} featured={index === 0} key={venture.slug} />)}
           </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container-wide diagram-row">
+          <div>
+            <SectionHeading
+              eyebrow="WHERE WE WORK"
+              title="Israel. Portugal. | Europe next."
+              intro="Israeli capital and technology. | A working base in Portugal. | New relationships from Barcelona."
+            />
+            <ButtonLink href="/markets" variant="dark">See the markets</ButtonLink>
+          </div>
+          <figure className="diagram diagram--panel"><MarketBridgeDiagram /></figure>
         </div>
       </section>
 

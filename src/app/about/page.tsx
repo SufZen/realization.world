@@ -43,7 +43,7 @@ export default function AboutPage() {
             <h2>Asaf Eyzenkot<br />(Suf Zen)</h2>
             <h3>Connecting the abstract with the tangible.</h3>
             <p><Lines text="Asaf is drawn to the logic behind complex systems, | and to making it clear, useful and real." /></p>
-            <p><Lines text="He works across Israel and Portugal: | real estate development, venture architecture | and the systems behind them." /></p>
+            <p><Lines text="He works between Israel, Portugal and Barcelona: | real estate development, venture architecture | and the systems behind them." /></p>
             <p><Lines text="He leads vision, architecture and validation, | and builds ventures that do not depend on him to run." /></p>
             <div className="button-row"><a className="button button--dark" href="/asaf"><span>Founder profile</span></a><ButtonLink href="/how-we-build" variant="outline">How the role works</ButtonLink></div>
           </div>

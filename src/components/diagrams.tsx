@@ -109,20 +109,26 @@ export function GatesFunnelDiagram() {
   );
 }
 
-/** Israel ↔ Portugal bridge. */
+/** Israel → Portugal (base) → Europe, Spain first. Europe is dashed: a direction, not an operation. */
 export function MarketBridgeDiagram() {
+  const arrow = (x1: number, x2: number) => `M${x1} 206 H${x2} M${x2 - 12} 196 L${x2} 206 L${x2 - 12} 216`;
   return (
-    <Frame title="Realization connects Israeli capital, technology and partners with opportunities in Portugal">
-      <path d="M205 214 Q320 40 435 214" fill="none" stroke="currentColor" strokeWidth="3" strokeDasharray="10 9" />
-      <text x="320" y="118" fontSize="22" fontWeight="700" textAnchor="middle">Realization</text>
-      <circle cx="140" cy="262" r="78" fill={Y} />
-      <text x="140" y="270" fontSize="22" fontWeight="700" textAnchor="middle" fill={INK}>Portugal</text>
-      <circle cx="500" cy="262" r="78" fill="none" stroke="currentColor" strokeWidth="3" />
-      <text x="500" y="270" fontSize="22" fontWeight="700" textAnchor="middle">Israel</text>
-      <text x="140" y="378" fontSize="20" textAnchor="middle" opacity=".8">Opportunity</text>
-      <text x="140" y="402" fontSize="20" textAnchor="middle" opacity=".8">Local operation</text>
-      <text x="500" y="378" fontSize="20" textAnchor="middle" opacity=".8">Capital · technology</text>
-      <text x="500" y="402" fontSize="20" textAnchor="middle" opacity=".8">Partners</text>
+    <Frame title="Israeli capital and technology, a working base in Portugal, and Europe next, starting with Spain">
+      <circle cx="104" cy="206" r="72" fill="none" stroke="currentColor" strokeWidth="3" />
+      <text x="104" y="214" fontSize="22" fontWeight="700" textAnchor="middle">Israel</text>
+      <path d={arrow(182, 238)} fill="none" stroke="currentColor" strokeWidth="3" />
+      <circle cx="320" cy="206" r="78" fill={Y} />
+      <text x="320" y="214" fontSize="22" fontWeight="700" textAnchor="middle" fill={INK}>Portugal</text>
+      <path d={arrow(404, 460)} fill="none" stroke="currentColor" strokeWidth="3" strokeDasharray="8 7" />
+      <circle cx="536" cy="206" r="72" fill="none" stroke="currentColor" strokeWidth="3" strokeDasharray="10 8" />
+      <text x="536" y="214" fontSize="22" fontWeight="700" textAnchor="middle">Europe</text>
+      <text x="104" y="330" fontSize="20" textAnchor="middle" opacity=".8">Capital</text>
+      <text x="104" y="356" fontSize="20" textAnchor="middle" opacity=".8">Technology</text>
+      <text x="320" y="330" fontSize="20" fontWeight="700" textAnchor="middle">Base</text>
+      <text x="320" y="356" fontSize="20" textAnchor="middle" opacity=".8">Projects · operation</text>
+      <text x="536" y="330" fontSize="20" fontWeight="700" textAnchor="middle">Next</text>
+      <text x="536" y="356" fontSize="20" textAnchor="middle" opacity=".8">Spain first</text>
+      <text x="320" y="74" fontSize="20" textAnchor="middle" opacity=".75">Realization</text>
     </Frame>
   );
 }

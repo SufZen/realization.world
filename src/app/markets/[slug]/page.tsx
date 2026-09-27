@@ -54,7 +54,7 @@ export default async function MarketPage({ params }: PageProps<"/markets/[slug]"
           </div>
         </div>
       </section>
-      <section className="section surface-muted"><div className="container-wide"><SectionHeading eyebrow="CLARITY" title={isIsrael ? "The origin side of the bridge." : isPortugal ? "A core European market." : "Market status."} intro={isIsrael ? "Israel brings relationships, capital and technology. | Realization connects them to specific opportunities." : isPortugal ? "A broad opportunity market, | and home of the Realization Portugal venture." : "Market status is subject to validation."} /></div></section>
+      <section className="section surface-muted"><div className="container-wide"><SectionHeading eyebrow="CLARITY" title={isIsrael ? "The origin side of the bridge." : isPortugal ? "Our base | in Europe." : "Market status."} intro={isIsrael ? "Israel brings relationships, capital and technology. | Realization connects them to specific opportunities." : isPortugal ? "A broad opportunity market, | and home of the Realization Portugal venture." : "Market status is subject to validation."} /></div></section>
     </>
   );
 }

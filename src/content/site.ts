@@ -252,7 +252,7 @@ export const markets = [
   {
     slug: "portugal",
     name: "Portugal",
-    label: "CORE EUROPEAN MARKET",
+    label: "OUR BASE",
     headline: "Opportunity grounded in place.",
     summary:
       "Where we source opportunities, | build partnerships and develop projects.",

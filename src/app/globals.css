@@ -284,6 +284,9 @@ button { cursor: pointer; }
 .verification-note strong { display: block; margin-bottom: .5rem; }
 
 .partner-jump-grid, .market-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.market-grid { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 1000px) { .market-grid { grid-template-columns: 1fr; } }
+.market-card--next { border-style: dashed; }
 .partner-jump, .market-card { display: flex; min-height: 350px; flex-direction: column; padding: clamp(1.5rem, 4vw, 2.5rem); border: 1px solid var(--border-hairline); background: #fff; transition: background .2s, transform .2s; }
 .partner-jump:hover, .market-card:hover { background: var(--color-yellow); transform: translateY(-3px); }
 .partner-jump svg, .market-card svg { width: 54px; height: 54px; padding: .8rem; border: 1px solid #000; border-radius: 50%; }
