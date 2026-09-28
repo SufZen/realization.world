@@ -9,6 +9,17 @@ import Script from "next/script";
 export function Analytics() {
   const src = process.env.NEXT_PUBLIC_UMAMI_SRC;
   const websiteId = process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID;
+  // Where the tracker posts events; defaults to the script's own origin.
+  const hostUrl = process.env.NEXT_PUBLIC_UMAMI_HOST_URL;
   if (!src || !websiteId) return null;
-  return <Script src={src} data-website-id={websiteId} data-do-not-track="true" strategy="afterInteractive" />;
+  return (
+    <Script
+      src={src}
+      data-website-id={websiteId}
+      data-do-not-track="true"
+      data-exclude-search="true"
+      {...(hostUrl ? { "data-host-url": hostUrl } : {})}
+      strategy="afterInteractive"
+    />
+  );
 }
