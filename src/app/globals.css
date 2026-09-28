@@ -605,3 +605,15 @@ section[id] { scroll-margin-top: 90px; }
 .legal-copy p, .legal-copy li { margin-top: .9rem; font-size: 1rem; line-height: 1.8; }
 .legal-copy ul { padding-inline-start: 1.2rem; }
 .legal-copy a { color: #000; text-decoration: underline; text-underline-offset: .2rem; }
+.project-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2.5vw, 2rem); }
+.project-tile { margin: 0; }
+.project-tile__image { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--color-neutral-100); }
+.project-tile__image img { object-fit: cover; transition: transform .8s var(--ease-out); }
+.project-tile:hover .project-tile__image img { transform: scale(1.035); }
+.project-tile figcaption { display: grid; grid-template-columns: 1fr auto; gap: .2rem 1rem; align-items: start; padding-top: .9rem; }
+.project-tile h3 { font-size: 1.15rem; letter-spacing: -.02em; }
+.project-tile p { grid-column: 1; color: var(--text-muted); font-size: .8rem; }
+.project-tile .status { grid-column: 2; grid-row: 1 / span 2; }
+@media (max-width: 1000px) { .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .project-grid { grid-template-columns: 1fr; } }
+.case-gallery__wide { grid-column: 1 / -1; }

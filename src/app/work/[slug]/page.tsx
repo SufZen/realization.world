@@ -130,15 +130,32 @@ export default async function WorkItemPage({ params }: PageProps<"/work/[slug]">
         <section className="section">
           <div className="container-wide">
             <SectionHeading eyebrow="PROJECTS" title="Selected work" intro="Residential, interior | and small urban projects." />
-            <div className="project-list">
-              {item.projects.map((project) => (
-                <article className="project-row" key={project.name}>
-                  <div><h3>{project.name}</h3></div>
-                  <p>{project.place}</p>
-                  <span className={`status status--${project.status === "Finished" ? "active" : "verify"}`}>{project.status}</span>
-                </article>
-              ))}
-            </div>
+            {item.projects.every((project) => project.image) ? (
+              <div className="project-grid">
+                {item.projects.map((project) => (
+                  <figure className="project-tile" key={project.name}>
+                    <div className="project-tile__image">
+                      <Image src={project.image!} alt={`${project.name}, ${project.place}`} fill sizes="(max-width: 760px) 100vw, 33vw" />
+                    </div>
+                    <figcaption>
+                      <h3>{project.name}</h3>
+                      <p>{project.place}</p>
+                      <span className={`status status--${project.status === "Finished" ? "active" : "verify"}`}>{project.status}</span>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            ) : (
+              <div className="project-list">
+                {item.projects.map((project) => (
+                  <article className="project-row" key={project.name}>
+                    <div><h3>{project.name}</h3></div>
+                    <p>{project.place}</p>
+                    <span className={`status status--${project.status === "Finished" ? "active" : "verify"}`}>{project.status}</span>
+                  </article>
+                ))}
+              </div>
+            )}
           </div>
         </section>
       )}
@@ -165,8 +182,8 @@ export default async function WorkItemPage({ params }: PageProps<"/work/[slug]">
             <SectionHeading eyebrow="IMAGES" title="The work, | shown." />
             <div className="case-gallery">
               {item.gallery.map((image) => (
-                <figure key={image.src}>
-                  <Image src={image.src} alt={image.alt} width={1600} height={1000} sizes="(max-width: 760px) 100vw, 50vw" />
+                <figure key={image.src} className={image.wide ? "case-gallery__wide" : undefined}>
+                  <Image src={image.src} alt={image.alt} width={1600} height={1000} sizes={image.wide ? "(max-width: 1480px) 100vw, 1400px" : "(max-width: 760px) 100vw, 50vw"} />
                   {image.caption && <figcaption>{image.caption}</figcaption>}
                 </figure>
               ))}

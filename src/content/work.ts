@@ -37,7 +37,8 @@ export const workCategories: WorkCategory[] = [
 export type FormPath = "opportunity" | "operator" | "capital" | "corporate" | "advisory";
 
 export type WorkFact = { value: string; label: string };
-export type WorkImage = { src: string; alt: string; caption?: string };
+/** `wide` images (screenshots) span the full gallery width. */
+export type WorkImage = { src: string; alt: string; caption?: string; wide?: boolean };
 export type WorkLink = { label: string; href: string };
 export type WorkSection = { heading: string; paragraphs: string[] };
 
@@ -61,7 +62,7 @@ export type WorkItem = {
   /** Optional numbered method or flow, shown on a dark band. */
   steps?: { title: string; intro: string; items: Array<[string, string]> };
   /** Optional list of individual projects (architecture portfolio). */
-  projects?: Array<{ name: string; place: string; status: string }>;
+  projects?: Array<{ name: string; place: string; status: string; image?: string }>;
   /** Optional long-form narrative (used by the advisory case study). */
   sections?: WorkSection[];
   partners?: string[];
@@ -174,7 +175,7 @@ export const work: WorkItem[] = [
       alt: "Architectural plans, a house model and a key inside a Portuguese property",
     },
     gallery: [
-      { src: "/work/realization-portugal/owner-landing.webp", alt: "realization.pt owner landing page with a chat panel where Clara asks what is stopping the sale", caption: "Owner landing page · demo data" },
+      { src: "/work/realization-portugal/owner-landing.webp", wide: true, alt: "realization.pt owner landing page with a chat panel where Clara asks what is stopping the sale", caption: "Owner landing page · demo data" },
       { src: "/work/realization-portugal/clara-intake.webp", alt: "Owner portal showing Clara summarising an inherited T3 apartment case in Portuguese", caption: "Intake with Clara, in Portuguese · demo data" },
     ],
     diagram: "area-gap",
@@ -228,6 +229,10 @@ export const work: WorkItem[] = [
       src: "/media/venture-realizeos.webp",
       alt: "Operators connecting field equipment beside a tablet and process map",
     },
+    gallery: [
+      { src: "/work/realizeos/missions.webp", wide: true, alt: "RealizeOS Missions dashboard showing mission totals, tracked cost and a completed property-search mission", caption: "Missions: goals planned into steps, with cost tracked per step · demo data" },
+      { src: "/work/realizeos/dream-inbox.webp", wide: true, alt: "RealizeOS Dream Inbox listing knowledge updates proposed by background agents, each waiting for approval", caption: "Dream Inbox: agents propose knowledge updates, a person approves · demo data" },
+    ],
     disclosure: "Source-available under BSL 1.1. Counts are measured from the repository.",
     source: "RealizeOS project overview v5.6.0, September 2026.",
     related: ["ai-in-the-office-start-with-knowledge"],
@@ -346,6 +351,10 @@ export const work: WorkItem[] = [
     ],
     stack: ["Next.js 16", "BullMQ + Redis", "PostgreSQL", "MinIO", "faster-whisper (ivrit-ai)", "Gemini", "Electron capture app", "MCP server", "Docker Compose + Traefik"],
     links: [{ label: "meetsum.realization.co.il", href: "https://meetsum.realization.co.il" }],
+    gallery: [
+      { src: "/work/meetsum/meeting-summary.webp", wide: true, alt: "MeetSum meeting workspace with a meeting list, processing pipeline and an AI summary of an acquisition review", caption: "Meeting workspace: summary, decisions, tasks and the processing pipeline · demo data" },
+      { src: "/work/meetsum/hebrew-interface.webp", wide: true, alt: "The same MeetSum workspace in the Hebrew right-to-left interface", caption: "The same workspace in Hebrew, right to left · demo data" },
+    ],
     disclosure: "The cost comparison is illustrative (SaaS at $19 per seat per month vs a $100 VPS plus usage) and excludes engineering time.",
     source: "MeetSum project overview v0.6.0, September 2026.",
     cta: { path: "advisory", heading: "Meetings that should | feed your systems?", label: "Talk about MeetSum" },
@@ -410,17 +419,23 @@ export const work: WorkItem[] = [
       { value: "2", label: "towns: Setúbal and Montijo" },
     ],
     projects: [
-      { name: "Santa Maria", place: "Travessa Santa Maria, Setúbal", status: "In progress" },
-      { name: "Maria Eusébio #2", place: "Troino, Baixa de Setúbal", status: "In progress" },
-      { name: "Serpa Pinto", place: "Praça 5 de Outubro, Montijo", status: "Finished" },
-      { name: "Maria Eusébio", place: "Baixa de Setúbal", status: "Finished" },
-      { name: "Vila das Fontaínhas", place: "Setúbal", status: "Finished" },
-      { name: "Sousa Alvão", place: "Montalvão, Setúbal", status: "Finished" },
-      { name: "Bairro do Liceu", place: "Setúbal", status: "Finished" },
-      { name: "Amaral A", place: "Baixa de Setúbal", status: "Finished" },
-      { name: "Amaral B", place: "Bairro do Liceu, Setúbal", status: "Finished" },
+      { name: "Santa Maria", place: "Travessa Santa Maria, Setúbal", status: "In progress" , image: "/work/boa-architecture/santa-maria.webp" },
+      { name: "Maria Eusébio #2", place: "Troino, Baixa de Setúbal", status: "In progress" , image: "/work/boa-architecture/maria-eusebio-2.webp" },
+      { name: "Serpa Pinto", place: "Praça 5 de Outubro, Montijo", status: "Finished" , image: "/work/boa-architecture/serpa-pinto.webp" },
+      { name: "Maria Eusébio", place: "Baixa de Setúbal", status: "Finished" , image: "/work/boa-architecture/maria-eusebio.webp" },
+      { name: "Vila das Fontaínhas", place: "Setúbal", status: "Finished" , image: "/work/boa-architecture/vila-das-fontainhas.webp" },
+      { name: "Sousa Alvão", place: "Montalvão, Setúbal", status: "Finished" , image: "/work/boa-architecture/sousa-alvao.webp" },
+      { name: "Bairro do Liceu", place: "Setúbal", status: "Finished" , image: "/work/boa-architecture/bairro-do-liceu.webp" },
+      { name: "Amaral A", place: "Baixa de Setúbal", status: "Finished" , image: "/work/boa-architecture/amaral-a.webp" },
+      { name: "Amaral B", place: "Bairro do Liceu, Setúbal", status: "Finished" , image: "/work/boa-architecture/amaral-b.webp" },
     ],
     links: [{ label: "boaarc.com", href: "https://www.boaarc.com" }],
+    cover: {
+      src: "/work/boa-architecture/vila-das-fontainhas.webp",
+      alt: "Renovated two-storey living room in Vila das Fontaínhas, Setúbal, with exposed brick, a spiral steel stair and terracotta floor",
+      caption: "Vila das Fontaínhas, Setúbal · finished",
+    },
+    disclosure: "Some in-progress projects are shown as design visualisations.",
     source: "boaarc.com project gallery, September 2026.",
     related: ["design-first-then-ask-for-a-price"],
     cta: { path: "opportunity", heading: "A building in Setúbal | or Lisbon to rethink?", label: "Bring the property" },
