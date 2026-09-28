@@ -3,20 +3,28 @@ import { Open_Sans, Poppins } from "next/font/google";
 import "./globals.css";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { Analytics } from "@/components/analytics";
+import { JsonLd } from "@/components/json-ld";
 import { siteUrl } from "@/content/site";
+import { founderSchema, graph, organizationSchema } from "@/lib/schema";
 
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
+// Only used by the RTL/Hebrew rules in globals.css; not preloaded until Hebrew pages exist.
 const openSans = Open_Sans({
   variable: "--font-open-sans",
   subsets: ["latin", "hebrew"],
   display: "swap",
+  preload: false,
 });
+
+const description =
+  "Realization develops real estate in Portugal and builds the ventures and AI systems around it — residential development, property resolution, and advisory on AI adoption and operations.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -24,31 +32,36 @@ export const metadata: Metadata = {
     default: "Realization — Real estate, ventures and systems",
     template: "%s · Realization",
   },
-  description: "Realization develops real estate in Portugal and builds the ventures and systems around it, with an Israeli capital and partnership network.",
+  description,
   applicationName: "Realization",
   category: "Real estate",
   keywords: [
     "real estate development Portugal",
-    "physical-world venture studio",
-    "venture architecture",
-    "physical-world systems",
-    "venture validation",
-    "Realization Portugal",
-    "Israel Europe venture bridge",
+    "residential development Barreiro",
+    "property resolution Portugal",
+    "AI adoption consulting",
+    "AI operations system",
     "RealizeOS",
+    "Asaf Eyzenkot",
+    "Suf Zen",
   ],
-  alternates: { canonical: siteUrl },
+  authors: [{ name: "Asaf Eyzenkot", url: `${siteUrl}/asaf` }],
+  creator: "Realization Unipessoal LDA",
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+    other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION } : undefined,
+  },
   openGraph: {
     type: "website",
     url: siteUrl,
     title: "Realization — Real estate, ventures and systems",
-    description: "Realization develops real estate in Portugal and builds the ventures and systems around it, with an Israeli capital and partnership network.",
+    description,
     siteName: "Realization",
   },
   twitter: {
     card: "summary_large_image",
     title: "Realization — Real estate, ventures and systems",
-    description: "Realization develops real estate in Portugal and builds the ventures and systems around it, with an Israeli capital and partnership network.",
+    description,
   },
 };
 
@@ -62,25 +75,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${poppins.variable} ${openSans.variable}`}>
       <body>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              name: "Realization",
-              url: siteUrl,
-              description: "Realization develops real estate in Portugal and builds the ventures and systems around it.",
-              founder: { "@type": "Person", name: "Asaf Eyzenkot (Suf Zen)" },
-              email: "hello@realization.world",
-              areaServed: ["Portugal", "Spain", "Europe", "Israel"],
-            }),
-          }}
-        />
+        <JsonLd data={graph(organizationSchema, founderSchema)} />
         <a className="skip-link" href="#main-content">Skip to content</a>
         <SiteHeader />
         <main id="main-content">{children}</main>
         <SiteFooter />
+        <Analytics />
       </body>
     </html>
   );

@@ -32,7 +32,7 @@ export default function ThesisPage() {
         intro="Assets stay stuck when rights, people and operations don’t connect. | That missing system is the opportunity."
         actions={<><ButtonLink href="/how-we-build" variant="dark">See how we build</ButtonLink><ButtonLink href="/bring-an-opportunity" variant="outline">Bring a case</ButtonLink></>}
         theme="brand"
-        aside={<EditorialMedia src="/media/hero-physical-world.png" alt="A team mapping a physical-world venture around an architectural model" label="THE MISSING LAYER" className="page-hero__media" />}
+        aside={<EditorialMedia src="/media/hero-physical-world.webp" alt="A team mapping a physical-world venture around an architectural model" label="THE MISSING LAYER" className="page-hero__media" />}
       />
 
       <section className="section">
