@@ -59,7 +59,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section surface-dark"><div className="container-wide"><SectionHeading eyebrow="THE STUDIO ROLE" title="Build the conditions. | Transfer the operation." intro="We originate and architect. | Partners own the operation." inverse /><div className="button-row"><ButtonLink href="/ventures" variant="primary">Explore the portfolio</ButtonLink><ButtonLink href="/partners" variant="outline">See partner paths</ButtonLink></div></div></section>
+      <section className="section surface-dark"><div className="container-wide"><SectionHeading eyebrow="THE STUDIO ROLE" title="Build the conditions. | Transfer the operation." intro="We originate and architect. | Partners own the operation." inverse /><div className="button-row"><ButtonLink href="/work" variant="primary">Explore the work</ButtonLink><ButtonLink href="/partners" variant="outline">See partner paths</ButtonLink></div></div></section>
     </>
   );
 }

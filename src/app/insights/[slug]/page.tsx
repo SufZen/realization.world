@@ -8,6 +8,9 @@ import { insights } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 import { Lines } from "@/components/lines";
 import { insightDiagrams } from "@/components/diagrams";
+import { JsonLd } from "@/components/json-ld";
+import { work } from "@/content/work";
+import { articleSchema, breadcrumbSchema, graph } from "@/lib/schema";
 
 export function generateStaticParams() {
   return insights.map((insight) => ({ slug: insight.slug }));
@@ -16,7 +19,13 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<"/insights/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const insight = insights.find((entry) => entry.slug === slug);
-  return insight ? pageMetadata(insight.title, insight.excerpt, `/insights/${insight.slug}`) : {};
+  return insight
+    ? pageMetadata(insight.title, insight.excerpt, `/insights/${insight.slug}`, {
+        type: "article",
+        publishedTime: insight.date,
+        markdownPath: `/insights/${insight.slug}.md`,
+      })
+    : {};
 }
 
 export default async function InsightPage({ params }: PageProps<"/insights/[slug]">) {
@@ -25,8 +34,10 @@ export default async function InsightPage({ params }: PageProps<"/insights/[slug
   if (!insight) notFound();
   const Icon = insight.icon;
   const Cover = insightDiagrams[insight.slug];
+  const relatedWork = work.filter((item) => item.related?.includes(insight.slug));
   return (
     <>
+      <JsonLd data={graph(articleSchema(insight), breadcrumbSchema([["Insights", "/insights"], [insight.title.split(" | ").join(" "), `/insights/${insight.slug}`]]))} />
       <PageHero
         index="I"
         eyebrow={insight.category}
@@ -38,9 +49,10 @@ export default async function InsightPage({ params }: PageProps<"/insights/[slug
       <article className="section">
         <div className="container article-shell">
           <aside className="article-meta">
-            <p className="eyebrow">{insight.published}</p>
+            <p className="eyebrow"><time dateTime={insight.date}>{insight.published}</time></p>
             <p>{insight.readTime}</p>
             <a href="/asaf">By Asaf Eyzenkot</a>
+            {relatedWork.map((item) => <Link href={`/work/${item.slug}`} key={item.slug}>In practice: {item.name}</Link>)}
             <Link href="/insights"><ArrowLeft className="r-flip-x" size={16} /> All insights</Link>
           </aside>
           <div className="article-content">

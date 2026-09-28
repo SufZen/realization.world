@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { trackingFor } from "@/lib/tracking";
 
 type ButtonLinkProps = {
   href: string;
@@ -23,6 +24,7 @@ export function ButtonLink({
       className={`button button--${variant} ${className}`}
       href={href}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      {...trackingFor(href)}
     >
       <span>{children}</span>
       {arrow && <ArrowRight className="r-flip-x" aria-hidden="true" size={17} strokeWidth={2.2} />}

@@ -1,8 +1,17 @@
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import { primaryNavigation } from "@/content/site";
+import { approachNavigation, bookingUrl, contactEmail, primaryNavigation, whatsappUrl } from "@/content/site";
 import { BrandMark } from "./brand-mark";
 import { Lines } from "./lines";
+
+/** Sister sites: cross-links that tie the Realization entity together for people and search engines. */
+const networkLinks = [
+  ["realization.pt · property resolution", "https://realization.pt"],
+  ["realizeos.ai · AI operations system", "https://realizeos.ai"],
+  ["realization.co.il · Israel", "https://realization.co.il"],
+  ["MeetSum", "https://meetsum.realization.co.il"],
+  ["BOA Architecture", "https://www.boaarc.com"],
+] as const;
 
 export function SiteFooter() {
   return (
@@ -15,12 +24,13 @@ export function SiteFooter() {
         </div>
         <div className="site-footer__nav">
           <p className="eyebrow">Explore</p>
-          {primaryNavigation.map((item) => <Link href={item.href} key={item.href}>{item.label}</Link>)}
+          {[...primaryNavigation, ...approachNavigation].map((item) => <Link href={item.href} key={item.href}>{item.label}</Link>)}
           {/* Separate app behind Traefik: plain <a> so the browser does a full load. */}
           <a href="/livelab">Live Lab</a>
         </div>
         <div className="site-footer__nav">
           <p className="eyebrow">Work with us</p>
+          <Link href="/advisory">Advisory</Link>
           <Link href="/partners/opportunity-owners">Opportunity owners</Link>
           <Link href="/partners/operators">Operators</Link>
           <Link href="/partners/capital">Capital partners</Link>
@@ -31,15 +41,19 @@ export function SiteFooter() {
           <Link className="footer-cta" href="/bring-an-opportunity">
             Bring an opportunity <ArrowUpRight aria-hidden="true" />
           </Link>
-          <a href="mailto:hello@realization.world">hello@realization.world</a>
-          <a href="https://wa.me/972528289437" rel="noopener">WhatsApp</a>
-          <a href="https://schedule.realization.co.il/30-minute-intro-meeting-asaf" rel="noopener">Book a 30-min intro</a>
+          <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+          <a href={whatsappUrl} rel="noopener" data-umami-event="whatsapp">WhatsApp</a>
+          <a href={bookingUrl} rel="noopener" data-umami-event="book-intro">Book a 30-min intro</a>
           <a href="/asaf">Founder · Asaf Eyzenkot</a>
           <p>Israel · Portugal · Europe</p>
         </div>
       </div>
+      <nav className="container-wide site-footer__network" aria-label="Realization network">
+        <p className="eyebrow">Network</p>
+        {networkLinks.map(([label, href]) => <a href={href} key={href} rel="noopener">{label}</a>)}
+      </nav>
       <div className="container-wide site-footer__legal">
-        <p>© {new Date().getFullYear()} Realization. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Realization Unipessoal LDA · <Link href="/privacy">Privacy</Link> · <Link href="/legal">Legal</Link></p>
         <p>
           <Lines text="Nothing on this site is an offer | of securities or investment advice." />
         </p>
