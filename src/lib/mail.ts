@@ -1,3 +1,5 @@
+import { resolve4 } from "node:dns/promises";
+import { isIP } from "node:net";
 import nodemailer from "nodemailer";
 import type SMTPTransport from "nodemailer/lib/smtp-transport";
 
@@ -7,28 +9,33 @@ import type SMTPTransport from "nodemailer/lib/smtp-transport";
  * SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM, SUBMISSION_NOTIFY_EMAIL.
  */
 
-type Mailer = ReturnType<typeof nodemailer.createTransport>;
-let mailer: Mailer | null = null;
+/**
+ * The Workspace SMTP relay allow-lists the server's IPv4 address only, and
+ * nodemailer (v9+) may connect over IPv6. So we resolve the relay's IPv4
+ * address ourselves, connect to it, and verify TLS against the real hostname.
+ */
+async function ipv4For(host: string): Promise<string> {
+  if (isIP(host)) return host;
+  const [address] = await resolve4(host);
+  return address ?? host;
+}
 
-function getMailer(): Mailer | null {
+async function createMailer() {
   const host = process.env.SMTP_HOST;
   if (!host) return null;
-  if (!mailer) {
-    const port = Number(process.env.SMTP_PORT || 587);
-    const user = process.env.SMTP_USER;
-    const pass = process.env.SMTP_PASS;
-    const options: SMTPTransport.Options & { family: 4 } = {
-      host,
-      port,
-      secure: port === 465,
-      family: 4,
-      name: "realization.co.il",
-      requireTLS: port !== 465,
-      ...(user && pass ? { auth: { user, pass } } : {}),
-    };
-    mailer = nodemailer.createTransport(options);
-  }
-  return mailer;
+  const port = Number(process.env.SMTP_PORT || 587);
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+  const options: SMTPTransport.Options = {
+    host: await ipv4For(host),
+    port,
+    secure: port === 465,
+    name: "realization.co.il",
+    requireTLS: port !== 465,
+    tls: { servername: host },
+    ...(user && pass ? { auth: { user, pass } } : {}),
+  };
+  return nodemailer.createTransport(options);
 }
 
 export function mailConfigured() {
@@ -48,7 +55,8 @@ export type Brief = {
 
 export async function sendBrief(brief: Brief) {
   const to = process.env.SUBMISSION_NOTIFY_EMAIL;
-  const transporter = getMailer();
+  // A fresh transport per brief: volume is low and relay addresses can change.
+  const transporter = await createMailer();
   if (!to || !transporter) throw new Error("Mail is not configured");
 
   await transporter.sendMail({

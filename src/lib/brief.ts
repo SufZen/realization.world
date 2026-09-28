@@ -9,14 +9,16 @@ const validPaths = new Set<string>(formPaths.map(([value]) => value));
 const EMAIL = /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/;
 
 const clip = (value: unknown, max: number) => String(value ?? "").trim().slice(0, max);
+/** Single-line fields end up in mail headers: no control characters or line breaks. */
+const line = (value: unknown, max: number) => clip(String(value ?? "").replace(/[\u0000-\u001f\u007f]+/g, " "), max);
 
 export function readBrief(input: (name: string) => unknown): Brief {
   return {
-    path: clip(input("path"), 40),
-    name: clip(input("name"), 120),
-    email: clip(input("email"), 200),
-    organization: clip(input("organization"), 200),
-    geography: clip(input("geography"), 120),
+    path: line(input("path"), 40),
+    name: line(input("name"), 120),
+    email: line(input("email"), 200),
+    organization: line(input("organization"), 200),
+    geography: line(input("geography"), 120),
     brief: clip(input("brief"), 5000),
     context: clip(input("context"), 5000),
     ref: clip(input("ref"), 80).replace(/[^a-z0-9-]/gi, ""),
