@@ -25,6 +25,7 @@ export async function generateMetadata({ params }: PageProps<"/work/[slug]">): P
   return pageMetadata(`${item.name} — ${categoryOf(item).label}`, item.summary, `/work/${item.slug}`, {
     modifiedTime: item.updated,
     markdownPath: `/work/${item.slug}.md`,
+    imagePath: `/work/${item.slug}/opengraph-image`,
   });
 }
 

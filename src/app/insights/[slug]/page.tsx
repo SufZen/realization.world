@@ -24,6 +24,7 @@ export async function generateMetadata({ params }: PageProps<"/insights/[slug]">
         type: "article",
         publishedTime: insight.date,
         markdownPath: `/insights/${insight.slug}.md`,
+        imagePath: `/insights/${insight.slug}/opengraph-image`,
       })
     : {};
 }

@@ -11,7 +11,12 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   // Static founder profile (public/asaf) served at /asaf; linked from every CV.
   async rewrites() {
-    return [{ source: "/asaf", destination: "/asaf/index.html" }];
+    return [
+      { source: "/asaf", destination: "/asaf/index.html" },
+      // Plain-markdown twins of case studies and field notes, for LLMs and agents.
+      { source: "/work/:slug.md", destination: "/md/work/:slug" },
+      { source: "/insights/:slug.md", destination: "/md/insights/:slug" },
+    ];
   },
   async redirects() {
     return [
