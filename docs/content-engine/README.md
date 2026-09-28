@@ -49,7 +49,15 @@ The Metricool channels are founder-branded, not Realization-branded. Until Reali
 | Phase | Status |
 |---|---|
 | 0 Account and identity setup | Routing gap above |
-| 1 Content DNA | First harvest run over all Fireflies history (Dec 2025 – Sep 2026) and the Drive archive |
+| 1 Content DNA | Done 2026-09-28: 287 meetings (Dec 2025 – Sep 2026) + Drive archive → 141 insights (18 P0, 98 P1, 23 P2, 2 P3 blocked), 16 documented frameworks, 98 fact checks |
+| Wave 1 drafts | 19 topic clusters × LinkedIn, X, short video + storyboard, long-form seed; 4 web field notes (06–09). Awaiting Gate 1 in the content desk |
 | 2 Digital character | Not started — needs 30–50 photos and source videos in `/ASAF_DIGITAL_CHARACTER/` on Drive |
-| 3 Pilot | Waiting on Gate 1 and Phase 2 |
+| 3 Pilot | Production pack written ("The Apartment Bigger Than Its Own Building", 8:36, 60 scenes); waiting on Gate 1 and Phase 2 |
 | 4–5 Weekly loop, analytics | After the pilot |
+
+## Lessons from the first run
+
+- Run Agent F (verification) before writing, not after. The first run caught a wrong mortgage-guarantee cap and an outdated licence-of-use claim that several drafts relied on.
+- Portuguese rules move fast: DL 108/2026 (planning, from 1 Oct 2026), the youth mortgage guarantee (ends 31 Dec 2026 unless extended) and the heir-sale decree (due ~Feb 2027) need a re-check before any piece that cites them goes out.
+- Fireflies speaker labels are unreliable in shared-room and Hebrew recordings. Attribute quotes by content and confirm them with Asaf at Gate 1.
+- Parallel agents must write only their own files and use uniquely named helper scripts.
