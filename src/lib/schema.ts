@@ -34,7 +34,8 @@ export const organizationSchema = {
     { "@type": "Country", name: "Portugal" },
     { "@type": "Country", name: "Israel" },
   ],
-  address: { "@type": "PostalAddress", addressLocality: "Setúbal", addressCountry: "PT" },
+  address: { "@type": "PostalAddress", streetAddress: "Largo José Afonso 44", addressLocality: "Setúbal", addressCountry: "PT" },
+  taxID: "517298961",
   sameAs,
   contactPoint: [
     {

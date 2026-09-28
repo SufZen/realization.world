@@ -18,7 +18,7 @@ export default function LegalPage() {
         <div className="container legal-copy">
           <section>
             <h2>Company</h2>
-            <p>realization.world is operated by Realization Unipessoal LDA, Setúbal, Portugal. Real-estate mediation licence AMI 25459. Contact: <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.</p>
+            <p>realization.world is operated by Realization Unipessoal LDA, Largo José Afonso 44, Setúbal, Portugal. NIPC 517298961. Real-estate mediation licence AMI 25459. Contact: <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.</p>
           </section>
           <section>
             <h2>No offer or advice</h2>
