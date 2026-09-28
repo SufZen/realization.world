@@ -304,7 +304,7 @@ export const work: WorkItem[] = [
       },
     ],
     links: [],
-    disclosure: "Client anonymised with permission. Figures come from the engagement’s planning model, not from measured results.",
+    disclosure: "Client anonymised. Figures come from the engagement’s planning model, not from measured results.",
     source: "AI Adoption Roadmap — Method and case study, Realization, 2026.",
     related: ["ai-in-the-office-start-with-knowledge"],
     cta: { path: "advisory", heading: "Deciding where AI | should start in your firm?", label: "Start with discovery" },
