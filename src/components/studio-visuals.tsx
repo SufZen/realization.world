@@ -1,29 +1,4 @@
 import type { CSSProperties } from "react";
-import { Lines } from "./lines";
-
-const systemNodes = [
-  ["01", "Signal", "A valuable reality is stuck."],
-  ["02", "System", "Rights, product and operations connect."],
-  ["03", "Evidence", "The model meets the real world."],
-  ["04", "Operator", "Continuity gains an owner."],
-] as const;
-
-export function StudioSystemMap() {
-  return (
-    <div className="system-map" aria-label="How Realization turns a physical-world signal into an operating venture">
-      <div className="system-map__line" aria-hidden="true" />
-      {systemNodes.map(([number, title, text], index) => (
-        <article className="system-map__node" key={title}>
-          <div className="system-map__signal" aria-hidden="true"><i /></div>
-          <span>{number}</span>
-          <h3><Lines text={title} /></h3>
-          <p>{text}</p>
-          {index < systemNodes.length - 1 && <b aria-hidden="true">→</b>}
-        </article>
-      ))}
-    </div>
-  );
-}
 
 const evidence = [
   ["Discover", "Find the constraint"],
