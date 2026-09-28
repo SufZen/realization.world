@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { securityHeaders } from "./src/lib/security-headers";
 
 // Internal URL of the self-hosted Umami container (docker network), set at build time.
 // Its tracker and collection endpoint are served first-party under /stats.
@@ -27,6 +28,9 @@ const nextConfig: NextConfig = {
           ]
         : []),
     ];
+  },
+  async headers() {
+    return [{ source: "/:path*", headers: securityHeaders }];
   },
   async redirects() {
     return [
