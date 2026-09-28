@@ -6,6 +6,8 @@ This directory contains the authoritative source materials used to design and bu
 
 - [`strategy/realization-brand-strategy.html`](strategy/realization-brand-strategy.html) — complete Hebrew brand, domain and website-architecture strategy, including the refined role of `realization.co.il` as an Israeli capital and partnership hub.
 - SHA-256: `AB1EB599C745AB3B5CC7849982C4D95914A9C89223420E49220FF816DCCAE4B3`
+- [`strategy/realization-content-automation-strategy.html`](strategy/realization-content-automation-strategy.html) — content automation strategy and AI-agent specification (v1.0) that feeds `/insights` and the Realization and founder channels. Implemented in [`content-engine/`](content-engine/README.md).
+- SHA-256: `89DF08F36BB2054DDD1E1545033C48DBF2CBE6F2B191D108DB8A3B055031BB54`
 
 ## Design system
 

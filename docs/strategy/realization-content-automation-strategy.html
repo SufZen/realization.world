@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Realization Content Automation Strategy & AI Agent Implementation Specification</title>
+<style>
+:root{--bg:#0b0d10;--panel:#12161b;--panel2:#171c22;--text:#eef2f6;--muted:#a9b4c0;--line:#2b333d;--accent:#d7b46a;--accent2:#8fb8ff;--green:#7ed6a5;--red:#ff8d8d;--orange:#f5b976;--code:#0f1318}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(180deg,#0a0c0f 0%,#0e1116 100%);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6}
+a{color:var(--accent2);text-decoration:none}a:hover{text-decoration:underline}.wrap{max-width:1180px;margin:0 auto;padding:32px 22px 80px}
+.hero{padding:52px 34px 36px;background:radial-gradient(circle at top right,rgba(215,180,106,.16),transparent 36%),radial-gradient(circle at top left,rgba(143,184,255,.12),transparent 30%),var(--panel);border:1px solid var(--line);border-radius:24px;margin-bottom:26px}
+.eyebrow{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700}h1{font-size:clamp(2rem,4.2vw,4.5rem);line-height:1.02;margin:.4rem 0 1rem;max-width:1000px}
+.hero p{font-size:1.08rem;color:var(--muted);max-width:900px;margin:0}.meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.pill{border:1px solid var(--line);background:var(--panel2);padding:7px 11px;border-radius:999px;color:#d8dee6;font-size:.86rem}
+nav{position:sticky;top:12px;z-index:10;background:rgba(18,22,27,.92);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin-bottom:26px;display:flex;gap:10px;flex-wrap:wrap}
+nav a{font-size:.9rem;padding:6px 9px;border-radius:10px}nav a:hover{background:var(--panel2);text-decoration:none}
+section{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:30px;margin:22px 0}h2{font-size:1.75rem;margin:0 0 14px}h3{font-size:1.2rem;margin:26px 0 8px;color:#fff}h4{margin:18px 0 6px}p{margin:8px 0 12px}ul,ol{padding-left:22px}li{margin:6px 0}
+.grid{display:grid;gap:16px}.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.card{background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:18px}.card h3,.card h4{margin-top:0}.kpi{font-size:1.8rem;font-weight:800;color:var(--accent);line-height:1.1}.small{font-size:.9rem;color:var(--muted)}
+.note,.warn,.success{border-left:4px solid var(--accent2);background:rgba(143,184,255,.08);padding:14px 16px;border-radius:12px;margin:14px 0}.warn{border-left-color:var(--orange);background:rgba(245,185,118,.09)}.success{border-left-color:var(--green);background:rgba(126,214,165,.09)}
+table{width:100%;border-collapse:collapse;margin:14px 0 4px;display:block;overflow:auto;border:1px solid var(--line);border-radius:14px}th,td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}th{background:#171c22;color:#fff;position:sticky;top:0}tr:last-child td{border-bottom:none}
+code,kbd{background:var(--code);border:1px solid var(--line);padding:2px 6px;border-radius:7px;color:#e9eef5}pre,.flow{background:var(--code);border:1px solid var(--line);border-radius:14px;padding:16px;overflow:auto;color:#dce7f3;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.tag{display:inline-block;padding:3px 8px;border-radius:999px;font-size:.78rem;font-weight:700}.green{background:rgba(126,214,165,.12);color:var(--green);border:1px solid rgba(126,214,165,.25)}.yellow{background:rgba(245,185,118,.12);color:var(--orange);border:1px solid rgba(245,185,118,.25)}.red{background:rgba(255,141,141,.12);color:var(--red);border:1px solid rgba(255,141,141,.25)}.blue{background:rgba(143,184,255,.12);color:var(--accent2);border:1px solid rgba(143,184,255,.25)}
+.checklist li{list-style:"☐  "}.footer{color:var(--muted);font-size:.88rem;text-align:center;margin-top:34px}
+@media(max-width:800px){.g2,.g3{grid-template-columns:1fr}section{padding:22px}.hero{padding:34px 22px}}@media print{body{background:#fff;color:#111}.wrap{max-width:none;padding:0}nav{display:none}section,.hero,.card{background:#fff;border:1px solid #ccc;color:#111;break-inside:avoid}.small,.hero p{color:#444}a{color:#111}}
+</style>
+</head>
+<body><div class="wrap">
+
+<header class="hero">
+<div class="eyebrow">Implementation Strategy · v1.0</div>
+<h1>Realization Content Automation Engine</h1>
+<p>A complete strategy and implementation specification for turning Realization’s real-world work, project knowledge, meetings, documents, and founder expertise into a scalable media system using ChatGPT, Fireflies, Google Drive, Higgsfield, Buffer, Metricool, and the Realization / Asaf social channels.</p>
+<div class="meta">
+<span class="pill">Primary brand: Realization</span><span class="pill">Founder layer: Asaf / Suf Zen</span><span class="pill">Production: Higgsfield-first</span><span class="pill">Distribution: Buffer + Metricool</span><span class="pill">Knowledge capture: Fireflies + Drive + ChatGPT</span><span class="pill">Human-in-the-loop</span>
+</div>
+</header>
+
+<nav>
+<a href="#goal">Goal</a><a href="#principles">Principles</a><a href="#stack">Stack</a><a href="#channels">Channels</a><a href="#knowledge">Knowledge</a><a href="#privacy">Privacy</a><a href="#avatar">Avatar</a><a href="#production">Production</a><a href="#distribution">Distribution</a><a href="#automation">Automation</a><a href="#data-model">Data Model</a><a href="#agents">Agents</a><a href="#rollout">Rollout</a>
+</nav>
+
+<section id="goal">
+<h2>1. Strategic Goal</h2>
+<p>The system is not designed to “make AI videos.” Its purpose is to create a durable, searchable, high-quality public representation of Realization’s expertise and Asaf’s thinking with minimal recurring production effort.</p>
+<div class="grid g3">
+<div class="card"><div class="kpi">1</div><h3>Capture real expertise</h3><p>Continuously harvest knowledge from active projects, meetings, decisions, documents and research.</p></div>
+<div class="card"><div class="kpi">2</div><h3>Convert it into media</h3><p>Turn private operational knowledge into safe, useful, well-structured public content.</p></div>
+<div class="card"><div class="kpi">3</div><h3>Build authority</h3><p>Use long-form and short-form media to make the brand’s expertise legible to people, search engines and AI systems.</p></div>
+</div>
+<div class="success"><strong>Core principle:</strong> Automate the production of expertise. Do not automate the creation of expertise.</div>
+<h3>Primary business outcomes</h3>
+<ul>
+<li>Build Realization as an authority in real estate development, architecture, urban regeneration, AI-enabled operations and systems thinking.</li>
+<li>Increase discovery among investors, project partners, clients, developers, founders and AEC/PropTech operators.</li>
+<li>Demonstrate Asaf’s cross-disciplinary X-factor: architecture + development + investment + systems thinking + AI + execution.</li>
+<li>Create a growing public knowledge asset that supports trust, referrals, partnerships, hiring, consulting and deal flow.</li>
+<li>Reduce founder filming time by using a high-quality trained digital avatar for most recurring content.</li>
+</ul>
+</section>
+
+<section id="principles">
+<h2>2. Operating Principles</h2>
+<div class="grid g2">
+<div class="card"><h3>Real work first</h3><p>Topics originate from actual work, recurring questions, decisions, lessons, research and operating experience.</p></div>
+<div class="card"><h3>Avatar-first, human-anchored</h3><p>The avatar handles scalable delivery. Real appearances are reserved for trust, story, emotional weight, site work and important messages.</p></div>
+<div class="card"><h3>One engine, many outputs</h3><p>One knowledge object creates channel-native derivatives. Do not run separate ideation engines per platform.</p></div>
+<div class="card"><h3>Modular production</h3><p>Generate scenes, not entire videos. This improves quality, lowers retry cost and enables reuse.</p></div>
+<div class="card"><h3>Privacy by architecture</h3><p>Meetings are internal research sources. Public outputs contain generalized knowledge, not identifiable confidential cases.</p></div>
+<div class="card"><h3>No tool sprawl</h3><p>Use the existing stack first. Add paid services only when a measured bottleneck materially affects quality or automation.</p></div>
+</div>
+</section>
+
+<section id="stack">
+<h2>3. Approved End-to-End Stack</h2>
+<table><thead><tr><th>Layer</th><th>Primary Tool</th><th>Role</th><th>Fallback / Future</th></tr></thead><tbody>
+<tr><td>Meetings</td><td>Fireflies</td><td>Transcripts, summaries, recurring problems, questions, lessons</td><td>Manual transcript import</td></tr>
+<tr><td>Knowledge files</td><td>Google Drive</td><td>Docs, Sheets, models, presentations, reports, project material, archive</td><td>None initially</td></tr>
+<tr><td>Reasoning / orchestration</td><td>ChatGPT</td><td>Synthesis, scoring, privacy filtering, research, scripts, storyboards, adaptation</td><td>n8n later if workflow volume requires a backend</td></tr>
+<tr><td>Content database</td><td>Google Sheets + Drive</td><td>Master ledger, states, approvals, sources, routing</td><td>Airtable or Supabase only if scale justifies migration</td></tr>
+<tr><td>Avatar identity</td><td>Higgsfield Soul ID</td><td>Persistent visual persona</td><td>No external avatar service unless quality is inadequate</td></tr>
+<tr><td>Presenter generation</td><td>Higgsfield / Seedance</td><td>Reference-led presenter clips, identity consistency, native speech</td><td>Kling / Wan / other Higgsfield-supported models</td></tr>
+<tr><td>Voice</td><td>Higgsfield custom voice / Seed Audio / native speech</td><td>Consistent voice layer</td><td>ElevenLabs only if voice quality is a proven bottleneck</td></tr>
+<tr><td>Storyboards / visuals</td><td>ChatGPT + Higgsfield</td><td>Shot planning, diagrams, supporting visuals, generated scenes</td><td>Canva when useful for brand graphics</td></tr>
+<tr><td>Edit</td><td>Higgsedit / Higgsfield</td><td>Assembly, subtitles, motion, scene replacement, rendering</td><td>Premiere / CapCut / Descript only if required</td></tr>
+<tr><td>Founder distribution</td><td>Buffer</td><td>LinkedIn, X, Facebook</td><td>Browser fallback</td></tr>
+<tr><td>Brand distribution</td><td>Metricool</td><td>YouTube, Instagram, TikTok</td><td>Browser fallback</td></tr>
+<tr><td>Analytics</td><td>Buffer + Metricool</td><td>Performance, timing, feedback signals</td><td>vidIQ if deeper YouTube research becomes necessary</td></tr>
+</tbody></table>
+<div class="warn"><strong>Do not add Make, Zapier, Airtable, Descript, HeyGen, Runway, ElevenLabs or another paid service by default.</strong> Each new tool must solve a measured bottleneck the existing stack cannot solve well enough.</div>
+</section>
+
+<section id="channels">
+<h2>4. Channel Architecture: Realization vs Founder</h2>
+<div class="grid g2">
+<div class="card"><h3>Realization Brand Layer</h3><p><strong>Purpose:</strong> institutional authority, expertise, case studies, frameworks, projects, AI × real estate, development knowledge.</p><ul><li><strong>YouTube:</strong> primary long-form authority asset.</li><li><strong>Instagram:</strong> Reels, architecture, project visuals, selected educational clips.</li><li><strong>TikTok:</strong> experimental short-form discovery.</li></ul></div>
+<div class="card"><h3>Founder / Asaf Layer</h3><p><strong>Purpose:</strong> worldview, interpretation, lessons, founder/operator perspective and professional credibility.</p><ul><li><strong>LinkedIn:</strong> primary founder authority and B2B distribution.</li><li><strong>X:</strong> short observations, opinions, experiments and links.</li><li><strong>Facebook:</strong> secondary distribution where an existing audience justifies it.</li></ul></div>
+</div>
+<h3>Routing rule</h3>
+<pre>IF content explains what Realization knows, builds, studies or does:
+    route = REALIZATION_BRAND
+
+IF content explains how Asaf thinks, what he learned, what he believes,
+or how he interprets an industry problem:
+    route = ASAF_FOUNDER
+
+IF both apply:
+    create separate native variants rather than identical cross-posts.</pre>
+<h3>Example: one insight, multiple identities</h3>
+<table><thead><tr><th>Channel</th><th>Version</th></tr></thead><tbody>
+<tr><td>Realization YouTube</td><td>“Why Small Design Changes Create Large Development Risks”</td></tr>
+<tr><td>Realization Instagram</td><td>45-second visual explainer with plan graphics and avatar</td></tr>
+<tr><td>Asaf LinkedIn</td><td>Founder commentary beginning from a real lesson learned in development work</td></tr>
+<tr><td>Asaf X</td><td>One sharp systems-thinking observation, optionally linking to the long-form piece</td></tr>
+<tr><td>Facebook</td><td>Only if audience fit is clear; otherwise skip</td></tr>
+</tbody></table>
+</section>
+
+<section id="knowledge">
+<h2>5. Knowledge & Content Intelligence Engine</h2>
+<h3>5.1 Input sources</h3>
+<table><thead><tr><th>Source</th><th>Purpose</th><th>Default Trust Level</th></tr></thead><tbody>
+<tr><td>Fireflies</td><td>Problems, questions, decisions, recurring themes, language, insights</td><td>Private / sensitive by default</td></tr>
+<tr><td>Google Drive</td><td>Project evidence, documents, models, presentations, strategy, historical IP</td><td>Private by default</td></tr>
+<tr><td>ChatGPT work</td><td>Refined thinking, frameworks, strategy, recurring questions</td><td>Internal</td></tr>
+<tr><td>Voice notes</td><td>Fast founder observations, post-meeting reflections</td><td>Internal</td></tr>
+<tr><td>Public research</td><td>Market facts, legislation, reports, public case studies, technology</td><td>Public / citeable</td></tr>
+<tr><td>Burtucala / Realization archive</td><td>Historical content, frameworks and evergreen insights</td><td>Mixed; verify freshness</td></tr>
+</tbody></table>
+
+<h3>5.2 Extract atomic knowledge, not “meeting content”</h3>
+<ul><li>Problem</li><li>Decision</li><li>Framework</li><li>Misconception</li><li>Lesson</li><li>Mistake / failure pattern</li><li>Recurring question</li><li>Interesting disagreement</li><li>Operational principle</li><li>Unexpected observation</li><li>Prediction / hypothesis</li><li>Counterintuitive tradeoff</li></ul>
+
+<h3>5.3 Knowledge graph / Content DNA</h3>
+<div class="flow">DEVELOPMENT FEASIBILITY
+├── planning
+├── architecture
+├── unit efficiency
+├── legal constraints
+├── construction cost
+├── finance
+├── sales / exit
+└── risk sequencing
+
+AI FOR AEC / REAL ESTATE
+├── workflow redesign
+├── knowledge management
+├── document intelligence
+├── agentic operations
+├── buy-vs-build
+└── human oversight
+
+URBAN REGENERATION
+├── urban infill
+├── underused assets
+├── adaptive reuse
+├── ESG / impact
+└── highest and best use</div>
+<div class="note">When multiple private sources independently reinforce the same generalized insight, increase the topic’s expertise score.</div>
+</section>
+
+<section id="privacy">
+<h2>6. Privacy, Confidentiality & Public-Safe Transformation</h2>
+<div class="flow">RAW PRIVATE SITUATION → PRIVATE INSIGHT → GENERALIZED EXAMPLE → PRINCIPLE / FRAMEWORK → PUBLIC CONTENT</div>
+<h3>Risk levels</h3>
+<table><thead><tr><th>Level</th><th>Meaning</th><th>Rule</th></tr></thead><tbody>
+<tr><td><span class="tag green">P0 Public</span></td><td>Already public, sourceable information</td><td>Usable with normal fact-checking</td></tr>
+<tr><td><span class="tag blue">P1 Generalizable</span></td><td>Private origin but safe after anonymization</td><td>May proceed automatically after privacy transform</td></tr>
+<tr><td><span class="tag yellow">P2 Sensitive</span></td><td>Could reveal project, party, price, negotiation, legal or identifying context</td><td>Heavy abstraction + human approval</td></tr>
+<tr><td><span class="tag red">P3 Confidential</span></td><td>Active negotiations, identifiable counterparties, legal matters, investors, proprietary client data</td><td>Never publish automatically</td></tr>
+</tbody></table>
+<h3>Red-list categories</h3>
+<ul><li>Active negotiations or bids</li><li>Investor identities and fundraising discussions</li><li>Legal, tax, litigation or regulatory disputes</li><li>Pending planning applications where disclosure creates risk</li><li>Exact confidential prices, bids, budgets or financing terms</li><li>Personal data and identifiable client stories</li><li>Counterparty strategies or internal weaknesses</li><li>Non-public project addresses where disclosure is not approved</li></ul>
+<h3>Composite case rule</h3>
+<p>When a lesson is valuable but the original case is identifiable, combine multiple similar cases and change nonessential details while preserving the principle.</p>
+</section>
+
+<section id="scoring">
+<h2>7. Editorial Scoring Model</h2>
+<table><thead><tr><th>Dimension</th><th>Range</th><th>Question</th></tr></thead><tbody>
+<tr><td>Audience value</td><td>1–5</td><td>Does this help someone understand, decide or act?</td></tr>
+<tr><td>Expertise signal</td><td>1–5</td><td>Does this demonstrate a meaningful capability?</td></tr>
+<tr><td>Originality</td><td>1–5</td><td>Is it meaningfully different from generic content?</td></tr>
+<tr><td>Strategic fit</td><td>1–5</td><td>Does it support desired positioning?</td></tr>
+<tr><td>Evidence strength</td><td>1–5</td><td>Do we have enough experience, data or sources?</td></tr>
+<tr><td>Visual potential</td><td>1–5</td><td>Can it be shown clearly?</td></tr>
+<tr><td>Timeliness</td><td>1–5</td><td>Is there a reason to publish now?</td></tr>
+<tr><td>Commercial relevance</td><td>1–5</td><td>Can it attract the right opportunities?</td></tr>
+<tr><td>Privacy risk</td><td>0–5 penalty</td><td>How much disclosure risk is embedded?</td></tr>
+<tr><td>Genericness</td><td>0–5 penalty</td><td>Could almost any AI account say the same thing?</td></tr>
+</tbody></table>
+<pre>content_score =
+  audience_value
++ expertise_signal
++ originality
++ strategic_fit
++ evidence_strength
++ visual_potential
++ timeliness
++ commercial_relevance
+- privacy_risk
+- genericness</pre>
+</section>
+
+<section id="avatar">
+<h2>8. Digital Character / Avatar Build</h2>
+<h3>8.1 Objective</h3>
+<p>Build a persistent digital representation of Asaf that remains convincing across angle, lighting, wardrobe and environment. The standard is identity consistency under variation, not a single good talking-head shot.</p>
+<h3>8.2 Training inputs</h3>
+<ul><li>Target: 30–50 curated recent photos</li><li>Straight-on, 3/4 left/right, profiles, close-up, medium and full body</li><li>Neutral, smiling, thoughtful and speaking expressions</li><li>Indoor + outdoor</li><li>Professional + casual clothing</li><li>Good lighting and unobstructed face</li><li>Prefer consistency in current appearance</li></ul>
+<h3>8.3 Existing video use</h3>
+<ol><li><strong>Frame extraction:</strong> extract sharp, varied identity frames for Soul ID training.</li><li><strong>Behaviour calibration:</strong> learn gestures, cadence, expressions and presentation energy.</li><li><strong>Real B-roll:</strong> reuse genuine site visits, talks, interviews and project footage.</li></ol>
+<h3>8.4 Dataset folder structure</h3>
+<pre>/ASAF_DIGITAL_CHARACTER/
+  01_training_photos/
+  02_source_videos/
+  03_extracted_frames/
+  04_voice_samples/
+  05_presentation_references/
+  06_reject_examples/
+  07_soul_id_tests/
+  08_approved_identity_assets/</pre>
+<h3>8.5 Production bible</h3>
+<ul><li>Approved Soul ID</li><li>Voice identity</li><li>4–6 wardrobe looks</li><li>Approved camera angles</li><li>Primary studio / architecture / urban environments</li><li>Gesture and speech style</li><li>Lighting language</li><li>Editing pace</li><li>Forbidden visual clichés</li></ul>
+<div class="warn">Avoid fake luxury offices, generic skyscraper montages, motivational-guru aesthetics, fabricated project claims and visuals that weaken the impression of real operating experience.</div>
+</section>
+
+<section id="voice">
+<h2>9. Voice Strategy</h2>
+<p>Start entirely inside Higgsfield. Test custom voice / user voice element, Seed Audio and native Seedance speech. Compare pronunciation, cadence, warmth, authority, accent fidelity and long-form fatigue. Add ElevenLabs only if the pilot proves voice quality is the limiting factor.</p>
+<div class="grid g2">
+<div class="card"><h4>Avoid written prose</h4><p>“The feasibility assessment of a real estate development requires the analysis of several interdependent factors.”</p></div>
+<div class="card"><h4>Prefer spoken language</h4><p>“Here’s something developers learn very quickly. A building can work perfectly on paper—and still be a terrible development.”</p></div>
+</div>
+</section>
+
+<section id="production">
+<h2>10. Content Production System</h2>
+<h3>10.1 Long-form</h3>
+<p>Initial target: 5–15 minutes. The avatar is the host, not the whole video. Recommended mix: 30–40% host footage and 60–70% supporting visuals.</p>
+<ul><li>Plans and architectural drawings</li><li>Maps</li><li>Financial models and simplified charts</li><li>Timelines</li><li>Construction details</li><li>Site footage</li><li>Public case studies</li><li>Documents / screenshots</li><li>3D models / conceptual visuals</li><li>Typography and diagrams</li></ul>
+<h3>10.2 Short-form</h3>
+<p>Target: 30–75 seconds. One insight, one promise, one payoff. Avatar can occupy more of the runtime. Prefer counterintuitive observations over generic tip lists.</p>
+<h3>10.3 Content families</h3>
+<table><thead><tr><th>Format</th><th>Purpose</th><th>Example</th></tr></thead><tbody>
+<tr><td>Real-world lesson</td><td>Demonstrate experience</td><td>“A tiny design decision that can destroy a property’s business model.”</td></tr>
+<tr><td>How I think</td><td>Reveal judgment</td><td>“How I evaluate a development opportunity in 20 minutes.”</td></tr>
+<tr><td>Explainer</td><td>Search / AI discovery</td><td>“Why planning, architecture and finance cannot be separated.”</td></tr>
+<tr><td>Case study</td><td>Story + credibility</td><td>“The deal looked profitable until one planning constraint changed the whole model.”</td></tr>
+<tr><td>Frontier / future</td><td>Thought leadership</td><td>“What an AI-native real estate development company actually looks like.”</td></tr>
+</tbody></table>
+<h3>10.4 Scene-based generation</h3>
+<div class="flow">SCRIPT → scene segmentation → storyboard → camera assignment → avatar dialogue blocks → supporting visuals → generate scenes independently → QA → edit → master</div>
+<h3>10.5 Production pack schema</h3>
+<pre>production_pack = {
+  title,
+  audience,
+  channel_identity,
+  primary_goal,
+  hook_options[],
+  final_hook,
+  spoken_script,
+  sources[],
+  privacy_level,
+  claims_to_verify[],
+  scene_list[],
+  avatar_lines[],
+  supporting_visuals[],
+  diagrams[],
+  b_roll[],
+  thumbnail_concepts[],
+  cta,
+  derivative_outputs[]
+}</pre>
+</section>
+
+<section id="repurpose">
+<h2>11. Repurposing Logic</h2>
+<div class="flow">1 LONG-FORM REALIZATION VIDEO
+↓
+3–6 SHORT CLIPS
+↓
+1 LINKEDIN FOUNDER POST
+↓
+1–3 X POSTS
+↓
+1 INSTAGRAM REEL
+↓
+OPTIONAL TIKTOK VERSION
+↓
+OPTIONAL ARTICLE / KNOWLEDGE PAGE</div>
+<div class="note">Repurposing means adapting to the platform. Do not simply resize and repost identical copy.</div>
+<h3>Short-first validation</h3>
+<div class="flow">INSIGHT → SHORT → signal → LONG-FORM EXPANSION</div>
+</section>
+
+<section id="distribution">
+<h2>12. Publishing & Distribution Architecture</h2>
+<h3>12.1 Buffer</h3>
+<ul><li>LinkedIn personal profile</li><li>X personal profile</li><li>Facebook secondary page</li></ul>
+<h3>12.2 Metricool</h3>
+<ul><li>Realization YouTube</li><li>Realization Instagram</li><li>Realization TikTok</li></ul>
+<h3>12.3 Priority</h3>
+<ol><li><strong>Realization YouTube</strong> — primary intellectual asset</li><li><strong>Asaf LinkedIn</strong> — primary professional distribution</li><li><strong>Realization Instagram + YouTube Shorts</strong> — discovery</li><li><strong>X</strong> — low-cost thought distribution</li><li><strong>TikTok</strong> — experimental</li><li><strong>Facebook</strong> — opportunistic</li></ol>
+<h3>12.4 AI disclosure</h3>
+<p>Preserve platform-specific AI disclosure flags whenever realistic synthetic presenter footage is used. Do not hide avatar use.</p>
+</section>
+
+<section id="automation">
+<h2>13. Automation Cadence & Human Approval</h2>
+<h3>13.1 Weekly ingestion</h3>
+<pre>Every week:
+  1. Fetch recent Fireflies meetings.
+  2. Fetch relevant recently modified Drive files.
+  3. Retrieve new internal notes / approved voice notes.
+  4. Extract insight objects.
+  5. Deduplicate against the content ledger.
+  6. Run privacy classification.
+  7. Cluster against the knowledge graph.
+  8. Score candidates.
+  9. Produce weekly editorial brief.</pre>
+<h3>13.2 Human gates</h3>
+<table><thead><tr><th>Gate</th><th>When</th><th>Human action</th></tr></thead><tbody>
+<tr><td>Gate 1: Editorial</td><td>Weekly</td><td>Approve / skip / modify top candidate ideas</td></tr>
+<tr><td>Gate 2: Sensitive</td><td>P2 only</td><td>Approve abstraction or reject use</td></tr>
+<tr><td>Gate 3: Final publish</td><td>Before publication</td><td>Review title, thumbnail, video, description and routing</td></tr>
+</tbody></table>
+<p>Long-term target: roughly 1–2 focused founder hours per week.</p>
+</section>
+
+<section id="analytics">
+<h2>14. Analytics & Feedback Loop</h2>
+<div class="grid g3">
+<div class="card"><h3>Attention</h3><ul><li>CTR</li><li>Retention</li><li>Completion rate</li><li>Rewatch rate</li></ul></div>
+<div class="card"><h3>Authority</h3><ul><li>Qualified comments</li><li>Shares / saves</li><li>Profile views</li><li>Target-audience followers</li></ul></div>
+<div class="card"><h3>Business</h3><ul><li>Inbound opportunities</li><li>Investor / partner conversations</li><li>Consulting leads</li><li>Relevant introductions</li></ul></div>
+</div>
+<pre>performance → update topic weights
+performance → update hook patterns
+performance → update preferred formats
+performance → update platform routing
+performance → update ideal video length
+performance → update pillar priority</pre>
+</section>
+
+<section id="data-model">
+<h2>15. Master Content Data Model</h2>
+<pre>ContentItem {
+  id: string
+  created_at: datetime
+  updated_at: datetime
+
+  source_type: enum[fireflies, drive, chatgpt, voice_note, public_research, archive]
+  source_ids: string[]
+  source_dates: datetime[]
+  source_private: boolean
+
+  topic: string
+  subtopics: string[]
+  insight_type: enum[problem, decision, framework, misconception, lesson,
+                     mistake, question, disagreement, principle, observation,
+                     prediction, tradeoff]
+  private_context: text
+  generalized_insight: text
+  supporting_evidence: text[]
+  related_content_ids: string[]
+
+  privacy_level: enum[P0, P1, P2, P3]
+  sensitive_fields_removed: string[]
+  human_approval_required: boolean
+  publishable: boolean
+
+  expertise_signal: string[]
+  target_audience: string[]
+  brand_identity: enum[REALIZATION, ASAF, BOTH]
+  strategic_goal: enum[authority, discovery, investor, client, network, education]
+
+  audience_value: int
+  expertise_score: int
+  originality: int
+  strategic_fit: int
+  evidence_strength: int
+  visual_potential: int
+  timeliness: int
+  commercial_relevance: int
+  privacy_risk: int
+  genericness: int
+  total_score: number
+
+  status: enum[candidate, shortlisted, approved, scripting, production,
+               qa, ready, scheduled, published, archived]
+  format: enum[short, long, linkedin_post, x_post, reel, article]
+  title_options: string[]
+  selected_title: string
+  hook_options: string[]
+  selected_hook: string
+  cta: string
+
+  script: text
+  storyboard_id: string
+  production_pack_url: string
+  avatar_required: boolean
+  real_asaf_required: boolean
+  higgsfield_job_ids: string[]
+  master_video_url: string
+  thumbnail_url: string
+
+  channels: string[]
+  buffer_post_ids: string[]
+  metricool_post_ids: string[]
+  ai_disclosure_required: boolean
+  scheduled_at: datetime
+
+  published_urls: string[]
+  views: number
+  ctr: number
+  avg_view_duration: number
+  completion_rate: number
+  saves: number
+  shares: number
+  comments: number
+  leads: number
+  qualitative_notes: text
+}</pre>
+</section>
+
+<section id="agents">
+<h2>16. AI Agent Implementation Specification</h2>
+<h3>Agent A — Source Harvester</h3><p><strong>Inputs:</strong> Fireflies, Drive, internal notes. <strong>Outputs:</strong> normalized source records with IDs, timestamps, source type, privacy default and raw text.</p>
+<h3>Agent B — Insight Extractor</h3><p><strong>Outputs:</strong> atomic knowledge objects. Extract problems, decisions, frameworks, mistakes, questions and lessons. Separate speaker claims from verified facts.</p>
+<h3>Agent C — Privacy Transformer</h3><p><strong>Outputs:</strong> privacy level + generalized public-safe version. Remove names, addresses, exact project identity, emails, investor identity and sensitive commercial terms. Escalate P2. Block P3.</p>
+<h3>Agent D — Knowledge Graph / Deduplication Agent</h3><p>Cluster related insights, flag duplicates and calculate recurrence / expertise strength.</p>
+<h3>Agent E — Editorial Ranker</h3><p>Apply the scoring model and reject high-genericness / low-expertise candidates.</p>
+<h3>Agent F — Research / Verification Agent</h3><p>Verify factual claims using primary or authoritative sources. Never convert a private-meeting claim into a public fact without verification.</p>
+<h3>Agent G — Script Agent</h3><p>Produce hook options, final spoken script, CTA and production cues. Do not fabricate personal experience.</p>
+<h3>Agent H — Storyboard / Visual Director</h3><p>Create scene list with clear visual ownership: avatar / diagram / B-roll / playback / text.</p>
+<h3>Agent I — Higgsfield Production Agent</h3><p>Generate presenter clips, supporting visuals, assembled master and cover. Use short presenter segments, preserve Soul ID and voice consistency, record job IDs and exact parameters, and perform QA.</p>
+<h3>Agent J — Channel Adaptation Agent</h3><p>Create separate Realization brand versions and Asaf founder versions. Do not duplicate identical captions everywhere.</p>
+<h3>Agent K — Publisher</h3><p>Use Buffer for founder channels and Metricool for Realization channels. Respect AI disclosure, account identity and scheduling. Record post IDs.</p>
+<h3>Agent L — Analytics Agent</h3><p>Feed post performance and lead quality back into editorial weights. Optimize for authority and business relevance, not raw reach alone.</p>
+</section>
+
+<section id="state-machine">
+<h2>17. Content State Machine</h2>
+<div class="flow">CANDIDATE → SHORTLISTED → APPROVED → RESEARCHED → SCRIPTING → STORYBOARDED → PRODUCTION → QA → READY → SCHEDULED → PUBLISHED → ANALYZED → EVERGREEN / ITERATE / ARCHIVE</div>
+<h3>Hard stops</h3>
+<ul><li><strong>BLOCKED_PRIVACY</strong> — P3 or unresolved disclosure risk</li><li><strong>BLOCKED_EVIDENCE</strong> — factual claim cannot be verified</li><li><strong>BLOCKED_IDENTITY</strong> — avatar or voice inconsistent</li><li><strong>BLOCKED_ACCOUNT</strong> — publishing target ambiguous or wrong brand identity</li></ul>
+</section>
+
+<section id="qa">
+<h2>18. Quality Assurance</h2>
+<div class="grid g2">
+<div class="card"><h3>Editorial QA</h3><ul class="checklist"><li>Clear viewer promise</li><li>Non-generic insight</li><li>Real expertise signal</li><li>Strong hook</li><li>Evidence supports claims</li><li>No confidential leakage</li></ul></div>
+<div class="card"><h3>Visual QA</h3><ul class="checklist"><li>Avatar identity stable</li><li>Voice consistent</li><li>Lip sync acceptable</li><li>No uncanny transitions</li><li>Supporting visuals explain the point</li><li>Thumbnail readable small</li></ul></div>
+<div class="card"><h3>Brand QA</h3><ul class="checklist"><li>Credible and premium</li><li>No guru / hype language</li><li>No fake luxury cues</li><li>Architecture + development + AI identity coherent</li></ul></div>
+<div class="card"><h3>Distribution QA</h3><ul class="checklist"><li>Correct account</li><li>Correct brand/founder identity</li><li>Correct aspect ratio</li><li>AI disclosure set</li><li>CTA fits platform</li><li>Tracking IDs recorded</li></ul></div>
+</div>
+</section>
+
+<section id="rollout">
+<h2>19. Rollout Plan</h2>
+<h3>Phase 0 — Account & identity setup</h3>
+<ul><li>Confirm Realization YouTube in Metricool.</li><li>Connect Realization Instagram / TikTok if desired.</li><li>Keep personal LinkedIn + X in Buffer.</li><li>Lock the final routing table.</li></ul>
+<h3>Phase 1 — Content DNA</h3>
+<ul><li>Mine Fireflies history.</li><li>Review Realization Drive archive.</li><li>Extract core expertise pillars.</li><li>Create first 20–30 video candidates.</li><li>Define privacy red lines.</li></ul>
+<h3>Phase 2 — Digital character</h3>
+<ul><li>Curate 30–50 training photos.</li><li>Extract frames from historical videos.</li><li>Train Soul ID.</li><li>Test angle, expression, full-body and environment consistency.</li><li>Test voice.</li><li>Lock Asaf Digital Character v1.</li></ul>
+<h3>Phase 3 — Pilot</h3>
+<ul><li>Select one high-scoring Realization topic.</li><li>Create one 5–10 minute episode.</li><li>Create 2–4 short derivatives.</li><li>Create a founder LinkedIn variant.</li><li>Judge against serious client / investor quality.</li></ul>
+<h3>Phase 4 — Semi-automated weekly loop</h3>
+<ul><li>Weekly ingestion</li><li>Editorial brief</li><li>User approval</li><li>Automatic script / storyboard / production pack</li><li>Higgsfield generation</li><li>Final approval</li><li>Buffer / Metricool scheduling</li></ul>
+<h3>Phase 5 — Analytics-driven automation</h3>
+<ul><li>Feed performance back into scoring.</li><li>Reduce approval frequency for low-risk repeatable content.</li><li>Introduce n8n only if orchestration becomes a genuine bottleneck.</li></ul>
+</section>
+
+<section id="next">
+<h2>20. Immediate Next Actions</h2>
+<ol>
+<li><strong>Lock account routing:</strong> Realization YouTube / Instagram / TikTok in Metricool; Asaf LinkedIn / X in Buffer.</li>
+<li><strong>Start Content DNA extraction:</strong> Fireflies + Drive are already available.</li>
+<li><strong>Create avatar dataset folder:</strong> add photos and videos during the coming week.</li>
+<li><strong>Curate training media:</strong> score photos and extract strong frames from videos.</li>
+<li><strong>Train and test Soul ID.</strong></li>
+<li><strong>Select one pilot topic based on real Realization expertise.</strong></li>
+<li><strong>Produce one complete pilot before scaling automation.</strong></li>
+</ol>
+<div class="success">The system is not production-ready until a serious investor, client or industry operator could discover the pilot and reasonably conclude that Realization is credible, experienced and worth paying attention to.</div>
+</section>
+
+<section id="agent-handoff">
+<h2>21. Compact Handoff Prompt for Other AI Agents</h2>
+<pre>You are implementing the Realization Content Automation Engine.
+
+Preserve these rules:
+1. Real work is the source of truth.
+2. Fireflies + Google Drive + ChatGPT are the core knowledge sources.
+3. Every private source must pass through privacy transformation before public use.
+4. Maintain one canonical ContentItem ledger and state machine.
+5. Realization channels carry institutional expertise.
+6. Asaf channels carry founder thinking and interpretation.
+7. Higgsfield is the default media production environment.
+8. Use Soul ID for persistent Asaf identity.
+9. Use short scene-based avatar generation, not monolithic videos.
+10. Use supporting visuals for most long-form runtime.
+11. Buffer publishes founder/personal channels.
+12. Metricool publishes Realization brand channels.
+13. Preserve platform AI disclosure.
+14. Keep three human gates: editorial, sensitive-content, final-publish.
+15. Do not add paid tools unless a measured bottleneck materially justifies them.
+16. Optimize for authority, relevance and business outcomes—not vanity reach.
+17. Never invent personal experience, project facts, private identities or unsupported claims.
+18. Record source IDs, generation IDs, publishing IDs and analytics back into the ledger.
+19. If brand identity, privacy level, account target or evidence is ambiguous, stop before publishing.
+20. Quality bar: a serious investor/client/operator should perceive the output as credible, useful and premium.</pre>
+</section>
+
+<div class="footer">Realization Content Automation Strategy · Implementation-grade working specification</div>
+</div></body></html>

@@ -42,3 +42,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# content engine: harvested insights and ledgers hold private meeting context
+/content/private/
