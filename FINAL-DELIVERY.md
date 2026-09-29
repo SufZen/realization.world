@@ -1,3 +1,5 @@
+> Historical note (Sep 2026): this is the original build hand-off. The current route map and setup are in README.md; `/ventures` is now `/work`.
+
 # realization.world — Final Delivery Index
 
 This file is the durable index for the website materials produced in the Codex task **Build realization.world website**.

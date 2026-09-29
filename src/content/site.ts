@@ -9,7 +9,6 @@ import {
   KeyRound,
   Landmark,
   Network,
-  Orbit,
   Scale,
   Sparkles,
   UsersRound,
@@ -21,14 +20,24 @@ export type IconComponent = ComponentType<{ size?: number; strokeWidth?: number 
 export const siteUrl = "https://realization.world";
 
 export const primaryNavigation = [
-  { label: "Thesis", href: "/thesis" },
-  { label: "How we build", href: "/how-we-build" },
-  { label: "Ventures", href: "/ventures" },
+  { label: "Work", href: "/work" },
+  { label: "Advisory", href: "/advisory" },
   { label: "Partners", href: "/partners" },
-  { label: "Markets", href: "/markets" },
   { label: "Insights", href: "/insights" },
   { label: "About", href: "/about" },
 ] as const;
+
+/** The model behind the work: secondary navigation (menu and footer). */
+export const approachNavigation = [
+  { label: "Thesis", href: "/thesis" },
+  { label: "How we build", href: "/how-we-build" },
+  { label: "Markets", href: "/markets" },
+] as const;
+
+/** Booking link for a 30-minute intro call (TidyCal). */
+export const bookingUrl = "https://schedule.realization.co.il/30-minute-intro-meeting-asaf";
+export const whatsappUrl = "https://wa.me/972528289437";
+export const contactEmail = "hello@realization.world";
 
 export const processSteps = [
   {
@@ -75,91 +84,6 @@ export const framework = [
     icon: Sparkles,
   },
 ] satisfies Array<{ title: string; text: string; icon: IconComponent }>;
-
-export type Venture = {
-  slug: string;
-  name: string;
-  eyebrow: string;
-  descriptor: string;
-  stage: "Active" | "In development" | "Exploring";
-  problem: string;
-  system: string;
-  realizationRole: string;
-  operator: string;
-  evidence: string;
-  ask: string;
-  icon: IconComponent;
-  image: string;
-  imageAlt: string;
-  externalHref?: string;
-};
-
-export const ventures: Venture[] = [
-  {
-    slug: "realization-portugal",
-    name: "Realization Portugal",
-    eyebrow: "PROPERTY RESOLUTION VENTURE · PORTUGAL",
-    descriptor:
-      "A coordinated system for properties stuck | in inheritance, paperwork or co-owner deadlock.",
-    stage: "In development",
-    problem:
-      "Homes with real value stay stuck | when ownership and paperwork | are fragmented.",
-    system:
-      "A guided diagnosis and Clara, | coordinated with licensed professionals.",
-    realizationRole:
-      "Research, venture architecture, | product and technology.",
-    operator:
-      "A local operator and licensed professionals | carry the regulated responsibilities.",
-    evidence:
-      "Case studies are published | once documented and cleared.",
-    ask: "Bring a property case · Operate this venture · Partner with capital",
-    icon: KeyRound,
-    image: "/media/venture-portugal.png",
-    imageAlt: "Architectural plans, a house model and a key inside a Portuguese property",
-  },
-  {
-    slug: "realizeos",
-    name: "RealizeOS",
-    eyebrow: "AI OPERATING SYSTEM · BUILT BY REALIZATION",
-    descriptor:
-      "The AI operating system we built to run Realization. | Free for others to use.",
-    stage: "Active",
-    problem:
-      "Knowledge, context and action | are scattered across disconnected AI tools.",
-    system:
-      "A knowledge graph, agents, routines | and an event log, working as one system.",
-    realizationRole:
-      "Built for our own operations, | and improved as we use it.",
-    operator:
-      "Free to use and source-available (BSL 1.1). | No paid service or licence sales.",
-    evidence:
-      "Used in Realization’s own research, | documentation and coordination.",
-    ask: "Explore the code · Use it freely",
-    icon: Cpu,
-    image: "/media/venture-realizeos.png",
-    imageAlt: "Operators connecting field equipment beside a tablet and process map",
-    externalHref: "https://github.com/SufZen/RealizeOS-5",
-  },
-];
-
-export const projects = [
-  {
-    name: "Arena",
-    location: "Barreiro, Portugal",
-    type: "Residential development",
-    role: "GP manager and shareholder",
-    status: "Ongoing",
-  },
-] as const;
-
-export const futureVenture = {
-  name: "Future venture",
-  eyebrow: "NEXT PHYSICAL-WORLD SYSTEM",
-  descriptor:
-    "Reserved for the next opportunity | that passes our validation gates.",
-  stage: "Exploring" as const,
-  icon: Orbit,
-};
 
 export const partnerPaths = [
   {
@@ -270,6 +194,8 @@ export type Insight = {
   excerpt: string;
   readTime: string;
   published: string;
+  /** ISO date for metadata, schema.org and the sitemap. */
+  date: string;
   icon: IconComponent;
   sections: Array<{ heading: string; paragraphs: string[] }>;
 };
@@ -283,6 +209,7 @@ export const insights: Insight[] = [
       "A property can look ready to sell | and still be legally stuck.",
     readTime: "2 min read",
     published: "Field note 01 · Sep 2026",
+    date: "2026-09-27",
     icon: KeyRound,
     sections: [
       {
@@ -331,6 +258,7 @@ export const insights: Insight[] = [
       "A contractor can only price | what has actually been designed.",
     readTime: "2 min read",
     published: "Field note 02 · Sep 2026",
+    date: "2026-09-27",
     icon: Building2,
     sections: [
       {
@@ -385,6 +313,7 @@ export const insights: Insight[] = [
       "Two properties, one budget. | The right choice depends on the investor, not the listing.",
     readTime: "2 min read",
     published: "Field note 03 · Sep 2026",
+    date: "2026-09-27",
     icon: Scale,
     sections: [
       {
@@ -439,6 +368,7 @@ export const insights: Insight[] = [
       "Most teams use AI for small tasks. | The value starts when the office's knowledge is in order.",
     readTime: "2 min read",
     published: "Field note 04 · Sep 2026",
+    date: "2026-09-27",
     icon: Cpu,
     sections: [
       {
@@ -493,6 +423,7 @@ export const insights: Insight[] = [
       "AI can estimate a rent in seconds. | The market decides it over months.",
     readTime: "2 min read",
     published: "Field note 05 · Sep 2026",
+    date: "2026-09-27",
     icon: Globe2,
     sections: [
       {

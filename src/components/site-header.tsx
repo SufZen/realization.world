@@ -4,7 +4,7 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { primaryNavigation } from "@/content/site";
+import { approachNavigation, bookingUrl, primaryNavigation } from "@/content/site";
 import { BrandMark } from "./brand-mark";
 
 export function SiteHeader() {
@@ -23,13 +23,16 @@ export function SiteHeader() {
       <div className="site-header__inner">
         <BrandMark />
         <nav className="desktop-nav" aria-label="Primary navigation">
-          {primaryNavigation.slice(0, 5).map((item) => (
-            <Link className={pathname === item.href ? "is-active" : ""} href={item.href} key={item.href}>
+          {primaryNavigation.map((item) => (
+            <Link className={pathname === item.href || pathname.startsWith(`${item.href}/`) ? "is-active" : ""} href={item.href} key={item.href}>
               {item.label}
             </Link>
           ))}
         </nav>
         <div className="site-header__actions">
+          <a className="header-book" href={bookingUrl} target="_blank" rel="noopener" data-umami-event="book-intro">
+            Book intro
+          </a>
           <Link className="header-opportunity" href="/bring-an-opportunity">
             Bring an opportunity
           </Link>
@@ -66,9 +69,18 @@ export function SiteHeader() {
               </Link>
             ))}
           </div>
+          <p className="menu-panel__group">Our approach</p>
+          <div className="menu-panel__links menu-panel__links--minor">
+            {approachNavigation.map((item) => (
+              <Link className={pathname === item.href ? "is-active" : ""} href={item.href} key={item.href} onClick={() => setOpen(false)}>
+                <span>{item.label}</span><ArrowUpRight aria-hidden="true" />
+              </Link>
+            ))}
+          </div>
           <div className="menu-panel__foot">
             <p>Founder-led vision and validation.<br />Partner-operated scale and continuity.</p>
             <Link href="/bring-an-opportunity" onClick={() => setOpen(false)}>Start with an opportunity <ArrowUpRight aria-hidden="true" size={16} /></Link>
+            <a href={bookingUrl} target="_blank" rel="noopener" data-umami-event="book-intro">Book a 30-min intro <ArrowUpRight aria-hidden="true" size={16} /></a>
           </div>
         </nav>
       </div>

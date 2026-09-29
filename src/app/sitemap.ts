@@ -1,29 +1,37 @@
 import type { MetadataRoute } from "next";
-import { insights, markets, partnerPaths, siteUrl, ventures } from "@/content/site";
+import { insights, markets, partnerPaths, siteUrl } from "@/content/site";
+import { work } from "@/content/work";
+
+/** Date of the last site-wide content revision; bump when static pages change. */
+const siteUpdated = "2026-09-28";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     "",
-    "/thesis",
-    "/how-we-build",
-    "/ventures",
+    "/work",
+    "/advisory",
     "/partners",
-    "/markets",
     "/insights",
     "/about",
+    "/thesis",
+    "/how-we-build",
+    "/markets",
     "/bring-an-opportunity",
     "/asaf",
+    "/privacy",
+    "/legal",
   ];
-  const routes = [
-    ...staticRoutes,
-    ...ventures.map((venture) => `/ventures/${venture.slug}`),
-    ...partnerPaths.map((path) => `/partners/${path.slug}`),
-    ...markets.map((market) => `/markets/${market.slug}`),
-    ...insights.map((insight) => `/insights/${insight.slug}`),
+  const entries: Array<[string, string]> = [
+    ...staticRoutes.map((route): [string, string] => [route, siteUpdated]),
+    ...work.map((item): [string, string] => [`/work/${item.slug}`, item.updated]),
+    ...partnerPaths.map((path): [string, string] => [`/partners/${path.slug}`, siteUpdated]),
+    ...markets.map((market): [string, string] => [`/markets/${market.slug}`, siteUpdated]),
+    ...insights.map((insight): [string, string] => [`/insights/${insight.slug}`, insight.date]),
   ];
-  return routes.map((route) => ({
+  return entries.map(([route, lastModified]) => ({
     url: `${siteUrl}${route}`,
+    lastModified,
     changeFrequency: route.startsWith("/insights/") ? "monthly" : "weekly",
-    priority: route === "" ? 1 : route.split("/").length === 2 ? 0.8 : 0.7,
+    priority: route === "" ? 1 : ["/work", "/advisory"].includes(route) || route.startsWith("/work/") ? 0.9 : route.split("/").length === 2 ? 0.7 : 0.6,
   }));
 }

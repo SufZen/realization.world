@@ -10,7 +10,7 @@ export function BrandMark({ compact = false, inverse = false }: BrandMarkProps) 
   return (
     <Link className={`brand-mark ${compact ? "brand-mark--compact" : ""}`} href="/" aria-label="Realization home">
       <span className="brand-mark__image">
-        <Image src="/brand/butterfly-mark.png" alt="" fill sizes="42px" priority />
+        <Image src="/brand/butterfly-mark-96.png" alt="" fill sizes="42px" priority />
       </span>
       {!compact && (
         <span className="brand-mark__type">

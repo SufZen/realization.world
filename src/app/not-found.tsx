@@ -1,4 +1,8 @@
+import type { Metadata } from "next";
 import { ButtonLink } from "@/components/button-link";
+
+// Next.js already marks not-found responses noindex.
+export const metadata: Metadata = { title: "Page not found" };
 
 export default function NotFound() {
   return (
