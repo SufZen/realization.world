@@ -47,7 +47,7 @@ export type WorkItem = {
   name: string;
   kind: WorkKind;
   eyebrow: string;
-  status: "Ongoing" | "Live" | "In development" | "In daily use" | "Case study" | "Concluded";
+  status: "Ongoing" | "Live" | "Launching" | "In development" | "In daily use" | "Case study" | "Concluded";
   years?: string;
   location: string;
   role: string;
@@ -181,7 +181,7 @@ export const work: WorkItem[] = [
     diagram: "area-gap",
     disclosure: "Screens show demo data. Case studies are published only once documented and cleared by the owners.",
     source: "Realization project overview, September 2026 (repository counts as of 28 Sep 2026; market data INE 2021 and 2025).",
-    related: ["when-the-registry-and-the-building-disagree"],
+    related: ["portugals-empty-homes-why-they-are-stuck", "when-the-registry-and-the-building-disagree"],
     cta: { path: "opportunity", heading: "Own a stuck property, | or want to operate this?", label: "Bring a property case" },
     schema: "Organization",
     icon: KeyRound,
@@ -235,7 +235,7 @@ export const work: WorkItem[] = [
     ],
     disclosure: "Source-available under BSL 1.1. Counts are measured from the repository.",
     source: "RealizeOS project overview v5.6.0, September 2026.",
-    related: ["ai-in-the-office-start-with-knowledge"],
+    related: ["own-the-heart-local-first-ai-operations", "ai-in-the-office-start-with-knowledge"],
     cta: { path: "advisory", heading: "Want an AI operation | that belongs to you?", label: "Talk about a setup" },
     schema: "SoftwareApplication",
     icon: Cpu,
@@ -311,7 +311,7 @@ export const work: WorkItem[] = [
     links: [],
     disclosure: "Client anonymised. Figures come from the engagement’s planning model, not from measured results.",
     source: "AI Adoption Roadmap — Method and case study, Realization, 2026.",
-    related: ["ai-in-the-office-start-with-knowledge"],
+    related: ["how-to-run-an-ai-pilot-you-can-judge", "why-ai-adoption-fails-at-step-three", "ai-in-the-office-start-with-knowledge"],
     cta: { path: "advisory", heading: "Deciding where AI | should start in your firm?", label: "Start with discovery" },
     schema: "CreativeWork",
     icon: Compass,
@@ -357,42 +357,66 @@ export const work: WorkItem[] = [
     ],
     disclosure: "The cost comparison is illustrative (SaaS at $19 per seat per month vs a $100 VPS plus usage) and excludes engineering time.",
     source: "MeetSum project overview v0.6.0, September 2026.",
+    related: ["making-hebrew-speech-recognition-production-safe"],
     cta: { path: "advisory", heading: "Meetings that should | feed your systems?", label: "Talk about MeetSum" },
     schema: "SoftwareApplication",
     icon: Mic,
     updated: "2026-09-28",
   },
   {
-    slug: "lifebook",
-    name: "Lifebook",
+    slug: "dreamward",
+    name: "Dreamward",
     kind: "system",
-    eyebrow: "PERSONAL OPERATING SYSTEM · PRIVATE BY DESIGN",
-    status: "In daily use",
+    eyebrow: "LIFE-DESIGN APP · PRIVATE BY DESIGN",
+    status: "Launching",
     years: "2026–",
-    location: "Self-hosted · invited circle",
+    location: "Desktop app (Windows, macOS, Linux) or self-hosted · dreamward.life",
     role: "Designed and built by Realization",
-    descriptor: "A private system that turns | a life vision into daily action, | with an AI companion that proposes, never imposes.",
+    descriptor: "A private app that turns | the life you envision into the life you live, | with an AI companion on your own AI.",
     summary:
-      "Lifebook turns a once-a-year life-vision document into a living system of goals, actions and journal entries across twelve life areas. Its AI companion, Lify, plans the day and flags drifting goals, but every change waits for the user’s approval.",
+      "Dreamward is a private life-design app: a book of twelve life areas, a current life chapter, an IKIGAI wizard, goals with measurable progress, a journal and vision boards, with an AI companion that runs on the user’s own AI subscription. It is the second generation of Lifebook, and it runs as a desktop app or self-hosted, in English and Hebrew.",
     problem:
-      "A life plan that lives in a slide deck | stops living. | Editing is slow, nothing links the vision | to this week, and the content is | too personal for a SaaS notes app.",
+      "A life plan written once a year | stops living. | Goal apps don’t hold a vision, notes apps | don’t drive action, and the content is | too personal to hand to a SaaS company.",
     approach:
-      "Edit like a document, see like a board, | act like a plan. | One database per user, | bring-your-own AI model, | and open access for external agents over MCP.",
+      "Start from meaning — a life chapter, | a life wheel and IKIGAI — | then break it into goals and actions. | Every account gets its own database; | AI proposes, the person approves.",
     outcome:
-      "Six releases in 26 days, | in daily use by an invited circle. | Next: a coach mode that shares progress | without breaking per-user isolation.",
+      "First public release, v0.4.0, | with desktop installers and one-line self-hosting. | Its first generation, Lifebook, | went from first release to v0.3.1 in 26 days.",
     facts: [
-      { value: "26 days", label: "from first release to v0.3.1" },
-      { value: "16.3k", label: "lines of TypeScript" },
-      { value: "27", label: "MCP tools for external agents" },
-      { value: "100%", label: "of personal content on user-controlled servers" },
+      { value: "37", label: "MCP tools for external AI agents" },
+      { value: "13", label: "AI provider presets, from OpenAI to local Ollama" },
+      { value: "25.6k", label: "lines of TypeScript across 219 files" },
+      { value: "0", label: "AI cost to the server: users bring their own AI" },
     ],
-    stack: ["React 19", "Fastify 5", "SQLite per user", "Drizzle ORM", "TipTap", "Konva", "OpenRouter / Ollama", "MCP server", "Docker Compose"],
-    links: [],
-    source: "Lifebook project overview v0.3.1, 2026.",
+    steps: {
+      title: "Meaning → | focus → | action.",
+      intro: "From who you want to be | to what you do this week.",
+      items: [
+        ["Life chapter", "Up to five focus areas, | a “not now” list and an anti-vision."],
+        ["Life wheel & IKIGAI", "Rate each area against your vision, | then find what the whole life is for."],
+        ["Goals & actions", "Progress, momentum and at-risk signals, | down to the next small step."],
+        ["Lify, on your own AI", "Daily plan, weekly review and goal drift — | proposals you approve, never silent edits."],
+      ],
+    },
+    stack: ["React 19", "Fastify 5", "SQLite per user", "Drizzle ORM", "Electron", "TipTap", "Konva", "MCP server", "Docker Compose"],
+    links: [
+      { label: "dreamward.life", href: "https://dreamward.life" },
+      { label: "View on GitHub", href: "https://github.com/SufZen/Dreamward" },
+    ],
+    cover: {
+      src: "/work/dreamward/cover-tall-v2.webp",
+      alt: "Dreamward logo — a gold star at the end of a dotted path — with the line “Move toward the life you envision”",
+    },
+    gallery: [
+      { src: "/work/dreamward/dashboard.webp", wide: true, alt: "Dreamward dashboard showing the current life chapter with three focus areas, a life-wheel radar across twelve areas and the biggest gaps", caption: "Dashboard: current chapter, life wheel and biggest gaps · demo data" },
+      { src: "/work/dreamward/ikigai.webp", alt: "Dreamward IKIGAI wizard mapping answers to the four circles, with a live Venn diagram", caption: "IKIGAI wizard with a live four-circle diagram · demo data" },
+      { src: "/work/dreamward/dashboard-hebrew.webp", alt: "The Dreamward dashboard in the Hebrew right-to-left interface", caption: "The same dashboard in Hebrew, right to left · demo data" },
+    ],
+    disclosure: "Counts are measured from the public repository at v0.4.0 (September 2026). Screens show fictional demo data.",
+    source: "Dreamward repository and changelog, v0.4.0, September 2026; Lifebook project overview v0.3.1.",
     cta: { path: "advisory", heading: "Need a private, | agent-ready product built fast?", label: "Start a conversation" },
     schema: "SoftwareApplication",
     icon: BookOpen,
-    updated: "2026-09-28",
+    updated: "2026-09-29",
   },
   {
     slug: "boa-architecture",

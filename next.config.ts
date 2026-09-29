@@ -38,6 +38,9 @@ const nextConfig: NextConfig = {
       // The portfolio moved from /ventures to /work (Sep 2026).
       { source: "/ventures", destination: "/work", permanent: true },
       { source: "/ventures/:slug", destination: "/work/:slug", permanent: true },
+      // Lifebook's second generation is Dreamward (Sep 2026).
+      { source: "/work/lifebook", destination: "/work/dreamward", permanent: true },
+      { source: "/work/lifebook.md", destination: "/work/dreamward.md", permanent: true },
     ];
   },
   turbopack: {
