@@ -1,14 +1,15 @@
 #!/usr/bin/env node
-// Content engine — brand visuals in the Venation language (docs/content-engine/visual-language.md).
-// Renders every draft's carousel, quote card and reel cover from its `carousel` spec.
+// Content engine — brand visuals (docs/content-engine/visual-language.md).
+// Renders every draft's carousel, quote card and reel cover from its `carousel` spec, in the style the draft calls for:
+// Term sheet by default, Site sheet for anything drawn to scale, Swiss grid for AI, systems and taxonomies.
 //
 //   node tools/content/visuals/render.mjs <drafts-dir> <out-dir> [cluster-id ...]
 //
 // Per cluster it writes:
 //   <id>/carousel-NN.png        Instagram / LinkedIn carousel, 1080x1350:
-//                               cover → beats → diagram (after the second beat) → closing on Night
-//   <id>/quote-1200x627.png     LinkedIn / X card: Asaf's line in Fraunces italic, the topic's wing
-//   <id>/cover-1080x1920.png    Reel / Story / Shorts cover (Night)
+//                               cover → beats → diagram (after the second beat) → closing
+//   <id>/quote-1200x627.png     LinkedIn / X card: Asaf's line on marigold
+//   <id>/cover-1080x1920.png    Reel / Story / Shorts cover
 //   <id>/diagram.svg            the carousel diagram, cropped to its drawing, for web field notes
 //
 // A draft without `carousel` gets a plain one derived from its short-video script (no diagram).
@@ -32,8 +33,6 @@ const FONTS = `
 @font-face{font-family:Poppins;font-weight:400;src:${font("poppins-regular.woff2")}}
 @font-face{font-family:Poppins;font-weight:700;src:${font("poppins-bold.woff2")}}
 @font-face{font-family:Poppins;font-weight:800;src:${font("poppins-extrabold.woff2")}}
-@font-face{font-family:Fraunces;font-style:normal;font-weight:100 900;src:${font("fraunces-var.woff2")}}
-@font-face{font-family:Fraunces;font-style:italic;font-weight:100 900;src:${font("fraunces-var-italic.woff2")}}
 @font-face{font-family:"IBM Plex Mono";font-weight:400;src:${font("ibm-plex-mono-regular.woff2")}}
 @font-face{font-family:"IBM Plex Mono";font-weight:500;src:${font("ibm-plex-mono-medium.woff2")}}`;
 
@@ -64,6 +63,7 @@ function derive(d) {
 function slidesFor(d) {
   const c = d.carousel ?? derive(d);
   const v = { cluster_id: d.cluster_id, eyebrow: c.eyebrow ?? titleCase(d.pillar), ...c };
+  const style = S.styleFor({ ...d, carousel: c });
   const beats = c.beats ?? [];
   const order = [["cover"]];
   beats.forEach((b, k) => {
@@ -74,8 +74,8 @@ function slidesFor(d) {
   order.push(["closing"]);
   const n = order.length;
   const carousel = order.map(([kind, x], i) =>
-    kind === "cover" ? S.cover(v, { i, n }) : kind === "beat" ? S.beat(v, x, { i, n }) : kind === "diagram" ? S.diagramSlide(v, x, { i, n }) : S.closing(v, { i, n }));
-  return { carousel, quote: S.quoteCard(v), reel: S.reelCover(v), hasDiagram: !!c.diagram };
+    kind === "cover" ? S.cover(v, { i, n, style }) : kind === "beat" ? S.beat(v, x, { i, n, style }) : kind === "diagram" ? S.diagramSlide(v, x, { i, n, style }) : S.closing(v, { i, n, style }));
+  return { carousel, quote: S.quoteCard(v), reel: S.reelCover(v), hasDiagram: !!c.diagram, style };
 }
 
 async function shot(browser, slide, file, { svgOut } = {}) {
@@ -102,13 +102,13 @@ for (const f of files) {
   const d = JSON.parse(readFileSync(join(draftsDir, f), "utf8"));
   const dir = join(outDir, d.cluster_id);
   mkdirSync(dir, { recursive: true });
-  const { carousel, quote, reel, hasDiagram } = slidesFor(d);
+  const { carousel, quote, reel, hasDiagram, style } = slidesFor(d);
   for (const [i, slide] of carousel.entries()) {
     const isDiagram = hasDiagram && slide.html.includes("data-fit");
     await shot(browser, slide, join(dir, `carousel-${String(i + 1).padStart(2, "0")}.png`), { svgOut: isDiagram ? join(dir, "diagram.svg") : null });
   }
   await shot(browser, quote, join(dir, "quote-1200x627.png"));
   await shot(browser, reel, join(dir, "cover-1080x1920.png"));
-  console.log(`${d.cluster_id}: ${carousel.length} carousel slides${hasDiagram ? " (with diagram)" : ""}, quote, cover`);
+  console.log(`${d.cluster_id}: ${style} · ${carousel.length} carousel slides${hasDiagram ? " (with diagram)" : ""}, quote, cover`);
 }
 await browser.close();

@@ -106,7 +106,7 @@ Use two or three per piece, never all of them.
 - **"To cut it short:"** is an equation line near the top that states the whole argument. His own: "The issue of abandoned properties + impending legislation = investment opportunities."
 - **Questions he answers himself** act as transitions: "What's the answer? Well, there are several." "Sounds good so far? Well, not quite."
 - **"The thing is,"** turns from common knowledge to his view. **"Let's put some order into this"** starts an explainer.
-- **Portuguese terms, glossed once.** Use one to three per piece. Name the term with a short gloss in parentheses the first time, then just use it: Conservatória (the land registry), Finanças (the tax office), Câmara (the municipality), caderneta predial (the property's tax record), IMI (annual property tax), IMT (property transfer tax), herança indivisa (an undivided inheritance), licença de utilização (licence of use). "Portugal being Portugal," is his idiom for the local pace.
+- **Portuguese terms, only when they add value** (decided 2026-09-29). Use one when it is the precise name for the thing (Conservatória, licença de utilização, CPCV), when it carries a meaning English doesn't (herança indivisa), or when it brings humour ("o barato sai caro", "Portugal being Portugal"). Never add one to decorate a piece; many pieces need none. Gloss it in parentheses the first time, then just use it: Conservatória (the land registry), Finanças (the tax office), Câmara (the municipality), caderneta predial (the property's tax record), IMI (annual property tax), IMT (property transfer tax), herança indivisa (an undivided inheritance), licença de utilização (licence of use).
 - **"Real"** is his word for sincerity: "a real bridge", "real good", "the real reasons", "I really want to hear". Use it once or twice per piece, and never as the formula "X is the real work".
 - **The bridge.** He sees himself as a bridge between worlds: Israel and Portugal, the drawing and the market, the registry and the building, the tools and the people. Use it at most once, and only when the piece is about joining two sides.
 - **Generosity.** Say plainly that you are sharing: "I'm here to share it, and you're welcome to use it." "Enjoy it, and decide for yourself what it's worth." The gift is the actual checklist, not the adjective.
@@ -159,6 +159,7 @@ Use one closing per piece, and rotate them.
 - Fake luxury: skyscraper montages, sports cars, staged rich-office sets.
 - Invented experience. If it did not happen in our work, it is not "a case we had".
 - Identifiable private cases, counterparties, investors, prices, negotiations or disputes.
+- Prices and amounts, in most cases (decided 2026-09-29). Name a price only when it is the point of the piece or adds real weight to the message, such as a public threshold that decides who can buy. Otherwise describe it ("a monthly subscription", "a big ticket to finance").
 - Generic AI-account content: if anyone with a chatbot could post it, it is not ours.
 - Emoji strings and hashtag walls. Use at most one emoji where he would smile (the sign-off or the image note) and at most three specific hashtags, at the end.
 
@@ -198,9 +199,9 @@ What changed:
 3. **Opening:** a question, a "keep reading" teaser, a real moment or feeling, or a contrast. Not a definition, a slogan or a bare number.
 4. **Rhythm:** LinkedIn has at least two sentences of 20 words or more; no more than three short sentences in a row; fragments are merged with colons, dashes or parentheses.
 5. **Transitions:** at least one question he answers himself, plus connectives (So, But, Well, The thing is) instead of jumps between lines.
-6. **Texture:** one to three Portuguese terms, each glossed once, and one human touch (a named feeling, an aside or light humour), never forced.
+6. **Texture:** a Portuguese term only where it adds value (see Signature devices), and one human touch (a named feeling, an aside or light humour), never forced.
 7. **Words:** nothing from the never-use list; "real" at most twice; finance in plain words; at most one "!" and one "…".
-8. **Close:** exactly one soft closing, different from the last post's; "até já" only occasionally; an image note if there is a visual; the link goes in the first comment.
+8. **Close:** exactly one soft closing, different from the last post's; "até já" only occasionally; an image note if there is a visual; the link goes in the first comment. When a piece has no link of its own, a first comment pointing to realization.world/insights (or the relevant field note) is welcome.
 9. **Truth:** every experience happened; every number is verified and cleared, otherwise generalise ("a noticeable share of the budget"); complexity is admitted, not hidden; tools are never presented as for sale.
 10. **Privacy and the read-aloud test:** no identifiable case, name or price. Read it aloud: if it sounds like a list of claims rather than Asaf talking across a table, rewrite it.
 

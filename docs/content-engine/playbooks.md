@@ -36,7 +36,7 @@ Read `voice.md` first. Agents A–E (harvest, extract, privacy, dedupe, rank) ru
 > `on_screen_text` (max 6 words), `higgsfield_prompt` (for generated visuals), `asset_needed` (for real footage).
 > Long-form: 30–40% avatar, 60–70% supporting visuals. Short: avatar can carry most of the runtime.
 > Prefer plans, sections, maps, simplified charts, timelines, site footage and clean diagrams.
-> Diagram and generated scenes follow the Venation language (`visual-language.md`): tapered ink veins, soft cells in marigold and pollen on warm paper, hatched cells for what is locked, the topic's half wing at the frame edge. No icons, people, arrows or 3D.
+> Diagram and generated scenes follow `visual-language.md`: black, white and marigold, flat and sharp, bold Poppins labels, marigold for the answer and a black hatch for what is locked; the style follows the topic (Term sheet, Site sheet or Swiss grid). No soft or organic imagery, icons, stock people or 3D.
 > Forbidden: skyscraper montages, luxury clichés, stock handshakes, fabricated project imagery presented as real.
 
 ---
