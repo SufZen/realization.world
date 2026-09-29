@@ -56,7 +56,7 @@ function stagePage(slides, lengths) {
       for(const h of c.querySelectorAll('.d')){
         const walk=(node)=>{for(const ch of [...node.childNodes]){
           if(ch.nodeType===3&&ch.textContent.trim()){const f=document.createDocumentFragment();
-            ch.textContent.split(/(\s+)/).forEach((w)=>{if(!w.trim()){f.appendChild(document.createTextNode(w));return;}const sp=document.createElement('span');sp.className='w';sp.style.display='inline-block';sp.textContent=w;f.appendChild(sp);});
+            ch.textContent.split(/( +)/).forEach((w)=>{if(!w.trim()){f.appendChild(document.createTextNode(w));return;}const sp=document.createElement('span');sp.className='w';sp.style.display='inline-block';sp.textContent=w;f.appendChild(sp);});
             ch.replaceWith(f);} else if(ch.nodeType===1) walk(ch);}};
         walk(h);
       }
