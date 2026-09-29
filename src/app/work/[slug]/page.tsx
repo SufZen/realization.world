@@ -37,7 +37,7 @@ export default async function WorkItemPage({ params }: PageProps<"/work/[slug]">
   const dark = item.kind === "system" || item.kind === "advisory";
   const formHref = `/bring-an-opportunity?path=${item.cta.path}&ref=${item.slug}`;
   const related = insights.filter((insight) => item.related?.includes(insight.slug));
-  const isLive = ["Live", "Ongoing", "In daily use"].includes(item.status);
+  const isLive = ["Live", "Launching", "Ongoing", "In daily use"].includes(item.status);
 
   return (
     <>

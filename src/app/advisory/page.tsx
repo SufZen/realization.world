@@ -43,7 +43,7 @@ const faqs = [
 
 export default function AdvisoryPage() {
   const flagship = workBySlug("ai-adoption-architecture-firm")!;
-  const systems = ["realizeos", "meetsum", "lifebook"].map((slug) => workBySlug(slug)).filter((item): item is WorkItem => Boolean(item));
+  const systems = ["realizeos", "meetsum", "dreamward"].map((slug) => workBySlug(slug)).filter((item): item is WorkItem => Boolean(item));
 
   return (
     <>
