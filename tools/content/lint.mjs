@@ -40,7 +40,8 @@ const texts = (o, out = []) => {
   else if (o && typeof o === "object") Object.entries(o).forEach(([k, v]) => k !== "privacy_check" && k !== "voice_rewrite" && texts(v, out));
   return out;
 };
-const numbers = (s) => new Set(String(s).match(/\d+(?:[.,]\d+)?/g) ?? []);
+// "3D", "9:16" and similar production terms are not claims.
+const numbers = (s) => new Set(String(s).replace(/\b\d+D\b|\b\d+:\d+\b/g, "").match(/\d+(?:[.,]\d+)?/g) ?? []);
 
 function checkDiagram(g, err) {
   const L = LIMITS[g.type];

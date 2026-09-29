@@ -95,13 +95,14 @@ export function beat(d, b, { i, n }) {
 export function diagramSlide(d, spec, { i, n }) {
   const fn = D[spec.type];
   const H = { flight: 640, scale: 700 }[spec.type] ?? 820;
-  const svg = fn(spec, { W: 960, H, id: "dg" + i, seed: hash(d.cluster_id) + 11, wingSVG });
+  // Flights are drawn narrower and taller, then scaled up into the box, so their labels read at phone size.
+  const svg = fn(spec, { W: spec.type === "flight" ? 760 : 960, H: spec.type === "flight" ? 720 : H, id: "dg" + i, seed: hash(d.cluster_id) + 11, wingSVG });
   return { w: 1080, h: 1350, html: `<div class="c" style="width:1080px;height:1350px">
     <div style="position:absolute;left:84px;top:96px;right:84px">
       <div class="mono">${String(i).padStart(2, "0")} / ${String(n - 1).padStart(2, "0")} · ${esc(spec.kicker ?? "How it works")}</div>
       <div class="head fit" data-min="36" style="font-size:52px;margin-top:22px;max-height:130px">${esc(spec.title)}</div>
     </div>
-    <div style="position:absolute;left:60px;right:60px;top:300px;height:${spec.caption ? 730 : 860}px;display:flex;align-items:center;justify-content:center">${svg}</div>
+    <div style="position:absolute;left:60px;right:60px;top:300px;height:${spec.caption ? 730 : 860}px;display:flex;align-items:center;justify-content:center" data-max="${spec.type === "flight" ? 1.3 : 1.15}">${svg}</div>
     ${spec.caption ? `<div class="voice fit" data-min="26" style="position:absolute;left:84px;right:120px;bottom:150px;font-size:36px;max-height:130px">${esc(spec.caption)}</div>` : ""}
     <div class="foot"><span>${esc(spec.source ?? "Suf Zen · Realization")}</span>${pager(i, n)}</div></div>` };
 }
