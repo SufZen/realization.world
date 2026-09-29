@@ -36,6 +36,7 @@ Read `voice.md` first. Agents A–E (harvest, extract, privacy, dedupe, rank) ru
 > `on_screen_text` (max 6 words), `higgsfield_prompt` (for generated visuals), `asset_needed` (for real footage).
 > Long-form: 30–40% avatar, 60–70% supporting visuals. Short: avatar can carry most of the runtime.
 > Prefer plans, sections, maps, simplified charts, timelines, site footage and clean diagrams.
+> Diagram and generated scenes follow the Venation language (`visual-language.md`): tapered ink veins, soft cells in marigold and pollen on warm paper, hatched cells for what is locked, the topic's half wing at the frame edge. No icons, people, arrows or 3D.
 > Forbidden: skyscraper montages, luxury clichés, stock handshakes, fabricated project imagery presented as real.
 
 ---
@@ -65,7 +66,7 @@ Generate scenes independently, not whole videos. Record every Higgsfield job ID 
 > Create native versions. Do not reuse the same caption on two platforms.
 > - **Realization YouTube**: title (≤ 60 chars, searchable), description (first 2 lines carry the promise), chapters, 3 thumbnail texts (≤ 4 words).
 > - **Realization Instagram Reel / TikTok**: 30–60 s cut plan, cover text, caption (≤ 125 chars before the fold), 3–5 specific hashtags.
-> - **Asaf LinkedIn**: 120–220 words, first person, opens from the lesson not the video, short paragraphs, ends with a question or a decision rule; link in first comment.
+> - **Asaf LinkedIn**: 150–250 words, first person, in his voice (`voice.md`): open with a question, a "keep reading" teaser, a real moment or a contrast, never with the lesson as a slogan; Empathy → Authority → Generosity; one soft closing, rotated across the wave (an honest question at most one post in three); link in first comment.
 > - **Asaf X**: 1 standalone post (≤ 280 chars) + optional 3–5 post thread.
 > - **Facebook**: only if the audience fit is clear; otherwise output `SKIP`.
 > - **realization.world/insights**: field-note article in the site's structure (see `voice.md`).
