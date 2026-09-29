@@ -84,7 +84,7 @@ export function beat(d, b, { i, n }) {
   const art = `<svg class="art" viewBox="0 0 1080 1350">${wingSVG(B.F, { scale: 300, x: 1080, y: 170, rotate: 24, flip: true, lit: litFor(B.F, share, B.seed), id: "bt" + i })}</svg>`;
   return { w: 1080, h: 1350, html: `<div class="c" style="width:1080px;height:1350px">${art}
     <div style="position:absolute;left:84px;top:96px" class="mono">${String(i).padStart(2, "0")} / ${String(n - 1).padStart(2, "0")}</div>
-    <div style="position:absolute;left:84px;right:84px;top:330px">
+    <div style="position:absolute;left:84px;right:84px;top:390px">
       <div class="head fit" data-min="44" style="font-size:72px;max-height:360px">${esc(b.head)}</div>
       ${b.body ? `<div class="body fit" data-min="26" style="font-size:36px;margin-top:40px;max-height:420px;max-width:860px">${esc(b.body)}</div>` : ""}
       ${b.voice ? `<div class="voice" style="font-size:40px;margin-top:40px;max-width:820px">${esc(b.voice)}</div>` : ""}
