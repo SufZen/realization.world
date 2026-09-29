@@ -1,5 +1,7 @@
 # Venation — Realization's visual language
 
+![Venation, plate I: a measured half specimen with numbered cells, five states of one cell structure from locked to realized, and the pigments](img/venation-plate-I.png)
+
 Venation is the pattern of veins that holds a butterfly's wing together. It is also how Realization draws: precise lines that structure soft, living areas. Every image the content engine produces (carousels, quote cards, covers, diagrams, charts) follows this document. The renderer that implements it lives in `tools/content/visuals/`.
 
 ---
