@@ -37,7 +37,7 @@ const sentences = (s) => String(s ?? "").replace(/\s+/g, " ").match(/[^.?!…]+[
 const texts = (o, out = []) => {
   if (typeof o === "string") out.push(o);
   else if (Array.isArray(o)) o.forEach((x) => texts(x, out));
-  else if (o && typeof o === "object") Object.entries(o).forEach(([k, v]) => k !== "privacy_check" && k !== "voice_rewrite" && texts(v, out));
+  else if (o && typeof o === "object") Object.entries(o).forEach(([k, v]) => k !== "privacy_check" && k !== "voice_rewrite" && k !== "highlight" && texts(v, out));
   return out;
 };
 // "3D", "9:16" and similar production terms are not claims.
