@@ -9,10 +9,14 @@ Source: `docs/strategy/realization-content-automation-strategy.html` §9, §18, 
 |---|---|---|
 | Speaks as | "we" — the studio | "I" — the operator |
 | Says | What we know, build, study, do | How I think, what I learned, what I believe |
-| Channels | YouTube, Instagram, TikTok, realization.world/insights | LinkedIn, X, Facebook |
+| Channels | realization.world/insights, and video on the Suf Zen YouTube, Instagram and TikTok (see below) | LinkedIn, X, Facebook |
 | Tone | Calm, exact, institutional | Direct, reflective, occasionally contrarian |
 
 When an insight fits both, write two native versions. Never cross-post identical copy.
+
+**Current routing (decided 2026-09-28):** Suf Zen is the personal brand leading Realization. There are no separate Realization social accounts for now, so brand video runs on the Suf Zen YouTube, Instagram and TikTok. On those channels Asaf presents, "we" means Realization's team, and Realization is named as the company behind the work.
+
+**RealizeOS and the AI tools (decided 2026-09-28):** the tools are free to use. Realization sells services around them: setups, implementation, and custom builds. Never write that we sell the tools, licences or subscriptions.
 
 ## Spoken, not written
 

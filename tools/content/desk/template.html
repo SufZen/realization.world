@@ -1,0 +1,433 @@
+<title>Realization Content Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an editor's desk. Summary strip on top, the pilot episode, then one row per topic;
+   opening a topic shows its channel drafts side by side with the decision controls. */
+:root {
+  --paper: #fafaf8;
+  --sheet: #ffffff;
+  --ink: #111111;
+  --body: #3d3d3d;
+  --muted: #74726a;
+  --rule: #e4e2da;
+  --brand: #fdcc33;
+  --brand-wash: #fef3cf;
+  --on-brand: #111111;
+  --ok: #1f7a4d;
+  --ok-wash: #e3f3ea;
+  --warn: #8a5a00;
+  --warn-wash: #fdf0d2;
+  --stop: #9b2c2c;
+  --stop-wash: #f8e4e4;
+  --f-display: "Poppins", system-ui, sans-serif;
+  --f-body: "Poppins", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --r: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0f0f0e; --sheet: #191917; --ink: #f4f3ee; --body: #cfcdc4; --muted: #9a978c; --rule: #2d2c28;
+    --brand: #fdcc33; --brand-wash: #3a3114; --on-brand: #111111;
+    --ok: #7fd3a4; --ok-wash: #16301f; --warn: #f3c26b; --warn-wash: #33280f; --stop: #f19a9a; --stop-wash: #3a1b1b;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0f0f0e; --sheet: #191917; --ink: #f4f3ee; --body: #cfcdc4; --muted: #9a978c; --rule: #2d2c28;
+  --brand: #fdcc33; --brand-wash: #3a3114; --on-brand: #111111;
+  --ok: #7fd3a4; --ok-wash: #16301f; --warn: #f3c26b; --warn-wash: #33280f; --stop: #f19a9a; --stop-wash: #3a1b1b;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--body); font-family: var(--f-body); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 40px); padding-block: 28px 80px; }
+h1, h2, h3, h4 { color: var(--ink); font-family: var(--f-display); margin: 0; letter-spacing: -.02em; line-height: 1.15; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+button { font: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+.mono { font-family: var(--f-mono); font-size: 12px; letter-spacing: .02em; }
+.eyebrow { font-family: var(--f-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+
+/* masthead */
+.mast { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: end; padding-bottom: 22px; border-bottom: 2px solid var(--ink); }
+.mast h1 { font-size: clamp(28px, 4.4vw, 48px); font-weight: 800; }
+.mast h1 mark { background: var(--brand); color: var(--on-brand); padding: 0 .18em; border-radius: 4px; }
+.mast p { margin-top: 10px; max-width: 62ch; }
+.tally { display: flex; gap: 18px; flex-wrap: wrap; font-variant-numeric: tabular-nums; }
+.tally div { display: grid; }
+.tally b { font-size: 26px; color: var(--ink); font-weight: 700; line-height: 1.1; }
+.tally span { font-family: var(--f-mono); font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+@media (max-width: 720px) { .mast { grid-template-columns: 1fr; } }
+
+/* notices */
+.notices { display: grid; gap: 10px; margin-top: 18px; }
+.notice { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; padding: 12px 14px; border-radius: var(--r); background: var(--warn-wash); color: var(--ink); font-size: 14px; }
+.notice .tag { font-family: var(--f-mono); font-size: 11px; font-weight: 500; color: var(--warn); text-transform: uppercase; letter-spacing: .08em; padding-top: 2px; }
+.notice.info { background: var(--brand-wash); }
+.notice.info .tag { color: var(--ink); }
+
+/* section headers */
+.sec { margin-top: 40px; display: flex; justify-content: space-between; gap: 16px; align-items: baseline; flex-wrap: wrap; }
+.sec h2 { font-size: 22px; font-weight: 700; }
+
+/* filter bar */
+.filters { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; display: flex; gap: 8px; flex-wrap: wrap; padding: 12px 0; background: var(--paper); border-bottom: 1px solid var(--rule); margin-top: 12px; }
+.chip { border: 1px solid var(--rule); background: var(--sheet); color: var(--ink); border-radius: 999px; padding: 5px 12px; font-size: 13px; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+/* topic rows */
+.topics { display: grid; gap: 10px; margin-top: 14px; }
+.topic { background: var(--sheet); border: 1px solid var(--rule); border-radius: var(--r); }
+.topic > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 14px 16px; }
+.topic > summary::-webkit-details-marker { display: none; }
+.topic .num { font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.topic h3 { font-size: 16px; font-weight: 600; }
+.topic .pillar { font-family: var(--f-mono); font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-top: 2px; }
+.dots { display: flex; gap: 5px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--muted); }
+.dot.approved { background: var(--brand); border-color: var(--brand); }
+.dot.edits { background: var(--warn); border-color: var(--warn); }
+.dot.skip { background: var(--rule); border-color: var(--rule); }
+.topic[open] > summary { border-bottom: 1px solid var(--rule); }
+@media (max-width: 560px) { .topic > summary { grid-template-columns: minmax(0, 1fr) auto; } .topic .num { display: none; } }
+
+/* channel tabs */
+.body { padding: 14px 16px 18px; }
+.tabs { display: flex; gap: 4px; flex-wrap: wrap; border-bottom: 1px solid var(--rule); }
+.tab { border: 0; background: none; padding: 8px 12px; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; font-size: 14px; display: inline-flex; gap: 6px; align-items: center; }
+.tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--brand); font-weight: 600; }
+.tab .dot { width: 8px; height: 8px; }
+.piece { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 22px; padding-top: 16px; }
+@media (max-width: 860px) { .piece { grid-template-columns: 1fr; } }
+.draft { min-width: 0; }
+.draft .meta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.text { white-space: pre-wrap; color: var(--ink); font-size: 15px; line-height: 1.7; max-width: 68ch; }
+.text + .text { margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--rule); }
+.sub { margin-top: 18px; }
+.sub h4 { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.hooks { margin: 0; padding-left: 18px; }
+.hooks li.sel { color: var(--ink); font-weight: 600; }
+.scroll { overflow-x: auto; border: 1px solid var(--rule); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--rule); }
+th { font-family: var(--f-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); background: var(--paper); }
+td.n { font-variant-numeric: tabular-nums; font-family: var(--f-mono); font-size: 12px; white-space: nowrap; }
+.own { font-family: var(--f-mono); font-size: 11px; padding: 1px 6px; border-radius: 4px; background: var(--paper); border: 1px solid var(--rule); white-space: nowrap; }
+.own.avatar { background: var(--brand-wash); border-color: var(--brand); color: var(--ink); }
+.verify { background: var(--warn-wash); color: var(--warn); border-radius: 3px; padding: 0 3px; font-family: var(--f-mono); font-size: 12px; }
+.web h5 { font-size: 14px; color: var(--ink); margin: 14px 0 4px; font-family: var(--f-display); }
+.web .wt { font-size: 20px; font-weight: 700; color: var(--ink); }
+
+/* decision panel */
+.decide { align-self: start; position: sticky; top: 70px; display: grid; gap: 10px; padding: 14px; border-radius: var(--r); background: var(--paper); border: 1px solid var(--rule); }
+.decide .row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.dbtn { border: 1px solid var(--rule); background: var(--sheet); color: var(--ink); border-radius: 8px; padding: 8px 6px; font-size: 13px; }
+.dbtn[aria-pressed="true"][data-s="approved"] { background: var(--brand); border-color: var(--brand); color: var(--on-brand); font-weight: 600; }
+.dbtn[aria-pressed="true"][data-s="edits"] { background: var(--warn-wash); border-color: var(--warn); color: var(--warn); font-weight: 600; }
+.dbtn[aria-pressed="true"][data-s="skip"] { background: var(--rule); color: var(--ink); font-weight: 600; }
+.decide textarea { width: 100%; min-height: 84px; resize: vertical; border: 1px solid var(--rule); border-radius: 8px; padding: 8px 10px; background: var(--sheet); color: var(--ink); font: inherit; font-size: 13px; }
+.decide .foot { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+.decide .foot .btn { white-space: nowrap; flex: none; }
+.btn { border: 1px solid var(--ink); background: var(--ink); color: var(--paper); border-radius: 8px; padding: 7px 12px; font-size: 13px; }
+.btn.ghost { background: transparent; color: var(--ink); border-color: var(--rule); }
+.state { font-family: var(--f-mono); font-size: 11px; color: var(--muted); }
+
+/* pilot + facts */
+.pilot { margin-top: 14px; background: var(--sheet); border: 1px solid var(--rule); border-radius: var(--r); overflow: hidden; }
+.pilot-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; padding: 18px; background: var(--ink); color: var(--paper); }
+.pilot-head h3 { color: var(--paper); font-size: clamp(18px, 2.4vw, 24px); }
+.pilot-head .eyebrow { color: var(--brand); }
+.pilot-head { cursor: pointer; list-style: none; }
+.pilot-head::-webkit-details-marker { display: none; }
+.pilot-head .rt { font-family: var(--f-mono); font-size: 12px; color: var(--brand); text-align: right; display: grid; gap: 6px; align-content: start; }
+.pilot-hook { margin-top: 8px; color: var(--paper); opacity: .8; font-size: 14px; max-width: 70ch; }
+.pilot-status { text-transform: capitalize; }
+@media (max-width: 560px) { .pilot-head { grid-template-columns: 1fr; } .pilot-head .rt { text-align: left; } }
+.facts { display: grid; gap: 8px; margin-top: 14px; }
+.fact { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 12px; padding: 10px 12px; background: var(--sheet); border: 1px solid var(--rule); border-radius: 8px; font-size: 14px; }
+.fact .v { font-family: var(--f-mono); font-size: 11px; text-transform: uppercase; letter-spacing: .06em; padding-top: 2px; }
+.v.confirmed { color: var(--ok); } .v.partly { color: var(--warn); } .v.wrong { color: var(--stop); } .v.unverified, .v.internal { color: var(--muted); }
+.fact a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--brand); text-underline-offset: 3px; }
+.fact .src { font-size: 12px; color: var(--muted); margin-top: 4px; }
+@media (max-width: 560px) { .fact { grid-template-columns: 1fr; gap: 2px; } }
+.vgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+.vgrid.wide { grid-template-columns: minmax(0, 520px); }
+.vgrid.tall { grid-template-columns: minmax(0, 200px); }
+.vis { display: block; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; background: var(--paper); }
+.vis img { display: block; width: 100%; height: auto; }
+.film { margin-left: 8px; padding: 1px 7px; border-radius: 999px; background: var(--brand); color: var(--on-brand); font-family: var(--f-mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; }
+.empty { padding: 18px; color: var(--muted); font-size: 14px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <div>
+      <div class="eyebrow">Realization content engine · latest wave <span id="wave-date"></span></div>
+      <h1>Content <mark>desk</mark></h1>
+      <p>Drafts built from your meetings and Drive archive, privacy-filtered and ready for review. Approve, flag for edits or skip each piece. Nothing here is published until you approve it.</p>
+    </div>
+    <div class="tally" id="tally"></div>
+  </header>
+
+  <div class="notices" id="notices"></div>
+
+  <div class="sec"><h2>Pilot episode</h2><span class="eyebrow">Phase 3 · long-form YouTube</span></div>
+  <div id="pilot"></div>
+
+  <div class="sec"><h2>Topics</h2><span class="eyebrow" id="topic-count"></span></div>
+  <div class="filters" role="toolbar" aria-label="Filter drafts">
+    <button class="chip" data-f="all" aria-pressed="true">All</button>
+    <button class="chip" data-f="pending" aria-pressed="false">Awaiting you</button>
+    <button class="chip" data-f="approved" aria-pressed="false">Approved</button>
+    <button class="chip" data-f="edits" aria-pressed="false">Needs edits</button>
+    <button class="chip" data-f="skip" aria-pressed="false">Skipped</button>
+  </div>
+  <div class="topics" id="topics"></div>
+
+  <div class="sec"><h2>Fact checks</h2><span class="eyebrow">Agent F · public sources</span></div>
+  <div class="facts" id="facts"></div>
+</div>
+
+<script type="application/json" id="desk-data">/*__DATA__*/</script>
+<script>
+(() => {
+  const DATA = JSON.parse(document.getElementById("desk-data").textContent);
+  const CHANNELS = [
+    ["linkedin", "LinkedIn · Asaf"],
+    ["x", "X · Asaf"],
+    ["short", "Short video"],
+    ["web", "Web field note"],
+    ["long", "Long-form seed"],
+    ["visuals", "Visuals"],
+  ];
+  const decisions = {};           // key -> {status, note, updatedAt}
+  let db = null;
+  let filter = "all";
+  const openTabs = {};
+
+  const el = (tag, attrs = {}, ...kids) => {
+    const n = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k === "class") n.className = v;
+      else if (k === "text") n.textContent = v;
+      else if (k.startsWith("on")) n.addEventListener(k.slice(2), v);
+      else n.setAttribute(k, v);
+    }
+    for (const k of kids.flat()) if (k != null) n.append(k.nodeType ? k : document.createTextNode(k));
+    return n;
+  };
+  const key = (cid, ch) => `${cid}__${ch}`;
+  const statusOf = (cid, ch) => decisions[key(cid, ch)]?.status || "pending";
+  const channelsFor = (d) => CHANNELS.filter(([ch]) =>
+    ch === "linkedin" ? d.linkedin : ch === "x" ? d.x : ch === "short" ? d.short : ch === "web" ? d.web_article : ch === "visuals" ? (DATA.visuals || {})[d.cluster_id] : d.long_form_seed);
+
+  // Text with {{VERIFY: ...}} markers highlighted
+  function richText(s, cls = "text") {
+    const p = el("div", { class: cls });
+    const parts = String(s || "").split(/(\{\{VERIFY:[^}]*\}\})/g);
+    for (const part of parts) {
+      if (part.startsWith("{{VERIFY")) p.append(el("span", { class: "verify", title: "Needs a public source before publishing" }, part.replace(/^\{\{VERIFY:\s*|\}\}$/g, "⚑ ")));
+      else p.append(part);
+    }
+    return p;
+  }
+
+  function renderTally() {
+    const all = DATA.drafts.flatMap((d) => channelsFor(d).map(([ch]) => statusOf(d.cluster_id, ch)));
+    const count = (s) => all.filter((x) => x === s).length;
+    const t = document.getElementById("tally");
+    t.replaceChildren(
+      ...[[all.length, "pieces"], [count("pending"), "awaiting"], [count("approved"), "approved"], [count("edits"), "edits"], [count("skip"), "skipped"]]
+        .map(([n, l]) => el("div", {}, el("b", { text: String(n) }), el("span", { text: l })))
+    );
+  }
+
+  function decisionPanel(cid, ch) {
+    const k = key(cid, ch);
+    const cur = decisions[k] || {};
+    const note = el("textarea", { id: `note-${k}`, placeholder: "What should change? (optional)", "aria-label": "Edit note" });
+    note.value = cur.note || "";
+    const when = (iso) => new Date(iso).toLocaleString([], { dateStyle: "medium", timeStyle: "short" });
+    const state = el("span", { class: "state", text:
+      cur.published_url ? "Published" :
+      cur.scheduled_for ? `Scheduled for ${when(cur.scheduled_for)}` :
+      cur.updatedAt ? `Saved ${when(cur.updatedAt)}` : db ? "Not reviewed yet" : "Decisions save when the page is opened in Claude" });
+    const save = async (status) => {
+      // Keep fields the publisher wrote (scheduled_for, post ids) when the decision is re-saved.
+      const body = { ...cur, status: status || cur.status || "pending", note: note.value.trim(), cluster_id: cid, channel: ch, updatedAt: new Date().toISOString() };
+      decisions[k] = body;
+      render();
+      if (!db) return;
+      try { await db.doc(`decisions/${k}`).set(body); }
+      catch (e) { state.textContent = e?.code === "invalid_argument" ? "You can view this desk but not record decisions" : "Could not save. Try again in a moment."; }
+    };
+    const btn = (s, label) => el("button", { class: "dbtn", "data-s": s, "aria-pressed": String(cur.status === s), onclick: () => save(s) }, label);
+    return el("aside", { class: "decide", "aria-label": "Decision" },
+      el("div", { class: "eyebrow", text: "Your decision" }),
+      el("div", { class: "row" }, btn("approved", "Approve"), btn("edits", "Edits"), btn("skip", "Skip")),
+      note,
+      el("div", { class: "foot" }, state, el("button", { class: "btn ghost", onclick: () => save() }, "Save note")),
+      el("button", { class: "btn ghost", onclick: (e) => copy(e.currentTarget, plainFor(cid, ch)) }, "Copy draft text")
+    );
+  }
+
+  function copy(btn, text) {
+    const done = () => { const t = btn.textContent; btn.textContent = "Copied"; setTimeout(() => (btn.textContent = t), 1400); };
+    try { navigator.clipboard.writeText(text).then(done, () => (btn.textContent = "Select the text to copy")); }
+    catch { btn.textContent = "Select the text to copy"; }
+  }
+  function plainFor(cid, ch) {
+    const d = DATA.drafts.find((x) => x.cluster_id === cid);
+    if (ch === "linkedin") return d.linkedin.text + (d.linkedin.first_comment ? `\n\nFirst comment: ${d.linkedin.first_comment}` : "");
+    if (ch === "x") return [d.x.post, ...(d.x.thread || [])].join("\n\n---\n\n");
+    if (ch === "short") return d.short.script;
+    if (ch === "web") return [d.web_article.title.replace(/ \| /g, " "), d.web_article.excerpt.replace(/ \| /g, " "), ...d.web_article.sections.flatMap((s) => [s.heading, ...s.paragraphs])].join("\n\n");
+    if (ch === "visuals") return Object.keys(DATA.visuals[cid] || {}).join("\n");
+    return [d.long_form_seed.title, d.long_form_seed.promise, ...d.long_form_seed.chapters].join("\n");
+  }
+
+  function scenesTable(scenes) {
+    const rows = (scenes || []).map((s) => el("tr", {},
+      el("td", { class: "n", text: String(s.no ?? "") }),
+      el("td", { class: "n", text: s.start_s != null ? `${s.start_s}s` : `${s.duration_s ?? ""}s` }),
+      el("td", {}, el("span", { class: "own" + (s.owner === "avatar" ? " avatar" : ""), text: s.owner || "" })),
+      el("td", { text: s.spoken_line || "" }),
+      el("td", { text: [s.visual, s.on_screen_text ? `Text: “${s.on_screen_text}”` : "", s.camera ? `Camera: ${s.camera}` : "", s.asset_needed ? `Needs: ${s.asset_needed}` : ""].filter(Boolean).join(" · ") })
+    ));
+    return el("div", { class: "scroll" }, el("table", {},
+      el("thead", {}, el("tr", {}, ...["#", "t", "Owner", "Spoken", "Visual"].map((h) => el("th", { text: h })))),
+      el("tbody", {}, rows)));
+  }
+
+  function draftView(d, ch) {
+    const box = el("div", { class: "draft" });
+    if (ch === "linkedin") {
+      box.append(el("div", { class: "meta" }, el("span", { class: "mono", text: `${(d.linkedin.text || "").split(/\s+/).filter(Boolean).length} words` })), richText(d.linkedin.text));
+      if (d.linkedin.first_comment) box.append(el("div", { class: "sub" }, el("h4", { text: "First comment" }), richText(d.linkedin.first_comment)));
+    } else if (ch === "x") {
+      box.append(el("div", { class: "meta" }, el("span", { class: "mono", text: `${(d.x.post || "").length}/280` })), richText(d.x.post));
+      if (d.x.thread?.length) box.append(el("div", { class: "sub" }, el("h4", { text: "Optional thread" }), ...d.x.thread.map((t) => richText(t))));
+    } else if (ch === "short") {
+      const s = d.short;
+      box.append(
+        el("div", { class: "meta" }, el("span", { class: "mono", text: `${s.word_count || (s.script || "").split(/\s+/).length} words · ~${Math.round(((s.word_count || 150) / 150) * 60)}s` }), el("span", { class: "mono", text: `Cover: ${s.cover_text || "—"}` })),
+        el("h4", { text: s.working_title || "" }),
+        el("div", { class: "sub" }, el("h4", { text: "Hooks" }), el("ol", { class: "hooks" }, (s.hook_options || []).map((h) => el("li", { class: h === s.selected_hook ? "sel" : "", text: h })))),
+        s.why_this_hook ? el("p", { class: "state", text: `Why: ${s.why_this_hook}` }) : null,
+        el("div", { class: "sub" }, el("h4", { text: "Script" }), richText(s.script)),
+        el("div", { class: "sub" }, el("h4", { text: "Storyboard" }), scenesTable(s.scenes)),
+        s.captions ? el("div", { class: "sub" }, el("h4", { text: "Captions" }),
+          richText(`Instagram: ${s.captions.instagram || ""}\nTikTok: ${s.captions.tiktok || ""}\nYouTube Shorts: ${s.captions.youtube_shorts_title || ""}`)) : null
+      );
+    } else if (ch === "web") {
+      const w = d.web_article;
+      box.classList.add("web");
+      box.append(el("div", { class: "meta" }, el("span", { class: "mono", text: `${w.published} · ${w.readTime} · /insights/${w.slug}` })),
+        el("div", { class: "wt", text: w.title.replace(/ \| /g, " ") }),
+        el("p", { class: "state", text: w.excerpt.replace(/ \| /g, " ") }),
+        ...w.sections.map((sec) => el("div", {}, el("h5", { text: sec.heading }), ...sec.paragraphs.map((p) => richText(p)))));
+    } else if (ch === "visuals") {
+      const v = DATA.visuals[d.cluster_id];
+      const img = (f, cls) => el("a", { href: v[f], target: "_blank", rel: "noopener", class: `vis ${cls}` }, el("img", { src: v[f], alt: f, loading: "lazy" }));
+      const car = Object.keys(v).filter((f) => f.includes("carousel")).sort();
+      box.append(
+        el("div", { class: "sub" }, el("h4", { text: "LinkedIn / X card · 1200×627" }), el("div", { class: "vgrid wide" }, img(Object.keys(v).find((f) => f.includes("quote")), "q"))),
+        el("div", { class: "sub" }, el("h4", { text: `Carousel · ${car.length} slides · 1080×1350` }), el("div", { class: "vgrid" }, car.map((f) => img(f, "p")))),
+        el("div", { class: "sub" }, el("h4", { text: "Reel / Story cover · 1080×1920" }), el("div", { class: "vgrid tall" }, img(Object.keys(v).find((f) => f.includes("cover")), "t"))));
+    } else {
+      const l = d.long_form_seed;
+      box.append(el("h4", { text: l.title }), el("p", { class: "state", text: l.promise }), el("ol", { class: "hooks" }, l.chapters.map((c) => el("li", { text: c }))));
+    }
+    return box;
+  }
+
+  function topicRow(d, i) {
+    const chans = channelsFor(d);
+    const statuses = chans.map(([ch]) => statusOf(d.cluster_id, ch));
+    if (filter !== "all" && !statuses.includes(filter)) return null;
+    const cur = openTabs[d.cluster_id] || chans[0][0];
+    const det = el("details", { class: "topic", id: d.cluster_id });
+    if (openTabs[d.cluster_id]) det.open = true;
+    det.addEventListener("toggle", () => { if (det.open && !openTabs[d.cluster_id]) openTabs[d.cluster_id] = chans[0][0]; if (!det.open) delete openTabs[d.cluster_id]; });
+    det.append(el("summary", {},
+      el("span", { class: "num", text: d.cluster_id.slice(0, 3) }),
+      el("div", {}, el("h3", { text: d.topic }), el("div", { class: "pillar" }, d.pillar || "", (DATA.film || {})[d.cluster_id] ? el("span", { class: "film", title: (DATA.film || {})[d.cluster_id] }, "Film yourself") : null)),
+      el("div", { class: "dots", "aria-label": statuses.join(", ") }, statuses.map((s) => el("span", { class: `dot ${s}` })))
+    ));
+    const tabs = el("div", { class: "tabs", role: "tablist" }, chans.map(([ch, label]) =>
+      el("button", { class: "tab", role: "tab", "aria-selected": String(ch === cur), onclick: () => { openTabs[d.cluster_id] = ch; render(); } },
+        el("span", { class: `dot ${statusOf(d.cluster_id, ch)}` }), label)));
+    det.append(el("div", { class: "body" }, tabs, el("div", { class: "piece" }, draftView(d, cur), decisionPanel(d.cluster_id, cur))));
+    return det;
+  }
+
+  function renderPilot() {
+    const p = DATA.pilot;
+    const host = document.getElementById("pilot");
+    if (!p) { host.replaceChildren(el("div", { class: "empty", text: "The pilot production pack is still being written." })); return; }
+    const cid = "PILOT";
+    const det = el("details", { class: "pilot", id: "pilot-pack" },
+      el("summary", { class: "pilot-head" },
+        el("div", {}, el("div", { class: "eyebrow", text: "Realization YouTube · pilot" }), el("h3", { text: p.title }),
+          el("p", { class: "pilot-hook", text: p.final_hook })),
+        el("div", { class: "rt" }, el("div", { text: p.runtime || "" }), el("div", { class: "pilot-status", text: statusOf("PILOT", "pilot") === "pending" ? "Open to review ▾" : statusOf("PILOT", "pilot") }))),
+      el("div", { class: "body" }, el("div", { class: "piece" },
+        el("div", { class: "draft" },
+          el("div", { class: "sub" }, el("h4", { text: "Final hook" }), richText(p.final_hook)),
+          el("div", { class: "sub" }, el("h4", { text: "Script" }), ...(p.chapters || []).map((c) => el("div", {}, el("h5", { class: "mono", text: `${c.timestamp || ""}  ${c.title || ""}` }), richText(c.text)))),
+          el("div", { class: "sub" }, el("h4", { text: `Storyboard · ${(p.scenes || []).length} scenes` }), scenesTable(p.scenes)),
+          p.thumbnails?.length ? el("div", { class: "sub" }, el("h4", { text: "Thumbnails" }), el("ol", { class: "hooks" }, p.thumbnails.map((t) => el("li", { text: t })))) : null
+        ),
+        decisionPanel(cid, "pilot"))));
+    const was = document.getElementById("pilot-pack");
+    if (was?.open) det.open = true;
+    host.replaceChildren(det);
+  }
+
+  function renderFacts() {
+    const host = document.getElementById("facts");
+    const f = (DATA.facts || []).filter((x) => x.verdict !== "internal");
+    if (!f.length) { host.replaceChildren(el("div", { class: "empty", text: "Fact checks are still running." })); return; }
+    const order = { wrong: 0, partly: 1, unverified: 2, confirmed: 3 };
+    f.sort((a, b) => (order[a.verdict] ?? 9) - (order[b.verdict] ?? 9));
+    host.replaceChildren(...f.map((x) => el("div", { class: "fact" },
+      el("div", { class: `v ${x.verdict}`, text: x.verdict }),
+      el("div", {}, el("div", { text: x.public_safe_statement || x.claim }),
+        el("div", { class: "src" }, ...(x.sources || []).slice(0, 2).flatMap((s, i) => [i ? " · " : "", el("a", { href: s.url, target: "_blank", rel: "noopener" }, s.publisher || s.title || "source")]))))));
+  }
+
+  function render() {
+    renderTally();
+    renderPilot();
+    const host = document.getElementById("topics");
+    const rows = DATA.drafts.map(topicRow).filter(Boolean);
+    host.replaceChildren(...(rows.length ? rows : [el("div", { class: "empty", text: "Nothing matches this filter yet." })]));
+    document.getElementById("topic-count").textContent = `${DATA.drafts.length} topics`;
+  }
+
+  document.getElementById("wave-date").textContent = DATA.date;
+  document.getElementById("notices").replaceChildren(...(DATA.notices || []).map((n) =>
+    el("div", { class: `notice ${n.kind || ""}` }, el("span", { class: "tag", text: n.tag }), el("div", { text: n.text }))));
+  document.querySelectorAll(".chip").forEach((c) => c.addEventListener("click", () => {
+    filter = c.dataset.f;
+    document.querySelectorAll(".chip").forEach((x) => x.setAttribute("aria-pressed", String(x === c)));
+    render();
+  }));
+  renderFacts();
+  render();
+
+  (async () => {
+    db = await window.claude?.use?.("db");
+    if (!db) return;
+    db.collection("decisions").onSnapshot((snap) => {
+      for (const doc of snap.docs) decisions[doc.id] = doc.data();
+      // Don't wipe a note the viewer is typing; the next render picks the update up.
+      if (document.activeElement?.tagName !== "TEXTAREA") render();
+    }, () => {});
+    render();
+  })();
+})();
+</script>
