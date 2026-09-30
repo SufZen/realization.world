@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Remotion reels project with its own dependencies.
+    "tools/content/reels/**",
   ]),
 ]);
 

@@ -45,3 +45,8 @@ next-env.d.ts
 
 # content engine: harvested insights and ledgers hold private meeting context
 /content/private/
+
+# content engine reels: dependencies, generated music, and the per-reel storyboards (approved copy stays private)
+/tools/content/reels/node_modules/
+/tools/content/reels/public/music/
+/tools/content/reels/src/reels/
