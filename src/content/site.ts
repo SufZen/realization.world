@@ -752,6 +752,68 @@ export const insights: Insight[] = [
       },
     ],
   },
+  {
+    slug: "five-hours-to-build-a-month-to-trust",
+    category: "AI in practice",
+    title: "Five hours to build. | A month to trust.",
+    excerpt:
+      "A tender agent is quick to build. | Earning the office's trust takes longer.",
+    readTime: "2 min read",
+    published: "Field note 12 · Oct 2026",
+    date: "2026-10-02",
+    icon: Cpu,
+    sections: [
+      {
+        heading: "Why tenders first",
+        paragraphs: [
+          "Where should AI start in an architecture office? When we worked through that question with a practice, tender preparation came out on top.",
+          "Public tenders are long and dense, yet they repeat the same structure every time: how price and quality are weighted, which site visits are mandatory, when the window for questions closes. Missing one of those details can cost the bid.",
+          "Long text, a fixed structure and expensive mistakes are where a language model earns its place. On reading speed alone, no one in the office can compete with it.",
+        ],
+      },
+      {
+        heading: "What the build involves",
+        paragraphs: [
+          "The technical part is small. The PDFs are converted to text automatically, and the agent learns from the firm's past tenders and from the summary sheets the team already produced, in the format the team already uses.",
+          "It is also allowed to ask. When a clause is ambiguous, it questions the reviewer rather than guessing.",
+          "Our estimate for a working first version is around five hours. That is the easy part.",
+        ],
+      },
+      {
+        heading: "The trust phase",
+        paragraphs: [
+          "What does a demo leave out? The testing that comes after the build.",
+          "The agent is tested on tenders it has never seen, and its output is compared with what an experienced person extracted from the same documents. Every miss becomes a correction.",
+          "We set a threshold of above nine in ten right in testing before anyone relies on it, and we expect this phase to take weeks, under a month.",
+          "If it holds, our estimate is that preparation drops to around a quarter of today's time. Until it is measured in the office, that stays an estimate.",
+        ],
+      },
+      {
+        heading: "Nothing is 100%",
+        paragraphs: [
+          "No agent will be right every time. When we said so to a practice's partners, one answered: that is true for us too.",
+          "The fair comparison, then, is not a perfect machine. It is a person reading a long document against a deadline.",
+          "So the reviewer's job changes rather than disappears: one experienced person checks and corrects the output, in a fraction of the time it took to produce it by hand.",
+        ],
+      },
+      {
+        heading: "What stays human",
+        paragraphs: [
+          "The go/no-go call stays with the person who has made it for years. The agent puts the facts in front of them faster, and the judgement is still theirs.",
+          "So is the responsibility. A missed clause is still the office's missed clause, which is why the reviewer is not optional.",
+        ],
+      },
+      {
+        heading: "Build, don't buy",
+        paragraphs: [
+          "For this job we would not buy a product. It is too easy to build today, and too specific to each firm's documents and formats.",
+          "Once it works, the same pattern extends to other long rulebooks, such as the requirements of a design-build project, as an assistant the team can question.",
+          "To cut it short: five hours of building + under a month of testing + one experienced reviewer = an agent the office can rely on.",
+          "One workflow, measured honestly, before the next.",
+        ],
+      },
+    ],
+  },
 ];
 
 export const thesisDomains = [
