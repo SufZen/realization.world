@@ -35,8 +35,8 @@ The principle behind every rule: **people decide in a second whether to stay, an
 Key content stays between y 240 and 1500 and x 80 and 960, clear of the platforms' buttons and caption. No label may sit on a line, a hatch or another label; use a legend instead. Text on marigold is black; marigold text only on black.
 
 ### Sound
-- **Music sits under reading.** Calm and warm: piano, pads, no drums, claps, hi-hats or risers, nothing with a beat that pushes the viewer. 70–100 BPM.
-- **Only approved tracks.** The palette is `tools/content/reels/music.json`; a track is publishable only after Asaf has listened and set `approved: true`. A track Asaf supplies goes in the palette with its licence. Never trending or copyrighted music in a file we render; if a platform's own library track is wanted, it is added in the app at posting time.
+- **Music follows the sound brief** (`sound.md`): smooth, cool, light and sophisticated; real piano and vibraphone with jazz harmony, a light swung groove at 90 BPM; never heavy, never busy, no claps, drops, risers or lyrics.
+- **Only approved tracks.** The palette is `tools/content/reels/music.json` (played by `music.py`); a track is publishable only after Asaf has listened and set `approved: true`. A track Asaf supplies goes in the palette with its licence. Never trending or copyrighted music in a file we render; if a platform's own library track is wanted, it is added in the app at posting time.
 - **Effects:** at most one per scene, quiet (volume ≤ 0.25), only `tap`, `paper` or `chime`, and only on the moment the scene turns on.
 - **Loudness:** −16 LUFS integrated, true peak ≤ −1.5 dBTP (set by `render.mjs`, checked by `qa.mjs`).
 

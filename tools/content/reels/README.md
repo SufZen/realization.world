@@ -15,6 +15,7 @@ too long, too dense or too fast, it does not render: cut words or scenes, never 
 cd tools/content/reels
 npm install
 pip install numpy scipy
+./fetch_samples.sh
 ```
 
 ## Making a reel
@@ -35,6 +36,11 @@ pip install numpy scipy
 
 ## Music
 
-`music.json` is the palette. Synthesized entries (`audio.py bed --style warm|reflective|open --key --seed`) are calm
-and warm, with no drums, regenerated per reel at its exact length. A track Asaf supplies is a `file` entry with its
-licence. Only `approved: true` entries are publishable, and approving one is Asaf's call by ear.
+The sound brief is `docs/content-engine/sound.md`. `music.json` is the palette; `music.py` plays it with real recorded
+instruments (Versilian Community Sample Library, CC0; `./fetch_samples.sh` downloads the ~450 MB used into
+`samples/vcsl`, git-ignored) and regenerates each bed at the reel's exact length. Only `approved: true` entries are
+publishable, and approving one is Asaf's call by ear. `audio.py` makes the three quiet effects.
+
+```bash
+python3 music.py out.wav --seconds 30 --style lounge --key F --seed 2   # lounge | airy | night
+```

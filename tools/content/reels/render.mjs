@@ -6,7 +6,7 @@
 //
 // For each reel (src/reels/<id>.spec.mjs + src/reels/<id>.jsx, registered in src/reels/Root.jsx):
 //   1. audits the spec against the reading-time rules (src/pace.mjs); any error stops here
-//   2. builds the music bed from the palette entry the spec names (music.json), at the reel's exact length
+//   2. builds the music bed from the palette entry the spec names (music.json, played by music.py), at the reel's exact length
 //   3. renders with Remotion, then sets loudness to -16 LUFS with a -1.5 dBTP ceiling
 //   4. measures the result (qa.mjs) and writes <out-dir>/<id>/: reel-1080x1920.mp4, cover.jpg, sheet.png and qa.json
 // qa.json says `publishable: true` only when the pacing audit, the video QA and the music approval all pass.
@@ -56,7 +56,8 @@ for (const id of ids) {
   if (track.file) {
     execFileSync(FFMPEG, ["-y", "-loglevel", "error", "-i", track.file, "-t", String(seconds), "-af", `afade=t=out:st=${Math.max(0, seconds - 2)}:d=2`, "-ar", "44100", "-ac", "2", bed]);
   } else {
-    execFileSync("python3", [join(here, "audio.py"), "bed", bed, "--seconds", seconds.toFixed(3), "--style", track.style, "--key", track.key, "--seed", String(track.seed)], { stdio: "ignore" });
+    if (!existsSync(join(here, "samples/vcsl"))) execFileSync(join(here, "fetch_samples.sh"), { stdio: "inherit" });
+    execFileSync("python3", [join(here, "music.py"), bed, "--seconds", seconds.toFixed(3), "--style", track.style, "--key", track.key, "--seed", String(track.seed)], { stdio: "ignore" });
   }
 
   const dir = join(outDir, id);

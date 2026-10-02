@@ -13,6 +13,7 @@ It turns real work (meetings, documents, decisions) into public content for the 
 | `docs/content-engine/voice.md` | Voice, style, hooks and red lines | yes |
 | `docs/content-engine/visual-language.md` | The three visual styles (Term sheet by default, Site sheet, Swiss grid) and when to use each; colour, type, diagram grammar, formats | yes |
 | `docs/content-engine/quality.md` | Readability and UX guardrails for every format (reel pacing, music, type sizes, alt text, captions, platform specs) and the pre-publish checklist | yes |
+| `docs/content-engine/sound.md` | The sound of the brand: what the music must say, the palette and when to use each entry, approval, platform music | yes |
 | `docs/content-engine/playbooks.md` | Script, storyboard, production-pack and channel-adaptation prompts | yes |
 | `docs/content-engine/decisions.md` | Asaf's gate decisions; overrides older sources | yes |
 | `docs/content-engine/RUNBOOK.md` | Step-by-step for the scheduled runs | yes |
