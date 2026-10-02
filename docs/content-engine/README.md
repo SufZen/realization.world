@@ -12,11 +12,13 @@ It turns real work (meetings, documents, decisions) into public content for the 
 | `docs/strategy/realization-content-automation-strategy.html` | The source strategy (v1.0) | yes |
 | `docs/content-engine/voice.md` | Voice, style, hooks and red lines | yes |
 | `docs/content-engine/visual-language.md` | The three visual styles (Term sheet by default, Site sheet, Swiss grid) and when to use each; colour, type, diagram grammar, formats | yes |
+| `docs/content-engine/quality.md` | Readability and UX guardrails for every format (reel pacing, music, type sizes, alt text, captions, platform specs) and the pre-publish checklist | yes |
 | `docs/content-engine/playbooks.md` | Script, storyboard, production-pack and channel-adaptation prompts | yes |
 | `docs/content-engine/decisions.md` | Asaf's gate decisions; overrides older sources | yes |
 | `docs/content-engine/RUNBOOK.md` | Step-by-step for the scheduled runs | yes |
 | `tools/content/rank.mjs` | Merge + dedupe + score + editorial brief (Agents D, E) | yes |
 | `tools/content/visuals/` | Carousel renderer in the three styles (carousel with diagram, quote card, reel cover, web diagram SVG) and carousel PDF; see `visual-language.md` | yes |
+| `tools/content/reels/` | Reels: motion kit, reading-time pacing (`src/pace.mjs`), calm music palette (`music.json`, `audio.py`), render pipeline with QA gate (`render.mjs`, `qa.mjs`) | yes (reel specs stay private) |
 | `tools/content/desk/` | Content desk template and builder | yes |
 | `content/private/` | Scratch space for a run (private context) | **no** (ignored) |
 | Content desk (private claude.ai page) | Review and approvals; its database holds the ledger, drafts, decisions, facts and engine state | claude.ai only |

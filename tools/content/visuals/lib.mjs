@@ -1,4 +1,4 @@
-// Shared by render.mjs (images) and video.mjs (vertical videos): fonts, page wrapper, and the slide list for a draft.
+// Used by render.mjs (images): fonts, page wrapper, and the slide list for a draft. Videos are made in tools/content/reels.
 import { readFileSync, existsSync } from "node:fs";
 import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";

@@ -1,8 +1,13 @@
 # Reels
 
-Motion-design reels for Instagram Reels, TikTok and YouTube Shorts, built with [Remotion](https://www.remotion.dev) in the
-Realization visual language (`docs/content-engine/visual-language.md`). 1080 × 1920, 30 fps, 20–30 s, cut on a
-120 BPM grid (one beat = 15 frames).
+Motion-design reels for Instagram Reels, TikTok, YouTube Shorts and Facebook Reels, in the Realization visual language
+(`docs/content-engine/visual-language.md`) and under the readability rules of `docs/content-engine/quality.md` §1.
+1080 × 1920, 30 fps, at most 58 s.
+
+**Nothing here is timed by hand.** A reel is a spec: every word that appears on screen, in order, with the second it
+starts to arrive. `src/pace.mjs` turns that into scene lengths at a relaxed reading speed (12 characters a second, plus
+time to find the first line, to look at the drawing and to breathe), rounded to whole beats of the music. If a reel is
+too long, too dense or too fast, it does not render: cut words or scenes, never speed.
 
 ## Setup
 
@@ -10,38 +15,26 @@ Realization visual language (`docs/content-engine/visual-language.md`). 1080 × 
 cd tools/content/reels
 npm install
 pip install numpy scipy
-python3 audio.py sfx public/sfx                       # effects (already committed)
-python3 audio.py bed public/music/<id>.wav --seconds 28 --key A --mode minor --seed 1 --tail-bars 2
 ```
-
-The music beds and effects are synthesized from scratch, so there is nothing to license. Match `--seconds` to the reel
-and `--tail-bars` to the closing card, so the bed drops to a held chord under the close.
 
 ## Making a reel
 
-1. **Storyboard first.** Shot by shot: picture, motion, sound, time in beats. Keep it private, next to the drafts.
-2. **Build it** in `src/reels/<id>.jsx` (git-ignored: it carries copy before it is published) from the primitives in
-   `src/kit.jsx`, and register it in `src/reels/Root.jsx`, which `src/index.jsx` loads.
-3. **Render**: `FFMPEG=/path/to/ffmpeg node render.mjs <out-dir> <id>` writes `<out-dir>/<id>/reel-1080x1920.mp4`,
-   loudness-normalised to −14 LUFS.
-4. **Look at it**: a one-frame-per-second contact sheet (`ffmpeg -i reel.mp4 -vf "fps=1,scale=270:480,tile=7x4" -frames:v 1 sheet.png`)
-   shows collisions, cut-offs and empty shots at a glance.
+1. **Spec** `src/reels/<id>.spec.mjs` (git-ignored until published): `{ id, music, scenes: [{ name, text, cues, carry?, look?, sfx? }] }`.
+   `text` lists every word on screen, labels included; `carry` lists words still visible from the scene before;
+   `look` adds seconds for a drawing; `sfx` is at most one quiet effect (`tap`, `paper`, `chime`).
+2. **Scenes** `src/reels/<id>.jsx`: one component per scene name, rendering `s.text[i]` at frame `s.at[i]`, built from
+   `src/kit.jsx` (`Line`, `Fade`, `Words`, `Slab`, `Stamp`, `Strike`, `draw`, `Sweep`, `Close`, `Reel`). Register the
+   reel in `src/reels/Root.jsx`.
+3. **Check** `node render.mjs --check <id>`: the pacing table, errors and warnings, without rendering.
+4. **Render** `FFMPEG=/path/to/ffmpeg node render.mjs <out-dir> <id>`: builds the music bed at the reel's exact length,
+   renders, sets loudness to −16 LUFS, then measures the MP4 (`qa.mjs`: format, length, no picture change closer than
+   1 s, loudness). Writes `reel-1080x1920.mp4`, `cover.jpg`, `sheet.png` (one frame a second) and `qa.json`.
+5. **Look** at `sheet.png`: nothing cut, overlapping or sitting on a line.
+6. **Approve**: the MP4 goes to the desk; it is scheduled only when `qa.json` says `publishable` and Asaf has approved
+   the video itself.
 
-## Craft rules
+## Music
 
-- The first frame already carries the hook: no fade-in from blank.
-- One idea per shot, at most seven words on screen at once, one visual metaphor per beat.
-- Cuts land on beats; hard cuts by default, at most two wipes per reel.
-- Nothing sits still: every shot drifts, and every element enters with a spring, never a plain fade.
-- Every sound effect is tied to something on screen: tick for typing and counters, thud for slams, whoosh for wipes,
-  snap for flips, stamp for stamps.
-- Key content stays between y 240 and 1500 and x 80 and 960, clear of the platform buttons and captions.
-- Only approved copy and approved numbers. Charts without cleared numbers are relative and tagged ILLUSTRATIVE.
-- Styles: Term sheet for money and decisions; Site sheet (one drawing sheet revised shot by shot) for anything drawn to
-  scale; Swiss grid (six visible columns) for AI and systems.
-
-## Kit
-
-`Shot` (ground plus drift), `At` (placement), `Slam` / `Words` (type that lands), `Rise` (masked rise), `Slab` (colour
-slab that wipes in), `Typed` / `typedTicks`, `draw` (SVG plot-on), `HatchDef` / `Sweep` (hatch fills), `Stamp`, `Strike`,
-`Count`, `Mark` (on a marigold plate on dark grounds), `WipeOut`, `Sfx`, `Bed`, `Close` (the shared closing card).
+`music.json` is the palette. Synthesized entries (`audio.py bed --style warm|reflective|open --key --seed`) are calm
+and warm, with no drums, regenerated per reel at its exact length. A track Asaf supplies is a `file` entry with its
+licence. Only `approved: true` entries are publishable, and approving one is Asaf's call by ear.

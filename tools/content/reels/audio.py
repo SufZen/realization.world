@@ -1,217 +1,191 @@
 #!/usr/bin/env python3
-"""Content engine reels: original music beds and sound effects, synthesized from scratch.
+"""Content engine reels: original music beds and quiet sound effects, synthesized from scratch (nothing to license).
 
-Everything is generated here, so there is nothing to license. The bed is minimal and editorial: a soft kick, closed hats,
-a sub bass, a plucked mallet arpeggio and a quiet pad. It locks to the reels' 120 BPM edit grid (one beat = 15 frames
-at 30 fps), and its last bar drops to one held chord under the closing card.
+The music sits under reading, so it is calm and warm: a soft electric piano playing slow chords with a few sparse
+notes, a pad, a quiet sub bass and a small room. No drums, no claps, no risers, nothing that competes with the words.
+90 BPM, so one beat is 20 frames at 30 fps and scene cuts (rounded to whole beats in src/pace.mjs) land on the music.
+Each bed opens with one bar of piano alone and ends on the tonic chord, held under the closing card.
 
+  python3 tools/content/reels/audio.py bed <out.wav> --seconds 48 --style warm --key D --seed 3
   python3 tools/content/reels/audio.py sfx <out-dir>
-  python3 tools/content/reels/audio.py bed <out.wav> --seconds 28 --key A --mode minor --seed 1 --tail-bars 2
 
-Needs numpy and scipy.
+Styles: warm (major, maj9 colours), reflective (minor, m9 colours), open (sus chords, lighter). Palette entries in
+music.json name a style, key and seed, so every reel's bed can be regenerated exactly. Needs numpy and scipy.
 """
 import argparse
 import os
 import wave
 
 import numpy as np
-from scipy.signal import butter, sosfilt
+from scipy.signal import butter, fftconvolve, sosfilt
 
 SR = 44100
-BPM = 120
+BPM = 90
 BEAT = 60 / BPM
+BAR = 4 * BEAT
 NOTES = {"C": 0, "C#": 1, "D": 2, "D#": 3, "E": 4, "F": 5, "F#": 6, "G": 7, "G#": 8, "A": 9, "A#": 10, "B": 11}
+QUALITY = {"maj9": [0, 4, 7, 11, 14], "m9": [0, 3, 7, 10, 14], "sus": [0, 5, 7, 10, 14], "add9": [0, 4, 7, 14], "m7": [0, 3, 7, 10]}
+STYLES = {
+    # (semitones from the key root, chord quality) per bar
+    "warm": [(0, "maj9"), (9, "m9"), (5, "maj9"), (7, "sus")],  # I - vi - IV - V(sus)
+    "reflective": [(0, "m9"), (8, "maj9"), (3, "maj9"), (10, "sus")],  # i - VI - III - VII(sus)
+    "open": [(0, "add9"), (5, "maj9"), (9, "m7"), (7, "sus")],  # I - IV - vi - V(sus)
+}
+TONIC = {"warm": (0, "maj9"), "reflective": (0, "m9"), "open": (0, "add9")}
 
 
-def hz(midi):
-    return 440.0 * 2 ** ((midi - 69) / 12)
+def hz(m):
+    return 440.0 * 2 ** ((m - 69) / 12)
 
 
 def t(sec):
     return np.arange(int(sec * SR)) / SR
 
 
-def env(n, a=0.002, d=0.2, curve=4.0):
-    """Attack then exponential-ish decay over n samples."""
-    x = np.arange(n) / SR
-    att = np.clip(x / max(a, 1e-4), 0, 1)
-    dec = np.exp(-curve * np.clip(x - a, 0, None) / max(d, 1e-4))
-    return att * dec
-
-
 def filt(x, kind, freq, order=2):
-    sos = butter(order, freq, btype=kind, fs=SR, output="sos")
-    return sosfilt(sos, x)
+    return sosfilt(butter(order, freq, btype=kind, fs=SR, output="sos"), x, axis=0)
 
 
-def place(buf, clip, at):
+def place(buf, clip, at, pan=0.0):
+    """Add a mono clip into a stereo buffer at `at` seconds, with constant-power pan (-1 left … 1 right)."""
     i = int(at * SR)
     if i >= len(buf):
         return
     j = min(len(buf), i + len(clip))
-    buf[i:j] += clip[: j - i]
+    a = (pan + 1) * np.pi / 4
+    buf[i:j, 0] += clip[: j - i] * np.cos(a)
+    buf[i:j, 1] += clip[: j - i] * np.sin(a)
 
 
 # ---------- instruments ----------
 
-def kick():
-    x = t(0.45)
-    f = 48 + 90 * np.exp(-x * 38)  # pitch drop
-    ph = 2 * np.pi * np.cumsum(f) / SR
-    body = np.sin(ph) * env(len(x), 0.001, 0.32, 3.2)
-    click = filt(np.random.default_rng(3).standard_normal(len(x)), "highpass", 2500) * env(len(x), 0.0005, 0.006)
-    return np.tanh(1.6 * (body + 0.25 * click)) * 0.9
+def epiano(m, dur, vel=0.6):
+    """Soft FM electric piano: a round fundamental, a little bell on the attack, a gentle release."""
+    x = t(dur + 1.2)
+    f = hz(m)
+    idx = (0.6 + 2.6 * vel * np.exp(-x * 4.0))
+    s = np.sin(2 * np.pi * f * x + idx * np.sin(2 * np.pi * f * x)) + 0.18 * np.sin(2 * np.pi * 2 * f * x) * np.exp(-x * 1.5)
+    tine = 0.1 * vel * np.sin(2 * np.pi * f * 7.0 * x) * np.exp(-x * 22)
+    decay = np.exp(-x * (0.9 + max(0, m - 60) * 0.035))
+    release = np.clip((dur + 1.2 - x) / 1.2, 0, 1) ** 2
+    env = np.minimum(1, x / 0.004) * decay * np.where(x < dur, 1, release)
+    return (s + tine) * env * vel * 0.32
 
 
-def hat(open_=False, seed=0):
-    n = int((0.18 if open_ else 0.05) * SR)
-    noise = np.random.default_rng(seed).standard_normal(n)
-    x = filt(noise, "highpass", 7000, 4)
-    return x * env(n, 0.0008, 0.09 if open_ else 0.018, 3) * 0.22
-
-
-def clap(seed=0):
-    n = int(0.22 * SR)
-    noise = filt(np.random.default_rng(seed).standard_normal(n), "bandpass", [900, 2600], 2)
-    e = np.zeros(n)
-    for k, off in enumerate([0, 0.011, 0.022]):
-        i = int(off * SR)
-        e[i:] += env(n - i, 0.0005, 0.012 if k < 2 else 0.12, 3)
-    return noise * e * 0.35
-
-
-def bass(midi, sec):
-    x = t(sec)
-    f = hz(midi)
-    # Harmonics and drive so the line still reads on a phone speaker that cannot play the fundamental.
-    s = np.sin(2 * np.pi * f * x) + 0.45 * np.sin(2 * np.pi * 2 * f * x) + 0.25 * np.sin(2 * np.pi * 3 * f * x)
-    e = np.minimum(1, x / 0.008) * np.exp(-x * 2.2)
-    return np.tanh(2.2 * s) * e * 0.3
-
-
-def pluck(midi, sec=0.6, bright=1.0):
-    """Two-operator FM mallet: warm, short, a little woody."""
-    x = t(sec)
-    f = hz(midi)
-    idx = 2.2 * bright * np.exp(-x * 14)
-    s = np.sin(2 * np.pi * f * x + idx * np.sin(2 * np.pi * f * 3.5 * x))
-    return s * env(len(x), 0.001, 0.28, 3.5) * 0.3
-
-
-def pad(midis, sec):
-    x = t(sec)
+def pad(ms, dur):
+    x = t(dur)
     s = np.zeros_like(x)
-    for m in midis:
-        for det in (-0.07, 0.0, 0.07):
-            f = hz(m + det)
-            s += 2 * (x * f % 1) - 1  # saw
-    s = filt(s / (3 * len(midis)), "lowpass", 2400, 2)
-    e = np.minimum(1, x / 0.35) * np.minimum(1, (sec - x) / 0.4)
-    return s * e * 0.26
+    for m in ms:
+        for det, ph in ((-0.06, 0.0), (0.06, 1.3)):
+            s += np.sin(2 * np.pi * hz(m + det) * x + ph) + 0.18 * np.sin(2 * np.pi * 2 * hz(m + det) * x)
+    s /= 2 * len(ms)
+    env = np.minimum(1, x / 1.4) * np.minimum(1, (dur - x) / 1.2)
+    return filt(s, "lowpass", 3200) * env * 0.11
+
+
+def sub(m, dur):
+    x = t(dur)
+    s = np.sin(2 * np.pi * hz(m) * x) + 0.3 * np.sin(2 * np.pi * 2 * hz(m) * x)
+    env = np.minimum(1, x / 0.08) * np.minimum(1, (dur - x) / 0.4) * (0.75 + 0.25 * np.exp(-x * 1.5))
+    return s * env * 0.13
+
+
+def room(stereo, seconds=2.2, wet=0.28, seed=11):
+    """A small, dark room: two decorrelated noise tails for width."""
+    rng = np.random.default_rng(seed)
+    n = int(seconds * SR)
+    decay = np.exp(-np.arange(n) / SR * (6.9 / seconds))
+    out = np.zeros_like(stereo)
+    for ch in (0, 1):
+        ir = filt(rng.standard_normal(n), "lowpass", 6500) * decay
+        ir /= np.sqrt(np.sum(ir ** 2))
+        out[:, ch] = fftconvolve(stereo[:, ch], ir)[: len(stereo)]
+    return (1 - wet) * stereo + wet * out
 
 
 # ---------- the bed ----------
 
-PROGRESSIONS = {
-    "minor": [[0, 3, 7], [-4, 0, 3], [-9, -5, -2], [-2, 2, 5]],  # i - VI - III - VII
-    "major": [[0, 4, 7], [-3, 0, 4], [-7, -3, 0], [-5, -1, 2]],  # I - vi - IV - V
-}
+def voicing(root, quality, prev=None, lo=55, hi=77):
+    """Chord tones without the root, placed in the piano's middle register, moving as little as possible."""
+    tones = [q for q in QUALITY[quality] if q % 12 != 0] or QUALITY[quality]
+    pcs = [(root + q) % 12 for q in tones]
+    if prev is None:
+        notes, last = [], lo - 1
+        for pc in pcs:
+            m = last + 1 + ((pc - (last + 1)) % 12)
+            notes.append(m)
+            last = m
+        return sorted(notes)
+    out = []
+    for pc in pcs:
+        cands = [m for m in range(lo, hi + 1) if m % 12 == pc]
+        out.append(min(cands, key=lambda m: min(abs(m - p) for p in prev)))
+    return sorted(set(out))
 
 
-def bed(seconds, key="A", mode="minor", seed=1, tail_bars=1):
+def bed(seconds, style="warm", key="D", seed=3):
     rng = np.random.default_rng(seed)
-    root = 45 + NOTES[key]  # bass octave
-    prog = PROGRESSIONS[mode]
-    bar = 4 * BEAT
-    bars = int(np.ceil(seconds / bar))
-    n = int(seconds * SR) + SR
-    drums, low, mid = np.zeros(n), np.zeros(n), np.zeros(n)
-    k, arp_shape = kick(), rng.permutation([0, 1, 2, 1, 2, 0, 2, 1])
+    k = NOTES[key]
+    prog = STYLES[style]
+    bars = int(np.ceil(seconds / BAR)) + 1
+    n = int((seconds + 3) * SR)
+    keys, warm, low = np.zeros((n, 2)), np.zeros((n, 2)), np.zeros((n, 2))
+    prev = None
+    end_bar = int(seconds // BAR)
     for b in range(bars):
-        start = b * bar
-        chord = prog[b % len(prog)]
-        last = b >= bars - tail_bars
-        if last:
-            # One held chord under the close, then a single low hit on the downbeat.
-            place(mid, pad([root + 12 + c for c in chord], bar + 0.8) * 1.6, start)
-            place(low, bass(root + chord[0], bar), start)
-            place(drums, k, start)
-            continue
-        for q in range(4):
-            place(drums, k * (1.0 if q in (0, 2) else 0.0), start + q * BEAT)
-            if q in (1, 3) and b > 0:
-                place(drums, clap(seed + b * 4 + q), start + q * BEAT)
-        for e8 in range(8):
-            place(drums, hat(open_=(e8 == 7 and b % 2 == 1), seed=b * 8 + e8) * (1.0 if e8 % 2 else 0.6), start + e8 * BEAT / 2)
-        # Sub bass on the root, pushing on the and-of-two.
-        for at, dur in ((0, 1.5 * BEAT), (1.5 * BEAT, 0.5 * BEAT), (2 * BEAT, 2 * BEAT)):
-            place(low, bass(root + chord[0], dur), start + at)
-        # Mallet arpeggio from bar 2: eighth notes over the chord, an octave up.
-        if b >= 1:
-            for e8 in range(8):
-                if rng.random() < 0.18:
-                    continue
-                note = root + 24 + chord[arp_shape[e8] % 3] + (12 if e8 == 6 else 0)
-                place(mid, pluck(note, 0.5, 0.8 + 0.4 * rng.random()), start + e8 * BEAT / 2)
-        place(mid, pad([root + 12 + c for c in chord], bar) * 0.55, start)
-    # Light sidechain: duck the mids under each kick.
-    duck = np.ones(n)
-    for b in range(bars):
-        for q in (0, 2):
-            i = int((b * bar + q * BEAT) * SR)
-            m = int(0.18 * SR)
-            if i + m < n:
-                duck[i : i + m] = np.minimum(duck[i : i + m], 0.45 + 0.55 * np.linspace(0, 1, m) ** 0.6)
-    mix = 0.75 * drums + 0.6 * low + 1.5 * mid * duck
-    mix = filt(mix, "highpass", 28, 2)
+        start = b * BAR
+        if start > seconds:
+            break
+        final = b >= end_bar or start + BAR > seconds - 0.2
+        deg, q = TONIC[style] if final else prog[b % len(prog)]
+        root = (k + deg) % 12
+        v = voicing(root, q, prev)
+        prev = v
+        hold = max(0.5, seconds - start) if final else 2 * BEAT
+        # A rolled chord on the downbeat.
+        for i, m in enumerate(v):
+            place(keys, epiano(m, hold, 0.42 + 0.06 * rng.random()), start + 0.028 * i, pan=-0.25 + 0.5 * i / max(1, len(v) - 1))
+        if not final:
+            # Two or three sparse notes from the chord over the rest of the bar, softer than the chord.
+            top = sorted(v)[-2:] + [v[-1] + 2 if (v[-1] + 2) % 12 in [(root + x) % 12 for x in QUALITY[q]] else v[-1]]
+            for at in sorted(rng.choice([1.5, 2.0, 2.5, 3.0, 3.5], size=int(rng.integers(2, 4)), replace=False)):
+                place(keys, epiano(int(rng.choice(top)) + 12, 0.9, 0.26 + 0.08 * rng.random()), start + at * BEAT, pan=0.2 * rng.standard_normal())
+        if b >= 1 or final:
+            place(warm, pad(v, min(BAR + 0.6, hold + 0.6)), start)
+            place(low, sub(36 + (root - 0) % 12, min(BAR, hold)), start)
+    mix = keys + 0.9 * warm + low
+    # A slow, shallow tremolo on the piano gives it breath without movement in the rhythm.
+    trem = 1 + 0.06 * np.sin(2 * np.pi * 4.5 * np.arange(n) / SR)
+    mix[:, 0] *= trem
+    mix[:, 1] *= trem
+    mix = room(mix)
+    # Voice it for phone speakers: nothing below 70 Hz, less low-mid mud, a little presence.
+    mix = filt(mix, "highpass", 70)
+    mix = mix - 0.35 * filt(mix, "bandpass", [120, 320]) + 0.45 * filt(mix, "bandpass", [1800, 6000])
+    mix = filt(mix, "lowpass", 13000)
     mix = mix[: int(seconds * SR)]
-    fade = int(0.35 * SR)
-    mix[-fade:] *= np.linspace(1, 0, fade)
-    return normalise(mix, -1.5)
+    fade_in, fade_out = int(0.25 * SR), int(1.6 * SR)
+    mix[:fade_in] *= np.linspace(0, 1, fade_in)[:, None]
+    mix[-fade_out:] *= np.linspace(1, 0, fade_out)[:, None] ** 1.5
+    return normalise(mix, -3.0)
 
 
-# ---------- effects ----------
+# ---------- effects: three quiet ones, for one moment per scene at most ----------
 
 def sfx():
     rng = np.random.default_rng(7)
     out = {}
-    # tick: a short, dry wooden click for typing and counters
-    x = t(0.035)
-    out["tick"] = np.sin(2 * np.pi * 2400 * x) * env(len(x), 0.0003, 0.008, 3) * 0.5
-    # thud: a low hit for slams
-    x = t(0.35)
-    f = 70 + 60 * np.exp(-x * 30)
-    out["thud"] = np.tanh(2 * np.sin(2 * np.pi * np.cumsum(f) / SR) * env(len(x), 0.001, 0.2, 3)) * 0.8
-    # stamp: thud plus a paper slap
-    slap = filt(rng.standard_normal(len(x)), "bandpass", [600, 3500]) * env(len(x), 0.0005, 0.04, 3)
-    out["stamp"] = np.tanh(out["thud"] * 1.2 + slap * 0.6) * 0.85
-    # snap: a crisp transient for cuts and flips
-    x = t(0.08)
-    out["snap"] = filt(rng.standard_normal(len(x)), "highpass", 3000) * env(len(x), 0.0003, 0.012, 3) * 0.6
-    # whoosh: band-passed noise sweeping up then down
-    x = t(0.45)
-    noise = rng.standard_normal(len(x))
-    lo = filt(noise, "bandpass", [300, 1200])
-    hi = filt(noise, "bandpass", [1500, 5000])
-    shape = np.sin(np.pi * np.clip(x / 0.45, 0, 1)) ** 2
-    mixw = (lo * (1 - x / 0.45) + hi * (x / 0.45)) * shape
-    out["whoosh"] = mixw * 0.5
-    # whip: a faster, brighter whoosh for strike-throughs and cuts
-    x = t(0.2)
-    noise = filt(rng.standard_normal(len(x)), "highpass", 1800)
-    out["whip"] = noise * (np.sin(np.pi * np.clip(x / 0.2, 0, 1)) ** 3) * 0.55
-    # riser: a two-second filtered-noise lift
-    x = t(1.0)
-    noise = rng.standard_normal(len(x))
-    parts = [filt(noise[i : i + 4410], "bandpass", [200 + 5000 * (i / len(x)), 400 + 7000 * (i / len(x))]) for i in range(0, len(x), 4410)]
-    r = np.concatenate(parts)[: len(x)]
-    out["riser"] = r * (x / 1.0) ** 2 * 0.35
-    # scratch: a pen drawing a line
-    x = t(0.4)
-    noise = filt(rng.standard_normal(len(x)), "bandpass", [2500, 6000])
-    grain = 0.6 + 0.4 * np.sin(2 * np.pi * 38 * x + 3 * np.sin(2 * np.pi * 5 * x))
-    out["scratch"] = noise * grain * np.minimum(1, x / 0.03) * np.minimum(1, (0.4 - x) / 0.06) * 0.22
-    return {k: normalise(v, -3 if k not in ("tick", "scratch") else -8) for k, v in out.items()}
+    # tap: a soft felt tap, for a stamp or a counter landing
+    x = t(0.25)
+    out["tap"] = (np.sin(2 * np.pi * 520 * x) * np.exp(-x * 38) + 0.3 * filt(rng.standard_normal(len(x)), "lowpass", 1800) * np.exp(-x * 60)) * 0.6
+    # paper: a slow, soft page movement, for a flip or a drawing being cut
+    x = t(0.5)
+    out["paper"] = filt(rng.standard_normal(len(x)), "bandpass", [700, 3200]) * np.sin(np.pi * x / 0.5) ** 3 * 0.35
+    # chime: a quiet two-note bell, for the one reveal a reel turns on
+    x = t(1.6)
+    bell = sum(np.sin(2 * np.pi * hz(m) * x + 1.2 * np.exp(-x * 6) * np.sin(2 * np.pi * hz(m) * 3.5 * x)) * np.exp(-x * 2.2) for m in (79, 86))
+    out["chime"] = bell * np.minimum(1, x / 0.003) * 0.25
+    return {k: normalise(np.stack([v, v], axis=1), -9) for k, v in out.items()}
 
 
 # ---------- io ----------
@@ -222,27 +196,27 @@ def normalise(x, db):
 
 
 def write(path, x):
+    if x.ndim == 1:
+        x = np.stack([x, x], axis=1)
     x = np.clip(x, -1, 1)
-    stereo = np.stack([x, x], axis=1)
     with wave.open(path, "wb") as w:
         w.setnchannels(2)
         w.setsampwidth(2)
         w.setframerate(SR)
-        w.writeframes((stereo * 32767).astype("<i2").tobytes())
+        w.writeframes((x * 32767).astype("<i2").tobytes())
 
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
-    sub = p.add_subparsers(dest="cmd", required=True)
-    s = sub.add_parser("sfx")
+    sub_ = p.add_subparsers(dest="cmd", required=True)
+    s = sub_.add_parser("sfx")
     s.add_argument("out_dir")
-    b = sub.add_parser("bed")
+    b = sub_.add_parser("bed")
     b.add_argument("out")
-    b.add_argument("--seconds", type=float, default=26)
-    b.add_argument("--key", default="A")
-    b.add_argument("--mode", default="minor", choices=list(PROGRESSIONS))
-    b.add_argument("--seed", type=int, default=1)
-    b.add_argument("--tail-bars", type=int, default=1)
+    b.add_argument("--seconds", type=float, required=True)
+    b.add_argument("--style", default="warm", choices=list(STYLES))
+    b.add_argument("--key", default="D", choices=list(NOTES))
+    b.add_argument("--seed", type=int, default=3)
     a = p.parse_args()
     if a.cmd == "sfx":
         os.makedirs(a.out_dir, exist_ok=True)
@@ -250,5 +224,5 @@ if __name__ == "__main__":
             write(os.path.join(a.out_dir, f"{name}.wav"), clip)
             print(f"{name}.wav")
     else:
-        write(a.out, bed(a.seconds, a.key, a.mode, a.seed, a.tail_bars))
+        write(a.out, bed(a.seconds, a.style, a.key, a.seed))
         print(a.out)

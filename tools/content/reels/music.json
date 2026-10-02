@@ -1,0 +1,8 @@
+{
+  "about": "Music palette for reels. A reel names one entry (spec.music). Synthesized entries are regenerated to the reel's exact length by render.mjs (audio.py bed --style --key --seed); file entries point to a track Asaf supplied, with its licence. Only entries with approved: true can be published; approving a track is Asaf's call, by ear.",
+  "tracks": {
+    "warm-d": { "style": "warm", "key": "D", "seed": 3, "mood": "Warm and steady: soft electric piano, maj9 chords, no drums. Default for development, money and decisions.", "approved": false },
+    "reflective-a": { "style": "reflective", "key": "A", "seed": 5, "mood": "Thoughtful, a little serious: minor 9 chords. Stuck properties, families, risk.", "approved": false },
+    "open-f": { "style": "open", "key": "F", "seed": 7, "mood": "Light and open: sus and add9 chords. AI and systems topics.", "approved": false }
+  }
+}

@@ -1,12 +1,15 @@
 #!/usr/bin/env node
-// Content engine — check drafts against the voice guide and the Venation carousel spec before they reach the desk.
+// Content engine — check drafts against the voice guide, the visual language and the readability rules before they
+// reach the desk.
 //
 //   node tools/content/lint.mjs <drafts-dir> [--against <previous-drafts-dir>]
 //
 // Errors (exit code 1): never-use words, X posts over 280 characters, a carousel or diagram that breaks the
 // renderer's limits, and (with --against) numbers that did not exist in the previous version of a draft.
-// Warnings: LinkedIn length and rhythm, script length, too many question or sign-off closings in the wave.
-// See docs/content-engine/voice.md and docs/content-engine/visual-language.md.
+// Warnings: LinkedIn length and rhythm, script length, too many question or sign-off closings in the wave, and the
+// readability rules: the hook before LinkedIn's "see more" cut, wall-of-text paragraphs, hashtag counts, and the
+// first line of Instagram and TikTok captions.
+// See docs/content-engine/voice.md, visual-language.md and quality.md.
 
 import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
@@ -85,6 +88,19 @@ for (const f of readdirSync(dir).filter((x) => x.endsWith(".json")).sort()) {
   for (const x of ss) { run = words(x) <= 6 ? run + 1 : 0; maxRun = Math.max(maxRun, run); }
   if (maxRun > 3) warn(`LinkedIn has ${maxRun} short sentences in a row (max 3)`);
   if ((li.match(/!/g) ?? []).length > 1) warn("more than one \"!\" in LinkedIn");
+  // Readability (quality.md §4): the feed shows roughly the first 210 characters before "see more".
+  const paras = li.split(/\n\s*\n/).map((x) => x.trim()).filter(Boolean);
+  if (paras[0] && paras[0].length > 300) err(`LinkedIn opening paragraph is ${paras[0].length} chars; the hook must land before "see more" (~210)`);
+  else if (paras[0] && paras[0].length > 210) warn(`LinkedIn opening paragraph is ${paras[0].length} chars; keep the hook within ~210`);
+  paras.forEach((x, i) => x.length > 400 && warn(`LinkedIn paragraph ${i + 1} is ${x.length} chars; on a phone that is a wall of text (≤ 400)`));
+  if ((li.match(/#\w+/g) ?? []).length > 3) warn("more than 3 hashtags on LinkedIn");
+  const ig = d.short?.captions?.instagram ?? "";
+  const igFirst = ig.split("\n")[0].replace(/#\S+/g, "").trim();
+  if (igFirst.length > 125) warn(`Instagram caption first line is ${igFirst.length} chars; it truncates at ~125`);
+  if ((ig.match(/#\w+/g) ?? []).length > 5) warn("more than 5 hashtags in the Instagram caption");
+  if (/https?:\/\//.test(ig)) warn("link in the Instagram caption (not clickable there)");
+  const tt = d.short?.captions?.tiktok ?? "";
+  if (tt.replace(/#\S+/g, "").trim().length > 150) warn("TikTok caption over 150 chars before hashtags");
 
   if ((d.x?.post ?? "").length > 280) err(`X post is ${d.x.post.length} characters`);
   (d.x?.thread ?? []).forEach((t, i) => t.length > 280 && err(`X thread post ${i + 1} is ${t.length} characters`));
