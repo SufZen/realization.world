@@ -752,6 +752,64 @@ export const insights: Insight[] = [
       },
     ],
   },
+  {
+    slug: "price-the-entry-ticket-not-the-square-metre",
+    category: "Development",
+    title: "Price the entry ticket, | not the square metre",
+    excerpt:
+      "Buyers don't compare prices per metre. | They compare what the bank will lend.",
+    readTime: "2 min read",
+    published: "Field note 11 · Oct 2026",
+    date: "2026-10-02",
+    icon: Building2,
+    sections: [
+      {
+        heading: "Failed on paper",
+        paragraphs: [
+          "We were pricing an 11-unit infill project near Lisbon. The first model took comparable prices per square metre from nearby listings and multiplied them by each unit's area.",
+          "The totals came out too low, and on paper the project did not work. Before accepting that, we opened the live listings and read them one by one.",
+        ],
+      },
+      {
+        heading: "What the listings said",
+        paragraphs: [
+          "Small, older flats were asking a high price per metre. Larger flats were asking much less per metre.",
+          "Yet their total prices landed in nearly the same place. So what were buyers paying for? Not metres, but a way in.",
+        ],
+      },
+      {
+        heading: "The entry ticket",
+        paragraphs: [
+          "In a market with limited budgets, buyers do not compare prices per metre. They compare what the bank will approve.",
+          "A well-designed small unit can carry a much higher price per metre than a large one and still sell first, as long as its total fits the buyer.",
+          "That is why we split the plot into many small units rather than four or five large ones.",
+        ],
+      },
+      {
+        heading: "Design under the ceiling",
+        paragraphs: [
+          "In 2026, first-home buyers aged 35 or under pay no IMT (the property transfer tax) or stamp duty on a home up to €330,539, with partial relief up to €660,982.",
+          "Separately, a state guarantee lets banks lend buyers aged 18 to 35, within an income limit, up to 100% on a first home costing up to €450,000. It covers loans signed until 31 December 2026, and no extension had been confirmed when we wrote this.",
+          "The tax ceiling is the lower of the two lines, and the one that shapes a young buyer's cash needs. So it stops being a sales detail and becomes part of the design brief.",
+          "We keep every unit but one below it. The exception is aimed at a different buyer, and is ideally sold early.",
+        ],
+      },
+      {
+        heading: "The bank decides",
+        paragraphs: [
+          "None of this works unless the bank's valuation supports the price. Banks lend on the lower of price and valuation.",
+          "If the valuation falls short, the buyer does not get the loan, and demand disappears overnight. So appraisal risk belongs in the model from the first day, not after the first refused mortgage.",
+        ],
+      },
+      {
+        heading: "Where the metre belongs",
+        paragraphs: [
+          "Price per square metre still has a job. We use it internally, to check construction cost and margin.",
+          "Pricing is half market knowledge and half arithmetic. To cut it short: the market sets the price, and the arithmetic checks it.",
+        ],
+      },
+    ],
+  },
 ];
 
 export const thesisDomains = [
