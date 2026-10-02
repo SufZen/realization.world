@@ -51,3 +51,4 @@ next-env.d.ts
 /tools/content/reels/public/music/
 /tools/content/reels/src/reels/
 /tools/content/reels/samples/
+__pycache__/
