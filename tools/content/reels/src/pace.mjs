@@ -2,9 +2,10 @@
 // (which audits a reel spec before anything renders). A scene is never timed by hand: it lasts as long as a relaxed
 // viewer needs to read everything on it, then look at the drawing, then breathe. See docs/content-engine/quality.md.
 
+import music from "../music.mjs";
+
 export const FPS = 30;
-export const BPM = 90;
-export const BEAT = 20; // frames per beat at 90 BPM and 30 fps; scene lengths round up to whole beats
+export const BPM = 90; // when a reel's track has no tempo
 export const READ_CPS = 12; // characters per second for a relaxed phone reader, second-language readers included
 export const ENTER = 0.6; // seconds an entrance takes before its text is readable
 export const ORIENT = 0.6; // seconds to find the first line after a cut
@@ -13,7 +14,7 @@ export const XFADE = 12; // frames of cross-dissolve between scenes (added on to
 export const MIN_SCENE = 3; // seconds
 export const MAX_WORDS = 18; // per scene, every word on screen counted, labels included
 export const MAX_SCENES = 9;
-export const MAX_SECONDS = 58; // leaves room under qa.mjs's 60 s for encoder and container rounding
+export const MAX_SECONDS = 59; // a second under qa.mjs's 60 s for encoder and container rounding (measured at ~0.05 s)
 export const MAX_LOOK = 3; // seconds of extra looking time a drawing may ask for
 export const MAX_SFX_VOLUME = 0.25;
 
@@ -22,9 +23,18 @@ export const chars = (t) => clean(t).length;
 export const words = (t) => clean(t).split(" ").filter(Boolean).length;
 export const readSeconds = (t) => Math.max(0.5, chars(t) / READ_CPS); // a two-character label is taken in at a glance
 
+// Frames per beat of the reel's track, the frame of its first downbeat, and the grid scene cuts land on: the beat, or
+// the half beat for slow tracks (so rounding up never costs more than about half a second a scene).
+export const beatOf = (spec) => {
+  const t = music.tracks[spec.music] ?? {};
+  const beat = (FPS * 60) / (t.bpm ?? BPM);
+  return { beat, grid: beat > 16 ? beat / 2 : beat, offset: (t.offset ?? 0) * FPS };
+};
+
 // spec: { id, music, scenes: [{ name, text: [string], cues?: [seconds], carry?: [string], look?: seconds, sfx?: { name, at } }] }
 // Returns the spec with, per scene: at (cue frames), reveal, need (seconds), frames, start; and total frames.
 export function plan(spec) {
+  const { beat, grid, offset } = beatOf(spec);
   let start = 0;
   const n = spec.scenes.length;
   const scenes = spec.scenes.map((s, i) => {
@@ -35,12 +45,14 @@ export function plan(spec) {
     const look = s.look ?? 0;
     const readAll = s.text.reduce((a, t) => a + readSeconds(t), 0);
     const need = Math.max(MIN_SCENE, ORIENT + readAll + look + TAIL, reveal + readSeconds(last) + look + TAIL);
-    const body = Math.ceil((need * FPS) / BEAT) * BEAT;
+    // The scene ends on the first grid line after it has had the time it needs (counted on the whole reel, so a
+    // fractional beat never drifts).
+    const body = Math.round(offset + Math.ceil((start + need * FPS - offset) / grid) * grid) - start;
     const frames = body + (i < n - 1 ? XFADE : 0);
     // `carry` lists words still on screen from the scene before: already read, so no reading time, but they count
     // towards the scene's word limit because the eye still has to sort them.
     const onScreen = [...s.text, ...(s.carry ?? [])];
-    const out = { ...s, index: i, count: n, cues, at: cues.map((c) => Math.round(c * FPS)), reveal, look, need, body, frames, start, words: onScreen.reduce((a, t) => a + words(t), 0) };
+    const out = { ...s, index: i, count: n, cues, at: cues.map((c) => Math.round(c * FPS)), beat, reveal, look, need, body, frames, start, words: onScreen.reduce((a, t) => a + words(t), 0) };
     start += frames - (i < n - 1 ? XFADE : 0);
     return out;
   });

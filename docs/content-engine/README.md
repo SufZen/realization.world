@@ -19,7 +19,7 @@ It turns real work (meetings, documents, decisions) into public content for the 
 | `docs/content-engine/RUNBOOK.md` | Step-by-step for the scheduled runs | yes |
 | `tools/content/rank.mjs` | Merge + dedupe + score + editorial brief (Agents D, E) | yes |
 | `tools/content/visuals/` | Carousel renderer in the three styles (carousel with diagram, quote card, reel cover, web diagram SVG) and carousel PDF; see `visual-language.md` | yes |
-| `tools/content/reels/` | Reels: motion kit, reading-time pacing (`src/pace.mjs`), calm music palette (`music.json`, `audio.py`), render pipeline with QA gate (`render.mjs`, `qa.mjs`) | yes (reel specs stay private) |
+| `tools/content/reels/` | Reels: motion kit, reading-time pacing (`src/pace.mjs`), music palette (`music.mjs`, track files git-ignored), quiet effects (`audio.py`), render pipeline with QA gate (`render.mjs`, `qa.mjs`) | yes (reel specs stay private) |
 | `tools/content/desk/` | Content desk template and builder | yes |
 | `content/private/` | Scratch space for a run (private context) | **no** (ignored) |
 | Content desk (private claude.ai page) | Review and approvals; its database holds the ledger, drafts, decisions, facts and engine state | claude.ai only |

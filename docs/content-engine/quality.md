@@ -12,10 +12,10 @@ The principle behind every rule: **people decide in a second whether to stay, an
 | Rule | Value | Enforced by |
 |---|---|---|
 | Reading speed | 12 characters per second (relaxed, second-language readers included) | `pace.mjs` |
-| Scene length | time to find the first line (0.6 s) + read every line + look at the drawing + a breath (0.8 s); and the last line gets its full reading time after it lands; at least 3 s; rounded up to whole beats of the music | `pace.mjs` |
+| Scene length | time to find the first line (0.6 s) + read every line + look at the drawing + a breath (0.8 s); and the last line gets its full reading time after it lands; at least 3 s; rounded up to the beat grid of the reel's track (half beats for tracks slower than ~112 BPM) | `pace.mjs` |
 | Words on screen per scene | at most 18, labels and carried-over words included | `render.mjs --check` |
 | Scenes per reel | at most 9 | `render.mjs --check` |
-| Reel length | at most 58 s (cut words or scenes, never speed) | `render.mjs --check`, `qa.mjs` |
+| Reel length | at most 59 s (cut words or scenes, never speed) | `render.mjs --check`, `qa.mjs` |
 | Big picture changes | never closer than 1 s (error), ideally 2 s apart (warning) | `qa.mjs` (measured on the MP4) |
 | Entrances | 0.5–0.7 s, eased, early in the scene; the last line lands in the first half | `pace.mjs` warning |
 | Between scenes | a 0.4 s cross-dissolve, added on top of reading time | kit `Reel` |
@@ -36,7 +36,7 @@ Key content stays between y 240 and 1500 and x 80 and 960, clear of the platform
 
 ### Sound
 - **Music follows the sound brief** (`sound.md`): smooth, cool, light and sophisticated; real piano and vibraphone with jazz harmony, a light swung groove at 90 BPM; never heavy, never busy, no claps, drops, risers or lyrics.
-- **Only approved tracks.** The palette is `tools/content/reels/music.json` (played by `music.py`); a track is publishable only after Asaf has listened and set `approved: true`. A track Asaf supplies goes in the palette with its licence. Never trending or copyrighted music in a file we render; if a platform's own library track is wanted, it is added in the app at posting time.
+- **Only approved tracks.** The palette is `tools/content/reels/music.mjs`: produced instrumental tracks (AI-generated or supplied by Asaf), each with its source and licence; a track is publishable only after Asaf has listened and set `approved: true`. Never trending or copyrighted music in a file we render; if a platform's own library track is wanted, it is added in the app at posting time.
 - **Effects:** at most one per scene, quiet (volume ≤ 0.25), only `tap`, `paper` or `chime`, and only on the moment the scene turns on.
 - **Loudness:** −16 LUFS integrated, true peak ≤ −1.5 dBTP (set by `render.mjs`, checked by `qa.mjs`).
 
@@ -75,7 +75,7 @@ Voice and privacy rules stay in `voice.md` and the runbook.
 ## 5. Platform formats
 | Format | Spec |
 |---|---|
-| Reel | MP4, H.264 + AAC, 1080 × 1920, 30 fps, 10–58 s, −16 LUFS |
+| Reel | MP4, H.264 + AAC, 1080 × 1920, 30 fps, 10–59 s, −16 LUFS |
 | Instagram carousel | PNG or JPEG, 1080 × 1350 (4:5), up to 10 |
 | TikTok photo post | JPEG or WebP only, within 1080 × 1920 |
 | LinkedIn document | PDF from the carousel (`carousel.pdf`) |
