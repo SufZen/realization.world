@@ -1,0 +1,44 @@
+{
+  "carousel": [
+    {
+      "file": "carousel-01.png",
+      "short": "Five hours to build it. How long to trust it?",
+      "long": "Five hours to build it. How long to trust it? The honest answer: under a month of testing, by my estimate."
+    },
+    {
+      "file": "carousel-02.png",
+      "short": "Why tenders come first.",
+      "long": "Why tenders come first. Long public documents that repeat the same structure every time (weightings, site visits, deadlines for questions), where one missed clause can cost the bid. On reading speed alone, nobody in the office can compete."
+    },
+    {
+      "file": "carousel-03.png",
+      "short": "The build is the quick part.",
+      "long": "The build is the quick part. Convert the PDFs to text, train the agent on past tenders and the team's own summary sheets, and let it ask when a clause is unclear instead of guessing."
+    },
+    {
+      "file": "carousel-04.png",
+      "short": "Diagram: Five hours to build, under a month to trust.",
+      "long": "Diagram: Five hours to build, under a month to trust. The build is a short hop. The dotted stretch of testing is what earns the agent its place in the office."
+    },
+    {
+      "file": "carousel-05.png",
+      "short": "Nobody is 100% right.",
+      "long": "Nobody is 100% right. The goal isn't zero review. It's one experienced person checking in a fraction of the time, while the go/no-go stays with whoever has made it for years. “That's true for us too,” one of the partners answered."
+    },
+    {
+      "file": "carousel-06.png",
+      "short": "Measure an agent's mistakes before you rely on it, and leave the final call with the person who…",
+      "long": "Measure an agent's mistakes before you rely on it, and leave the final call with the person who has made it for years. Deciding where AI should start? I'm happy to think it through."
+    }
+  ],
+  "quote": {
+    "file": "quote-1200x627.png",
+    "short": "Quote card: \"When I said there's no 100% in anything we'll build, one of the partners answered:…",
+    "long": "Quote card: \"When I said there's no 100% in anything we'll build, one of the partners answered: that's true for us too.\" Asaf Eyzenkot, Suf Zen, founder of Realization."
+  },
+  "cover": {
+    "file": "cover-1080x1920.png",
+    "short": "Build in hours, trust in weeks.",
+    "long": "Build in hours, trust in weeks. Asaf Eyzenkot, Suf Zen, founder of Realization."
+  }
+}

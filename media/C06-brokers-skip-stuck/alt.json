@@ -1,0 +1,44 @@
+{
+  "carousel": [
+    {
+      "file": "carousel-01.png",
+      "short": "Most see a house nobody wants. I see unpredictable hours.",
+      "long": "Most see a house nobody wants. I see unpredictable hours. The buyers are often there. What's missing is someone to make it sellable."
+    },
+    {
+      "file": "carousel-02.png",
+      "short": "Why brokers walk away.",
+      "long": "Why brokers walk away. An undivided inheritance split across generations, a missing licence, a boundary nobody registered: on a sales commission, that open-ended work eats the margin. It isn't the house. It's the hours."
+    },
+    {
+      "file": "carousel-03.png",
+      "short": "Why success fee alone didn't hold.",
+      "long": "Why success fee alone didn't hold. Our first instinct was a full team of lawyers, architects and mediators on success fee, nothing upfront. Once several professionals are involved, that's almost a dream."
+    },
+    {
+      "file": "carousel-04.png",
+      "short": "Diagram: Give away the diagnosis, charge for the execution.",
+      "long": "Diagram: Give away the diagnosis, charge for the execution. Each step earns the next: the owner shares the story before anyone asks for documents or money."
+    },
+    {
+      "file": "carousel-05.png",
+      "short": "The first step costs the owner nothing.",
+      "long": "The first step costs the owner nothing. AI reads the documents and the story, a person reviews it, and the owner gets a clear roadmap. The work that follows is paid. In Portugal we create relationships before we do business."
+    },
+    {
+      "file": "carousel-06.png",
+      "short": "Hear the owner's story first. Money only comes with a roadmap and a fit.",
+      "long": "Hear the owner's story first. Money only comes with a roadmap and a fit. Together, we can bring these buildings back into use."
+    }
+  ],
+  "quote": {
+    "file": "quote-1200x627.png",
+    "short": "Quote card: \"I see a problem of hours, not of demand.\"",
+    "long": "Quote card: \"I see a problem of hours, not of demand.\" Asaf Eyzenkot, Suf Zen, founder of Realization."
+  },
+  "cover": {
+    "file": "cover-1080x1920.png",
+    "short": "It isn't the house. It's the hours.",
+    "long": "It isn't the house. It's the hours. Asaf Eyzenkot, Suf Zen, founder of Realization."
+  }
+}

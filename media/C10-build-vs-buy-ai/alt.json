@@ -1,0 +1,44 @@
+{
+  "carousel": [
+    {
+      "file": "carousel-01.png",
+      "short": "Your AI prototype isn't a product. It's a specification.",
+      "long": "Your AI prototype isn't a product. It's a specification. And I mean that as a compliment."
+    },
+    {
+      "file": "carousel-02.png",
+      "short": "Easy to build, hard to own.",
+      "long": "Easy to build, hard to own. I built my own meeting note-taker to replace a cheap subscription. It saved money at first, and then the maintenance cost me more. For one person, pointless."
+    },
+    {
+      "file": "carousel-03.png",
+      "short": "Treat the prototype as the brief.",
+      "long": "Treat the prototype as the brief. For a firm of twenty or thirty people, my rule of thumb is that around 90% of what you need already exists in platforms you can buy."
+    },
+    {
+      "file": "carousel-04.png",
+      "short": "Diagram: Configure the 90%, build only the 10%.",
+      "long": "Diagram: Configure the 90%, build only the 10%. For a firm of twenty or thirty people, most of what you need already exists. Your effort goes to the rest."
+    },
+    {
+      "file": "carousel-05.png",
+      "short": "Build only the part nobody sells.",
+      "long": "Build only the part nobody sells. Build the 10% that is truly yours and make it talk to the tool you already pay for, so someone else fixes the bugs and upkeep stays low. I prefer to pay for a system when it's good."
+    },
+    {
+      "file": "carousel-06.png",
+      "short": "Use the prototype as the brief, configure what already exists, and build only the part that is…",
+      "long": "Use the prototype as the brief, configure what already exists, and build only the part that is truly yours. Weighing build or buy in your office? I'm glad to think it through with you."
+    }
+  ],
+  "quote": {
+    "file": "quote-1200x627.png",
+    "short": "Quote card: \"What you built is amazing, I said, as a specification for an existing tool.\"",
+    "long": "Quote card: \"What you built is amazing, I said, as a specification for an existing tool.\" Asaf Eyzenkot, Suf Zen, founder of Realization."
+  },
+  "cover": {
+    "file": "cover-1080x1920.png",
+    "short": "Your prototype is a spec.",
+    "long": "Your prototype is a spec. Asaf Eyzenkot, Suf Zen, founder of Realization."
+  }
+}

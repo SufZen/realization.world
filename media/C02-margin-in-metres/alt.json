@@ -1,0 +1,44 @@
+{
+  "carousel": [
+    {
+      "file": "carousel-01.png",
+      "short": "Who pays for the metre above the minimum?",
+      "long": "Who pays for the metre above the minimum? A few extra metres feel generous. The buyer's budget doesn't stretch to them."
+    },
+    {
+      "file": "carousel-02.png",
+      "short": "Every metre above the minimum is a loss.",
+      "long": "Every metre above the minimum is a loss. In a price-sensitive market, a buyer's budget doesn't stretch because a two-bedroom came out a few metres bigger. We still pay to build those metres. Hit the minimum of each typology, and you've nailed it."
+    },
+    {
+      "file": "carousel-03.png",
+      "short": "Name the extra room honestly.",
+      "long": "Name the extra room honestly. Legally, a T0+1 is still a T0 (a studio), and the '+1' is a market label. The room is real and buyers treat it that way, so check the registration first."
+    },
+    {
+      "file": "carousel-04.png",
+      "short": "Diagram: Past the minimum, metres are paid for but not priced.",
+      "long": "Diagram: Past the minimum, metres are paid for but not priced. Draw each unit to its typology minimum first; every metre beyond it has to earn cash or atmosphere."
+    },
+    {
+      "file": "carousel-05.png",
+      "short": "Small flats need their own logic.",
+      "long": "Small flats need their own logic. Too often they're drawn as if they were big ones: a floating sofa is a mistake in a small room, and a door that swings the wrong way costs a whole wall of furniture. Lobby and stairs count too: everyone pays, nobody enjoys them net."
+    },
+    {
+      "file": "carousel-06.png",
+      "short": "Every extra metre earns cash or atmosphere. If it does neither, cut it.",
+      "long": "Every extra metre earns cash or atmosphere. If it does neither, cut it. Take the check to your next plan. Tell me what I missed."
+    }
+  ],
+  "quote": {
+    "file": "quote-1200x627.png",
+    "short": "Quote card: \"If you manage to hit exactly the minimum area of each typology, you've nailed it on…",
+    "long": "Quote card: \"If you manage to hit exactly the minimum area of each typology, you've nailed it on profitability per metre.\" Asaf Eyzenkot, Suf Zen, founder of Realization."
+  },
+  "cover": {
+    "file": "cover-1080x1920.png",
+    "short": "The most expensive metre.",
+    "long": "The most expensive metre. Asaf Eyzenkot, Suf Zen, founder of Realization."
+  }
+}

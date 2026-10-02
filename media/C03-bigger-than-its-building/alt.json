@@ -1,0 +1,44 @@
+{
+  "carousel": [
+    {
+      "file": "carousel-01.png",
+      "short": "Can an apartment be bigger than its own building?",
+      "long": "Can an apartment be bigger than its own building? Against the registry, yes, and it gets complicated."
+    },
+    {
+      "file": "carousel-02.png",
+      "short": "The top floor outgrew the paper.",
+      "long": "The top floor outgrew the paper. An old building in a historic town centre, shared by several owners. Measured on site, its top floor covers more ground than the registry gives the entire building. It's one thing to change the permilage. This is something else."
+    },
+    {
+      "file": "carousel-03.png",
+      "short": "You can't fix just your floor.",
+      "long": "You can't fix just your floor. In law, the building is a single vertical entity. Correct the footprint at the top and the whole building changes on paper: new registration, survey, every owner's signature."
+    },
+    {
+      "file": "carousel-04.png",
+      "short": "Diagram: One floor, bigger than the whole building on paper.",
+      "long": "Diagram: One floor, bigger than the whole building on paper. The building is one vertical legal entity, so fixing the top floor means every owner signs."
+    },
+    {
+      "file": "carousel-05.png",
+      "short": "First, we prove what exists.",
+      "long": "First, we prove what exists. Handwritten land books, the municipal licensing archive, historic aerial photos. Then the walls, where ceiling height and technique change halfway back. Otherwise, how do we convince anyone that what we have is what we have?"
+    },
+    {
+      "file": "carousel-06.png",
+      "short": "If the space is bigger than the paper, it isn't a bonus. Price it as a collective legal project.",
+      "long": "If the space is bigger than the paper, it isn't a bonus. Price it as a collective legal project. Stuck between paper and building? Send me a message."
+    }
+  ],
+  "quote": {
+    "file": "quote-1200x627.png",
+    "short": "Quote card: \"Otherwise I don't see how we convince anyone that what we have is what we have.\"",
+    "long": "Quote card: \"Otherwise I don't see how we convince anyone that what we have is what we have.\" Asaf Eyzenkot, Suf Zen, founder of Realization."
+  },
+  "cover": {
+    "file": "cover-1080x1920.png",
+    "short": "Bigger than its own building.",
+    "long": "Bigger than its own building. Asaf Eyzenkot, Suf Zen, founder of Realization."
+  }
+}

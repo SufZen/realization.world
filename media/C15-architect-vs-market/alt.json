@@ -1,0 +1,44 @@
+{
+  "carousel": [
+    {
+      "file": "carousel-01.png",
+      "short": "Better apartment, or better product?",
+      "long": "Better apartment, or better product? “I agree it's a better apartment. I just don't think the market will pay for it.”"
+    },
+    {
+      "file": "carousel-02.png",
+      "short": "The better apartment on the table.",
+      "long": "The better apartment on the table. After the plot lost part of its buildable area, our architect proposed merging a small studio and a one-bedroom at the rear into one generous T2 with its own patio. As architecture, it was the right call."
+    },
+    {
+      "file": "carousel-03.png",
+      "short": "Two easy sales, or one hard one.",
+      "long": "Two easy sales, or one hard one. As a product, the merge turned two easy sales into one hard one. So we kept two registered units: one buyer can use them as one home, or as two."
+    },
+    {
+      "file": "carousel-04.png",
+      "short": "Diagram: Two easy sales, not one hard one.",
+      "long": "Diagram: Two easy sales, not one hard one. One buyer, two units: live as one, or rent as two."
+    },
+    {
+      "file": "carousel-05.png",
+      "short": "Balconies go before the interior.",
+      "long": "Balconies go before the interior. When a site loses area, give up the balconies first. Smaller units keep the price range adjustable, even at a higher price per metre, and a cramped one may need height, not width. And the rear stair? We're making it a feature."
+    },
+    {
+      "file": "carousel-06.png",
+      "short": "The better apartment is one conversation, what the market can buy is the other, and a project…",
+      "long": "The better apartment is one conversation, what the market can buy is the other, and a project needs both. Working through a unit mix right now? I'm happy to compare notes."
+    }
+  ],
+  "quote": {
+    "file": "quote-1200x627.png",
+    "short": "Quote card: \"I agree it's a better apartment. I just don't think the market will pay for it.\"",
+    "long": "Quote card: \"I agree it's a better apartment. I just don't think the market will pay for it.\" Asaf Eyzenkot, Suf Zen, founder of Realization."
+  },
+  "cover": {
+    "file": "cover-1080x1920.png",
+    "short": "The better apartment we turned down.",
+    "long": "The better apartment we turned down. Asaf Eyzenkot, Suf Zen, founder of Realization."
+  }
+}

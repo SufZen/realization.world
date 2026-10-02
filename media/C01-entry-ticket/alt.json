@@ -1,0 +1,44 @@
+{
+  "carousel": [
+    {
+      "file": "carousel-01.png",
+      "short": "Why pay more per metre for a smaller flat?",
+      "long": "Why pay more per metre for a smaller flat? It sounds backwards, I know, until you read the listings."
+    },
+    {
+      "file": "carousel-02.png",
+      "short": "On paper, the project failed.",
+      "long": "On paper, the project failed. Our comparables model took price per square metre from nearby listings and multiplied it by each unit's area. The totals came out too low for a small infill project. So I pushed back, and we opened the listings together, live."
+    },
+    {
+      "file": "carousel-03.png",
+      "short": "Less per metre, nearly the same total.",
+      "long": "Less per metre, nearly the same total. Small old flats were asking a high price per metre and larger ones much less, yet their totals landed in nearly the same place. Buyers weren't paying for metres."
+    },
+    {
+      "file": "carousel-04.png",
+      "short": "Diagram: Different price per metre, nearly the same total.",
+      "long": "Diagram: Different price per metre, nearly the same total. Buyers weren't paying for metres, but for a way in."
+    },
+    {
+      "file": "carousel-05.png",
+      "short": "Design under the tax line.",
+      "long": "Design under the tax line. First-home buyers up to 35 pay no IMT (property transfer tax) under a yearly ceiling, so every unit but one stays below it. Appraisal risk sits in the model from day one. Price per metre still has a job: checking cost and margin."
+    },
+    {
+      "file": "carousel-06.png",
+      "short": "Start from the ticket your buyer can finance, then design the metres to fit it.",
+      "long": "Start from the ticket your buyer can finance, then design the metres to fit it. Pricing small units right now? Tell me what your listings say."
+    }
+  ],
+  "quote": {
+    "file": "quote-1200x627.png",
+    "short": "Quote card: \"In a budget-limited town, buyers compare what the bank will approve, not metres.\"",
+    "long": "Quote card: \"In a budget-limited town, buyers compare what the bank will approve, not metres.\" Asaf Eyzenkot, Suf Zen, founder of Realization."
+  },
+  "cover": {
+    "file": "cover-1080x1920.png",
+    "short": "Buyers pay for a way in.",
+    "long": "Buyers pay for a way in. Asaf Eyzenkot, Suf Zen, founder of Realization."
+  }
+}

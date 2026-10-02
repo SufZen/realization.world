@@ -1,0 +1,44 @@
+{
+  "carousel": [
+    {
+      "file": "carousel-01.png",
+      "short": "Whose door do you knock on to fix the pump?",
+      "long": "Whose door do you knock on to fix the pump? A small developer is the building's first long-term owner."
+    },
+    {
+      "file": "carousel-02.png",
+      "short": "One electric pump, inside one flat.",
+      "long": "One electric pump, inside one flat. In a design review for an 11-unit infill project near Lisbon, most of the rainwater and sewage ran to an electric pump, and the pump sat inside one of the flats. That's a very bad decision."
+    },
+    {
+      "file": "carousel-03.png",
+      "short": "The warranty is still ours.",
+      "long": "The warranty is still ours. Within two or three years it becomes a maintenance issue. In Portugal, a developer selling to consumers answers for structural defects for ten years, and for other defects for five."
+    },
+    {
+      "file": "carousel-04.png",
+      "short": "Diagram: Shared systems belong in shared space.",
+      "long": "Diagram: Shared systems belong in shared space. Ask of every system where it fails, and whose door you knock on to fix it."
+    },
+    {
+      "file": "carousel-05.png",
+      "short": "Simulate before you buy the premium kit.",
+      "long": "Simulate before you buy the premium kit. The energy rating often hinges on a heat pump or solar more than on premium kit, so run the simulation first and spend after. If we try so hard and in the end we're a B anyway, what did we do?"
+    },
+    {
+      "file": "carousel-06.png",
+      "short": "Every building system gets two questions: where does it fail, and whose door do you knock on to…",
+      "long": "Every building system gets two questions: where does it fail, and whose door do you knock on to fix it? Take the two questions into your next design review, and tell me what I missed."
+    }
+  ],
+  "quote": {
+    "file": "quote-1200x627.png",
+    "short": "Quote card: \"Strategically, we were putting the building's weakest link inside a private apartment.\"",
+    "long": "Quote card: \"Strategically, we were putting the building's weakest link inside a private apartment.\" Asaf Eyzenkot, Suf Zen, founder of Realization."
+  },
+  "cover": {
+    "file": "cover-1080x1920.png",
+    "short": "Specify for year ten.",
+    "long": "Specify for year ten. Asaf Eyzenkot, Suf Zen, founder of Realization."
+  }
+}
