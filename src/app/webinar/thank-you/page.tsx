@@ -5,7 +5,7 @@ import { whatsappUrl } from "@/content/site";
 import { webinar, webinarCalendarUrl } from "@/lib/webinar";
 
 export const metadata: Metadata = {
-  title: "נרשמת לוובינר",
+  title: "נרשמתם לוובינר",
   robots: { index: false, follow: true },
 };
 
@@ -16,18 +16,18 @@ export default function WebinarThankYouPage() {
         index="✓"
         eyebrow="ההרשמה התקבלה"
         title="נתראה | ב־20 באוקטובר."
-        intro={`${webinar.dateLabel}, ${webinar.timeLabel}. | לינק ה־Google Meet יגיע למייל לפני השידור, | וההקלטה תישלח לכל הנרשמים.`}
+        intro={`${webinar.dateLabel}, ${webinar.timeLabel}. | הקישור לשידור יישלח במייל, | וההקלטה תישלח לכל הנרשמים.`}
         theme="brand"
         actions={
           <>
-            <ButtonLink href={webinarCalendarUrl} variant="dark">הוספה ל־Google Calendar</ButtonLink>
-            <ButtonLink href="/work/arena-barreiro" variant="outline">הפרויקט בברריירו</ButtonLink>
+            <ButtonLink href={webinarCalendarUrl} variant="dark">הוספה ליומן</ButtonLink>
+            <ButtonLink href="/work/arena-barreiro" variant="outline">הפרויקט בבריירו</ButtonLink>
           </>
         }
         aside={
           <div className="webinar-when">
-            <p className="eyebrow">יש בעיה שחשוב לכם שנראה?</p>
-            <p>עונים למייל האישור, או כותבים לנו. אחת הבעיות תעלה למסך.</p>
+            <p className="eyebrow">רוצים שנתייחס לבעיה מסוימת?</p>
+            <p>ענו למייל האישור או כתבו לנו בוואטסאפ. אולי ננתח את הבעיה שלכם בשידור.</p>
             <a className="text-link" href={whatsappUrl} rel="noopener">וואטסאפ</a>
           </div>
         }

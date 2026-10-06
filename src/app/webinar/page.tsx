@@ -2,111 +2,200 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Suspense } from "react";
 import { ButtonLink } from "@/components/button-link";
-import { EditorialMedia } from "@/components/editorial-media";
 import { Lines } from "@/components/lines";
-import { PageHero } from "@/components/page-hero";
 import { SectionHeading } from "@/components/section-heading";
 import { WebinarForm } from "@/components/webinar-form";
 import { pageMetadata } from "@/lib/metadata";
 import { webinar } from "@/lib/webinar";
 
 const base = pageMetadata(
-  "וובינר: לא עוד הרצאה על AI · 4 כלים חיים לנדל״ן",
-  "וובינר חינמי בעברית ליזמים, חברות בנייה, משרדי תכנון ויועצי נדל״ן. 4 כלי AI חיים על פרויקט אמיתי בברריירו, ובעיה אחת שלכם שנפרק בשידור. שלישי 20.10, 20:00 שעון ישראל, ב־Google Meet.",
+  "וובינר: לא עוד הרצאה על בינה מלאכותית",
+  "וובינר חינמי בעברית ליזמים, לחברות בנייה, למשרדי תכנון וליועצי נדל״ן: חמישה מקרים אמיתיים מפרויקטי נדל״ן, ובעיה אחת שלכם שננתח בשידור. שלישי 20.10, 20:00 שעון ישראל.",
   "/webinar",
 );
 
 export const metadata: Metadata = { ...base, openGraph: { ...base.openGraph, locale: "he_IL" } };
 
-// The four tools, in the order of a project's life: the deal, the tender, the build, the investors.
-const tools = [
-  ["התשואה במודעה | היא לא התשואה שלכם.", "מדביקים לינק למודעה ומקבלים את התמונה המלאה: מימון, תזרים ומיסוי, וגם מה שהתמונות מגלות על המצב האמיתי של הנכס.", "יבגני"],
-  ["שלוש הצעות מחיר, | שלושה פורמטים.", "כל הצעות הקבלנים בטבלה אחת, וכל סעיף חסר מסומן לפני שהוא מתגלה באמצע העבודה. מבחירת הקבלן שאנחנו עושים עכשיו בברריירו.", "אסף"],
-  ["הקבלן מבקש תשלום, | ואתם בחו״ל.", "בקרת תשלומים מול תמונות ואבני דרך: לפני שמעבירים כסף, יודעים מה באמת נבנה. ודוח קצר בוואטסאפ, פעם בשבוע.", "יבגני"],
-  ["המשקיע מחכה | לדוח הרבעוני.", 'מוח שני לפרויקט, שמחבר את החשבון בבנק, המסמכים והשיחות. הדוח יוצא בשעה במקום בימים, ו־"כמה נשאר לנו נטו?" מקבלת תשובה מיד.', "אסף"],
+type Case = { stage: string; title: string; hook: string; about: string; idea: string; image: string; alt: string };
+
+// The five cases follow a project's life: the deal, the tender, the contractors, the build, the investors.
+const cases: Case[] = [
+  {
+    stage: "העסקה",
+    title: "העסקה מלינק אחד",
+    hook: "התשואה במודעה היא לא התשואה שלכם.",
+    about: "מודעות מציגות תשואה ברוטו, לפני מסים, עמלות ומימון. נראה כלי שמקבל לינק למודעה ומחזיר ניתוח מלא: מימון, תזרים חודשי, מיסוי, והתשואה שנשארת לכם בפועל. הכלי מנתח גם את התמונות, ותופס פערים בין מה שכתוב במודעה לבין מה שרואים בהן.",
+    idea: "לסנן עשר עסקאות בערב אחד, ולהגיע לשמאי ולעורך הדין עם השאלות הנכונות.",
+    image: "/work/boa-architecture/santa-maria.webp",
+    alt: "מבט מלמעלה על גגות של עיר בפורטוגל",
+  },
+  {
+    stage: "המכרז",
+    title: "מכרז גדול, בימים במקום בשבועות",
+    hook: "מכרז גדול, הרבה מסמכים, ומעט זמן.",
+    about: "הגשנו, עבור חברה ישראלית, הצעה למכרז על פרויקט נדל״ן גדול מאוד בבריירו. נראה איך ניתחנו את מסמכי המכרז, חילצנו מהם את כל הדרישות והנתונים, והכנו הגשה מדויקת ומסודרת.",
+    idea: "עבודה שבלי הכלים הנכונים לוקחת שבועות, נעשתה בכמה ימים, בלי לוותר על הדיוק.",
+    image: "/media/hero-physical-world.webp",
+    alt: "צוות עובד סביב מודל ותוכניות של פרויקט",
+  },
+  {
+    stage: "הקבלנים",
+    title: "שלוש הצעות מחיר, טבלה אחת",
+    hook: "שלוש הצעות, שלושה פורמטים. ומה חסר?",
+    about: "כל קבלן כותב את ההצעה בדרך משלו: אחד לפי סעיפים, אחד במחיר כולל, ואחד שחצי מההצעה שלו נאמר בטלפון. נראה איך מכניסים את כל ההצעות לטבלה אחת, סעיף מול סעיף, ומסמנים מראש את מה שחסר. וגם: איך מפיקים כתב כמויות ישירות מהתוכניות.",
+    idea: "ההצעה הזולה היא לפעמים פשוט זו שחסר בה הכי הרבה.",
+    image: "/media/venture-portugal.webp",
+    alt: "תוכניות אדריכליות, מודל ודוגמאות חומרים על שולחן עבודה",
+  },
+  {
+    stage: "הביצוע",
+    title: "הקבלן מבקש תשלום, ואתם בחו״ל",
+    hook: "הקבלן אומר שהשלב הסתיים. באמת?",
+    about: "המפקח לא תמיד מגיע, ואתם לא בשטח. נראה מערכת שבה כל תמונה מאתר הבנייה נשלחת למספר הוואטסאפ של הפרויקט ומתויקת לפי שלב ותאריך. בינה מלאכותית משווה את מה שרואים בתמונות לאבני הדרך שבחוזה, ופעם בשבוע מגיע דוח קצר: בוצע, בוצע חלקית, או כדאי לבדוק לפני שמשלמים.",
+    idea: "משלמים על מה שנבנה, לא על מה שנאמר. וההחלטה נשארת שלכם.",
+    image: "/media/venture-realizeos.webp",
+    alt: "כלי מדידה וטאבלט על שולחן עבודה בשטח",
+  },
+  {
+    stage: "המשקיעים",
+    title: "הדוח למשקיעים, בשעה",
+    hook: "דוח רבעוני: ימים של עבודה, או שעה?",
+    about: "תדפיסי בנק, חשבוניות, מיילים עם הקבלן והחלטות מישיבות. הכל קיים, אבל מפוזר. נראה איך מוח שני לפרויקט מחזיק את כל הידע במקום אחד, ומפיק דוח רבעוני מתבנית קבועה בתוך כשעה, במקום כמה ימים.",
+    idea: 'שאלות כמו "כמה נשאר לנו נטו?" מקבלות תשובה מיד, בלי לחכות לישיבה.',
+    image: "/work/realizeos/missions.webp",
+    alt: "מסך מערכת RealizeOS",
+  },
 ];
 
 const audiences = [
-  ["יזמים וחברות בנייה", "גם מי שבונה בחו״ל ומנהל מישראל: קבלנים, תשלומים ומשקיעים, מרחוק."],
-  ["משרדי תכנון ואדריכלות", "הצעות, כתבי כמויות, וידע שיושב אצל אנשים בודדים. מה שלמדנו עם משרד של 25 איש."],
-  ["ליווי, ייעוץ ותיווך נדל״ן", "ניתוח עסקאות ללקוחות, מענה ללידים, ועבודה ידנית שאוכלת את היום."],
+  ["יזמים וחברות בנייה", "גם מי שבונה בחו״ל ומנהל מישראל: עסקאות, קבלנים, תשלומים ומשקיעים, מרחוק."],
+  ["משרדי תכנון ואדריכלות", "מכרזים, הצעות וכתבי כמויות, וידע שנשאר אצל אנשים בודדים. מה שלמדנו בליווי משרד של 25 איש."],
+  ["ליווי, ייעוץ ותיווך נדל״ן", "ניתוח עסקאות ללקוחות, מענה מהיר ללידים, ופחות עבודה ידנית שאוכלת את היום."],
 ];
 
 const agenda = [
-  ["0–5", "פתיחה: מי בחדר, והפרויקט שילווה אותנו"],
-  ["5–15", "העסקה מלינק אחד · יבגני"],
-  ["15–25", "מכרז קבלנים בלי כאב ראש · אסף"],
-  ["25–35", "הקבלן מבקש תשלום, ואתם בחו״ל · יבגני"],
-  ["35–45", "הדוח למשקיעים, בשעה · אסף"],
-  ["45–55", "הבעיה שלכם על המסך: מיני־אודיט חי"],
-  ["55–60", "איך ממשיכים מכאן, והבונוסים למשתתפים"],
-  ["60–85", "שאלות ותשובות"],
-  ["85–90", "סיכום"],
+  ["0–5", "פתיחה: מי איתנו, ועל מה נדבר"],
+  ["5–15", "העסקה מלינק אחד"],
+  ["15–25", "מכרז גדול, בימים במקום בשבועות"],
+  ["25–35", "שלוש הצעות מחיר, טבלה אחת"],
+  ["35–45", "הקבלן מבקש תשלום, ואתם בחו״ל"],
+  ["45–55", "הדוח למשקיעים, בשעה"],
+  ["55–65", "הבעיה שלכם על המסך: מיני־אודיט בזמן אמת"],
+  ["65–70", "איך ממשיכים מכאן"],
+  ["70–90", "שאלות ותשובות"],
 ];
 
 const faq = [
-  ["כמה זה עולה?", "הוובינר חינמי. ומי שמגיע לשידור החי יקבל לא מעט בונוסים, גם הם בחינם."],
-  ["תהיה הקלטה?", "כן. כל הנרשמים יקבלו את ההקלטה אחרי הוובינר. ובכל זאת שווה להגיע בשידור: הבעיה שעולה למסך והשאלות קורות שם."],
-  ["מה קורה אחרי הוובינר?", "מי שרוצה, קובע שיחת היכרות קצרה עם אחד מאיתנו. אם יש התאמה, נעשה יחד אודיט לעסק שלכם: איפה הולכים זמן וכסף, ומה עושים קודם. בלי התחייבות."],
-  ["זה טכני? צריך לדעת לתכנת?", "לא. מדברים על תהליכים, החלטות ומספרים. הכלים מוצגים כדי להראות מה אפשרי, לא כדי ללמד קוד."],
-  ["אני פעיל רק בישראל. זה רלוונטי?", "כן. הפרויקט שמלווה אותנו נמצא בפורטוגל, אבל הבעיות, הכלים והשיטה זהים בכל שוק."],
+  ["כמה זה עולה?", "הוובינר בחינם, ומי שמגיע לשידור החי מקבל גם לא מעט בונוסים."],
+  ["תהיה הקלטה?", "כן. ההקלטה תישלח לכל הנרשמים. ובכל זאת, שווה להצטרף לשידור החי: רק שם אפשר לשאול שאלות ולראות את הבעיה מהקהל מנותחת על המסך."],
+  ["מה קורה אחרי הוובינר?", "מי שרוצה יכול לקבוע איתנו שיחת היכרות קצרה. אם יש התאמה, נעשה יחד אודיט לעסק שלכם: לאן הולכים הזמן והכסף, ובמה כדאי להתחיל. בלי התחייבות."],
+  ["זה טכני? צריך לדעת לתכנת?", "לא. מדברים על תהליכים, החלטות ומספרים. אנחנו מציגים את הכלים כדי להראות מה אפשר לעשות, לא כדי ללמד תכנות."],
+  ["אני פעיל רק בישראל. זה רלוונטי?", "כן. רוב המקרים מגיעים מפורטוגל, אבל הבעיות, הכלים והשיטה זהים בכל שוק."],
 ];
 
 export default function WebinarPage() {
   return (
     <div dir="rtl" lang="he" className="webinar-page">
-      <PageHero
-        index="LIVE"
-        eyebrow="וובינר חינמי בעברית · שלישי 20.10 · 20:00"
-        title="לא עוד הרצאה על AI. | 4 כלים חיים, פרויקט אמיתי, | והבעיה שלכם על המסך."
-        intro="וובינר מעשי ליזמים, חברות בנייה ומשרדי תכנון: | מהשרטוט ועד המשקיע."
-        theme="dark"
-        actions={<ButtonLink href="#register" variant="primary">שמרו לי מקום</ButtonLink>}
-        aside={
-          <div className="webinar-when">
-            <p className="eyebrow">מתי</p>
-            <p className="webinar-when__date">{webinar.dateLabel}</p>
-            <p>{webinar.timeLabel}</p>
-            <p className="webinar-when__meta">{webinar.platform} · {webinar.durationLabel}</p>
-            <p className="webinar-when__meta">{webinar.hosts}</p>
+      <section className="wh-hero">
+        <div className="wh-hero__copy">
+          <p className="wh-hero__kicker">וובינר חינמי בעברית</p>
+          <h1><Lines text="לא עוד הרצאה | על בינה מלאכותית." /></h1>
+          <p className="wh-hero__sub"><Lines text="5 מקרים אמיתיים מפרויקטי נדל״ן, | והבעיה שלכם על המסך." /></p>
+          <p className="wh-hero__for">וובינר מעשי ליזמים, לחברות בנייה ולמשרדי תכנון, מהעסקה ועד המשקיעים.</p>
+          <div className="button-row">
+            <ButtonLink href="#register" variant="primary">שמרו לי מקום</ButtonLink>
           </div>
-        }
-      />
+          <p className="wh-hero__meta">חינם · 90 דקות · בשידור חי · מוקלט</p>
+          <p className="wh-hero__brand">{webinar.hosts}</p>
+        </div>
+        <div className="wh-hero__media">
+          <Image src="/work/arena-barreiro/facade.webp" alt="הדמיית חזית של בניין מגורים בבריירו" fill priority sizes="(max-width: 900px) 100vw, 50vw" />
+          <div className="wh-hero__when">
+            <p className="wh-hero__day">שלישי 20.10</p>
+            <p className="wh-hero__hour">20:00</p>
+            <p>שעון ישראל · 18:00 בליסבון</p>
+          </div>
+        </div>
+        <ol className="wh-path" aria-label="חמשת המקרים">
+          {cases.map((item, index) => (
+            <li key={item.stage}><a href={`#case-${index + 1}`}><span>{index + 1}</span>{item.stage}</a></li>
+          ))}
+          <li className="wh-path__you"><a href="#your-problem"><span>+</span>הבעיה שלכם</a></li>
+        </ol>
+      </section>
 
-      <section className="section">
+      <section className="section" id="cases">
         <div className="container-wide">
           <SectionHeading
-            eyebrow="4 כלים חיים · 10 דקות לכל אחד"
-            title="לא סיור בכלים. | ארבע בעיות אמיתיות, | וכלי שכבר פותר כל אחת."
-            intro="כל כלי מוצג בשידור חי, על פרויקט אמיתי: | בניין של 11 דירות בברריירו שליד ליסבון, | שאנחנו מפתחים עכשיו."
+            title="חמישה מקרים, | עשר דקות לכל אחד."
+            intro="מחזור החיים של פרויקט נדל״ן, מהעסקה ועד המשקיעים. | לחצו על מקרה כדי לראות על מה נדבר."
           />
-          <ol className="webinar-tools">
-            {tools.map(([title, text, host], index) => (
-              <li className="fit-list" key={title}>
-                <span className="webinar-tools__index" dir="ltr">0{index + 1}</span>
-                <h3><Lines text={title} /></h3>
-                <p>{text}</p>
-                <p className="webinar-tools__host">מציג: {host}</p>
-              </li>
+          <div className="wh-cases">
+            {cases.map((item, index) => (
+              <details className="wh-case" id={`case-${index + 1}`} key={item.title} open={index === 0}>
+                <summary>
+                  <span className="wh-case__thumb">
+                    <Image src={item.image} alt="" fill sizes="160px" />
+                  </span>
+                  <span className="wh-case__head">
+                    <span className="wh-case__stage">{index + 1} · {item.stage}</span>
+                    <span className="wh-case__title">{item.title}</span>
+                    <span className="wh-case__hook">{item.hook}</span>
+                  </span>
+                  <span className="wh-case__toggle" aria-hidden="true" />
+                </summary>
+                <div className="wh-case__body">
+                  <div>
+                    <h3>על מה נדבר</h3>
+                    <p>{item.about}</p>
+                    <h3>הרעיון המרכזי</h3>
+                    <p className="wh-case__idea">{item.idea}</p>
+                  </div>
+                  <div className="wh-case__image">
+                    <Image src={item.image} alt={item.alt} fill sizes="(max-width: 900px) 100vw, 40vw" />
+                  </div>
+                </div>
+              </details>
             ))}
-          </ol>
+          </div>
         </div>
       </section>
 
-      <section className="section surface-brand">
-        <div className="container-wide">
-          <SectionHeading
-            eyebrow="ועוד נושא אחד, מכם"
-            title="והבעיה שלכם | על המסך."
-            intro="בהרשמה כותבים בעיה אחת שהייתם רוצים לפתור. | אחת מהן נפרק בשידור, כמו אודיט אמיתי: | מה קורה היום, איפה הולכים זמן וכסף, | ומה אפשר לעשות כבר מחר."
-          />
-          <ButtonLink href="#register" variant="dark">לכתוב את הבעיה שלי</ButtonLink>
+      <section className="section surface-brand" id="your-problem">
+        <div className="container-wide wh-problem">
+          <h2><Lines text="והבעיה שלכם | על המסך." /></h2>
+          <div>
+            <p className="wh-problem__text">בהרשמה אתם כותבים בעיה אחת שהייתם רוצים לפתור, ומתוך כל הבעיות שיגיעו ננתח אחת בשידור, כמו אודיט אמיתי: מה קורה היום, לאן הולכים הזמן והכסף, ומה אפשר לשנות כבר מחר.</p>
+            <ButtonLink href="#register" variant="dark">לכתוב את הבעיה שלי</ButtonLink>
+          </div>
+        </div>
+      </section>
+
+      <section className="section surface-dark">
+        <div className="container-wide wh-os">
+          <div>
+            <SectionHeading
+              inverse
+              eyebrow="המוח השני שמאחורי הדוחות"
+              title="RealizeOS"
+              intro="מערכת שבנינו ב־Realization, ושעליה מבוססת כל העבודה שלנו. | צוות של סוכני בינה מלאכותית שחולקים מאגר ידע אחד על העסק, | זוכרים את מה שכבר נעשה, ופועלים רק באישור שלכם."
+            />
+            <ul className="wh-os__points">
+              <li><strong>זוכרת את העסק.</strong> מסמכים, החלטות ושיחות, במקום אחד.</li>
+              <li><strong>עובדת רק באישור.</strong> שום פעולה לא יוצאת לפועל בלי שאדם מאשר אותה.</li>
+              <li><strong>נשארת שלכם.</strong> מותקנת אצלכם, והידע לא יושב אצל ספק.</li>
+            </ul>
+          </div>
+          <figure className="wh-os__shot">
+            <Image src="/work/realizeos/dream-inbox.webp" alt="מסך האינבוקס של RealizeOS: עדכוני ידע שממתינים לאישור" width={1600} height={831} sizes="(max-width: 900px) 100vw, 50vw" />
+            <figcaption>עדכוני ידע שהסוכנים הציעו, בהמתנה לאישור · נתוני הדגמה</figcaption>
+          </figure>
         </div>
       </section>
 
       <section className="section">
         <div className="container-wide">
-          <SectionHeading eyebrow="למי זה מתאים" title="אותו פרויקט, | שלוש נקודות מבט." />
+          <SectionHeading title="למי זה מתאים" />
           <div className="webinar-audiences">
             {audiences.map(([title, text]) => (
               <article className="fit-list" key={title}>
@@ -121,43 +210,39 @@ export default function WebinarPage() {
       <section className="section surface-muted">
         <div className="container-wide webinar-split">
           <div className="webinar-agenda">
-            <SectionHeading eyebrow="90 דקות, בלי מילוי" title="10 דקות לכל כלי, | ו־25 דקות | לשאלות שלכם." />
+            <SectionHeading title="90 דקות, בלי חפירות." intro="עשר דקות לכל מקרה, ועשרים דקות לשאלות שלכם." />
             <ol>
               {agenda.map(([minutes, item]) => (
                 <li key={minutes}><span dir="ltr">{minutes}</span><p>{item}</p></li>
               ))}
             </ol>
           </div>
-          <EditorialMedia src="/work/arena-barreiro/facade.webp" alt="הדמיית חזית הפרויקט בברריירו" label="ARENA · BARREIRO" caption="הפרויקט שמלווה את הוובינר: 11 דירות בברריירו, מעבר לנהר מליסבון." />
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container-wide">
-          <SectionHeading eyebrow="המנחים" title="שני צדדים | של אותו שולחן." intro={`${webinar.hosts}.`} />
-          <div className="webinar-hosts">
-            <article>
-              <Image src="/asaf/asaf-eyzenkot.jpg" alt="אסף איזנקוט" width={96} height={96} />
-              <div>
-                <h3>אסף איזנקוט</h3>
-                <p>מייסד Realization. יזם נדל״ן בפורטוגל ומפתח מערכות AI. מוביל את פרויקט Arena בברריירו, בנה את RealizeOS, ומלווה משרדי אדריכלות וחברות בהטמעת AI.</p>
-              </div>
-            </article>
-            <article>
-              <span className="webinar-hosts__initials" aria-hidden="true">EG</span>
-              <div>
-                <h3>יבגני גורקוב</h3>
-                <p>יועץ AI לעסקי נדל״ן ובנייה, עם רקע בנדל״ן ובשיווק דיגיטלי. בונה מערכות CRM, בוטים ו־Deal Analyzer שמנתח עסקה מלינק אחד.</p>
-              </div>
-            </article>
+          <div>
+            <SectionHeading title="המארחים" intro={webinar.hosts} />
+            <div className="wh-hosts">
+              <article>
+                <Image src="/asaf/asaf-eyzenkot.jpg" alt="אסף איזנקוט" width={112} height={112} />
+                <div>
+                  <h3>אסף איזנקוט</h3>
+                  <p>מייסד Realization. יזם נדל״ן בפורטוגל ובונה מערכות בינה מלאכותית לעסקים. מוביל את פרויקט Arena בבריירו, בנה את RealizeOS, ומלווה משרדי אדריכלות וחברות בהטמעת בינה מלאכותית.</p>
+                </div>
+              </article>
+              <article>
+                <span className="webinar-hosts__initials" aria-hidden="true">EG</span>
+                <div>
+                  <h3>יבגני גורקוב</h3>
+                  <p>יועץ בינה מלאכותית לעסקי נדל״ן ובנייה ב־Montreza, עם רקע בנדל״ן ובשיווק דיגיטלי. בונה מערכות CRM, בוטים וכלים לניתוח עסקאות.</p>
+                </div>
+              </article>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="section surface-muted">
+      <section className="section">
         <div className="container-wide webinar-split webinar-split--form">
           <div>
-            <SectionHeading eyebrow="שאלות" title="לפני שנרשמים." />
+            <SectionHeading title="לפני שנרשמים" />
             <div className="faq-list">
               {faq.map(([question, answer]) => (
                 <details className="faq-item" key={question}>
@@ -172,6 +257,8 @@ export default function WebinarPage() {
           </Suspense>
         </div>
       </section>
+
+      <a className="wh-sticky" href="#register">שמרו לי מקום · וובינר חינמי ב־20.10</a>
     </div>
   );
 }

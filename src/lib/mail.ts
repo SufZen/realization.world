@@ -21,6 +21,10 @@ async function ipv4For(host: string): Promise<string> {
   return address ?? host;
 }
 
+function escapeHtml(text: string) {
+  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
 async function createMailer() {
   const host = process.env.SMTP_HOST;
   if (!host) return null;
@@ -81,6 +85,26 @@ export async function sendWebinarRegistration(reg: Registration) {
     ].join("\n"),
   });
 
+  const confirmation = [
+    `שלום ${reg.name},`,
+    "",
+    "תודה שנרשמת, שמרנו לך מקום.",
+    "",
+    `${webinar.title}.`,
+    `${webinar.dateLabel}, ${webinar.timeLabel}. ${webinar.durationLabel}, בשידור חי.`,
+    `מארחים: ${webinar.hostNames} (${webinar.hosts}).`,
+    "",
+    "הקישור לשידור יישלח במייל לפני תחילת הוובינר.",
+    `להוספה ליומן: ${webinarCalendarUrl}`,
+    "",
+    "הוובינר מוקלט, וההקלטה תישלח לכל הנרשמים.",
+    "",
+    "רוצה שנתייחס לבעיה מסוימת? אפשר פשוט לענות למייל הזה.",
+    "",
+    "נתראה,",
+    "אסף איזנקוט, Realization",
+  ];
+
   // The confirmation is a courtesy: the registration already reached us, so a failure here is only logged.
   try {
     await transporter.sendMail({
@@ -88,25 +112,11 @@ export async function sendWebinarRegistration(reg: Registration) {
       to: { name: reg.name, address: reg.email },
       replyTo: to,
       subject: `נרשמת לוובינר: ${webinar.shortTitle}`,
-      text: [
-        `היי ${reg.name},`,
-        "",
-        "תודה שנרשמת. שמרנו לך מקום.",
-        "",
-        `${webinar.title}.`,
-        `${webinar.dateLabel}, ${webinar.timeLabel}, ב־${webinar.platform}. ${webinar.durationLabel}.`,
-        `${webinar.hosts}.`,
-        "",
-        "לינק ה־Meet יישלח במייל לפני השידור.",
-        `להוספה ליומן: ${webinarCalendarUrl}`,
-        "",
-        "הוובינר מוקלט, וההקלטה תישלח לכל הנרשמים.",
-        "",
-        "יש בעיה שהכי חשוב לך שנראה על המסך? פשוט עונים למייל הזה.",
-        "",
-        "ניפגש,",
-        "אסף איזנקוט, Realization",
-      ].join("\n"),
+      text: confirmation.join("\n"),
+      // Right-to-left HTML, so mail apps keep the Hebrew word order around the English names.
+      html: `<div dir="rtl" style="text-align:right;font-family:Arial,sans-serif;font-size:15px;line-height:1.6">${confirmation
+        .map((row) => (row ? escapeHtml(row) : ""))
+        .join("<br>")}</div>`,
     });
   } catch (error) {
     console.error("Webinar confirmation failed to send", error);

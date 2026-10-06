@@ -2,10 +2,13 @@ import { EMAIL, clip, line } from "@/lib/brief";
 
 /** The joint AI × real estate webinar with Evgeni Gurkov (Hebrew, Google Meet). */
 
+// Titles stay Hebrew-only: calendars, email subjects and browser tabs render text left to right,
+// and a Latin word inside a Hebrew title scrambles the word order there.
 export const webinar = {
-  title: "לא עוד הרצאה על AI: 4 כלים חיים, פרויקט אמיתי, והבעיה שלכם על המסך",
-  shortTitle: "לא עוד הרצאה על AI",
-  hosts: "Realization בשיתוף יבגני גורקוב",
+  title: "לא עוד הרצאה על בינה מלאכותית: 5 מקרים אמיתיים מפרויקטי נדל״ן, והבעיה שלכם על המסך",
+  shortTitle: "לא עוד הרצאה על בינה מלאכותית",
+  hosts: "Realization בשיתוף Montreza",
+  hostNames: "אסף איזנקוט ויבגני גורקוב",
   // Tue 20 Oct 2026, 20:00–21:30 Israel (UTC+3) / 18:00–19:30 Lisbon (UTC+1).
   startUtc: "20261020T170000Z",
   endUtc: "20261020T183000Z",
@@ -22,10 +25,10 @@ export const webinarCalendarUrl = (() => {
     dates: `${webinar.startUtc}/${webinar.endUtc}`,
     details: [
       `${webinar.title}.`,
-      `וובינר חינמי בעברית של ${webinar.hosts}. 90 דקות: 4 כלים חיים, בעיה אחת מהקהל על המסך, ושאלות.`,
-      "לינק ה־Google Meet יישלח במייל לפני השידור. הוובינר מוקלט.",
+      `וובינר חינמי בעברית, 90 דקות: חמישה מקרים אמיתיים, בעיה אחת מהקהל על המסך, ושאלות ותשובות. מארחים: ${webinar.hostNames}.`,
+      "הקישור לשידור יישלח במייל לפני תחילת הוובינר. הוובינר מוקלט.",
     ].join("\n\n"),
-    location: "Google Meet",
+    location: "שידור חי, הקישור יישלח במייל",
   });
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 })();
@@ -77,12 +80,12 @@ export function readRegistration(input: (name: string) => unknown): Registration
 
 export function validateRegistration(reg: Registration, consent: boolean) {
   const errors: Partial<Record<RegistrationField, string>> = {};
-  if (!reg.name) errors.name = "נשמח לדעת איך קוראים לך.";
-  if (!EMAIL.test(reg.email)) errors.email = "צריך כתובת מייל תקינה, אליה יישלח הלינק.";
-  if (reg.phone && !/^[+\d][\d\s()-]{6,}$/.test(reg.phone)) errors.phone = "מספר הטלפון לא נראה תקין. אפשר גם להשאיר ריק.";
+  if (!reg.name) errors.name = "צריך למלא שם מלא.";
+  if (!EMAIL.test(reg.email)) errors.email = "צריך כתובת מייל תקינה, כדי שנוכל לשלוח את הקישור.";
+  if (reg.phone && !/^[+\d][\d\s()-]{6,}$/.test(reg.phone)) errors.phone = "מספר הטלפון לא נראה תקין. אפשר גם להשאיר את השדה ריק.";
   if (!roleLabels.has(reg.role)) errors.role = "בחרו את התיאור שהכי מתאים לכם.";
-  if (!marketLabels.has(reg.market)) errors.market = "איפה אתם פעילים?";
-  if (!consent) errors.consent = "צריך אישור כדי שנוכל לשלוח את הלינק והתזכורות.";
+  if (!marketLabels.has(reg.market)) errors.market = "בחרו איפה אתם פעילים.";
+  if (!consent) errors.consent = "סמנו את תיבת האישור כדי שנוכל לשלוח לכם את הקישור והתזכורות.";
   return errors;
 }
 

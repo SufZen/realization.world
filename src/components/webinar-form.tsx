@@ -23,7 +23,7 @@ function mailtoFrom(form: HTMLFormElement | null) {
     `תפקיד: ${get("role") || "—"}`,
     `פעילים: ${get("market") || "—"}`,
     "",
-    "הבעיה שהכי הייתם רוצים לפתור:",
+    "הבעיה שהכי חשוב לכם לפתור:",
     get("pain") || "—",
   ].join("\n");
   return `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -77,7 +77,7 @@ export function WebinarForm() {
         </label>
       </div>
       <fieldset aria-describedby={errors.role ? "role-error" : undefined}>
-        <legend className="eyebrow">מה הכי מתאר אותך? *</legend>
+        <legend className="eyebrow">מה הכי מתאר אתכם? *</legend>
         <div className="path-options">
           {webinarRoles.map(([value, label]) => (
             <label className="path-option" key={value}>
@@ -101,23 +101,23 @@ export function WebinarForm() {
         {errors.market && <p className="form-error" id="market-error">{errors.market}</p>}
       </fieldset>
       <label>
-        <span>איזו בעיה הכי הייתם רוצים לפתור? אחת מהן תעלה למסך.</span>
-        <textarea id="webinar-pain" name="pain" rows={4} maxLength={2000} placeholder="לדוגמה: תשלומים לקבלנים, השוואת הצעות מחיר, מענה ללידים, דוחות למשקיעים." />
+        <span>איזו בעיה הייתם רוצים לפתור? אולי ננתח אותה בשידור.</span>
+        <textarea id="webinar-pain" name="pain" rows={4} maxLength={2000} placeholder="למשל: תשלומים לקבלנים, השוואת הצעות מחיר, מענה ללידים, דוחות למשקיעים." />
       </label>
       <label className="form-consent">
         <input id="webinar-live-audit" name="liveAudit" type="checkbox" value="yes" />
-        <span>אשמח שהבעיה שלנו תנותח בשידור כמיני־אודיט (נתאם איתך מראש).</span>
+        <span>אשמח שתנתחו את הבעיה שלנו בשידור (בתיאום מראש).</span>
       </label>
       <label className="form-consent">
         <input id="webinar-consent" name="consent" type="checkbox" value="yes" required aria-invalid={Boolean(errors.consent)} />
-        <span>אני מאשר/ת ש־Realization ויבגני גורקוב, שמארחים יחד את הוובינר, ישתמשו בפרטים כדי לשלוח לי את הלינק, תזכורות, ההקלטה ועדכון אחרי הוובינר, לפי <Link href="/privacy">מדיניות הפרטיות</Link>. *</span>
+        <span>אני מאשר/ת ש־Realization ו־Montreza, שמארחות יחד את הוובינר, ישתמשו בפרטים שלי כדי לשלוח לי את הקישור, את התזכורות, את ההקלטה ועדכון אחרי הוובינר, בהתאם ל<Link href="/privacy">מדיניות הפרטיות</Link>. *</span>
       </label>
       {errors.consent && <p className="form-error">{errors.consent}</p>}
       <div className="form-submit">
         <button className="button button--dark" type="submit" disabled={pending} data-umami-event="webinar-register">
           {pending ? "שולחים…" : "הרשמה לוובינר"} <ArrowRight className="r-flip-x" aria-hidden="true" size={17} />
         </button>
-        <p>הלינק ל־Google Meet יגיע למייל. אין ספאם, ואפשר להסיר בכל רגע.</p>
+        <p>הקישור לשידור יישלח במייל. בלי ספאם, ואפשר לבטל את ההרשמה בכל רגע.</p>
       </div>
       {state.message && (
         <div className="form-status" role={state.status === "error" ? "alert" : "status"}>
