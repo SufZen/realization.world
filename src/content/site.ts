@@ -752,6 +752,65 @@ export const insights: Insight[] = [
       },
     ],
   },
+  {
+    slug: "model-the-money-not-just-the-project",
+    category: "Development finance",
+    title: "Model the money, | not just the project",
+    excerpt:
+      "A development plan can look profitable | and still run out of cash.",
+    readTime: "2 min read",
+    published: "Field note 13 · Oct 2026",
+    date: "2026-10-06",
+    icon: CircleDollarSign,
+    sections: [
+      {
+        heading: "The missing line",
+        paragraphs: [
+          "We often review development models where the costs are there, the sales are there, and the project company still shows months in the red.",
+          "Is that a warning? No. It is a gap. A project company cannot go negative, so the missing line is the one that shows when investor money arrives.",
+        ],
+      },
+      {
+        heading: "Timing is strategy",
+        paragraphs: [
+          "When each tranche of equity lands is a decision, not bookkeeping. It sets how long each investor is exposed, and at what stage of risk.",
+          "It is also the early warning. If you do not know when the money comes in, you cannot say three months ahead that the project will be late.",
+        ],
+      },
+      {
+        heading: "Stack capital by risk",
+        paragraphs: [
+          "Money that enters first carries the most uncertainty, for the longest time. In the structures we design, it carries a stronger preference than later rounds, which arrive once the permit and the price are known.",
+          "The managing partner reinvests part of the fee in the project. That keeps the people running it inside the result.",
+        ],
+      },
+      {
+        heading: "Model buyers honestly",
+        paragraphs: [
+          "In Portugal, off-plan buyers usually pay a deposit when they sign the promissory contract (CPCV), typically 10 to 20 percent of the price. The law sets no fixed amount, and off-plan deals often stage it. The balance comes at the deed.",
+          "A smooth payment curve across construction flatters the return. We put the money where it actually lands.",
+        ],
+      },
+      {
+        heading: "Deposits are collateral",
+        paragraphs: [
+          "We fund construction from equity and the bank loan only. Early deposits are a bonus that lets us draw less debt, and we never plan on them.",
+          "A signed buyer is worth more as a signal to the bank than as cash. Spending buyers' money and then failing to deliver is exposure no developer should carry. If the seller defaults, the buyer can claim back double the deposit.",
+          "Portuguese law does not require an escrow for off-plan deposits. A buyer putting down a large deposit is right to ask for protection, such as a bank guarantee.",
+          "When investors are also buyers, their money is already equity. It cannot be counted twice.",
+        ],
+      },
+      {
+        heading: "One test",
+        paragraphs: [
+          "In a small building, we pick one funding logic early. Mixing investor-buyers with open-market sales multiplies pricing, tax and paperwork problems.",
+          "To cut it short: equity + the bank loan = the construction budget, and buyers' money stays outside it.",
+          "Then we ask one question. Does the plan balance without buyers' money? If not, it is not yet a plan.",
+          "These are notes on how we structure our own projects, not an offer or investment advice.",
+        ],
+      },
+    ],
+  },
 ];
 
 export const thesisDomains = [
