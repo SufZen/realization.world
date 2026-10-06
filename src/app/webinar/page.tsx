@@ -12,6 +12,7 @@ const base = pageMetadata(
   "וובינר: לא עוד הרצאה על בינה מלאכותית",
   "וובינר חינמי בעברית ליזמים, לחברות בנייה, למשרדי תכנון וליועצי נדל״ן: חמישה מקרים אמיתיים מפרויקטי נדל״ן, ובעיה אחת שלכם שננתח בשידור. שלישי 20.10, 20:00 שעון ישראל.",
   "/webinar",
+  { imagePath: "/webinar/og.jpg" },
 );
 
 export const metadata: Metadata = { ...base, openGraph: { ...base.openGraph, locale: "he_IL" } };
