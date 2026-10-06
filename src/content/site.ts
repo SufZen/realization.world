@@ -752,6 +752,54 @@ export const insights: Insight[] = [
       },
     ],
   },
+  {
+    slug: "a-share-too-small-to-call-about",
+    category: "Property resolution",
+    title: "A share too small | to call about",
+    excerpt:
+      "Many inherited homes sit empty without a feud. | Each share is too small to start the conversation.",
+    readTime: "2 min read",
+    published: "Field note 14 · Oct 2026",
+    date: "2026-10-06",
+    icon: KeyRound,
+    sections: [
+      {
+        heading: "The usual picture",
+        paragraphs: [
+          "An empty inherited house suggests a family feud. In our work, the blocker is often quieter.",
+          "In Portugal, while an inheritance is undivided (herança indivisa), the heirs exercise their rights together. Selling a house therefore needs every one of them to agree.",
+        ],
+      },
+      {
+        heading: "Too small to start",
+        paragraphs: [
+          "With two siblings, that is manageable. With a dozen cousins, each holding a sliver, the effort of gathering everyone costs more than any one share is worth.",
+          "So nobody starts. The most extreme case we have seen was a building with more than 120 heirs, and the building simply waited.",
+        ],
+      },
+      {
+        heading: "The common case",
+        paragraphs: [
+          "Cases like that are a very small part of the problem. The usual one has up to five heirs, and often one who lacks the time, the knowledge or the money to move things along.",
+          "That is the case worth solving first.",
+        ],
+      },
+      {
+        heading: "A reason to answer",
+        paragraphs: [
+          "A small share stays silent until there is something concrete to answer. A clear picture of what the property could become, and a real offer, give each heir that reason.",
+          "To cut it short: a sliver turns into a decision once there is a number to answer.",
+        ],
+      },
+      {
+        heading: "What is coming",
+        paragraphs: [
+          "In August 2026, Parliament authorised the Government to create a special court procedure through which one heir can ask for the sale of a property held in an undivided inheritance after two years of deadlock (Lei 49/2026).",
+          "The detailed rules are still to be approved by decree-law within 180 days. Until they are, agreement remains the way out.",
+        ],
+      },
+    ],
+  },
 ];
 
 export const thesisDomains = [
