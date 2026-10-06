@@ -3,21 +3,28 @@ import { EMAIL, clip, line } from "@/lib/brief";
 /** The joint AI × real estate webinar with Evgeni Gurkov (Hebrew, Google Meet). */
 
 export const webinar = {
-  title: "מהשרטוט ועד המשקיע: איך AI עובד בפרויקט נדל״ן אמיתי",
-  // Tue 20 Oct 2026, 20:00 Israel (UTC+3) / 18:00 Lisbon (UTC+1).
+  title: "לא עוד הרצאה על AI: 4 כלים חיים, פרויקט אמיתי, והבעיה שלכם על המסך",
+  shortTitle: "לא עוד הרצאה על AI",
+  hosts: "Realization בשיתוף יבגני גורקוב",
+  // Tue 20 Oct 2026, 20:00–21:30 Israel (UTC+3) / 18:00–19:30 Lisbon (UTC+1).
   startUtc: "20261020T170000Z",
-  endUtc: "20261020T180000Z",
+  endUtc: "20261020T183000Z",
   dateLabel: "יום שלישי, 20 באוקטובר 2026",
   timeLabel: "20:00 שעון ישראל · 18:00 שעון ליסבון",
+  durationLabel: "90 דקות",
   platform: "Google Meet",
 };
 
 export const webinarCalendarUrl = (() => {
   const params = new URLSearchParams({
     action: "TEMPLATE",
-    text: `וובינר: ${webinar.title}`,
+    text: `וובינר: ${webinar.shortTitle}`,
     dates: `${webinar.startUtc}/${webinar.endUtc}`,
-    details: "וובינר חינמי של Realization ויבגני גורקוב. לינק ה-Google Meet יישלח במייל לפני השידור.",
+    details: [
+      `${webinar.title}.`,
+      `וובינר חינמי בעברית של ${webinar.hosts}. 90 דקות: 4 כלים חיים, בעיה אחת מהקהל על המסך, ושאלות.`,
+      "לינק ה־Google Meet יישלח במייל לפני השידור. הוובינר מוקלט.",
+    ].join("\n\n"),
     location: "Google Meet",
   });
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
@@ -25,8 +32,8 @@ export const webinarCalendarUrl = (() => {
 
 export const webinarRoles = [
   ["architect", "משרד תכנון / אדריכלות"],
-  ["developer", "יזם / חברת ייזום"],
-  ["company", "חברת נדל״ן / סוכנות"],
+  ["developer", "יזם / חברת בנייה"],
+  ["company", "ליווי, ייעוץ או תיווך נדל״ן"],
   ["investor", "משקיע/ה"],
   ["other", "אחר"],
 ] as const;
@@ -93,7 +100,8 @@ export function sheetConfigured() {
 
 /**
  * Appends the registration to the "Webinar leads" Google Sheet through its Apps Script
- * web app (docs/handoff/webinar.md). Apps Script answers with a redirect; fetch follows it.
+ * web app (realization-studio: campaigns/webinar-2026-10/webinar.md). Apps Script answers
+ * with a redirect; fetch follows it.
  */
 export async function appendToSheet(reg: Registration) {
   const url = process.env.WEBINAR_SHEET_WEBHOOK_URL;

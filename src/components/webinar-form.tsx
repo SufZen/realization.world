@@ -23,7 +23,7 @@ function mailtoFrom(form: HTMLFormElement | null) {
     `תפקיד: ${get("role") || "—"}`,
     `פעילים: ${get("market") || "—"}`,
     "",
-    "התהליך הכי ידני או כואב:",
+    "הבעיה שהכי הייתם רוצים לפתור:",
     get("pain") || "—",
   ].join("\n");
   return `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -101,23 +101,23 @@ export function WebinarForm() {
         {errors.market && <p className="form-error" id="market-error">{errors.market}</p>}
       </fieldset>
       <label>
-        <span>מה התהליך הכי ידני או כואב אצלכם היום?</span>
-        <textarea id="webinar-pain" name="pain" rows={4} maxLength={2000} placeholder="לדוגמה: מענה ללידים, תיאום קבלנים, הכנת הצעות, דיווח למשקיעים. נבנה את התוכן סביב התשובות." />
+        <span>איזו בעיה הכי הייתם רוצים לפתור? אחת מהן תעלה למסך.</span>
+        <textarea id="webinar-pain" name="pain" rows={4} maxLength={2000} placeholder="לדוגמה: תשלומים לקבלנים, השוואת הצעות מחיר, מענה ללידים, דוחות למשקיעים." />
       </label>
       <label className="form-consent">
         <input id="webinar-live-audit" name="liveAudit" type="checkbox" value="yes" />
-        <span>אשמח שהתהליך שלנו ינותח בשידור כמיני-אודיט (נתאם איתך מראש).</span>
+        <span>אשמח שהבעיה שלנו תנותח בשידור כמיני־אודיט (נתאם איתך מראש).</span>
       </label>
       <label className="form-consent">
         <input id="webinar-consent" name="consent" type="checkbox" value="yes" required aria-invalid={Boolean(errors.consent)} />
-        <span>אני מאשר/ת ש-Realization תשתמש בפרטים כדי לשלוח לי את הלינק, תזכורות ועדכון אחרי הוובינר, לפי <Link href="/privacy">מדיניות הפרטיות</Link>. *</span>
+        <span>אני מאשר/ת ש־Realization ויבגני גורקוב, שמארחים יחד את הוובינר, ישתמשו בפרטים כדי לשלוח לי את הלינק, תזכורות, ההקלטה ועדכון אחרי הוובינר, לפי <Link href="/privacy">מדיניות הפרטיות</Link>. *</span>
       </label>
       {errors.consent && <p className="form-error">{errors.consent}</p>}
       <div className="form-submit">
         <button className="button button--dark" type="submit" disabled={pending} data-umami-event="webinar-register">
           {pending ? "שולחים…" : "הרשמה לוובינר"} <ArrowRight className="r-flip-x" aria-hidden="true" size={17} />
         </button>
-        <p>הלינק ל-Google Meet יגיע למייל. אין ספאם, ואפשר להסיר בכל רגע.</p>
+        <p>הלינק ל־Google Meet יגיע למייל. אין ספאם, ואפשר להסיר בכל רגע.</p>
       </div>
       {state.message && (
         <div className="form-status" role={state.status === "error" ? "alert" : "status"}>

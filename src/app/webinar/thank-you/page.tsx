@@ -15,19 +15,19 @@ export default function WebinarThankYouPage() {
       <PageHero
         index="✓"
         eyebrow="ההרשמה התקבלה"
-        title="נתראה | ב-20 באוקטובר."
-        intro={`${webinar.dateLabel}, ${webinar.timeLabel}. | לינק ה-Google Meet יגיע למייל לפני השידור.`}
+        title="נתראה | ב־20 באוקטובר."
+        intro={`${webinar.dateLabel}, ${webinar.timeLabel}. | לינק ה־Google Meet יגיע למייל לפני השידור, | וההקלטה תישלח לכל הנרשמים.`}
         theme="brand"
         actions={
           <>
-            <ButtonLink href={webinarCalendarUrl} variant="dark">הוספה ל-Google Calendar</ButtonLink>
+            <ButtonLink href={webinarCalendarUrl} variant="dark">הוספה ל־Google Calendar</ButtonLink>
             <ButtonLink href="/work/arena-barreiro" variant="outline">הפרויקט בברריירו</ButtonLink>
           </>
         }
         aside={
           <div className="webinar-when">
-            <p className="eyebrow">יש שאלה?</p>
-            <p>אפשר לענות למייל האישור, או לכתוב לנו.</p>
+            <p className="eyebrow">יש בעיה שחשוב לכם שנראה?</p>
+            <p>עונים למייל האישור, או כותבים לנו. אחת הבעיות תעלה למסך.</p>
             <a className="text-link" href={whatsappUrl} rel="noopener">וואטסאפ</a>
           </div>
         }
