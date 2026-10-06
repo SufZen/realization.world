@@ -810,6 +810,233 @@ export const insights: Insight[] = [
       },
     ],
   },
+  {
+    slug: "five-hours-to-build-a-month-to-trust",
+    category: "AI in practice",
+    title: "Five hours to build. | A month to trust.",
+    excerpt:
+      "A tender agent is quick to build. | Earning the office's trust takes longer.",
+    readTime: "2 min read",
+    published: "Field note 12 · Oct 2026",
+    date: "2026-10-02",
+    icon: Cpu,
+    sections: [
+      {
+        heading: "Why tenders first",
+        paragraphs: [
+          "Where should AI start in an architecture office? When we worked through that question with a practice, tender preparation came out on top.",
+          "Public tenders are long and dense, yet they repeat the same structure every time: how price and quality are weighted, which site visits are mandatory, when the window for questions closes. Missing one of those details can cost the bid.",
+          "Long text, a fixed structure and expensive mistakes are where a language model earns its place. On reading speed alone, no one in the office can compete with it.",
+        ],
+      },
+      {
+        heading: "What the build involves",
+        paragraphs: [
+          "The technical part is small. The PDFs are converted to text automatically, and the agent learns from the firm's past tenders and from the summary sheets the team already produced, in the format the team already uses.",
+          "It is also allowed to ask. When a clause is ambiguous, it questions the reviewer rather than guessing.",
+          "Our estimate for a working first version is around five hours. That is the easy part.",
+        ],
+      },
+      {
+        heading: "The trust phase",
+        paragraphs: [
+          "What does a demo leave out? The testing that comes after the build.",
+          "The agent is tested on tenders it has never seen, and its output is compared with what an experienced person extracted from the same documents. Every miss becomes a correction.",
+          "We set a threshold of above nine in ten right in testing before anyone relies on it, and we expect this phase to take weeks, under a month.",
+          "If it holds, our estimate is that preparation drops to around a quarter of today's time. Until it is measured in the office, that stays an estimate.",
+        ],
+      },
+      {
+        heading: "Nothing is 100%",
+        paragraphs: [
+          "No agent will be right every time. When we said so to a practice's partners, one answered: that is true for us too.",
+          "The fair comparison, then, is not a perfect machine. It is a person reading a long document against a deadline.",
+          "So the reviewer's job changes rather than disappears: one experienced person checks and corrects the output, in a fraction of the time it took to produce it by hand.",
+        ],
+      },
+      {
+        heading: "What stays human",
+        paragraphs: [
+          "The go/no-go call stays with the person who has made it for years. The agent puts the facts in front of them faster, and the judgement is still theirs.",
+          "So is the responsibility. A missed clause is still the office's missed clause, which is why the reviewer is not optional.",
+        ],
+      },
+      {
+        heading: "Build, don't buy",
+        paragraphs: [
+          "For this job we would not buy a product. It is too easy to build today, and too specific to each firm's documents and formats.",
+          "Once it works, the same pattern extends to other long rulebooks, such as the requirements of a design-build project, as an assistant the team can question.",
+          "To cut it short: five hours of building + under a month of testing + one experienced reviewer = an agent the office can rely on.",
+          "One workflow, measured honestly, before the next.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "a-real-offer-changes-the-conversation",
+    category: "Property resolution",
+    title: "A real offer | changes the conversation",
+    excerpt:
+      "Many stuck family homes are not missing a buyer. | They are missing an agreement.",
+    readTime: "2 min read",
+    published: "Field note 13 · Oct 2026",
+    date: "2026-10-06",
+    icon: KeyRound,
+    sections: [
+      {
+        heading: "Waiting for agreement",
+        paragraphs: [
+          "Many inherited homes in Portugal sit empty for years. Usually it is not because nobody wants them.",
+          "Several heirs share the property, living different lives and needing different things. Nobody wants to spend money just to learn what the house is worth, so the decision keeps being postponed.",
+        ],
+      },
+      {
+        heading: "A handful of patterns",
+        paragraphs: [
+          "Every family feels its situation is unique. Most cases repeat a few patterns: heirs who want different things, a co-owner nobody can reach, a partner who will neither sell nor buy.",
+          "Naming the pattern tells us who the case needs: a lawyer, an architect, a mediator, sometimes someone to locate a missing relative. That clarity costs little and removes much of the uncertainty.",
+        ],
+      },
+      {
+        heading: "One heir can start",
+        paragraphs: [
+          "Does every heir need to agree before anyone asks the market?",
+          "No. One heir with a reason to act can ask what the property would fetch, without committing the family to anything. The proposal comes first, and the discussion follows.",
+        ],
+      },
+      {
+        heading: "What a number does",
+        paragraphs: [
+          "When there is a concrete offer on the table, people become less emotional. The conversation moves from the past to terms: price, timing, who keeps what.",
+          "We have seen a family member who had never engaged step in the moment a serious offer reached the family, with every document ready.",
+          "The offer has to be real, from a buyer who means it. A number created only to apply pressure would destroy the trust the whole process depends on.",
+          "To cut it short: one heir + a genuine offer = a family discussing terms instead of the past.",
+        ],
+      },
+      {
+        heading: "Shared problems, one table",
+        paragraphs: [
+          "In a building with several owners, a registration defect that blocks one of them usually blocks all of them. Everyone will have to sign anyway, so that is the moment to bring every owner to one table and design an outcome where each of them gains.",
+          "The law is adding its own pressure. A reform approved in 2026 is set to let any single heir ask a court to sell a property that has sat in an undivided inheritance (herança indivisa) for more than two years.",
+          "The detailed rules were still being drafted in autumn 2026, due by early 2027, so it does not apply yet. Once it does, the prospect of a court-ordered sale gives holdouts a reason to talk. The useful work happens in the months before anyone files.",
+        ],
+      },
+      {
+        heading: "An honest roadmap",
+        paragraphs: [
+          "We score each case by how likely it is to succeed, and we tell owners what we find.",
+          "Sometimes the honest answer is that a case is not worth pursuing. Saying so early is part of the service.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "model-the-money-not-just-the-project",
+    category: "Development finance",
+    title: "Model the money, | not just the project",
+    excerpt:
+      "A development plan can look profitable | and still run out of cash.",
+    readTime: "2 min read",
+    published: "Field note 14 · Oct 2026",
+    date: "2026-10-06",
+    icon: CircleDollarSign,
+    sections: [
+      {
+        heading: "The missing line",
+        paragraphs: [
+          "We often review development models where the costs are there, the sales are there, and the project company still shows months in the red.",
+          "Is that a warning? No. It is a gap. A project company cannot go negative, so the missing line is the one that shows when investor money arrives.",
+        ],
+      },
+      {
+        heading: "Timing is strategy",
+        paragraphs: [
+          "When each tranche of equity lands is a decision, not bookkeeping. It sets how long each investor is exposed, and at what stage of risk.",
+          "It is also the early warning. If you do not know when the money comes in, you cannot say three months ahead that the project will be late.",
+        ],
+      },
+      {
+        heading: "Stack capital by risk",
+        paragraphs: [
+          "Money that enters first carries the most uncertainty, for the longest time. In the structures we design, it carries a stronger preference than later rounds, which arrive once the permit and the price are known.",
+          "The managing partner reinvests part of the fee in the project. That keeps the people running it inside the result.",
+        ],
+      },
+      {
+        heading: "Model buyers honestly",
+        paragraphs: [
+          "In Portugal, off-plan buyers usually pay a deposit when they sign the promissory contract (CPCV), typically 10 to 20 percent of the price. The law sets no fixed amount, and off-plan deals often stage it. The balance comes at the deed.",
+          "A smooth payment curve across construction flatters the return. We put the money where it actually lands.",
+        ],
+      },
+      {
+        heading: "Deposits are collateral",
+        paragraphs: [
+          "We fund construction from equity and the bank loan only. Early deposits are a bonus that lets us draw less debt, and we never plan on them.",
+          "A signed buyer is worth more as a signal to the bank than as cash. Spending buyers' money and then failing to deliver is exposure no developer should carry. If the seller defaults, the buyer can claim back double the deposit.",
+          "Portuguese law does not require an escrow for off-plan deposits. A buyer putting down a large deposit is right to ask for protection, such as a bank guarantee.",
+          "When investors are also buyers, their money is already equity. It cannot be counted twice.",
+        ],
+      },
+      {
+        heading: "One test",
+        paragraphs: [
+          "In a small building, we pick one funding logic early. Mixing investor-buyers with open-market sales multiplies pricing, tax and paperwork problems.",
+          "To cut it short: equity + the bank loan = the construction budget, and buyers' money stays outside it.",
+          "Then we ask one question. Does the plan balance without buyers' money? If not, it is not yet a plan.",
+          "These are notes on how we structure our own projects, not an offer or investment advice.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "a-share-too-small-to-call-about",
+    category: "Property resolution",
+    title: "A share too small | to call about",
+    excerpt:
+      "Many inherited homes sit empty without a feud. | Each share is too small to start the conversation.",
+    readTime: "2 min read",
+    published: "Field note 15 · Oct 2026",
+    date: "2026-10-06",
+    icon: KeyRound,
+    sections: [
+      {
+        heading: "The usual picture",
+        paragraphs: [
+          "An empty inherited house suggests a family feud. In our work, the blocker is often quieter.",
+          "In Portugal, while an inheritance is undivided (herança indivisa), the heirs exercise their rights together. Selling a house therefore needs every one of them to agree.",
+        ],
+      },
+      {
+        heading: "Too small to start",
+        paragraphs: [
+          "With two siblings, that is manageable. With a dozen cousins, each holding a sliver, the effort of gathering everyone costs more than any one share is worth.",
+          "So nobody starts. The most extreme case we have seen was a building with more than 120 heirs, and the building simply waited.",
+        ],
+      },
+      {
+        heading: "The common case",
+        paragraphs: [
+          "Cases like that are a very small part of the problem. The usual one has up to five heirs, and often one who lacks the time, the knowledge or the money to move things along.",
+          "That is the case worth solving first.",
+        ],
+      },
+      {
+        heading: "A reason to answer",
+        paragraphs: [
+          "A small share stays silent until there is something concrete to answer. A clear picture of what the property could become, and a real offer, give each heir that reason.",
+          "To cut it short: a sliver turns into a decision once there is a number to answer.",
+        ],
+      },
+      {
+        heading: "What is coming",
+        paragraphs: [
+          "In August 2026, Parliament authorised the Government to create a special court procedure through which one heir can ask for the sale of a property held in an undivided inheritance after two years of deadlock (Lei 49/2026).",
+          "The detailed rules are still to be approved by decree-law within 180 days. Until they are, agreement remains the way out.",
+        ],
+      },
+    ],
+  },
 ];
 
 export const thesisDomains = [
