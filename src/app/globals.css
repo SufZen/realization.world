@@ -617,3 +617,26 @@ section[id] { scroll-margin-top: 90px; }
 @media (max-width: 1000px) { .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .project-grid { grid-template-columns: 1fr; } }
 .case-gallery__wide { grid-column: 1 / -1; }
+/* Webinar landing (Hebrew, RTL) */
+.webinar-when { display: grid; align-content: center; gap: .5rem; padding: clamp(1.5rem, 4vw, 3rem); border-inline-start: 1px solid currentColor; }
+.webinar-when__date { font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 800; line-height: 1.25; }
+.webinar-when__meta { opacity: .7; font-size: .9rem; }
+.webinar-audiences { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 2rem); margin-top: 2.5rem; }
+.webinar-audiences p { margin-top: .9rem; }
+.webinar-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 5rem); align-items: start; }
+.webinar-agenda ol { display: grid; margin: 2rem 0 0; padding: 0; list-style: none; border-top: 2px solid #000; }
+.webinar-agenda li { display: grid; grid-template-columns: 4.5rem 1fr; gap: 1rem; padding-block: 1rem; border-bottom: 1px solid var(--border-hairline); }
+.webinar-agenda li span { font-weight: 800; font-variant-numeric: tabular-nums; text-align: start; }
+.webinar-hosts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 3vw, 3rem); margin-top: 2.5rem; }
+.webinar-hosts article { display: flex; gap: 1.25rem; align-items: flex-start; }
+.webinar-hosts img, .webinar-hosts__initials { flex: none; width: 96px; height: 96px; border-radius: 50%; object-fit: cover; }
+.webinar-hosts__initials { display: grid; place-items: center; background: var(--color-yellow); color: #000; font-weight: 800; font-size: 1.5rem; }
+.webinar-hosts p { margin-top: .5rem; }
+.webinar-form__title { margin-top: .4rem; font-size: clamp(1.6rem, 3vw, 2.4rem); }
+.path-options--three { grid-template-columns: repeat(3, 1fr); }
+.webinar-form .form-consent + .form-consent { margin-top: -.75rem; }
+@media (max-width: 900px) {
+  .webinar-audiences, .webinar-split, .webinar-hosts { grid-template-columns: 1fr; }
+  .webinar-when { border-inline-start: 0; border-top: 1px solid currentColor; }
+}
+@media (max-width: 560px) { .path-options--three { grid-template-columns: 1fr; } }

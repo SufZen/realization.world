@@ -2,6 +2,7 @@ import { resolve4 } from "node:dns/promises";
 import { isIP } from "node:net";
 import nodemailer from "nodemailer";
 import type SMTPTransport from "nodemailer/lib/smtp-transport";
+import { describeRegistration, webinar, webinarCalendarUrl, type Registration } from "@/lib/webinar";
 
 /**
  * Outbound mail for the opportunity brief. Same SMTP setup and variables as the
@@ -52,6 +53,60 @@ export type Brief = {
   context: string;
   ref: string;
 };
+
+export async function sendWebinarRegistration(reg: Registration) {
+  const to = process.env.SUBMISSION_NOTIFY_EMAIL;
+  const transporter = await createMailer();
+  if (!to || !transporter) throw new Error("Mail is not configured");
+  const from = process.env.SMTP_FROM || process.env.SMTP_USER || to;
+  const { role, market } = describeRegistration(reg);
+
+  await transporter.sendMail({
+    from,
+    to,
+    replyTo: { name: reg.name, address: reg.email },
+    subject: `Webinar registration — ${reg.ref || "direct"} — ${reg.name}`,
+    text: [
+      `Name: ${reg.name}`,
+      `Email: ${reg.email}`,
+      `Phone: ${reg.phone || "—"}`,
+      `Company: ${reg.company || "—"}`,
+      `Role: ${role}`,
+      `Active in: ${market}`,
+      `Open to a live mini-audit: ${reg.liveAudit ? "yes" : "no"}`,
+      `Came from: ${reg.ref || "—"}`,
+      "",
+      "Most manual / painful process:",
+      reg.pain || "—",
+    ].join("\n"),
+  });
+
+  // The confirmation is a courtesy: the registration already reached us, so a failure here is only logged.
+  try {
+    await transporter.sendMail({
+      from: { name: "Realization", address: from },
+      to: { name: reg.name, address: reg.email },
+      replyTo: to,
+      subject: "נרשמת לוובינר: AI בפרויקט נדל״ן",
+      text: [
+        `היי ${reg.name},`,
+        "",
+        "תודה שנרשמת לוובינר של Realization ויבגני גורקוב.",
+        `${webinar.title}`,
+        `${webinar.dateLabel}, ${webinar.timeLabel}, ב-${webinar.platform}.`,
+        "",
+        "לינק ה-Meet יישלח במייל לפני השידור.",
+        `להוספה ליומן: ${webinarCalendarUrl}`,
+        "",
+        "יש שאלה, או תהליך שהכי חשוב לך שנדבר עליו? פשוט עונים למייל הזה.",
+        "",
+        "אסף איזנקוט, Realization",
+      ].join("\n"),
+    });
+  } catch (error) {
+    console.error("Webinar confirmation failed to send", error);
+  }
+}
 
 export async function sendBrief(brief: Brief) {
   const to = process.env.SUBMISSION_NOTIFY_EMAIL;
