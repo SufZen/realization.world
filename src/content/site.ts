@@ -752,6 +752,64 @@ export const insights: Insight[] = [
       },
     ],
   },
+  {
+    slug: "a-real-offer-changes-the-conversation",
+    category: "Property resolution",
+    title: "A real offer | changes the conversation",
+    excerpt:
+      "Many stuck family homes are not missing a buyer. | They are missing an agreement.",
+    readTime: "2 min read",
+    published: "Field note 12 · Oct 2026",
+    date: "2026-10-06",
+    icon: KeyRound,
+    sections: [
+      {
+        heading: "Waiting for agreement",
+        paragraphs: [
+          "Many inherited homes in Portugal sit empty for years. Usually it is not because nobody wants them.",
+          "Several heirs share the property, living different lives and needing different things. Nobody wants to spend money just to learn what the house is worth, so the decision keeps being postponed.",
+        ],
+      },
+      {
+        heading: "A handful of patterns",
+        paragraphs: [
+          "Every family feels its situation is unique. Most cases repeat a few patterns: heirs who want different things, a co-owner nobody can reach, a partner who will neither sell nor buy.",
+          "Naming the pattern tells us who the case needs: a lawyer, an architect, a mediator, sometimes someone to locate a missing relative. That clarity costs little and removes much of the uncertainty.",
+        ],
+      },
+      {
+        heading: "One heir can start",
+        paragraphs: [
+          "Does every heir need to agree before anyone asks the market?",
+          "No. One heir with a reason to act can ask what the property would fetch, without committing the family to anything. The proposal comes first, and the discussion follows.",
+        ],
+      },
+      {
+        heading: "What a number does",
+        paragraphs: [
+          "When there is a concrete offer on the table, people become less emotional. The conversation moves from the past to terms: price, timing, who keeps what.",
+          "We have seen a family member who had never engaged step in the moment a serious offer reached the family, with every document ready.",
+          "The offer has to be real, from a buyer who means it. A number created only to apply pressure would destroy the trust the whole process depends on.",
+          "To cut it short: one heir + a genuine offer = a family discussing terms instead of the past.",
+        ],
+      },
+      {
+        heading: "Shared problems, one table",
+        paragraphs: [
+          "In a building with several owners, a registration defect that blocks one of them usually blocks all of them. Everyone will have to sign anyway, so that is the moment to bring every owner to one table and design an outcome where each of them gains.",
+          "The law is adding its own pressure. A reform approved in 2026 is set to let any single heir ask a court to sell a property that has sat in an undivided inheritance (herança indivisa) for more than two years.",
+          "The detailed rules were still being drafted in autumn 2026, due by early 2027, so it does not apply yet. Once it does, the prospect of a court-ordered sale gives holdouts a reason to talk. The useful work happens in the months before anyone files.",
+        ],
+      },
+      {
+        heading: "An honest roadmap",
+        paragraphs: [
+          "We score each case by how likely it is to succeed, and we tell owners what we find.",
+          "Sometimes the honest answer is that a case is not worth pursuing. Saying so early is part of the service.",
+        ],
+      },
+    ],
+  },
 ];
 
 export const thesisDomains = [
