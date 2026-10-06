@@ -16,6 +16,16 @@ Several Claude sessions work at the same time, sometimes in the same folder. The
 - `git add -A`, `git add .`, `git commit -a`. Stage files by name.
 - Force-push, rewrite history, or delete or move files you don't own
 
+## Automated routines use this repo
+
+Two scheduled cloud routines (the content engine, details in `../realization-studio/SESSIONS.md`) run from this repo. **If you are one of those routines:** follow your routine prompt and the RUNBOOK; the session-board and worktree steps above don't apply to you.
+
+For everyone else:
+
+- Never delete, rename, rebase or force-push `claude/funny-darwin-d3s6gf` (engine code), `content-media` (public image host for Buffer and Metricool) or `content/field-note-*` (field-note PRs). Breaking them breaks publishing.
+- This repo is **public**. Never commit private context: client names, prices, addresses, meeting notes.
+- Field-note PRs all edit `src/content/site.ts`; don't restructure that file without checking for open field-note PRs.
+
 ## Shipping
 
 - `main` changes only through a pull request. Follow the merge order in `SESSIONS.md`.
