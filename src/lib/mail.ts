@@ -2,6 +2,7 @@ import { resolve4 } from "node:dns/promises";
 import { isIP } from "node:net";
 import nodemailer from "nodemailer";
 import type SMTPTransport from "nodemailer/lib/smtp-transport";
+import { describeRegistration, webinar, webinarCalendarUrl, type Registration } from "@/lib/webinar";
 
 /**
  * Outbound mail for the opportunity brief. Same SMTP setup and variables as the
@@ -18,6 +19,10 @@ async function ipv4For(host: string): Promise<string> {
   if (isIP(host)) return host;
   const [address] = await resolve4(host);
   return address ?? host;
+}
+
+function escapeHtml(text: string) {
+  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
 async function createMailer() {
@@ -52,6 +57,71 @@ export type Brief = {
   context: string;
   ref: string;
 };
+
+export async function sendWebinarRegistration(reg: Registration) {
+  const to = process.env.SUBMISSION_NOTIFY_EMAIL;
+  const transporter = await createMailer();
+  if (!to || !transporter) throw new Error("Mail is not configured");
+  const from = process.env.SMTP_FROM || process.env.SMTP_USER || to;
+  const { role, market } = describeRegistration(reg);
+
+  await transporter.sendMail({
+    from,
+    to,
+    replyTo: { name: reg.name, address: reg.email },
+    subject: `Webinar registration — ${reg.ref || "direct"} — ${reg.name}`,
+    text: [
+      `Name: ${reg.name}`,
+      `Email: ${reg.email}`,
+      `Phone: ${reg.phone || "—"}`,
+      `Company: ${reg.company || "—"}`,
+      `Role: ${role}`,
+      `Active in: ${market}`,
+      `Open to a live mini-audit: ${reg.liveAudit ? "yes" : "no"}`,
+      `Came from: ${reg.ref || "—"}`,
+      "",
+      "Problem they most want solved:",
+      reg.pain || "—",
+    ].join("\n"),
+  });
+
+  const confirmation = [
+    `שלום ${reg.name},`,
+    "",
+    "תודה שנרשמת, שמרנו לך מקום.",
+    "",
+    `${webinar.title}.`,
+    `${webinar.dateLabel}, ${webinar.timeLabel}. ${webinar.durationLabel}, בשידור חי.`,
+    `מארחים: ${webinar.hostNames} (${webinar.hosts}).`,
+    "",
+    "הקישור לשידור יישלח במייל לפני תחילת הוובינר.",
+    `להוספה ליומן: ${webinarCalendarUrl}`,
+    "",
+    "הוובינר מוקלט, וההקלטה תישלח לכל הנרשמים.",
+    "",
+    "רוצה שנתייחס לבעיה מסוימת? אפשר פשוט לענות למייל הזה.",
+    "",
+    "נתראה,",
+    "אסף איזנקוט, Realization",
+  ];
+
+  // The confirmation is a courtesy: the registration already reached us, so a failure here is only logged.
+  try {
+    await transporter.sendMail({
+      from: { name: "Realization", address: from },
+      to: { name: reg.name, address: reg.email },
+      replyTo: to,
+      subject: `נרשמת לוובינר: ${webinar.shortTitle}`,
+      text: confirmation.join("\n"),
+      // Right-to-left HTML, so mail apps keep the Hebrew word order around the English names.
+      html: `<div dir="rtl" style="text-align:right;font-family:Arial,sans-serif;font-size:15px;line-height:1.6">${confirmation
+        .map((row) => (row ? escapeHtml(row) : ""))
+        .join("<br>")}</div>`,
+    });
+  } catch (error) {
+    console.error("Webinar confirmation failed to send", error);
+  }
+}
 
 export async function sendBrief(brief: Brief) {
   const to = process.env.SUBMISSION_NOTIFY_EMAIL;

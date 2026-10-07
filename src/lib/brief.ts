@@ -6,11 +6,11 @@ import type { Brief } from "@/lib/mail";
 export type BriefField = "path" | "name" | "email" | "brief" | "consent";
 
 const validPaths = new Set<string>(formPaths.map(([value]) => value));
-const EMAIL = /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/;
+export const EMAIL = /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/;
 
-const clip = (value: unknown, max: number) => String(value ?? "").trim().slice(0, max);
+export const clip = (value: unknown, max: number) => String(value ?? "").trim().slice(0, max);
 /** Single-line fields end up in mail headers: no control characters or line breaks. */
-const line = (value: unknown, max: number) => clip(String(value ?? "").replace(/[\u0000-\u001f\u007f]+/g, " "), max);
+export const line = (value: unknown, max: number) => clip(String(value ?? "").replace(/[\u0000-\u001f\u007f]+/g, " "), max);
 
 export function readBrief(input: (name: string) => unknown): Brief {
   return {
