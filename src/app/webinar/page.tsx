@@ -229,10 +229,11 @@ export default function WebinarPage() {
                 </div>
               </article>
               <article>
-                <span className="webinar-hosts__initials" aria-hidden="true">EG</span>
+                <Image src="/webinar/evgeni-gurkov.jpg" alt="יבגני גורקוב" width={112} height={112} />
                 <div>
                   <h3>יבגני גורקוב</h3>
-                  <p>יועץ בינה מלאכותית לעסקי נדל״ן ובנייה ב־Montreza, עם רקע בנדל״ן ובשיווק דיגיטלי. בונה מערכות CRM, בוטים וכלים לניתוח עסקאות.</p>
+                  <p>יזם שחי בפורטוגל ומטמיע בינה מלאכותית בעסקים, בעיקר מעולם הנדל״ן. מביא ארבע שנים של ליווי משקיעים בקייב ורקע בשוק ההון ובשיווק. ב־Montreza הוא בונה מערכות לניהול המשרד ואוטומציות לטיפול בלידים, למעקב אחרי לקוחות ולהפקת דוחות.</p>
+                  <Image className="wh-hosts__logo" src="/webinar/montreza-logo.png" alt="Montreza" width={600} height={183} />
                 </div>
               </article>
             </div>

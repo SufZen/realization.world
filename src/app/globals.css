@@ -699,6 +699,7 @@ section[id] { scroll-margin-top: 90px; }
 .wh-hosts img, .webinar-hosts__initials { flex: none; width: 112px; height: 112px; border-radius: 50%; object-fit: cover; }
 .webinar-hosts__initials { display: grid; place-items: center; background: var(--color-yellow); color: #000; font-weight: 800; font-size: 1.6rem; }
 .wh-hosts p { margin-top: .5rem; }
+.wh-hosts .wh-hosts__logo { display: block; width: 130px; height: auto; margin-top: .9rem; border-radius: 0; object-fit: contain; mix-blend-mode: multiply; }
 .webinar-form__title { margin-top: .4rem; font-size: clamp(1.6rem, 3vw, 2.4rem); }
 .path-options--three { grid-template-columns: repeat(3, 1fr); }
 .webinar-form .form-consent + .form-consent { margin-top: -.75rem; }
