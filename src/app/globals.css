@@ -118,7 +118,7 @@ button { cursor: pointer; }
 .site-header__actions { display: flex; align-items: center; gap: .6rem; }
 .header-opportunity { padding: .7rem 1rem; border-radius: var(--radius-pill); background: var(--color-yellow); color: #000; font-size: .74rem; font-weight: 700; }
 .menu-trigger { display: inline-flex; min-height: 42px; align-items: center; gap: .45rem; padding: .7rem 1rem; border: 0; border-radius: var(--radius-pill); background: #000; color: #fff; font-size: .74rem; font-weight: 700; text-transform: uppercase; }
-.menu-overlay { position: fixed; top: 0; left: 0; z-index: 120; width: 100vw; height: 100dvh; overflow: hidden; visibility: hidden; opacity: 0; pointer-events: none; transition: opacity .28s var(--ease-standard), visibility .28s; }
+.menu-overlay { position: fixed; inset: 0 0 auto; z-index: 120; height: 100dvh; overflow: hidden; visibility: hidden; opacity: 0; pointer-events: none; transition: opacity .28s var(--ease-standard), visibility .28s; }
 .menu-overlay.is-open { visibility: visible; opacity: 1; pointer-events: auto; }
 .menu-overlay__scrim { position: absolute; inset: 0; width: 100%; border: 0; background: rgb(0 0 0 / 50%); }
 .menu-panel { position: absolute; inset-block: 0; inset-inline-end: 0; display: flex; width: min(480px, 92vw); flex-direction: column; padding: 2rem clamp(1.5rem, 5vw, 3.4rem); overflow-y: auto; background: #000; box-shadow: var(--shadow-menu); color: #fff; transform: translateX(100%); transition: transform .45s var(--ease-out); }
