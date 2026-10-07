@@ -17,7 +17,8 @@ const base = pageMetadata(
 
 export const metadata: Metadata = { ...base, openGraph: { ...base.openGraph, locale: "he_IL" } };
 
-type Case = { stage: string; title: string; hook: string; about: string; idea: string; image: string; alt: string };
+// thumb: optional square-ish image for the collapsed card; contain: show the whole image on a dark ground instead of cropping it.
+type Case = { stage: string; title: string; hook: string; about: string; idea: string; image: string; alt: string; thumb?: string; contain?: boolean };
 
 // The five cases follow a project's life: the deal, the tender, the contractors, the build, the investors.
 const cases: Case[] = [
@@ -63,8 +64,10 @@ const cases: Case[] = [
     hook: "דוח רבעוני: ימים של עבודה, או שעה?",
     about: "תדפיסי בנק, חשבוניות, מיילים עם הקבלן והחלטות מישיבות. הכל קיים, אבל מפוזר. נראה איך מוח שני לפרויקט מחזיק את כל הידע במקום אחד, ומפיק דוח רבעוני מתבנית קבועה בתוך כשעה, במקום כמה ימים.",
     idea: 'שאלות כמו "כמה נשאר לנו נטו?" מקבלות תשובה מיד, בלי לחכות לישיבה.',
-    image: "/work/realizeos/missions.webp",
-    alt: "מסך מערכת RealizeOS",
+    image: "/webinar/realizeos-missions.webp",
+    thumb: "/webinar/realizeos-thumb.webp",
+    contain: true,
+    alt: "מסך המשימות של RealizeOS",
   },
 ];
 
@@ -136,7 +139,7 @@ export default function WebinarPage() {
               <details className="wh-case" id={`case-${index + 1}`} key={item.title} open={index === 0}>
                 <summary>
                   <span className="wh-case__thumb">
-                    <Image src={item.image} alt="" fill sizes="160px" />
+                    <Image src={item.thumb ?? item.image} alt="" fill sizes="160px" />
                   </span>
                   <span className="wh-case__head">
                     <span className="wh-case__stage">{index + 1} · {item.stage}</span>
@@ -152,7 +155,7 @@ export default function WebinarPage() {
                     <h3>הרעיון המרכזי</h3>
                     <p className="wh-case__idea">{item.idea}</p>
                   </div>
-                  <div className="wh-case__image">
+                  <div className={item.contain ? "wh-case__image wh-case__image--contain" : "wh-case__image"}>
                     <Image src={item.image} alt={item.alt} fill sizes="(max-width: 900px) 100vw, 40vw" />
                   </div>
                 </div>
@@ -222,7 +225,7 @@ export default function WebinarPage() {
             <SectionHeading title="המארחים" intro={webinar.hosts} />
             <div className="wh-hosts">
               <article>
-                <Image src="/asaf/asaf-eyzenkot.jpg" alt="אסף איזנקוט" width={112} height={112} />
+                <Image src="/webinar/asaf-eyzenkot.jpg" alt="אסף איזנקוט" width={112} height={112} />
                 <div>
                   <h3>אסף איזנקוט</h3>
                   <p>מייסד Realization. יזם נדל״ן בפורטוגל ובונה מערכות בינה מלאכותית לעסקים. מוביל את פרויקט Arena בבריירו, בנה את RealizeOS, ומלווה משרדי אדריכלות וחברות בהטמעת בינה מלאכותית.</p>

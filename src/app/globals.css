@@ -673,6 +673,8 @@ section[id] { scroll-margin-top: 90px; }
 .wh-case__idea { color: #000; font-size: 1.2rem; font-weight: 700; line-height: 1.45; padding-inline-start: 1rem; border-inline-start: 6px solid var(--color-yellow); }
 .wh-case__image { position: relative; min-height: 240px; background: var(--color-neutral-100); }
 .wh-case__image img { object-fit: cover; }
+.wh-case__image--contain { background: #0a0a0f; }
+.wh-case__image--contain img { object-fit: contain; }
 
 /* Your problem, RealizeOS */
 .wh-problem { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 5rem); align-items: end; }
@@ -713,6 +715,7 @@ section[id] { scroll-margin-top: 90px; }
   .wh-hero { grid-template-columns: 1fr; }
   .wh-hero__media { min-height: 300px; order: -1; }
   .webinar-audiences, .webinar-split, .wh-problem, .wh-os, .wh-case__body { grid-template-columns: 1fr; }
+  .wh-case__image--contain { min-height: 0; aspect-ratio: 1400 / 661; }
   .webinar-when { border-inline-start: 0; border-top: 1px solid currentColor; }
   .wh-sticky { position: fixed; z-index: 40; inset-inline: 0; bottom: 0; display: block; padding: .95rem 1rem calc(.95rem + env(safe-area-inset-bottom, 0px)); background: var(--color-yellow); color: #000; font-weight: 800; text-align: center; text-decoration: none; box-shadow: 0 -6px 20px rgb(0 0 0 / 15%); }
   .webinar-page { padding-bottom: 4rem; }
