@@ -61,26 +61,26 @@ export type Brief = {
 // Webinar email frame: the Realization × Montreza logos, the webinar image, and links to Asaf's channels.
 // Images are hosted with the mailing service (Listmonk media), so they stay reachable from inboxes.
 const EMAIL_ASSETS = "https://lists.realization.world/uploads/";
-const SOCIAL_LINKS: Array<[string, string]> = [
-  ["LinkedIn", "https://www.linkedin.com/in/sufzen"],
-  ["Instagram", "https://www.instagram.com/suf.zen"],
-  ["Facebook", "https://facebook.com/101076789348095"],
-  ["YouTube", "https://www.youtube.com/channel/UC4iI6gWzbwtdd-z-O-Al_bQ"],
-  ["TikTok", "https://www.tiktok.com/@suf.zen"],
-  ["X", "https://x.com/Suf_Zen"],
+const SOCIAL_LINKS: Array<[string, string, string]> = [
+  ["LinkedIn", "https://www.linkedin.com/in/sufzen", "linkedin-in"],
+  ["Instagram", "https://www.instagram.com/suf.zen", "instagram"],
+  ["Facebook", "https://facebook.com/101076789348095", "facebook-f"],
+  ["YouTube", "https://www.youtube.com/channel/UC4iI6gWzbwtdd-z-O-Al_bQ", "youtube"],
+  ["TikTok", "https://www.tiktok.com/@suf.zen", "tiktok"],
+  ["X", "https://x.com/Suf_Zen", "x-twitter"],
 ];
 
 function brandedEmail(content: string) {
-  const pills = SOCIAL_LINKS.map(
-    ([name, url]) =>
-      `<a href="${url}" style="display:inline-block;margin:3px 2px;padding:6px 11px;background:#000;color:#FDCC33;font-family:Arial,sans-serif;font-size:13px;font-weight:bold;text-decoration:none">${name}</a>`,
+  const icons = SOCIAL_LINKS.map(
+    ([name, url, icon]) =>
+      `<a href="${url}" style="display:inline-block;margin:0 5px"><img src="${EMAIL_ASSETS}webinar-v2-social-${icon}.png" width="36" height="36" alt="${name}" style="display:block;width:36px;height:36px;border:0"></a>`,
   ).join("");
   return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f2"><tr><td align="center" style="padding:24px 12px">
 <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#fff;border:3px solid #000">
-<tr><td align="center" style="padding:14px 20px;border-bottom:1px solid #e6e2d6"><img src="${EMAIL_ASSETS}webinar-lockup.png" width="420" alt="Realization בשיתוף Montreza" style="display:block;width:100%;max-width:420px;height:auto;border:0"></td></tr>
-<tr><td style="padding:0"><img src="${EMAIL_ASSETS}webinar-og.jpg" width="594" alt="${escapeHtml(webinar.shortTitle)}" style="display:block;width:100%;height:auto;border:0"></td></tr>
+<tr><td align="center" style="padding:14px 20px;border-bottom:1px solid #e6e2d6"><img src="${EMAIL_ASSETS}webinar-v2-lockup.png" width="440" alt="Realization בשיתוף Montreza" style="display:block;width:100%;max-width:440px;height:auto;border:0"></td></tr>
+<tr><td style="padding:0"><img src="${EMAIL_ASSETS}webinar-v2-hero-confirm.jpg" width="594" alt="נרשמת! שמרנו לך מקום. אסף איזנקוט ויבגני גורקוב" style="display:block;width:100%;height:auto;border:0"></td></tr>
 <tr><td style="padding:24px 32px">${content}</td></tr>
-<tr><td dir="rtl" align="center" style="padding:16px 20px;background:#FDCC33;font-family:Arial,sans-serif;font-size:14px;color:#000"><b>עקבו אחרינו</b><br>${pills}</td></tr>
+<tr><td dir="rtl" align="center" style="padding:16px 20px;background:#FDCC33;font-family:Arial,sans-serif;font-size:14px;color:#000"><b>עקבו אחרינו</b><div style="margin-top:8px">${icons}</div></td></tr>
 </table></td></tr></table>`;
 }
 
