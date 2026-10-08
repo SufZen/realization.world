@@ -2,7 +2,7 @@ import { resolve4 } from "node:dns/promises";
 import { isIP } from "node:net";
 import nodemailer from "nodemailer";
 import type SMTPTransport from "nodemailer/lib/smtp-transport";
-import { describeRegistration, webinar, webinarCalendarUrl, type Registration } from "@/lib/webinar";
+import { describeRegistration, webinar, type Registration } from "@/lib/webinar";
 
 /**
  * Outbound mail for the opportunity brief. Same SMTP setup and variables as the
@@ -85,8 +85,9 @@ export async function sendWebinarRegistration(reg: Registration) {
     ].join("\n"),
   });
 
+  const firstName = reg.name.trim().split(/\s+/)[0] || reg.name;
   const confirmation = [
-    `שלום ${reg.name},`,
+    `שלום ${firstName},`,
     "",
     "תודה שנרשמת, שמרנו לך מקום.",
     "",
@@ -94,12 +95,13 @@ export async function sendWebinarRegistration(reg: Registration) {
     `${webinar.dateLabel}, ${webinar.timeLabel}. ${webinar.durationLabel}, בשידור חי.`,
     `מארחים: ${webinar.hostNames} (${webinar.hosts}).`,
     "",
-    "הקישור לשידור יישלח במייל לפני תחילת הוובינר.",
-    `להוספה ליומן: ${webinarCalendarUrl}`,
+    "בדקות הקרובות תגיע אליך הזמנה ליומן מ־Google Calendar, ובה הקישור לשידור. כדאי לאשר אותה: כך הוובינר נכנס ליומן ותגיע גם תזכורת.",
+    "יום לפני ובבוקר הוובינר נשלח גם תזכורת במייל.",
+    "אם ההזמנה לא הגיעה, כדאי לבדוק בתיקיית הספאם או פשוט לענות למייל הזה.",
     "",
     "הוובינר מוקלט, וההקלטה תישלח לכל הנרשמים.",
     "",
-    "רוצה שנתייחס לבעיה מסוימת? אפשר פשוט לענות למייל הזה.",
+    "רוצה שנתייחס לבעיה מסוימת? אפשר לענות למייל הזה ולספר עליה.",
     "",
     "נתראה,",
     "אסף איזנקוט, Realization",
@@ -108,7 +110,7 @@ export async function sendWebinarRegistration(reg: Registration) {
   // The confirmation is a courtesy: the registration already reached us, so a failure here is only logged.
   try {
     await transporter.sendMail({
-      from: { name: "Realization", address: from },
+      from: { name: "אסף איזנקוט", address: from },
       to: { name: reg.name, address: reg.email },
       replyTo: to,
       subject: `נרשמת לוובינר: ${webinar.shortTitle}`,

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ButtonLink } from "@/components/button-link";
 import { PageHero } from "@/components/page-hero";
 import { whatsappUrl } from "@/content/site";
-import { webinar, webinarCalendarUrl } from "@/lib/webinar";
+import { webinar } from "@/lib/webinar";
 
 export const metadata: Metadata = {
   title: "נרשמתם לוובינר",
@@ -16,12 +16,11 @@ export default function WebinarThankYouPage() {
         index="✓"
         eyebrow="ההרשמה התקבלה"
         title="נתראה | ב־20 באוקטובר."
-        intro={`${webinar.dateLabel}, ${webinar.timeLabel}. | הקישור לשידור יישלח במייל, | וההקלטה תישלח לכל הנרשמים.`}
+        intro={`${webinar.dateLabel}, ${webinar.timeLabel}. | בדקות הקרובות תגיע אליכם במייל הזמנה ליומן עם הקישור לשידור. | ההקלטה תישלח לכל הנרשמים.`}
         theme="brand"
         actions={
           <>
-            <ButtonLink href={webinarCalendarUrl} variant="dark">הוספה ליומן</ButtonLink>
-            <ButtonLink href="/work/arena-barreiro" variant="outline">הפרויקט בבריירו</ButtonLink>
+            <ButtonLink href="/work/arena-barreiro" variant="dark">הפרויקט בבריירו</ButtonLink>
           </>
         }
         aside={
