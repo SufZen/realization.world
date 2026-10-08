@@ -2,7 +2,7 @@ import { resolve4 } from "node:dns/promises";
 import { isIP } from "node:net";
 import nodemailer from "nodemailer";
 import type SMTPTransport from "nodemailer/lib/smtp-transport";
-import { describeRegistration, webinar, webinarCalendarUrl, type Registration } from "@/lib/webinar";
+import { describeRegistration, webinar, type Registration } from "@/lib/webinar";
 
 /**
  * Outbound mail for the opportunity brief. Same SMTP setup and variables as the
@@ -58,6 +58,32 @@ export type Brief = {
   ref: string;
 };
 
+// Webinar email frame: the Realization × Montreza logos, the webinar image, and links to Asaf's channels.
+// Images are hosted with the mailing service (Listmonk media), so they stay reachable from inboxes.
+const EMAIL_ASSETS = "https://lists.realization.world/uploads/";
+const SOCIAL_LINKS: Array<[string, string, string]> = [
+  ["LinkedIn", "https://www.linkedin.com/in/sufzen", "linkedin-in"],
+  ["Instagram", "https://www.instagram.com/suf.zen", "instagram"],
+  ["Facebook", "https://facebook.com/101076789348095", "facebook-f"],
+  ["YouTube", "https://www.youtube.com/channel/UC4iI6gWzbwtdd-z-O-Al_bQ", "youtube"],
+  ["TikTok", "https://www.tiktok.com/@suf.zen", "tiktok"],
+  ["X", "https://x.com/Suf_Zen", "x-twitter"],
+];
+
+function brandedEmail(content: string) {
+  const icons = SOCIAL_LINKS.map(
+    ([name, url, icon]) =>
+      `<a href="${url}" style="display:inline-block;margin:0 5px"><img src="${EMAIL_ASSETS}webinar-v2-social-${icon}.png" width="36" height="36" alt="${name}" style="display:block;width:36px;height:36px;border:0"></a>`,
+  ).join("");
+  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f2"><tr><td align="center" style="padding:24px 12px">
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#fff;border:3px solid #000">
+<tr><td align="center" style="padding:14px 20px;border-bottom:1px solid #e6e2d6"><img src="${EMAIL_ASSETS}webinar-v2-lockup.png" width="440" alt="Realization בשיתוף Montreza" style="display:block;width:100%;max-width:440px;height:auto;border:0"></td></tr>
+<tr><td style="padding:0"><img src="${EMAIL_ASSETS}webinar-v2-hero-confirm.jpg" width="594" alt="נרשמת! שמרנו לך מקום. אסף איזנקוט ויבגני גורקוב" style="display:block;width:100%;height:auto;border:0"></td></tr>
+<tr><td style="padding:24px 32px">${content}</td></tr>
+<tr><td dir="rtl" align="center" style="padding:16px 20px;background:#FDCC33;font-family:Arial,sans-serif;font-size:14px;color:#000"><b>עקבו אחרינו</b><div style="margin-top:8px">${icons}</div></td></tr>
+</table></td></tr></table>`;
+}
+
 export async function sendWebinarRegistration(reg: Registration) {
   const to = process.env.SUBMISSION_NOTIFY_EMAIL;
   const transporter = await createMailer();
@@ -85,8 +111,9 @@ export async function sendWebinarRegistration(reg: Registration) {
     ].join("\n"),
   });
 
+  const firstName = reg.name.trim().split(/\s+/)[0] || reg.name;
   const confirmation = [
-    `שלום ${reg.name},`,
+    `שלום ${firstName},`,
     "",
     "תודה שנרשמת, שמרנו לך מקום.",
     "",
@@ -94,12 +121,13 @@ export async function sendWebinarRegistration(reg: Registration) {
     `${webinar.dateLabel}, ${webinar.timeLabel}. ${webinar.durationLabel}, בשידור חי.`,
     `מארחים: ${webinar.hostNames} (${webinar.hosts}).`,
     "",
-    "הקישור לשידור יישלח במייל לפני תחילת הוובינר.",
-    `להוספה ליומן: ${webinarCalendarUrl}`,
+    "בדקות הקרובות תגיע אליך הזמנה ליומן מ־Google Calendar, ובה הקישור לשידור. כדאי לאשר אותה: כך הוובינר נכנס ליומן ותגיע גם תזכורת.",
+    "יום לפני ובבוקר הוובינר נשלח גם תזכורת במייל.",
+    "אם ההזמנה לא הגיעה, כדאי לבדוק בתיקיית הספאם או פשוט לענות למייל הזה.",
     "",
     "הוובינר מוקלט, וההקלטה תישלח לכל הנרשמים.",
     "",
-    "רוצה שנתייחס לבעיה מסוימת? אפשר פשוט לענות למייל הזה.",
+    "רוצה שנתייחס לבעיה מסוימת? אפשר לענות למייל הזה ולספר עליה.",
     "",
     "נתראה,",
     "אסף איזנקוט, Realization",
@@ -108,15 +136,17 @@ export async function sendWebinarRegistration(reg: Registration) {
   // The confirmation is a courtesy: the registration already reached us, so a failure here is only logged.
   try {
     await transporter.sendMail({
-      from: { name: "Realization", address: from },
+      from: { name: "אסף איזנקוט", address: from },
       to: { name: reg.name, address: reg.email },
       replyTo: to,
       subject: `נרשמת לוובינר: ${webinar.shortTitle}`,
       text: confirmation.join("\n"),
       // Right-to-left HTML, so mail apps keep the Hebrew word order around the English names.
-      html: `<div dir="rtl" style="text-align:right;font-family:Arial,sans-serif;font-size:15px;line-height:1.6">${confirmation
-        .map((row) => (row ? escapeHtml(row) : ""))
-        .join("<br>")}</div>`,
+      html: brandedEmail(
+        `<div dir="rtl" style="text-align:right;font-family:Arial,sans-serif;font-size:16px;line-height:1.65;color:#141414">${confirmation
+          .map((row) => (row ? escapeHtml(row) : ""))
+          .join("<br>")}</div>`,
+      ),
     });
   } catch (error) {
     console.error("Webinar confirmation failed to send", error);
