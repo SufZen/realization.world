@@ -1,6 +1,6 @@
 # realization.world
 
-Production website for **Realization**: real estate in Portugal, and the ventures and AI systems built around it. The site has two conversion paths — services in three pillars (real estate development, AI and operations systems, delivery and team setup) and partnerships (owners, operators, capital) — and is built to be read by people, search engines, LLMs and AI agents. Next.js App Router, TypeScript, a schema.org graph, and a standalone Docker build for Coolify.
+Production website for **Realization**: real estate in Portugal, and the ventures and AI systems built around it. The site has two conversion paths — services in three pillars (real estate development, AI and operations systems, delivery and team setup) and partnerships (owners, operators, capital) — and is built to be read by people, search engines, LLMs and AI agents. Next.js App Router, TypeScript, a schema.org graph, and a standalone Docker build.
 
 The repository also holds the static `/asaf/` founder profile (`public/asaf/`), its plain-text source and line-break audit utility, and the brand assets.
 
@@ -67,19 +67,19 @@ The parent studio, Realization Portugal, RealizeOS, the Israeli capital and part
 
 The source strategy and supplied design archive are kept under `docs/`; see [`docs/README.md`](docs/README.md) for descriptions and checksums.
 
-## Coolify deployment
+## Deployment
 
 The multi-stage `Dockerfile` uses Next.js standalone output and runs as a non-root user on port `3000`.
 
-1. Connect this repository in Coolify and select Dockerfile deployment.
-2. Expose container port `3000`.
-3. Configure the domain and HTTPS at the platform proxy.
-4. Set the health check path to `/api/health`.
-5. Add the environment variables from `.env.example` (SMTP for the brief form; Umami and search-console verification optional).
-6. Start with one application instance. If scaling with dynamic caching or Server Actions, configure shared cache and a consistent `NEXT_SERVER_ACTIONS_ENCRYPTION_KEY`.
-7. Keep a reverse proxy in front of Node.js and configure request limits and rate limiting there.
+**Merging to `main` is the deploy.** The production server checks `origin/main` every five minutes. When it has moved, the server pulls it, rebuilds the Docker image and restarts the container; the previous image is kept for rollback. A rebuild takes a few minutes, so a merge is usually live within about ten. Coolify runs on the same server but does not build or deploy this site, and settings entered in Coolify do not reach it.
 
-Pushing this source does not deploy the site; deploys are triggered in Coolify.
+- **Runtime variables** from `.env.example` (SMTP for the forms, the webinar and deal-check Sheet webhooks) are set in an env file on the server, never in the repository. After changing one, recreate the container; no rebuild is needed.
+- **Build-time variables** (`NEXT_PUBLIC_*` for Umami and search-console verification, and `UMAMI_PROXY_TARGET`) are passed to the Docker build as build arguments, so changing one needs a rebuild.
+- **Domain and HTTPS** are handled by the server's Traefik proxy in front of the container. Keep request limits and rate limiting there.
+- **Health check:** `GET /api/health`.
+- Run one instance. If scaling with dynamic caching or Server Actions, configure a shared cache and a consistent `NEXT_SERVER_ACTIONS_ENCRYPTION_KEY`.
+
+Server access, the update script and the env file location are kept out of this public repository; ask Asaf.
 
 ## Important disclaimer
 
