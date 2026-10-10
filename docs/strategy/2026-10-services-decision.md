@@ -36,8 +36,12 @@ What we keep from the strategy, so the site does not turn into a generic consult
 ## Prices shown
 
 - The two 60-minute sessions (Portugal Deal & Investment Consultation, AI Strategy Session): €150, credited toward the next stage.
+- The Audit Sprint: €495 + VAT, bought online. It is the same offer as the 20.10 webinar's "joint audit" (אודיט משותף), with the same wording: a joint audit, a written report within 48 hours, a RealizeOS setup session, and the fee credited toward implementation.
+  - The buy button on the English and Hebrew Systems pages links to a Stripe Payment Link, set in `auditSprintCheckout` (`src/content/services.ts`). Set it back to `null` and the button returns to "Ask for a proposal" (WhatsApp on the Hebrew page).
+  - Stripe Tax adds VAT from the billing address. A buyer can enter a VAT number, and every purchase gets an invoice.
+  - After paying, the buyer books a 90-minute kickoff on a hidden TidyCal type.
+  - The AI Strategy Session credit and the webinar price are Stripe promotion codes, handed out privately.
 - Everything else: "by proposal" for now.
-- The Audit Sprint's buy button appears only once a Stripe Payment Link is set in `auditSprintCheckout` (`src/content/services.ts`).
 
 ## Measurement
 
@@ -47,7 +51,7 @@ Every call to action carries a Umami event, with `pillar` and `ref` as event pro
 |---|---|
 | `book-intro` | 20-min intro, on every Services page |
 | `book-session-real-estate`, `book-session-ai-systems`, `book-session-delivery` | The pillar's first session or qualifying intro |
-| `buy-audit` | Audit Sprint checkout (once the Stripe link exists) |
+| `buy-audit` | Audit Sprint checkout, on the English and Hebrew Systems pages |
 | `join-webinar` | Webinar signup, until the 20.10 webinar ends |
 | `deal-check` | The free deal check form |
 
@@ -56,7 +60,7 @@ A visitor who arrives with `?ref=` (an ad, a group post) keeps that ref on every
 ## Still open
 
 1. TidyCal: the 60-minute meeting is €150 since 10.10, and both 60-minute sessions book it. Separate types per pillar, a dedicated delivery intro and new page copy are optional; change the URLs in `bookingTypes` (`src/content/services.ts`) if they are made.
-2. The Stripe Payment Link and the Audit Sprint price.
+2. ~~The Stripe Payment Link and the Audit Sprint price.~~ Done 10 Oct: €495 + VAT, Payment Link live.
 3. The deal check's Sheet and Apps Script (`DEAL_CHECK_SHEET_*`), and which tool produces the numbers.
 4. A weekly email list in Listmonk. After 20.10 the webinar offer gives way to the field notes on its own (the pages regenerate hourly).
 5. Hebrew for the hub and the other two pillars (phase 2).
