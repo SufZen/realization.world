@@ -17,10 +17,11 @@ type CtaLinkProps = {
 const cleanRef = (value: string | null) => (value ?? "").replace(/[^a-z0-9-]/gi, "").slice(0, 80);
 
 function withRef(href: string, ref: string) {
-  const [path, query = ""] = href.split("?");
+  const [base, hash = ""] = href.split("#");
+  const [path, query = ""] = base.split("?");
   const params = new URLSearchParams(query);
   params.set("ref", ref);
-  return `${path}?${params}`;
+  return `${path}?${params}${hash ? `#${hash}` : ""}`;
 }
 
 function linkFor(cta: Cta, ref: string) {

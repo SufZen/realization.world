@@ -1,0 +1,10 @@
+/* /links: a single column of large buttons, phone first. */
+.page { padding-block: clamp(3rem, 8vw, 6rem); background: var(--color-neutral-100); }
+.inner { display: grid; gap: 2rem; width: min(100% - 2 * var(--gutter), 520px); margin-inline: auto; }
+.head { display: grid; gap: .8rem; text-align: center; }
+.head h1 { font-size: clamp(2.2rem, 7vw, 3.4rem); }
+.head p:last-child { color: var(--text-body); font-size: 1.02rem; }
+.stack { display: grid; gap: .75rem; margin: 0; padding: 0; list-style: none; }
+.stack :global(.button) { width: 100%; justify-content: space-between; padding-block: 1.1rem; font-size: .95rem; }
+.social { display: flex; justify-content: center; }
+.social nav { display: grid; justify-items: center; margin-top: 0; }

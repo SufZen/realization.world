@@ -37,9 +37,9 @@ export type Offer = {
   from?: string;
 };
 
-/** The offers to show right now. Pages that list timed offers revalidate hourly. */
-export const currentOffers = (offers: Offer[], now = Date.now()) =>
-  offers.filter((offer) => (!offer.until || now < Date.parse(offer.until)) && (!offer.from || now >= Date.parse(offer.from)));
+/** The items to show right now (offers, links). Pages that list timed items revalidate hourly. */
+export const currentOffers = <T extends { until?: string; from?: string }>(items: T[], now = Date.now()) =>
+  items.filter((item) => (!item.until || now < Date.parse(item.until)) && (!item.from || now >= Date.parse(item.from)));
 
 const tidycal = "https://schedule.realization.co.il";
 
@@ -68,8 +68,8 @@ export const isWebinarOpen = (now = Date.now()) => now < Date.parse(webinarEnds)
 
 export const sessionPrice = "€150";
 
-/** The free 20-min intro, offered on every Services page. */
-export const introCta = (pillar: PillarSlug | "hub"): Cta => ({
+/** The free 20-min intro, offered on every Services page (and the homepage, Learn and /links). */
+export const introCta = (pillar: PillarSlug | "hub" | "home" | "learn" | "links"): Cta => ({
   label: "Book a 20-min intro",
   href: bookingTypes.intro,
   event: "book-intro",

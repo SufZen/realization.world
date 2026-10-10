@@ -12,6 +12,8 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 86400,
     deviceSizes: [640, 750, 1080, 1440, 1920],
+    // YouTube thumbnails for the video cards (src/lib/youtube.ts).
+    remotePatterns: [{ protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" }],
   },
   poweredByHeader: false,
   // Static founder profile (public/asaf) served at /asaf; linked from every CV.

@@ -3,40 +3,25 @@ import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { ButtonLink } from "@/components/button-link";
 import Image from "next/image";
-import { ProcessRibbon } from "@/components/process-ribbon";
 import { SectionHeading } from "@/components/section-heading";
 import { WorkCard } from "@/components/work-card";
 import { JsonLd } from "@/components/json-ld";
-import { framework, partnerPaths, siteUrl } from "@/content/site";
-import { featuredWork, workBySlug } from "@/content/work";
+import { Testimonials, VideoGrid } from "@/components/media-blocks";
+import { CtaLink } from "@/components/services/cta-link";
+import { PillarDoors } from "@/components/services/pillar-doors";
+import { approachNavigation, framework, insights, partnerPaths, siteUrl } from "@/content/site";
+import { introCta } from "@/content/services";
+import { featuredWork } from "@/content/work";
 import { graph, websiteSchema } from "@/lib/schema";
 import { Lines } from "@/components/lines";
-import { MarketBridgeDiagram } from "@/components/diagrams";
 import { WebinarBanner } from "@/components/webinar-banner";
+import { latestVideos } from "@/lib/youtube";
 
 // Title and description come from the root layout; canonical is set per page.
 export const metadata: Metadata = { alternates: { canonical: siteUrl } };
 
-const doors = [
-  {
-    tone: "brand",
-    eyebrow: "REAL ESTATE & CAPITAL",
-    title: "Develop and invest | in Portugal.",
-    text: "Residential development, architecture | and a licensed way to unblock stuck homes.",
-    work: ["arena-barreiro", "realization-portugal", "boa-architecture"],
-    href: "/partners/capital",
-    cta: "Partner on a project",
-  },
-  {
-    tone: "dark",
-    eyebrow: "AI & OPERATIONS",
-    title: "Bring AI into | your operations.",
-    text: "A measured adoption programme, | and the systems we built to run our own work.",
-    work: ["ai-adoption-architecture-firm", "realizeos", "meetsum"],
-    href: "/services/ai-systems",
-    cta: "See AI and operations systems",
-  },
-] as const;
+// The latest videos come from the YouTube feed: regenerate hourly.
+export const revalidate = 3600;
 
 const proof = [
   ["2019", "founded in Portugal"],
@@ -46,7 +31,10 @@ const proof = [
   ["Month 7", "modelled break-even in our AI adoption case"],
 ] as const;
 
-export default function HomePage() {
+export default async function HomePage() {
+  const videos = await latestVideos(3);
+  const notes = [...insights].sort((a, b) => b.date.localeCompare(a.date)).slice(0, videos.length ? 2 : 4);
+
   return (
     <>
       <JsonLd data={graph(websiteSchema)} />
@@ -57,44 +45,29 @@ export default function HomePage() {
         </div>
         <div className="container-wide home-hero__grid">
           <div className="home-hero__content">
-            <p className="eyebrow">REAL ESTATE · VENTURES · SYSTEMS</p>
+            <p className="eyebrow">REAL ESTATE · AI SYSTEMS · DELIVERY</p>
             <h1><span className="ln">Untapped potential.</span> <em className="ln">Realized.</em></h1>
             <p className="home-hero__lead">
-              <span className="ln">We develop real estate in Portugal</span>
-              <span className="ln">and build the ventures and systems around it.</span>
+              <span className="ln">We realize potential in three dimensions:</span>
+              <span className="ln">places, systems and teams.</span>
             </p>
             <div className="button-row">
-              <ButtonLink href="/bring-an-opportunity">Bring an opportunity</ButtonLink>
-              <ButtonLink href="/work" variant="outline">Explore the work</ButtonLink>
+              <ButtonLink href="/services">See our services</ButtonLink>
+              <CtaLink cta={introCta("home")} pageRef="home" variant="outline" />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="doors" aria-label="Choose your path">
-        <div className="container-wide doors__grid">
-          {doors.map((door) => (
-            <article className={`door door--${door.tone}`} key={door.eyebrow}>
-              <p className="eyebrow">{door.eyebrow}</p>
-              <h2><Lines text={door.title} /></h2>
-              <p><Lines text={door.text} /></p>
-              <ul className="door__links">
-                {door.work.map((slug) => {
-                  const item = workBySlug(slug)!;
-                  return <li key={slug}><Link href={`/work/${slug}`}><span>{item.name}</span><small>{item.eyebrow.split(" · ")[0].toLowerCase()}</small><ArrowUpRight aria-hidden="true" size={18} /></Link></li>;
-                })}
-              </ul>
-              <ButtonLink href={door.href} variant={door.tone === "dark" ? "primary" : "dark"}>{door.cta}</ButtonLink>
-            </article>
-          ))}
-        </div>
-      </section>
+      <PillarDoors />
 
       <section className="proof-strip" aria-label="Realization in numbers">
         <dl className="container-wide proof-strip__grid">
           {proof.map(([value, label]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
         </dl>
       </section>
+
+      <Testimonials />
 
       <section className="manifesto">
         <div className="container-wide manifesto__grid">
@@ -120,12 +93,28 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="section surface-muted">
+        <div className="container-wide">
+          <SectionHeading eyebrow="LEARN FROM THE FIELD" title="Notes and videos | from real projects." intro="What worked, what did not | and what it cost." />
+          <VideoGrid videos={videos} place="home" />
+          <div className="insights-grid" style={videos.length ? { marginTop: "clamp(2rem, 4vw, 3rem)" } : undefined}>
+            {notes.map(({ slug, category, title, excerpt, published, readTime, icon: Icon }) => (
+              <Link className="insight-card" href={`/insights/${slug}`} key={slug}>
+                <div className="insight-card__icon"><Icon size={25} strokeWidth={1.5} /></div>
+                <div><p className="eyebrow">{category}</p><h3><Lines text={title} /></h3><p><Lines text={excerpt} /></p><div className="insight-card__meta"><span>{published}</span><span>{readTime}</span></div></div>
+              </Link>
+            ))}
+          </div>
+          <div className="button-row"><ButtonLink href="/insights" variant="dark">Go to Learn</ButtonLink></div>
+        </div>
+      </section>
+
       <section className="section surface-dark">
         <div className="container-wide">
           <SectionHeading
             eyebrow="OUR FRAMEWORK"
             title="Potential → system → value."
-            intro="Three layers. One operating reality."
+            intro="Three layers. One operating reality. | Every engagement ends with a handoff."
             inverse
           />
           <div className="framework-grid">
@@ -138,41 +127,18 @@ export default function HomePage() {
               </article>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container-wide">
-          <SectionHeading
-            eyebrow="HOW WE BUILD"
-            title="Founder-led. Built to transfer."
-            intro="Vision and validation stay with us. | Scale moves to the right operator."
-          />
-          <ProcessRibbon />
-          <div className="button-row"><ButtonLink href="/how-we-build" variant="dark">See the full model</ButtonLink></div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container-wide diagram-row">
-          <div>
-            <SectionHeading
-              eyebrow="WHERE WE WORK"
-              title="Israel. Portugal. | Europe next."
-              intro="Israeli capital and technology. | A working base in Portugal. | New relationships from Barcelona."
-            />
-            <ButtonLink href="/markets" variant="dark">See the markets</ButtonLink>
+          <div className="button-row">
+            {approachNavigation.map((item) => <ButtonLink href={item.href} variant="outline" key={item.href}>{item.label}</ButtonLink>)}
           </div>
-          <figure className="diagram diagram--panel"><MarketBridgeDiagram /></figure>
         </div>
       </section>
 
       <section className="section">
         <div className="container-wide">
           <SectionHeading
-            eyebrow="PARTNER PATHS"
-            title="Where do you fit?"
-            intro="Start with the role you can play."
+            eyebrow="PARTNER WITH US"
+            title="Bringing a property, | capital or a team?"
+            intro="Owners, operators and capital partners | have their own paths into our projects."
           />
           <div className="audience-grid">
             {partnerPaths.map(({ slug, title, summary, icon: Icon }) => (
@@ -190,11 +156,14 @@ export default function HomePage() {
       <section className="cta-band">
         <div className="container-wide cta-band__grid">
           <div>
-            <p className="eyebrow">A POTENTIAL REALITY</p>
-            <h2>See what others miss?</h2>
-            <p><Lines text="Share the asset, the rights | and what keeps it stuck." /></p>
+            <p className="eyebrow">NOT SURE WHERE TO START?</p>
+            <h2><Lines text="Twenty minutes | is enough." /></h2>
+            <p><Lines text="One call to know which of the three | your problem sits in, or whether we fit at all." /></p>
           </div>
-          <Link className="button button--dark" href="/bring-an-opportunity">Bring an opportunity <ArrowUpRight size={18} aria-hidden="true" /></Link>
+          <div className="button-row">
+            <CtaLink cta={introCta("home")} pageRef="home" variant="dark" />
+            <Link className="button button--outline" href="/bring-an-opportunity" data-umami-event="open-brief" data-umami-event-path="general">Bring an opportunity <ArrowUpRight size={18} aria-hidden="true" /></Link>
+          </div>
         </div>
       </section>
     </>

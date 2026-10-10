@@ -5,6 +5,7 @@ import { JsonLd } from "@/components/json-ld";
 import { Lines } from "@/components/lines";
 import { PageHero } from "@/components/page-hero";
 import { SectionHeading } from "@/components/section-heading";
+import { PillarVideos, Testimonials } from "@/components/media-blocks";
 import { CtaLink } from "@/components/services/cta-link";
 import { DealCheckForm } from "@/components/services/deal-check-form";
 import { HeroStatement } from "@/components/services/hero-statement";
@@ -84,7 +85,7 @@ export default function RealEstatePage() {
         }
       />
 
-      <section className="section surface-muted">
+      <section className="section surface-muted" id="offers">
         <div className="container-wide">
           <SectionHeading eyebrow="WAYS TO START" title="Start with the numbers. | Then decide." intro="A free check on one listing, | a paid hour on one deal, | a fixed-scope study on one site." />
           <OfferList offers={pillar.offers} pageRef={pillar.ref} />
@@ -122,6 +123,10 @@ export default function RealEstatePage() {
           </div>
         </div>
       </section>
+
+      <Testimonials pillar="real-estate" />
+
+      <PillarVideos pillar="real-estate" title="Deals and numbers, | in short videos." intro="How we read a listing, | price a project and spot the risks." />
 
       <InsightFeed insights={pillarInsights(pillar, insights)} title="Development and investing, | from real projects." intro="How we price, model and unblock | real properties in Portugal." />
 

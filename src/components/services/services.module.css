@@ -53,3 +53,11 @@
 :global(.page-hero--dark) .heroStatement { color: #fff; }
 :global(.page-hero--dark) .heroStatement :global(.eyebrow) { color: var(--color-yellow); }
 @media (max-width: 1120px) { .heroStatement { padding-inline: 0; border-inline-start: 0; border-top: 1px solid currentColor; } }
+
+/* Homepage: three pillar doors (the global .door styles, three columns) */
+:global(.doors__grid).doors3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.doorLight { background: #fff; color: #000; }
+.doorLight :global(.eyebrow) { color: var(--color-neutral-700); }
+.doors3 :global(.door__links) a { grid-template-columns: minmax(0, 1fr) auto auto; }
+.doors3 :global(.door__links) small { white-space: nowrap; }
+@media (max-width: 1000px) { :global(.doors__grid).doors3 { grid-template-columns: 1fr; } }

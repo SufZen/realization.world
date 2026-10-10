@@ -9,6 +9,7 @@ import { insights, siteUrl } from "@/content/site";
 import { currentOffers, pillarBySlug, pillarInsights, type SystemsCopy } from "@/content/services";
 import { workBySlug, type WorkItem } from "@/content/work";
 import { breadcrumbSchema, graph, ids } from "@/lib/schema";
+import { PillarVideos, Testimonials } from "@/components/media-blocks";
 import { CtaLink } from "./cta-link";
 import { HeroStatement } from "./hero-statement";
 import { CtaBand, FaqList, FitLists, InsightFeed, OfferList } from "./sections";
@@ -72,7 +73,7 @@ export function SystemsPage({ copy, path }: { copy: SystemsCopy; path: string })
         }
       />
 
-      <section className="section surface-muted">
+      <section className="section surface-muted" id="offers">
         <div className="container-wide">
           <SectionHeading eyebrow={copy.offers.eyebrow} title={copy.offers.title} intro={copy.offers.intro} />
           <OfferList offers={copy.offers.items} pageRef={copy.ref} />
@@ -151,6 +152,10 @@ export function SystemsPage({ copy, path }: { copy: SystemsCopy; path: string })
           </div>
         </div>
       </section>
+
+      {he ? <Testimonials pillar="ai-systems" eyebrow="במילים שלהם" title="מה אומרים | לקוחות ושותפים." /> : <Testimonials pillar="ai-systems" />}
+
+      <PillarVideos pillar="ai-systems" eyebrow={he ? "צפו" : "WATCH"} title={he ? "בינה מלאכותית בפרויקטים, | בסרטונים קצרים." : "AI in real projects, | in short videos."} />
 
       {!he && <InsightFeed insights={pillarInsights(pillar, insights)} title="AI in practice, | from real projects." intro="Short notes on what worked, | what did not and what it cost." />}
 
