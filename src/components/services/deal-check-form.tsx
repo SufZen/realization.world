@@ -2,13 +2,31 @@
 
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { unstable_rethrow, useSearchParams } from "next/navigation";
 import { startTransition, useActionState, useRef, useState, type FormEvent } from "react";
 import { submitDealCheck, type DealCheckState } from "@/app/services/real-estate/actions";
 import { contactEmail, whatsappUrl } from "@/content/site";
 import { dealPlans } from "@/lib/deal-check";
 
 const initialState: DealCheckState = { status: "idle" };
+
+/**
+ * A page opened before a deploy still points at the previous build's server action, and
+ * the server answers 404. Without this, the click does nothing visible; with it, the
+ * visitor gets the email and WhatsApp fallback with what they typed.
+ */
+async function submitOrFallBack(previous: DealCheckState, form: FormData): Promise<DealCheckState> {
+  try {
+    return await submitDealCheck(previous, form);
+  } catch (error) {
+    unstable_rethrow(error);
+    console.error("Deal check could not reach the server", error);
+    return {
+      status: "unavailable",
+      message: "The site was updated while this page was open, so it could not send. Reload the page and send again, or send what you typed by email or WhatsApp.",
+    };
+  }
+}
 
 /** Builds a mailto: link from the current form values, used when online sending is unavailable. */
 function mailtoFrom(form: HTMLFormElement | null) {
@@ -30,7 +48,7 @@ function mailtoFrom(form: HTMLFormElement | null) {
 
 export function DealCheckForm() {
   const ref = (useSearchParams().get("ref") ?? "").replace(/[^a-z0-9-]/gi, "").slice(0, 80) || "services-real-estate";
-  const [state, action, pending] = useActionState(submitDealCheck, initialState);
+  const [state, action, pending] = useActionState(submitOrFallBack, initialState);
   const formRef = useRef<HTMLFormElement>(null);
   const [mailto, setMailto] = useState(`mailto:${contactEmail}`);
   const errors = state.fieldErrors ?? {};
