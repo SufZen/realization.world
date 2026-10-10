@@ -93,7 +93,7 @@ export default function ServicesPage() {
       <section className="section surface-dark">
         <div className="container-wide">
           <SectionHeading eyebrow={hub.why.eyebrow} title={hub.why.title} intro={hub.why.intro} inverse />
-          <div className="framework-grid">
+          <div className={`framework-grid ${styles.tabletOne}`}>
             {hub.why.items.map(([title, text], index) => {
               const Icon = pillars[index].icon;
               return (

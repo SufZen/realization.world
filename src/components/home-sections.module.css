@@ -1,0 +1,24 @@
+/* Homepage: numbers, ideas and selected work. */
+
+/* Numbers: four strong facts */
+:global(.proof-strip__grid).numbers { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 1120px) { :global(.proof-strip__grid).numbers { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Ideas we work by (inside the yellow manifesto band) */
+.ideas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem 2rem; margin: 2.5rem 0 0; padding: 1.75rem 0 0; border-top: 1px solid rgb(0 0 0 / 22%); list-style: none; }
+.ideas strong { display: block; color: #000; font-size: 1.05rem; }
+.ideas span { display: block; margin-top: .4rem; color: rgb(0 0 0 / 66%); font-size: .9rem; line-height: 1.5; }
+@media (max-width: 760px) { .ideas { grid-template-columns: 1fr; } }
+
+/* Selected work: three compact cards */
+.work { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2.5vw, 2rem); margin: 0; padding: 0; list-style: none; }
+.card { display: flex; height: 100%; flex-direction: column; color: inherit; }
+.media { position: relative; overflow: hidden; aspect-ratio: 4 / 3; background: var(--color-neutral-100); }
+.media img { object-fit: cover; transition: transform .8s var(--ease-out); }
+.card:hover .media img { transform: scale(1.04); }
+.meta { margin-top: 1.1rem; color: var(--text-muted); font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.card h3 { margin-top: .45rem; font-size: clamp(1.35rem, 2vw, 1.75rem); letter-spacing: -.025em; }
+.card p { margin-top: .5rem; font-size: .92rem; }
+.more { display: inline-flex; align-items: center; gap: .35rem; margin-top: auto; padding-top: 1rem; color: #000; font-size: .84rem; font-weight: 700; }
+.card:hover .more span { text-decoration: underline; text-underline-offset: .25rem; }
+@media (max-width: 900px) { .work { grid-template-columns: 1fr; } .media { aspect-ratio: 16 / 10; } }

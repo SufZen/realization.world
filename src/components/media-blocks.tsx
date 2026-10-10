@@ -46,10 +46,13 @@ export async function PillarVideos({ pillar, title, intro, eyebrow = "WATCH", su
 
 /**
  * Quotes from clients and partners (src/content/testimonials.ts). With a pillar, only
- * that pillar's quotes; without, all of them. Renders nothing until there are quotes.
+ * that pillar's quotes; without, one per person. Renders nothing until there are quotes.
  */
 export function Testimonials({ pillar, eyebrow = "IN THEIR WORDS", title = "What clients | and partners say.", surface = "" }: { pillar?: PillarSlug; eyebrow?: string; title?: string; surface?: string }) {
-  const quotes = pillar ? testimonials.filter((item) => item.pillar === pillar) : testimonials;
+  // Without a pillar: one quote per person.
+  const quotes = pillar
+    ? testimonials.filter((item) => item.pillar === pillar)
+    : testimonials.filter((item, index) => testimonials.findIndex((other) => other.name === item.name) === index);
   if (!quotes.length) return null;
   return (
     <section className={`section ${surface}`}>

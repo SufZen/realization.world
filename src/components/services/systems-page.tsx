@@ -106,7 +106,7 @@ export function SystemsPage({ copy, path }: { copy: SystemsCopy; path: string })
       <section className="section">
         <div className="container-wide">
           <SectionHeading eyebrow={copy.principles.eyebrow} title={copy.principles.title} intro={copy.principles.intro} />
-          <div className="journey-grid">
+          <div className={`journey-grid ${styles.tabletTwo}`}>
             {copy.principles.items.map(([title, text], index) => (
               <article className="journey-step" key={title}>
                 <span className="journey-step__number">0{index + 1}</span>

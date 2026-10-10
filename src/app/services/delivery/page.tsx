@@ -75,7 +75,7 @@ export default function DeliveryPage() {
       <section className="section">
         <div className="container-wide">
           <SectionHeading eyebrow="HOW IT WORKS" title="Built to be | handed over." intro="Every engagement ends on a handoff date | agreed at the start." />
-          <div className="journey-grid">
+          <div className={`journey-grid ${styles.tabletTwo}`}>
             {delivery.steps.map(([title, text], index) => (
               <article className="journey-step" key={title}>
                 <span className="journey-step__number">0{index + 1}</span>

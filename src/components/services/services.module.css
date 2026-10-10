@@ -61,3 +61,14 @@
 .doors3 :global(.door__links) a { grid-template-columns: minmax(0, 1fr) auto auto; }
 .doors3 :global(.door__links) small { white-space: nowrap; }
 @media (max-width: 1000px) { :global(.doors__grid).doors3 { grid-template-columns: 1fr; } }
+
+/* Tablet (761–1000 px): the global four-step and three-card grids are too narrow here.
+   Below 761 px the global one-column rules apply. */
+@media (min-width: 761px) and (max-width: 1000px) {
+  :global(.journey-grid).tabletTwo { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  :global(.journey-grid).tabletTwo > :nth-child(2n) { border-inline-end: 1px solid var(--border-hairline); }
+  :global(.journey-grid).tabletTwo > :nth-child(n + 3) { border-top: 0; }
+  :global(.framework-grid).tabletOne { grid-template-columns: 1fr; }
+  :global(.framework-grid).tabletOne > * { min-height: 0; border-inline-end: 0; border-bottom: 1px solid rgb(255 255 255 / 22%); }
+  :global(.framework-grid).tabletOne > :last-child { border-bottom: 0; }
+}

@@ -4,16 +4,17 @@ import Link from "next/link";
 import { ButtonLink } from "@/components/button-link";
 import Image from "next/image";
 import { SectionHeading } from "@/components/section-heading";
-import { WorkCard } from "@/components/work-card";
 import { JsonLd } from "@/components/json-ld";
+import styles from "@/components/home-sections.module.css";
+import { SelectedWork } from "@/components/selected-work";
+import servicesStyles from "@/components/services/services.module.css";
 import { Testimonials, VideoGrid } from "@/components/media-blocks";
 import { CtaLink } from "@/components/services/cta-link";
 import { PillarDoors } from "@/components/services/pillar-doors";
 import { approachNavigation, framework, insights, partnerPaths, siteUrl } from "@/content/site";
 import { introCta } from "@/content/services";
-import { featuredWork } from "@/content/work";
 import { graph, websiteSchema } from "@/lib/schema";
-import { Lines } from "@/components/lines";
+import { Lines, plain } from "@/components/lines";
 import { WebinarBanner } from "@/components/webinar-banner";
 import { latestVideos } from "@/lib/youtube";
 
@@ -23,12 +24,19 @@ export const metadata: Metadata = { alternates: { canonical: siteUrl } };
 // The latest videos come from the YouTube feed: regenerate hourly.
 export const revalidate = 3600;
 
+/* Sources: Asaf's founder profile (public/asaf/profile.md) and LinkedIn experience;
+   group sizes from the channel-growth session, 10.10.2026. */
 const proof = [
-  ["2019", "founded in Portugal"],
-  ["11 homes", "in development at Arena, Barreiro"],
-  ["9 projects", "designed by BOA Architecture"],
+  ["20 years", "leading complex work: intelligence, architecture, real estate development"],
+  ["6 ventures", "founded or co-founded since 2018"],
+  ["11,800+", "members in the Portugal business groups we run"],
   ["3 AI systems", "built and in daily use"],
-  ["Month 7", "modelled break-even in our AI adoption case"],
+] as const;
+
+const ideas = [
+  ["Highest and best use", "Every place has a best version. | We find it before anyone builds."],
+  ["Proof before scale", "One deal, one pilot, one process, | measured before anything grows."],
+  ["Built to be handed over", "We build the machine, train the team | and leave on a date agreed at the start."],
 ] as const;
 
 export default async function HomePage() {
@@ -62,7 +70,7 @@ export default async function HomePage() {
       <PillarDoors />
 
       <section className="proof-strip" aria-label="Realization in numbers">
-        <dl className="container-wide proof-strip__grid">
+        <dl className={`container-wide proof-strip__grid ${styles.numbers}`}>
           {proof.map(([value, label]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
         </dl>
       </section>
@@ -75,6 +83,9 @@ export default async function HomePage() {
           <div>
             <h2><Lines text="The value is there. | The system isn’t." /></h2>
             <p><Lines text="We build the missing layer | between an underused place and a working venture." /></p>
+            <ul className={styles.ideas} aria-label="Ideas we work by">
+              {ideas.map(([title, text]) => <li key={title}><strong>{title}</strong><span><Lines text={plain(text)} /></span></li>)}
+            </ul>
           </div>
         </div>
       </section>
@@ -83,12 +94,11 @@ export default async function HomePage() {
         <div className="container-wide">
           <SectionHeading
             eyebrow="SELECTED WORK"
-            title="Real estate is where we start."
-            intro="Development in Portugal is our core. | The ventures and systems grow from it."
+            title="One project | from each pillar."
+            intro="Development, systems and delivery, | from our own work and our clients’."
+            align="split"
           />
-          <div className="ventures-grid">
-            {featuredWork.map((item, index) => <WorkCard item={item} featured={index === 0} key={item.slug} />)}
-          </div>
+          <SelectedWork />
           <div className="button-row"><ButtonLink href="/work" variant="dark">See all the work</ButtonLink></div>
         </div>
       </section>
@@ -117,7 +127,7 @@ export default async function HomePage() {
             intro="Three layers. One operating reality. | Every engagement ends with a handoff."
             inverse
           />
-          <div className="framework-grid">
+          <div className={`framework-grid ${servicesStyles.tabletOne}`}>
             {framework.map(({ title, text, icon: Icon }, index) => (
               <article className="framework-card" key={title}>
                 <div className="framework-card__icon"><Icon size={25} strokeWidth={1.5} /></div>

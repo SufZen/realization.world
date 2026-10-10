@@ -8,7 +8,7 @@ import { InsightFeed } from "@/components/services/sections";
 import { SocialLinks } from "@/components/social-links";
 import { insights } from "@/content/site";
 import { isWebinarOpen, type Cta } from "@/content/services";
-import { newsletterUrl, youtubeChannelUrl } from "@/content/social";
+import { communities, newsletterUrl, youtubeChannelUrl } from "@/content/social";
 import { pageMetadata } from "@/lib/metadata";
 import { latestVideos } from "@/lib/youtube";
 
@@ -69,6 +69,13 @@ export default async function LearnPage() {
             <h2><Lines text="Get the field notes | by email." /></h2>
             <p><Lines text="Occasional updates: new tools, case studies and events. | Unsubscribe any time." /></p>
             <SocialLinks />
+            <p>
+              Or join the conversation in our Portugal business groups:{" "}
+              {communities.map((group, index) => (
+                <span key={group.href}>{index > 0 && " · "}<a className="text-link" href={group.href} rel="noopener" data-umami-event="join-group" data-umami-event-group={group.lang}>{group.lang === "he" ? "Hebrew" : "English"}</a></span>
+              ))}
+              .
+            </p>
           </div>
           <div className="button-row"><CtaLink cta={updates} pageRef={ref} variant="dark" /></div>
         </div>

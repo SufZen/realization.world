@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { approachNavigation, bookingUrl, contactEmail, primaryNavigation, whatsappUrl } from "@/content/site";
+import { communities } from "@/content/social";
 import { BrandMark } from "./brand-mark";
 import { Lines } from "./lines";
 import { SocialLinks } from "./social-links";
@@ -50,6 +51,11 @@ export function SiteFooter() {
           <a href={whatsappUrl} rel="noopener" data-umami-event="whatsapp">WhatsApp</a>
           <a href={bookingUrl} rel="noopener" data-umami-event="book-intro">Book a 30-min intro</a>
           <a href="/asaf">Founder · Asaf Eyzenkot</a>
+          {communities.map((group) => (
+            <a href={group.href} rel="noopener" data-umami-event="join-group" data-umami-event-group={group.lang} key={group.href}>
+              {group.lang === "he" ? "Portugal business group (Hebrew)" : "Portugal business group (English)"}
+            </a>
+          ))}
           <p>Israel · Portugal · Europe</p>
         </div>
       </div>
