@@ -3,7 +3,8 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { clientKey, rateLimited } from "@/lib/brief";
-import { appendToSheet, readDealCheck, sheetConfigured, validateDealCheck, type DealCheckField } from "@/lib/deal-check";
+import { appendToSheet, dealCheckBrief, readDealCheck, sheetConfigured, validateDealCheck, type DealCheckField } from "@/lib/deal-check";
+import { mailConfigured, sendBrief } from "@/lib/mail";
 
 export type DealCheckState = {
   status: "idle" | "error" | "unavailable";
@@ -26,18 +27,22 @@ export async function submitDealCheck(_previous: DealCheckState, form: FormData)
     return { status: "error", message: "Please check the highlighted fields.", fieldErrors };
   }
 
-  if (!sheetConfigured()) return unavailable;
+  if (!sheetConfigured() && !mailConfigured()) return unavailable;
 
   if (rateLimited(clientKey(await headers()))) {
     return { status: "error", message: "Too many requests from this connection. Please wait a few minutes, or email us directly." };
   }
 
-  try {
-    await appendToSheet(deal);
-  } catch (error) {
-    console.error("Deal check failed to reach the sheet", error);
-    return unavailable;
-  }
+  // The Sheet keeps the record and the email tells us it arrived. Either one is enough
+  // for us to answer, so the visitor sees an error only when both fail.
+  const deliveries: Array<[string, () => Promise<void>]> = [];
+  if (sheetConfigured()) deliveries.push(["sheet", () => appendToSheet(deal)]);
+  if (mailConfigured()) deliveries.push(["email", () => sendBrief(dealCheckBrief(deal))]);
+  const results = await Promise.allSettled(deliveries.map(([, deliver]) => deliver()));
+  results.forEach((result, index) => {
+    if (result.status === "rejected") console.error(`Deal check failed to reach the ${deliveries[index][0]}`, result.reason);
+  });
+  if (results.every((result) => result.status === "rejected")) return unavailable;
 
   redirect("/services/real-estate/thank-you");
 }
