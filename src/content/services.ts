@@ -60,7 +60,7 @@ export const bookingTypes = {
 };
 
 /** Stripe Payment Link for the Audit Sprint. The buy button appears only once this is set. */
-export const auditSprintCheckout: string | null = null;
+export const auditSprintCheckout: string | null = "https://buy.stripe.com/9B68wQbLB3JW2LA7K96Ri0f";
 
 /** End of the 20.10 webinar (src/lib/webinar.ts). Its signup offers disappear after it. */
 export const webinarEnds = "2026-10-20T18:30:00Z";
@@ -203,9 +203,10 @@ export const pillars: Pillar[] = [
       },
       {
         name: "Audit Sprint",
-        text: "Stage 0, focused discovery, as a fixed-price sprint: | a decisions document, a tiered roadmap | and agreed success measures. Limited slots.",
-        format: "Two to three sessions",
-        price: "Fixed price, by proposal",
+        text: "A joint, in-depth audit of your firm. | Within 48 hours, a written report: | what to fix first, in order of priority. | The fee is credited toward implementation.",
+        format: "90-min kickoff · RealizeOS setup session included",
+        price: "€495 + VAT",
+        amount: 495,
         cta: auditSprintCheckout
           ? { label: "Buy the Audit Sprint", href: auditSprintCheckout, event: "buy-audit", data: { pillar: "ai-systems" } }
           : { label: "Ask for a proposal", href: "/bring-an-opportunity?path=advisory", carryRef: true },
@@ -427,7 +428,7 @@ export const systemsEn: SystemsCopy = {
     intro: "There is no commitment to the sequence. | The retainer tapers on a schedule written into the proposal.",
     youGet: "You get:",
     stages: [
-      ["Stage 0", "Focused discovery", "Two to three in-depth sessions. | We name the problem in your words, | take three management decisions | and check what you already pay for.", "A decisions document, a tiered roadmap | and agreed success measures — yours to keep."],
+      ["Stage 0", "Audit Sprint", "A 90-minute kickoff, then a joint, in-depth audit: | how the work gets done today, | where it gets stuck | and what you already pay for.", "A written report within 48 hours: | what to fix first, in order of priority — yours to keep."],
       ["Stage 1", "Guided pilot", "Three to five weeks, one work domain, | two people. We choose the tools and guide the build; | your team operates and tests it.", "A working process in production, | measured before and after on real cases."],
       ["Stage 2", "Tapering support", "Around ten to twelve advisory hours a month, | tapering from full to half to a quarter | and ending at month twelve.", "A team that runs and extends | the system without us."],
       ["Add-on", "Team workshops", "Sessions built on your own cases: | how to spot where AI fits | and match the right tool to it.", "People who find the next use case | themselves."],
@@ -468,7 +469,7 @@ export const systemsEn: SystemsCopy = {
     eyebrow: "QUESTIONS",
     title: "Before you ask.",
     items: [
-      ["How quickly will we see a result?", "Discovery takes two to three sessions. A pilot runs three to five weeks, and most of that time is quality checks against real cases rather than building. In our modelled case, the programme breaks even in month seven."],
+      ["How quickly will we see a result?", "The Audit Sprint starts with a 90-minute kickoff, and the written report arrives within 48 hours of the audit. A pilot runs three to five weeks, and most of that time is quality checks against real cases rather than building. In our modelled case, the programme breaks even in month seven."],
       ["How much of our team’s time does it take?", "Two kinds of time. One internal lead for four to six hours a week, and two to three hours a week from each pilot participant, mostly reviewing outputs. We ask for those hours in the proposal, because without them the work does not happen."],
       ["Do we have to use RealizeOS or your other systems?", "No. We start with what you already pay for and what the market offers. RealizeOS, MeetSum and our other systems are options when they fit the gap, not a requirement."],
       ["What does it cost?", "Each stage is priced as a separate, fixed unit before it starts, and you can stop after any stage. Discovery is deliberately a small first commitment. Ask for a proposal after a 20-minute intro call."],
