@@ -55,9 +55,9 @@ A visitor who arrives with `?ref=` (an ad, a group post) keeps that ref on every
 
 ## Still open
 
-1. The TidyCal rebuild: new booking types and page copy. Until then, the new types point at today's closest type (`bookingTypes` in `src/content/services.ts`), so TidyCal still shows €90 for the 60-minute session.
+1. TidyCal: the 60-minute meeting is €150 since 10.10, and both 60-minute sessions book it. Separate types per pillar, a dedicated delivery intro and new page copy are optional; change the URLs in `bookingTypes` (`src/content/services.ts`) if they are made.
 2. The Stripe Payment Link and the Audit Sprint price.
 3. The deal check's Sheet and Apps Script (`DEAL_CHECK_SHEET_*`), and which tool produces the numbers.
-4. A weekly email list in Listmonk, to replace the webinar signup after 20.10.
+4. A weekly email list in Listmonk. After 20.10 the webinar offer gives way to the field notes on its own (the pages regenerate hourly).
 5. Hebrew for the hub and the other two pillars (phase 2).
 6. Which case studies may show numbers publicly.

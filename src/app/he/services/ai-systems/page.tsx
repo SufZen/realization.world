@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   openGraph: { ...base.openGraph, locale: "he_IL" },
 };
 
+// The webinar offer ends on 20.10; regenerate hourly so it disappears without a deploy.
+export const revalidate = 3600;
+
 export default function AiSystemsHebrewPage() {
   return <SystemsPage copy={systemsHe} path={path} />;
 }

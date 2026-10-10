@@ -6,7 +6,7 @@ import { PageHero } from "@/components/page-hero";
 import { SectionHeading } from "@/components/section-heading";
 import { WorkCard } from "@/components/work-card";
 import { insights, siteUrl } from "@/content/site";
-import { pillarBySlug, pillarInsights, type SystemsCopy } from "@/content/services";
+import { currentOffers, pillarBySlug, pillarInsights, type SystemsCopy } from "@/content/services";
 import { workBySlug, type WorkItem } from "@/content/work";
 import { breadcrumbSchema, graph, ids } from "@/lib/schema";
 import { CtaLink } from "./cta-link";
@@ -39,7 +39,7 @@ export function SystemsPage({ copy, path }: { copy: SystemsCopy; path: string })
             hasOfferCatalog: {
               "@type": "OfferCatalog",
               name: he ? "דרכים להתחיל" : "Ways to start",
-              itemListElement: copy.offers.items.map((offer) => ({
+              itemListElement: currentOffers(copy.offers.items).map((offer) => ({
                 "@type": "Offer",
                 itemOffered: { "@type": "Service", name: offer.name },
                 ...(offer.amount ? { price: offer.amount, priceCurrency: "EUR" } : {}),

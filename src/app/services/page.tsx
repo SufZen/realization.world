@@ -8,7 +8,7 @@ import { CtaLink } from "@/components/services/cta-link";
 import { CtaBand } from "@/components/services/sections";
 import styles from "@/components/services/services.module.css";
 import { siteUrl } from "@/content/site";
-import { hub, introCta, pillars, webinarOpen, type Cta } from "@/content/services";
+import { currentOffers, hub, introCta, isWebinarOpen, pillars, type Cta } from "@/content/services";
 import { pageMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, graph, ids } from "@/lib/schema";
 
@@ -20,7 +20,11 @@ export const metadata: Metadata = pageMetadata(
 
 const webinarCta: Cta = { label: "Free webinar, in Hebrew · 20.10", href: "/webinar", event: "join-webinar", data: { pillar: "hub" }, carryRef: true };
 
+// The webinar offer ends on 20.10; regenerate hourly so it disappears without a deploy.
+export const revalidate = 3600;
+
 export default function ServicesPage() {
+  const webinarOpen = isWebinarOpen();
   return (
     <>
       <JsonLd
@@ -70,7 +74,7 @@ export default function ServicesPage() {
                 <p className={styles.pillarSubtitle}><Lines text={subtitle} /></p>
                 <p className={styles.pillarFor}><Lines text={forWhom} /></p>
                 <ul className={styles.pillarOffers}>
-                  {offers.slice(0, 4).map((offer) => (
+                  {currentOffers(offers).slice(0, 4).map((offer) => (
                     <li key={offer.name}><span>{offer.name}</span>{offer.price && <small>{offer.price}</small>}</li>
                   ))}
                 </ul>

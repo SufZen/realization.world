@@ -32,7 +32,14 @@ export type Offer = {
   /** Price in euros, for schema.org. */
   amount?: number;
   cta?: Cta;
+  /** Shown only before this ISO time, or only from it. Checked when the page renders. */
+  until?: string;
+  from?: string;
 };
+
+/** The offers to show right now. Pages that list timed offers revalidate hourly. */
+export const currentOffers = (offers: Offer[], now = Date.now()) =>
+  offers.filter((offer) => (!offer.until || now < Date.parse(offer.until)) && (!offer.from || now >= Date.parse(offer.from)));
 
 const tidycal = "https://schedule.realization.co.il";
 
@@ -55,8 +62,9 @@ export const bookingTypes = {
 /** Stripe Payment Link for the Audit Sprint. The buy button appears only once this is set. */
 export const auditSprintCheckout: string | null = null;
 
-/** The 20.10 webinar (src/lib/webinar.ts). Its offer shows until the webinar ends; checked at build time. */
-export const webinarOpen = Date.now() < Date.parse("2026-10-20T18:30:00Z");
+/** End of the 20.10 webinar (src/lib/webinar.ts). Its signup offers disappear after it. */
+export const webinarEnds = "2026-10-20T18:30:00Z";
+export const isWebinarOpen = (now = Date.now()) => now < Date.parse(webinarEnds);
 
 export const sessionPrice = "€150";
 
@@ -90,21 +98,25 @@ export type Pillar = {
   insights: { categories?: string[]; slugs?: string[] };
 };
 
-const freeLearning: Offer = webinarOpen
-  ? {
-      name: "Free webinar, in Hebrew",
-      text: "Five real cases from real-estate projects, | and one audience problem worked on screen.",
-      format: "Tue 20 Oct · 90 min · Google Meet",
-      price: "Free",
-      cta: { label: "Save a seat", href: "/webinar", event: "join-webinar", data: { pillar: "ai-systems" }, carryRef: true },
-    }
-  : {
-      name: "Field notes",
-      text: "Short notes from real projects: | what worked, what did not and what it cost.",
-      format: "New notes every week",
-      price: "Free",
-      cta: { label: "Read the field notes", href: "/insights", event: "read-field-notes", data: { pillar: "ai-systems" } },
-    };
+/** Free first step on the Systems page: the webinar until it ends, then the field notes. */
+const freeLearning: Offer[] = [
+  {
+    name: "Free webinar, in Hebrew",
+    text: "Five real cases from real-estate projects, | and one audience problem worked on screen.",
+    format: "Tue 20 Oct · 90 min · Google Meet",
+    price: "Free",
+    cta: { label: "Save a seat", href: "/webinar", event: "join-webinar", data: { pillar: "ai-systems" }, carryRef: true },
+    until: webinarEnds,
+  },
+  {
+    name: "Field notes",
+    text: "Short notes from real projects: | what worked, what did not and what it cost.",
+    format: "New notes every week",
+    price: "Free",
+    cta: { label: "Read the field notes", href: "/insights", event: "read-field-notes", data: { pillar: "ai-systems" } },
+    from: webinarEnds,
+  },
+];
 
 export const pillars: Pillar[] = [
   {
@@ -180,7 +192,7 @@ export const pillars: Pillar[] = [
       carryRef: true,
     },
     offers: [
-      freeLearning,
+      ...freeLearning,
       {
         name: "AI Strategy Session",
         text: "An hour on your firm: where AI should start, | what you already pay for and what to measure. | The fee is credited toward the Audit Sprint.",

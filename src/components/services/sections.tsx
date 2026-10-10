@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Lines, plain } from "@/components/lines";
 import { SectionHeading } from "@/components/section-heading";
 import type { Insight } from "@/content/site";
-import type { Cta, Offer } from "@/content/services";
+import { currentOffers, type Cta, type Offer } from "@/content/services";
 import { CtaLink } from "./cta-link";
 import styles from "./services.module.css";
 
@@ -11,7 +11,7 @@ import styles from "./services.module.css";
 export function OfferList({ offers, pageRef }: { offers: Offer[]; pageRef: string }) {
   return (
     <ol className={styles.offers}>
-      {offers.map((offer, index) => (
+      {currentOffers(offers).map((offer, index) => (
         <li className={styles.offer} key={offer.name}>
           <span className={styles.offerIndex}>0{index + 1}</span>
           <div>

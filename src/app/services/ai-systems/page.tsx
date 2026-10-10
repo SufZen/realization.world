@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   alternates: { ...base.alternates, languages: { en: `${siteUrl}${path}`, he: `${siteUrl}/he${path}`, "x-default": `${siteUrl}${path}` } },
 };
 
+// The webinar offer ends on 20.10; regenerate hourly so it disappears without a deploy.
+export const revalidate = 3600;
+
 export default function AiSystemsPage() {
   return <SystemsPage copy={systemsEn} path={path} />;
 }

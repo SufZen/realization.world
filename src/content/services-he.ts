@@ -1,5 +1,5 @@
 import { whatsappUrl } from "./site";
-import { bookingTypes, pillarBySlug, sessionPrice, webinarOpen, type Offer, type SystemsCopy } from "./services";
+import { bookingTypes, pillarBySlug, sessionPrice, webinarEnds, type Offer, type SystemsCopy } from "./services";
 
 /**
  * Hebrew version of the Systems page (/he/services/ai-systems), for the ads and the
@@ -9,21 +9,24 @@ import { bookingTypes, pillarBySlug, sessionPrice, webinarOpen, type Offer, type
 const pillar = pillarBySlug("ai-systems");
 const data = { pillar: "ai-systems", lang: "he" };
 
-const freeLearning: Offer = webinarOpen
-  ? {
-      name: "וובינר חינמי בעברית",
-      text: "חמישה מקרים אמיתיים מפרויקטי נדל״ן, | ובעיה אחת מהקהל שננתח על המסך.",
-      format: "שלישי 20.10 · 90 דקות · Google Meet",
-      price: "חינם",
-      cta: { label: "שמרו לי מקום", href: "/webinar", event: "join-webinar", data, carryRef: true },
-    }
-  : {
-      name: "רשימות מהשטח",
-      text: "רשימות קצרות מפרויקטים אמיתיים (באנגלית): | מה עבד, מה לא, וכמה זה עלה.",
-      format: "רשימה חדשה כל שבוע",
-      price: "חינם",
-      cta: { label: "לקריאת הרשימות", href: "/insights", event: "read-field-notes", data },
-    };
+const freeLearning: Offer[] = [
+  {
+    name: "וובינר חינמי בעברית",
+    text: "חמישה מקרים אמיתיים מפרויקטי נדל״ן, | ובעיה אחת מהקהל שננתח על המסך.",
+    format: "שלישי 20.10 · 90 דקות · Google Meet",
+    price: "חינם",
+    cta: { label: "שמרו לי מקום", href: "/webinar", event: "join-webinar", data, carryRef: true },
+    until: webinarEnds,
+  },
+  {
+    name: "רשימות מהשטח",
+    text: "רשימות קצרות מפרויקטים אמיתיים (באנגלית): | מה עבד, מה לא, וכמה זה עלה.",
+    format: "רשימה חדשה כל שבוע",
+    price: "חינם",
+    cta: { label: "לקריאת הרשימות", href: "/insights", event: "read-field-notes", data },
+    from: webinarEnds,
+  },
+];
 
 export const systemsHe: SystemsCopy = {
   lang: "he",
@@ -56,7 +59,7 @@ export const systemsHe: SystemsCopy = {
     title: "מתחילים בקטן. | כל צעד עומד בפני עצמו.",
     intro: "ללמוד בחינם, שעה בתשלום כדי להחליט, | וספרינט במחיר קבוע כדי להוכיח.",
     items: [
-      freeLearning,
+      ...freeLearning,
       {
         name: "פגישת אסטרטגיה לבינה מלאכותית",
         text: "שעה על העסק שלכם: מאיפה כדאי להתחיל, | על מה אתם כבר משלמים ומה למדוד. | התשלום מקוזז ממחיר ספרינט האבחון.",
