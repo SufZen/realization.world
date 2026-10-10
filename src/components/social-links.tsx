@@ -12,6 +12,11 @@ const marks: Record<SocialNetwork, string> = {
 };
 
 /** Round social buttons, like the "Follow us" band in our emails. `tone` follows the background. */
+/** One brand mark, in the current text colour. */
+export function SocialIcon({ network, size = 17 }: { network: SocialNetwork; size?: number }) {
+  return <svg viewBox="0 0 24 24" width={size} height={size} aria-hidden="true" focusable="false"><path d={marks[network]} fill="currentColor" /></svg>;
+}
+
 export function SocialLinks({ tone = "light", label = "Follow us" }: { tone?: "light" | "dark"; label?: string }) {
   return (
     <nav className={`${styles.social} ${styles[tone]}`} aria-label={label}>
@@ -20,7 +25,7 @@ export function SocialLinks({ tone = "light", label = "Follow us" }: { tone?: "l
         {socialLinks.map(({ network, label: name, href }) => (
           <li key={network}>
             <a href={href} target="_blank" rel="noopener me" aria-label={name} title={name} data-umami-event="social" data-umami-event-network={network}>
-              <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false"><path d={marks[network]} fill="currentColor" /></svg>
+              <SocialIcon network={network} />
             </a>
           </li>
         ))}

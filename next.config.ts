@@ -45,6 +45,8 @@ const nextConfig: NextConfig = {
       { source: "/work/lifebook.md", destination: "/work/dreamward.md", permanent: true },
       // Advisory became the Systems pillar of /services (Oct 2026). 301, not Next's default 308.
       { source: "/advisory", destination: "/services/ai-systems", statusCode: 301 },
+      // The Teams pillar was renamed from "Delivery and team setup" (Oct 2026).
+      { source: "/services/delivery", destination: "/services/team-setup", statusCode: 301 },
     ];
   },
   turbopack: {

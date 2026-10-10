@@ -12,7 +12,7 @@ The site now has a Services section:
 | `/services` | Places, systems and teams | Realization realizes potential in three dimensions: places, systems and teams. |
 | `/services/real-estate` | Real estate development | From empty or underused to highest and best use. |
 | `/services/ai-systems` | AI and operations systems | Less manual work in planning, building, selling and reporting. |
-| `/services/delivery` | Delivery and team setup | We build the machine, train the team, and hand it over. |
+| `/services/team-setup` | Team and process setup (first named "Delivery and team setup") | We build the machine, train the team, and hand it over. |
 | `/he/services/ai-systems` | The Systems page in Hebrew | |
 
 - "Advisory" in the navigation became "Services".
@@ -65,3 +65,9 @@ A visitor who arrives with `?ref=` (an ad, a group post) keeps that ref on every
 4. A weekly email list in Listmonk. After 20.10 the webinar offer gives way to the field notes on its own (the pages regenerate hourly).
 5. Hebrew for the hub and the other two pillars (phase 2).
 6. Which case studies may show numbers publicly.
+
+## Changes after launch (10 October 2026)
+
+- **"Delivery and team setup" became "Team and process setup"** (Asaf), at `/services/team-setup`, with a 301 from `/services/delivery`. "Delivery" read as construction. The page now describes the method (roles, working processes, training, a handoff date) with one illustrative image. It no longer relies on a specific project. An FAQ says plainly that it is not construction management. The internal slug and the `book-session-delivery` event are unchanged.
+- **Deal check:** the Sheet "Realization · Deal checks (website)" and its Apps Script web app exist in the info@realization.co.il Drive. It goes live once Asaf has approved the script once and set `DEAL_CHECK_SHEET_WEBHOOK_URL` and `DEAL_CHECK_SHEET_SECRET` in Coolify. Each deal check adds a row and emails hello@. Asaf replies with the numbers.
+- **Channels:** "Latest from the channels" reads YouTube's RSS feed now. Buffer stays wired but without a key, since it only holds X. Next is a feed file that the content engine writes when it publishes (to be agreed with the engine session after 21.10).

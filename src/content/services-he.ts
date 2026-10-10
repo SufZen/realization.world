@@ -132,7 +132,7 @@ export const systemsHe: SystemsCopy = {
     intro: "אסף איזנקוט לוקח מספר מוגבל של תפקידים: | מודלים תפעוליים, תיאום פרויקטים | וניהול פרויקטי פיתוח נדל״ן.",
     links: [
       { label: "לפרופיל של אסף", href: "/asaf", event: "view-profile", data },
-      { label: "הקמת צוותים ותהליכים (באנגלית)", href: "/services/delivery" },
+      { label: "הקמת צוותים ותהליכים (באנגלית)", href: "/services/team-setup" },
     ],
   },
   faq: {

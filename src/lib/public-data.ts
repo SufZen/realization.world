@@ -90,10 +90,10 @@ export const services = {
       ],
     },
     {
-      name: "Delivery and team setup",
-      url: `${siteUrl}/services/delivery`,
+      name: "Team and process setup",
+      url: `${siteUrl}/services/team-setup`,
       first_steps: [
-        "Delivery intro · 30 min · free",
+        "Setup intro · 30 min · free",
         "Team and process setup · fixed scope with a handoff date, by proposal",
       ],
     },

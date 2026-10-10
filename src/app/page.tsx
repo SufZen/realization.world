@@ -8,7 +8,9 @@ import { JsonLd } from "@/components/json-ld";
 import styles from "@/components/home-sections.module.css";
 import { SelectedWork } from "@/components/selected-work";
 import servicesStyles from "@/components/services/services.module.css";
-import { Testimonials, VideoGrid } from "@/components/media-blocks";
+import { FollowTheWork, LatestFeed } from "@/components/channel-feed";
+import { Testimonials } from "@/components/media-blocks";
+import { SocialLinks } from "@/components/social-links";
 import { CtaLink } from "@/components/services/cta-link";
 import { PillarDoors } from "@/components/services/pillar-doors";
 import { approachNavigation, framework, insights, partnerPaths, siteUrl } from "@/content/site";
@@ -16,7 +18,7 @@ import { introCta } from "@/content/services";
 import { graph, websiteSchema } from "@/lib/schema";
 import { Lines, plain } from "@/components/lines";
 import { WebinarBanner } from "@/components/webinar-banner";
-import { latestVideos } from "@/lib/youtube";
+import { latestFeed } from "@/lib/feed";
 
 // Title and description come from the root layout; canonical is set per page.
 export const metadata: Metadata = { alternates: { canonical: siteUrl } };
@@ -40,8 +42,8 @@ const ideas = [
 ] as const;
 
 export default async function HomePage() {
-  const videos = await latestVideos(3);
-  const notes = [...insights].sort((a, b) => b.date.localeCompare(a.date)).slice(0, videos.length ? 2 : 4);
+  const feed = await latestFeed(3);
+  const notes = [...insights].sort((a, b) => b.date.localeCompare(a.date)).slice(0, feed.length ? 2 : 4);
 
   return (
     <>
@@ -63,6 +65,7 @@ export default async function HomePage() {
               <ButtonLink href="/services">See our services</ButtonLink>
               <CtaLink cta={introCta("home")} pageRef="home" variant="outline" />
             </div>
+            <SocialLinks tone="dark" label="Follow the work" />
           </div>
         </div>
       </section>
@@ -94,8 +97,8 @@ export default async function HomePage() {
         <div className="container-wide">
           <SectionHeading
             eyebrow="SELECTED WORK"
-            title="One project | from each pillar."
-            intro="Development, systems and delivery, | from our own work and our clients’."
+            title="One example | from each pillar."
+            intro="A development, a system | and the way we set up teams."
             align="split"
           />
           <SelectedWork />
@@ -105,9 +108,9 @@ export default async function HomePage() {
 
       <section className="section surface-muted">
         <div className="container-wide">
-          <SectionHeading eyebrow="LEARN FROM THE FIELD" title="Notes and videos | from real projects." intro="What worked, what did not | and what it cost." />
-          <VideoGrid videos={videos} place="home" />
-          <div className="insights-grid" style={videos.length ? { marginTop: "clamp(2rem, 4vw, 3rem)" } : undefined}>
+          <SectionHeading eyebrow="LATEST FROM THE CHANNELS" title="Posts, videos and notes | from real projects." intro="What worked, what did not | and what it cost." />
+          <LatestFeed items={feed} place="home" />
+          <div className="insights-grid" style={feed.length ? { marginTop: "clamp(2rem, 4vw, 3rem)" } : undefined}>
             {notes.map(({ slug, category, title, excerpt, published, readTime, icon: Icon }) => (
               <Link className="insight-card" href={`/insights/${slug}`} key={slug}>
                 <div className="insight-card__icon"><Icon size={25} strokeWidth={1.5} /></div>
@@ -116,6 +119,13 @@ export default async function HomePage() {
             ))}
           </div>
           <div className="button-row"><ButtonLink href="/insights" variant="dark">Go to Learn</ButtonLink></div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container-wide">
+          <SectionHeading eyebrow="FOLLOW THE WORK" title="Six places | to keep up." intro="Projects, ideas and the people behind them, | on the channels you already use." align="split" />
+          <FollowTheWork place="home" />
         </div>
       </section>
 

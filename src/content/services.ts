@@ -54,7 +54,7 @@ export const bookingTypes = {
   dealConsultation: `${tidycal}/60-minute-consulting-meeting`,
   /** AI Strategy Session. For now: the 60-min consulting type. */
   aiStrategySession: `${tidycal}/60-minute-consulting-meeting`,
-  /** Delivery and team setup intro. For now: the 30-min intro. */
+  /** Team and process setup intro. For now: the 30-min intro. */
   deliveryIntro: bookingUrl,
   realizeosSetup: `${tidycal}/realizeos-setup`,
 };
@@ -228,16 +228,17 @@ export const pillars: Pillar[] = [
     insights: { categories: ["AI in practice"] },
   },
   {
+    // Internal slug "delivery" (events, testimonials); the page is "Team and process setup" at /services/team-setup.
     slug: "delivery",
-    href: "/services/delivery",
+    href: "/services/team-setup",
     dimension: "Teams",
-    title: "Delivery and team setup",
+    title: "Team and process setup",
     subtitle: "We build the machine, | train the team, and hand it over.",
-    forWhom: "Firms and projects that need delivery set up, | not another permanent manager.",
+    forWhom: "Firms and projects that need clear roles, | working processes and a trained team, | not another permanent manager.",
     icon: UsersRound,
-    ref: "services-delivery",
+    ref: "services-team-setup",
     session: {
-      label: "Book a delivery intro · 30 min",
+      label: "Book a setup intro · 30 min",
       href: bookingTypes.deliveryIntro,
       event: "book-session-delivery",
       data: { pillar: "delivery" },
@@ -245,11 +246,11 @@ export const pillars: Pillar[] = [
     },
     offers: [
       {
-        name: "Delivery intro",
+        name: "Setup intro",
         text: "Thirty minutes and three questions (below). | If we are not the right fit, | you will know by the end of the call.",
         format: "30 min · Google Meet",
         price: "Free",
-        cta: { label: "Book a delivery intro", href: bookingTypes.deliveryIntro, event: "book-session-delivery", data: { pillar: "delivery" }, carryRef: true },
+        cta: { label: "Book a setup intro", href: bookingTypes.deliveryIntro, event: "book-session-delivery", data: { pillar: "delivery" }, carryRef: true },
       },
       {
         name: "Team and process setup",
@@ -266,7 +267,8 @@ export const pillars: Pillar[] = [
         cta: { label: "See Asaf’s profile", href: "/asaf", event: "view-profile", data: { pillar: "delivery" } },
       },
     ],
-    work: ["arena-barreiro", "ai-adoption-architecture-firm"],
+    // No single project represents this pillar; the page describes the method instead.
+    work: [],
     insights: { slugs: ["why-ai-adoption-fails-at-step-three", "five-hours-to-build-a-month-to-trust"] },
   },
 ];
@@ -318,9 +320,20 @@ export const realEstate = {
   ],
 } as const;
 
-/* ---- Teams: delivery and team setup ---- */
+/* ---- Teams: team and process setup ---- */
 
 export const delivery = {
+  image: {
+    src: "/media/team-setup.webp",
+    alt: "Hands arranging role cards for a project lead, architect, site coordinator, finance and sales around a workflow and a project timeline that ends in a handoff",
+  },
+  /** What a setup leaves behind: shown next to the image. */
+  outcomes: [
+    ["A role map", "Who owns what, who decides, | and who signs off."],
+    ["Working processes", "The workflows written down, | with the tools that carry them."],
+    ["A trained team", "Practised on your own cases, | not on generic examples."],
+    ["A handoff date", "Agreed at the start, | with a short handbook the team keeps."],
+  ],
   steps: [
     ["Map the work", "Who does what today, | where decisions wait | and what only one person knows."],
     ["Design the machine", "Roles, workflows and the tools | that carry them, written down | before anyone is hired or bought."],
@@ -345,6 +358,7 @@ export const delivery = {
     ],
   },
   faqs: [
+    ["Is this construction management?", "No. We set up how the project or the firm works: roles, decisions, workflows and reporting. Building stays with your architects and contractors. If you need someone to coordinate them for you, that is the fractional development-management role."],
     ["Is this ongoing operations work?", "No. Setup ends on a handoff date written into the proposal. Ongoing fractional roles are possible, with limited availability."],
     ["How is it priced?", "Team and process setup is a fixed scope, priced in a proposal before it starts. Fractional roles are priced in a proposal too, and contracted through Realization Unipessoal LDA."],
     ["Where do you work, and in which languages?", "Remotely, and in person in the Lisbon area and Barcelona. We work in English and Hebrew, with basic Portuguese and Spanish."],
@@ -448,7 +462,7 @@ export const systemsEn: SystemsCopy = {
     intro: "Asaf Eyzenkot takes a limited number of B2B roles: | operating models, project coordination | and real-estate development management.",
     links: [
       { label: "See Asaf’s profile", href: "/asaf", event: "view-profile", data: { pillar: "ai-systems" } },
-      { label: "Delivery and team setup", href: "/services/delivery" },
+      { label: "Team and process setup", href: "/services/team-setup" },
     ],
   },
   faq: {

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Lines } from "@/components/lines";
-import { VideoGrid } from "@/components/media-blocks";
+import { FollowTheWork, LatestFeed } from "@/components/channel-feed";
 import { PageHero } from "@/components/page-hero";
 import { SectionHeading } from "@/components/section-heading";
 import { CtaLink } from "@/components/services/cta-link";
@@ -10,7 +10,7 @@ import { insights } from "@/content/site";
 import { isWebinarOpen, type Cta } from "@/content/services";
 import { communities, newsletterUrl, youtubeChannelUrl } from "@/content/social";
 import { pageMetadata } from "@/lib/metadata";
-import { latestVideos } from "@/lib/youtube";
+import { latestFeed } from "@/lib/feed";
 
 export const metadata: Metadata = pageMetadata(
   "Learn — field notes, videos and webinars",
@@ -27,7 +27,7 @@ const youtube: Cta = { label: "Subscribe on YouTube", href: `${youtubeChannelUrl
 const webinar: Cta = { label: "Save a seat · free", href: "/webinar", event: "join-webinar", data: { pillar: "learn" }, carryRef: true };
 
 export default async function LearnPage() {
-  const videos = await latestVideos(6);
+  const feed = await latestFeed(6);
   const notes = [...insights].sort((a, b) => b.date.localeCompare(a.date));
 
   return (
@@ -50,15 +50,22 @@ export default async function LearnPage() {
         </section>
       )}
 
-      {videos.length > 0 && (
+      {feed.length > 0 && (
         <section className="section">
           <div className="container-wide">
-            <SectionHeading eyebrow="WATCH" title="Short videos | from the work." intro="New videos most weeks, in Hebrew and English. | They open on YouTube." />
-            <VideoGrid videos={videos} place="learn" />
+            <SectionHeading eyebrow="LATEST" title="Latest from | the channels." intro="Videos and posts as they are published, | in Hebrew and English. Each opens on its network." />
+            <LatestFeed items={feed} place="learn" />
             <div className="button-row"><CtaLink cta={{ ...youtube, label: "All videos on YouTube" }} pageRef={ref} variant="dark" /></div>
           </div>
         </section>
       )}
+
+      <section className="section surface-muted">
+        <div className="container-wide">
+          <SectionHeading eyebrow="FOLLOW THE WORK" title="Six places | to keep up." intro="Projects, ideas and the people behind them, | on the channels you already use." align="split" />
+          <FollowTheWork place="learn" />
+        </div>
+      </section>
 
       <InsightFeed insights={notes} title="Built from reality." intro="Written by Asaf Eyzenkot (Suf Zen), | from the work itself." />
 
