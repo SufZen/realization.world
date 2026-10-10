@@ -1,0 +1,12 @@
+/* Round social buttons, as in the email footer: black with a yellow mark on yellow, inverted on black. */
+.social { margin-top: 1.75rem; }
+.social p { margin-bottom: .7rem; }
+.social ul { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0; padding: 0; list-style: none; }
+.social a { display: grid; width: 40px; height: 40px; place-items: center; border-radius: 50%; transition: transform .18s var(--ease-standard), background .18s var(--ease-standard); }
+.social a:hover { transform: translateY(-2px); }
+.social a:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+.light a { background: #000; color: var(--color-yellow); }
+.light a:hover { background: var(--color-neutral-700); }
+.dark p { color: var(--color-yellow); }
+.dark a { background: var(--color-yellow); color: #000; }
+.dark a:hover { background: #fff; }

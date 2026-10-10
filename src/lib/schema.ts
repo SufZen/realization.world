@@ -1,5 +1,6 @@
 import { plain } from "@/components/lines";
 import { bookingUrl, contactEmail, siteUrl, type Insight } from "@/content/site";
+import { socialLinks } from "@/content/social";
 import type { WorkItem } from "@/content/work";
 
 /** Stable schema.org identifiers so every page describes the same entities. */
@@ -67,7 +68,7 @@ export const founderSchema = {
   image: `${siteUrl}/asaf/asaf-eyzenkot.jpg`,
   jobTitle: "Founder, Realization",
   worksFor: { "@id": ids.organization },
-  sameAs: ["https://www.linkedin.com/in/sufzen", "https://github.com/SufZen"],
+  sameAs: ["https://github.com/SufZen", ...socialLinks.map((link) => link.href)],
 };
 
 export function breadcrumbSchema(trail: Array<[name: string, path: string]>) {

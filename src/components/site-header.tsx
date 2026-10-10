@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { approachNavigation, bookingUrl, primaryNavigation } from "@/content/site";
 import { BrandMark } from "./brand-mark";
+import { SocialLinks } from "./social-links";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -81,6 +82,7 @@ export function SiteHeader() {
             <p>Founder-led vision and validation.<br />Partner-operated scale and continuity.</p>
             <Link href="/bring-an-opportunity" onClick={() => setOpen(false)}>Start with an opportunity <ArrowUpRight aria-hidden="true" size={16} /></Link>
             <a href={bookingUrl} target="_blank" rel="noopener" data-umami-event="book-intro">Book a 30-min intro <ArrowUpRight aria-hidden="true" size={16} /></a>
+            <SocialLinks tone="dark" />
           </div>
         </nav>
       </div>
