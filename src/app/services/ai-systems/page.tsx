@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/metadata";
 const path = "/services/ai-systems";
 const base = pageMetadata(
   "AI and operations systems — AI adoption for firms and developers",
-  "Realization helps professional firms and real-estate operators decide where AI starts, prove it on one measured pilot, and hand over a system the team owns. A 60-minute strategy session, a fixed-price Audit Sprint, and fixed-scope stages with a built-in exit.",
+  "Realization helps professional firms and real-estate operators decide where AI starts, prove it on one measured pilot, and hand over a system the team owns. A 60-minute strategy session, an Audit Sprint with a written report within 48 hours, and fixed-scope stages with a built-in exit.",
   path,
 );
 

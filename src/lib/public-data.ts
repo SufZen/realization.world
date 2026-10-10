@@ -68,14 +68,14 @@ export const services = {
       name: "AI and operations systems (formerly Advisory)",
       url: `${siteUrl}/services/ai-systems`,
       stages: [
-        "Stage 0 · Focused discovery: 2–3 sessions → decisions document, tiered roadmap, success measures",
+        "Stage 0 · Audit Sprint: 90-min kickoff, joint in-depth audit → written report within 48 hours, what to fix first in order of priority",
         "Stage 1 · Guided pilot: 3–5 weeks, one domain, two people → working process measured before and after",
         "Stage 2 · Tapering support: ~10–12 advisory hours a month, ending at month 12",
         "Add-on · Team workshops on the client's own cases",
       ],
       first_steps: [
         "AI Strategy Session · 60 min · €150, credited toward the Audit Sprint",
-        "Audit Sprint · Stage 0 as a fixed-price sprint, by proposal",
+        "Audit Sprint · €495 + VAT, buy online: 90-min kickoff, joint audit, written report within 48 hours; RealizeOS setup session included; fee credited toward implementation",
       ],
       pricing: "Each stage is priced as a separate fixed unit before it starts; stop after any stage.",
     },
