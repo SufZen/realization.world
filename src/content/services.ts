@@ -471,7 +471,7 @@ export const systemsEn: SystemsCopy = {
       ["How quickly will we see a result?", "Discovery takes two to three sessions. A pilot runs three to five weeks, and most of that time is quality checks against real cases rather than building. In our modelled case, the programme breaks even in month seven."],
       ["How much of our team’s time does it take?", "Two kinds of time. One internal lead for four to six hours a week, and two to three hours a week from each pilot participant, mostly reviewing outputs. We ask for those hours in the proposal, because without them the work does not happen."],
       ["Do we have to use RealizeOS or your other systems?", "No. We start with what you already pay for and what the market offers. RealizeOS, MeetSum and our other systems are options when they fit the gap, not a requirement."],
-      ["What does it cost?", "Each stage is priced as a separate, fixed unit before it starts, and you can stop after any stage. Discovery is deliberately a small first commitment. Ask for a proposal after a 20-minute intro call."],
+      ["What does it cost?", "Each stage is priced as a separate, fixed unit before it starts, and you can stop after any stage. The first step is deliberately small: the Audit Sprint, €495 + VAT, bought online. For the stages after it, ask for a proposal after a 20-minute intro call."],
       ["Where do you work, and in which languages?", "Remotely, and in person in the Lisbon area and Barcelona. We work in English and Hebrew, with basic Portuguese and Spanish."],
       ["Can you also run operations or a development project for us?", "Yes. Asaf Eyzenkot takes a limited number of fractional operations and development-management roles, contracted through Realization Unipessoal LDA."],
     ],
