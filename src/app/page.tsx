@@ -12,6 +12,7 @@ import { featuredWork, workBySlug } from "@/content/work";
 import { graph, websiteSchema } from "@/lib/schema";
 import { Lines } from "@/components/lines";
 import { MarketBridgeDiagram } from "@/components/diagrams";
+import { WebinarBanner } from "@/components/webinar-banner";
 
 // Title and description come from the root layout; canonical is set per page.
 export const metadata: Metadata = { alternates: { canonical: siteUrl } };
@@ -49,6 +50,7 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={graph(websiteSchema)} />
+      <WebinarBanner />
       <section className="home-hero">
         <div className="home-hero__bg" aria-hidden="true">
           <Image src="/media/hero-physical-world.webp" alt="" fill priority sizes="100vw" />
