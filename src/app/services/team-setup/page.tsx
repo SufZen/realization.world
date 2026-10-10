@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { JsonLd } from "@/components/json-ld";
 import { Lines } from "@/components/lines";
 import { PageHero } from "@/components/page-hero";
@@ -8,24 +9,20 @@ import { CtaLink } from "@/components/services/cta-link";
 import { HeroStatement } from "@/components/services/hero-statement";
 import { CtaBand, FaqList, FitLists, InsightFeed, OfferList } from "@/components/services/sections";
 import styles from "@/components/services/services.module.css";
-import { WorkCard } from "@/components/work-card";
 import { insights, siteUrl } from "@/content/site";
 import { delivery, introCta, pillarBySlug, pillarInsights } from "@/content/services";
-import { workBySlug, type WorkItem } from "@/content/work";
 import { pageMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, graph, ids } from "@/lib/schema";
 
 const pillar = pillarBySlug("delivery");
 
 export const metadata: Metadata = pageMetadata(
-  "Delivery and team setup — roles, workflows, training and handoff",
-  "We build the machine, train the team, and hand it over. Team and process setup with a handoff date, and a limited number of fractional operations and development-management roles.",
+  "Team and process setup — roles, workflows, training and handoff",
+  "We build the machine, train the team, and hand it over: clear roles, working processes and a trained team for a development project or a growing firm, with a handoff date agreed at the start. Not construction management.",
   pillar.href,
 );
 
-export default function DeliveryPage() {
-  const work = pillar.work.map((slug) => workBySlug(slug)).filter((item): item is WorkItem => Boolean(item));
-
+export default function TeamSetupPage() {
   return (
     <>
       <JsonLd
@@ -36,11 +33,12 @@ export default function DeliveryPage() {
             "@id": `${siteUrl}${pillar.href}#service`,
             name: pillar.title,
             serviceType: "Operations consulting",
-            description: "Team and process setup ending on a handoff date, and fractional operations or development management.",
+            description: "Team and process setup for development projects and growing firms: roles, workflows, training and a handoff date. Also fractional operations or development management.",
             provider: { "@id": ids.organization },
             areaServed: [{ "@type": "Country", name: "Portugal" }, { "@type": "Country", name: "Israel" }, { "@type": "Country", name: "Spain" }],
             availableLanguage: ["English", "Hebrew"],
             url: `${siteUrl}${pillar.href}`,
+            image: `${siteUrl}${delivery.image.src}`,
             hasOfferCatalog: {
               "@type": "OfferCatalog",
               name: "Ways to start",
@@ -60,7 +58,7 @@ export default function DeliveryPage() {
       <PageHero
         index="03"
         eyebrow="SERVICES · TEAMS"
-        title="Delivery and | team setup."
+        title="Team and | process setup."
         intro={pillar.subtitle}
         theme="light"
         aside={<HeroStatement eyebrow="FOR" statement={pillar.forWhom} />}
@@ -73,6 +71,20 @@ export default function DeliveryPage() {
       />
 
       <section className="section">
+        <div className={`container-wide ${styles.setup}`}>
+          <div className={styles.setupImage}>
+            <Image src={delivery.image.src} alt={delivery.image.alt} fill sizes="(max-width: 900px) 100vw, 55vw" />
+          </div>
+          <div>
+            <SectionHeading eyebrow="WHAT A SETUP LEAVES BEHIND" title="A machine | your team runs." intro="For a development project, or a firm | that has outgrown working it out as it goes." />
+            <ul className={styles.outcomes}>
+              {delivery.outcomes.map(([title, text]) => <li key={title}><strong>{title}</strong><span><Lines text={text} /></span></li>)}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="section surface-muted">
         <div className="container-wide">
           <SectionHeading eyebrow="HOW IT WORKS" title="Built to be | handed over." intro="Every engagement ends on a handoff date | agreed at the start." />
           <div className={`journey-grid ${styles.tabletTwo}`}>
@@ -87,7 +99,7 @@ export default function DeliveryPage() {
         </div>
       </section>
 
-      <section className="section surface-muted" id="offers">
+      <section className="section" id="offers">
         <div className="container-wide">
           <SectionHeading eyebrow="WAYS TO START" title="Three ways in." intro="A free intro, a fixed-scope setup, | or a fractional role while the team grows." />
           <OfferList offers={pillar.offers} pageRef={pillar.ref} />
@@ -108,23 +120,14 @@ export default function DeliveryPage() {
 
       <section className="section">
         <div className="container-wide">
-          <SectionHeading eyebrow="WHO IT’S FOR" title="Teams that need delivery set up, | not another manager." />
+          <SectionHeading eyebrow="WHO IT’S FOR" title="Clear roles and processes, | not another manager." />
           <FitLists {...delivery.fit} />
         </div>
       </section>
 
-      <section className="section surface-muted">
-        <div className="container-wide">
-          <SectionHeading eyebrow="PROOF" title="Set up, run, | then handed over." intro="Development management at Arena, | and an AI programme designed to end." />
-          <div className="ventures-grid">
-            {work.map((item, index) => <WorkCard item={item} featured={index === 0} key={item.slug} />)}
-          </div>
-        </div>
-      </section>
+      <Testimonials pillar="delivery" surface="surface-muted" />
 
-      <Testimonials pillar="delivery" />
-
-      <PillarVideos pillar="delivery" title="Delivery and handoff, | in short videos." />
+      <PillarVideos pillar="delivery" title="Teams and handoff, | in short videos." />
 
       <InsightFeed insights={pillarInsights(pillar, insights)} title="Ownership and handoff, | from real projects." />
 
@@ -132,7 +135,7 @@ export default function DeliveryPage() {
 
       <CtaBand
         eyebrow="START WITH 30 MINUTES"
-        title="Need delivery set up, | not another manager?"
+        title="Need the machine built, | not another manager?"
         text="Thirty minutes and three questions | tell us both whether it fits."
         primary={pillar.session}
         secondary={introCta("delivery")}

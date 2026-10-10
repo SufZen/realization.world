@@ -50,7 +50,7 @@ const tools = [
   {
     name: "get_services",
     title: "Services and engagement model",
-    description: "What Realization offers, in three pillars: real estate development in Portugal (deal checks, feasibility, development management), AI and operations systems (staged, fixed-scope AI adoption), and delivery and team setup; plus real-estate partnerships, stuck-property resolution and fractional operations.",
+    description: "What Realization offers, in three pillars: real estate development in Portugal (deal checks, feasibility, development management), AI and operations systems (staged, fixed-scope AI adoption), and team and process setup (roles, workflows, training, handoff); plus real-estate partnerships, stuck-property resolution and fractional operations.",
     inputSchema: { type: "object", properties: {} },
     annotations: { readOnlyHint: true },
   },

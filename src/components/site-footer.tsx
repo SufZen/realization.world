@@ -35,7 +35,7 @@ export function SiteFooter() {
           <p className="eyebrow">Work with us</p>
           <Link href="/services/real-estate">Real estate development</Link>
           <Link href="/services/ai-systems">AI and operations systems</Link>
-          <Link href="/services/delivery">Delivery and team setup</Link>
+          <Link href="/services/team-setup">Team and process setup</Link>
           <Link href="/partners">Partners</Link>
           <Link href="/partners/opportunity-owners">Opportunity owners</Link>
           <Link href="/partners/operators">Operators</Link>
