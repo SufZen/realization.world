@@ -39,7 +39,8 @@ export const testimonials: Testimonial[] = [
     ...linkedin,
   },
   {
-    quote: "Assaf is a leader. In every business process, in every process that requires execution, Assaf leads it while paying attention to details, thinking about the customer, and paying attention to quality.",
+    // Spelling of Asaf's name corrected at his request (the original says "Assaf").
+    quote: "Asaf is a leader. In every business process, in every process that requires execution, Asaf leads it while paying attention to details, thinking about the customer, and paying attention to quality.",
     name: "Amos Romano",
     role: "Co-founder & CEO",
     company: "Viki Sense",
