@@ -61,7 +61,7 @@ A visitor who arrives with `?ref=` (an ad, a group post) keeps that ref on every
 
 1. TidyCal: the 60-minute meeting is €150 since 10.10, and both 60-minute sessions book it. Separate types per pillar, a dedicated delivery intro and new page copy are optional; change the URLs in `bookingTypes` (`src/content/services.ts`) if they are made.
 2. ~~The Stripe Payment Link and the Audit Sprint price.~~ Done 10 Oct: €495 + VAT, Payment Link live.
-3. The deal check's Sheet and Apps Script (`DEAL_CHECK_SHEET_*`), and which tool produces the numbers.
+3. ~~The deal check's Sheet and Apps Script (`DEAL_CHECK_SHEET_*`).~~ Live 10 Oct. Still open: which tool produces the numbers.
 4. A weekly email list in Listmonk. After 20.10 the webinar offer gives way to the field notes on its own (the pages regenerate hourly).
 5. Hebrew for the hub and the other two pillars (phase 2).
 6. Which case studies may show numbers publicly.
@@ -69,5 +69,9 @@ A visitor who arrives with `?ref=` (an ad, a group post) keeps that ref on every
 ## Changes after launch (10 October 2026)
 
 - **"Delivery and team setup" became "Team and process setup"** (Asaf), at `/services/team-setup`, with a 301 from `/services/delivery`. "Delivery" read as construction. The page now describes the method (roles, working processes, training, a handoff date) with one illustrative image. It no longer relies on a specific project. An FAQ says plainly that it is not construction management. The internal slug and the `book-session-delivery` event are unchanged.
-- **Deal check:** the Sheet "Realization · Deal checks (website)" and its Apps Script web app exist in the info@realization.co.il Drive. It goes live once Asaf has approved the script once and set `DEAL_CHECK_SHEET_WEBHOOK_URL` and `DEAL_CHECK_SHEET_SECRET` in Coolify. Each deal check adds a row and emails hello@. Asaf replies with the numbers.
+- **Deal check:** live since 10 October.
+  - Each deal check adds a row to the Sheet "Realization · Deal checks (website)" through its Apps Script web app (info@realization.co.il Drive; `DEAL_CHECK_SHEET_WEBHOOK_URL` and `DEAL_CHECK_SHEET_SECRET` in the server env, `/etc/realization-world.env`).
+  - The site also emails hello@ through its SMTP relay, as an opportunity brief with the path `deal-check`. The Apps Script's own email goes from info@ to hello@, which is the same mailbox, so Gmail files it under Sent only.
+  - Either the row or the email is enough: the visitor sees an error only when both fail.
+  - Asaf replies with the numbers.
 - **Channels:** "Latest from the channels" reads YouTube's RSS feed now. Buffer stays wired but without a key, since it only holds X. Next is a feed file that the content engine writes when it publishes (to be agreed with the engine session after 21.10).

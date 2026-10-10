@@ -1,10 +1,12 @@
 import { EMAIL, clip, line } from "@/lib/brief";
+import type { Brief } from "@/lib/mail";
 
 /**
  * The free deal check on /services/real-estate: a visitor sends a listing link and gets
  * the real numbers back. Rows go to a Google Sheet through an Apps Script web app,
- * the same way as webinar registrations (src/lib/webinar.ts). Setup notes: the PR that
- * added this file, and docs/strategy/2026-10-services-decision.md.
+ * the same way as webinar registrations (src/lib/webinar.ts), and the notification goes
+ * out through the site's SMTP relay as an opportunity brief (src/lib/mail.ts). Setup
+ * notes: the PR that added this file, and docs/strategy/2026-10-services-decision.md.
  */
 
 export const dealPlans = [
@@ -58,6 +60,24 @@ export function validateDealCheck(deal: DealCheck, consent: boolean) {
   if (deal.phone && !/^[+\d][\d\s()-]{6,}$/.test(deal.phone)) errors.phone = "That number does not look right. You can also leave it empty.";
   if (!consent) errors.consent = "Please confirm we may use these details to send you the analysis.";
   return errors;
+}
+
+/**
+ * The notification email, in the opportunity-brief format. The Apps Script's own email
+ * goes from info@ to hello@, which delivers into the same mailbox, so Gmail files it
+ * under Sent only. Mail through the SMTP relay reaches the Inbox.
+ */
+export function dealCheckBrief(deal: DealCheck): Brief {
+  return {
+    path: "deal-check",
+    name: deal.name,
+    email: deal.email,
+    organization: "",
+    geography: "Portugal",
+    brief: [`Listing: ${deal.listing}`, `Plan: ${planLabels.get(deal.plan) ?? deal.plan}`, `Phone: ${deal.phone || "—"}`].join("\n"),
+    context: deal.notes,
+    ref: deal.ref,
+  };
 }
 
 export function sheetConfigured() {
