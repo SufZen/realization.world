@@ -33,8 +33,8 @@ const doors = [
     title: "Bring AI into | your operations.",
     text: "A measured adoption programme, | and the systems we built to run our own work.",
     work: ["ai-adoption-architecture-firm", "realizeos", "meetsum"],
-    href: "/advisory",
-    cta: "See Advisory",
+    href: "/services/ai-systems",
+    cta: "See AI and operations systems",
   },
 ] as const;
 

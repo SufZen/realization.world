@@ -9,7 +9,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     "",
     "/work",
-    "/advisory",
+    "/services",
+    "/services/real-estate",
+    "/services/ai-systems",
+    "/services/delivery",
+    "/he/services/ai-systems",
     "/partners",
     "/insights",
     "/about",
@@ -33,6 +37,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${siteUrl}${route}`,
     lastModified,
     changeFrequency: route.startsWith("/insights/") ? "monthly" : "weekly",
-    priority: route === "" ? 1 : ["/work", "/advisory"].includes(route) || route.startsWith("/work/") ? 0.9 : route.split("/").length === 2 ? 0.7 : 0.6,
+    priority: route === "" ? 1 : route === "/work" || route.startsWith("/work/") || route.startsWith("/services") || route.startsWith("/he/services") ? 0.9 : route.split("/").length === 2 ? 0.7 : 0.6,
   }));
 }

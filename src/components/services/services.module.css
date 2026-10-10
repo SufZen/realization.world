@@ -1,0 +1,55 @@
+/* Services section: /services, /services/*, /he/services/*. Everything else reuses globals.css. */
+
+/* Hub: the three pillars */
+.pillars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--border-hairline); border: 1px solid var(--border-hairline); }
+.pillar { display: flex; min-width: 0; flex-direction: column; padding: clamp(1.5rem, 3.5vw, 2.6rem); background: #fff; }
+.pillarTop { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.pillarIcon { display: grid; width: 54px; height: 54px; flex: none; place-items: center; border: 1px solid #000; border-radius: 50%; color: #000; }
+.pillarDimension { color: var(--text-muted); font-size: .72rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+.pillar h3 { margin-top: 2.5rem; font-size: clamp(1.7rem, 2.6vw, 2.5rem); }
+.pillarSubtitle { margin-top: .9rem; color: #000; font-size: 1.05rem; font-weight: 600; line-height: 1.4; }
+.pillarFor { margin-top: .8rem; font-size: .9rem; }
+.pillarOffers { display: grid; margin: 2rem 0 0; padding: 0; list-style: none; border-top: 1px solid #000; }
+.pillarOffers li { display: flex; justify-content: space-between; gap: 1rem; padding-block: .7rem; border-bottom: 1px solid var(--border-hairline); color: #000; font-size: .84rem; font-weight: 600; line-height: 1.35; }
+.pillarOffers small { flex: none; color: var(--text-muted); font-size: .76rem; font-weight: 500; }
+.pillarLink { margin-top: auto; padding-top: 2rem; }
+.pillarLink :global(.button) { margin-top: 0; }
+@media (max-width: 1000px) { .pillars { grid-template-columns: 1fr; } }
+
+/* Offers: what can be bought on a pillar page */
+.offers { margin: 0; padding: 0; list-style: none; border-top: 2px solid #000; }
+.offer { display: grid; grid-template-columns: 3rem minmax(0, 1.5fr) minmax(0, 1fr) auto; gap: 1.5rem; align-items: start; padding-block: 1.8rem; border-bottom: 1px solid var(--border-hairline); }
+.offerIndex { padding-top: .4rem; color: var(--color-neutral-400); font-size: .72rem; font-weight: 700; }
+.offer h3 { font-size: clamp(1.25rem, 1.8vw, 1.6rem); letter-spacing: -.02em; }
+.offer p { max-width: 52ch; margin-top: .6rem; font-size: .92rem; }
+.offerMeta { display: grid; gap: .3rem; padding-top: .3rem; font-size: .82rem; }
+.offerPrice { color: #000; font-size: 1.05rem; font-weight: 700; }
+.offerCta :global(.button) { white-space: nowrap; }
+@media (max-width: 900px) {
+  .offer { grid-template-columns: 2.2rem minmax(0, 1fr); gap: .8rem 1rem; padding-block: 1.5rem; }
+  .offerMeta, .offerCta { grid-column: 2; }
+  .offerCta :global(.button) { white-space: normal; }
+}
+
+/* Delivery: the three qualifying questions */
+.questions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; margin: 0; padding: 0; list-style: none; background: rgb(0 0 0 / 20%); border: 1px solid rgb(0 0 0 / 20%); counter-reset: question; }
+.questions li { padding: clamp(1.5rem, 3vw, 2.2rem); background: var(--color-yellow); color: #000; font-size: clamp(1.2rem, 1.8vw, 1.6rem); font-weight: 700; letter-spacing: -.02em; line-height: 1.25; counter-increment: question; }
+.questions li::before { display: block; margin-bottom: 2rem; content: counter(question, decimal-leading-zero); font-size: .72rem; letter-spacing: .1em; }
+@media (max-width: 900px) { .questions { grid-template-columns: 1fr; } }
+
+/* Systems page: links to the systems, on the Hebrew page */
+.systemLinks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 0; padding: 0; list-style: none; }
+.systemLinks a { display: flex; min-height: 120px; flex-direction: column; justify-content: space-between; gap: 1rem; padding: 1.5rem; border: 1px solid var(--border-hairline); background: #fff; color: #000; font-weight: 700; }
+.systemLinks a:hover { background: var(--color-yellow); }
+.systemLinks small { color: var(--text-body); font-size: .8rem; font-weight: 500; }
+@media (max-width: 760px) { .systemLinks { grid-template-columns: 1fr; } }
+
+.proofLink { margin-top: 2rem; }
+
+/* Pillar hero: the side statement (replaces the R mark) */
+.heroStatement { display: flex; min-width: 0; color: #000; flex-direction: column; justify-content: flex-end; gap: 1rem; padding: clamp(1.5rem, 3vw, 2.5rem); border-inline-start: 1px solid currentColor; }
+.heroStatement strong { color: inherit; font-size: clamp(1.25rem, 1.5vw, 1.5rem); font-weight: 700; letter-spacing: -.03em; line-height: 1.12; }
+.heroStatement p:last-child { max-width: 42ch; opacity: .7; }
+:global(.page-hero--dark) .heroStatement { color: #fff; }
+:global(.page-hero--dark) .heroStatement :global(.eyebrow) { color: var(--color-yellow); }
+@media (max-width: 1120px) { .heroStatement { padding-inline: 0; border-inline-start: 0; border-top: 1px solid currentColor; } }

@@ -21,7 +21,7 @@ export const siteUrl = "https://realization.world";
 
 export const primaryNavigation = [
   { label: "Work", href: "/work" },
-  { label: "Advisory", href: "/advisory" },
+  { label: "Services", href: "/services" },
   { label: "Partners", href: "/partners" },
   { label: "Insights", href: "/insights" },
   { label: "About", href: "/about" },

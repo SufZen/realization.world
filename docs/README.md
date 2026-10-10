@@ -6,6 +6,7 @@ This directory contains the authoritative source materials used to design and bu
 
 - [`strategy/realization-brand-strategy.html`](strategy/realization-brand-strategy.html) — complete Hebrew brand, domain and website-architecture strategy, including the refined role of `realization.co.il` as an Israeli capital and partnership hub.
 - SHA-256: `AB1EB599C745AB3B5CC7849982C4D95914A9C89223420E49220FF816DCCAE4B3`
+- [`strategy/2026-10-services-decision.md`](strategy/2026-10-services-decision.md) — October 2026 decision to add a Services hub; it supersedes the strategy's "no Services page" rule.
 
 ## Design system
 

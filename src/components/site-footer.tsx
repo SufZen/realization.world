@@ -3,6 +3,7 @@ import Link from "next/link";
 import { approachNavigation, bookingUrl, contactEmail, primaryNavigation, whatsappUrl } from "@/content/site";
 import { BrandMark } from "./brand-mark";
 import { Lines } from "./lines";
+import { SocialLinks } from "./social-links";
 
 /** Sister sites: cross-links that tie the Realization entity together for people and search engines. */
 const networkLinks = [
@@ -21,6 +22,7 @@ export function SiteFooter() {
           <BrandMark />
           <p className="spaced-caps">PHYSICAL POTENTIAL. DIGITAL SYSTEMS. REALIZED VALUE.</p>
           <p><Lines text="Realizing untapped potential | in the physical world." /></p>
+          <SocialLinks />
         </div>
         <div className="site-footer__nav">
           <p className="eyebrow">Explore</p>
@@ -30,7 +32,9 @@ export function SiteFooter() {
         </div>
         <div className="site-footer__nav">
           <p className="eyebrow">Work with us</p>
-          <Link href="/advisory">Advisory</Link>
+          <Link href="/services/real-estate">Real estate development</Link>
+          <Link href="/services/ai-systems">AI and operations systems</Link>
+          <Link href="/services/delivery">Delivery and team setup</Link>
           <Link href="/partners/opportunity-owners">Opportunity owners</Link>
           <Link href="/partners/operators">Operators</Link>
           <Link href="/partners/capital">Capital partners</Link>
