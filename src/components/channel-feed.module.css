@@ -1,0 +1,32 @@
+/* "Latest from the channels" and "Follow the work". */
+
+.feed { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2.5vw, 2rem); margin: 0; padding: 0; list-style: none; }
+.item { display: flex; height: 100%; flex-direction: column; gap: .75rem; color: inherit; }
+.thumb { position: relative; overflow: hidden; aspect-ratio: 16 / 10; background: #000; }
+.thumb img { object-fit: cover; transition: transform .6s var(--ease-out); }
+.item:hover .thumb img { transform: scale(1.04); }
+.blank { display: grid; place-items: center; background: var(--color-yellow-wash); color: #000; }
+.play { position: absolute; inset: 0; display: grid; place-items: center; }
+.play span { display: grid; width: 52px; height: 52px; place-items: center; border-radius: 50%; background: var(--color-yellow); color: #000; box-shadow: 0 6px 20px rgb(0 0 0 / 30%); }
+.meta { display: flex; align-items: center; gap: .5rem; color: var(--text-muted); font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.meta svg { color: #000; }
+.text { display: -webkit-box; overflow: hidden; color: var(--text-strong); font-size: .98rem; font-weight: 600; line-height: 1.45; -webkit-box-orient: vertical; -webkit-line-clamp: 4; white-space: pre-line; }
+.open { margin-top: auto; color: #000; font-size: .8rem; font-weight: 700; }
+.item:hover .open { text-decoration: underline; text-underline-offset: .25rem; }
+@media (max-width: 900px) { .feed { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .feed { grid-template-columns: 1fr; } }
+
+.channels { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; margin: 0; padding: 0; list-style: none; background: var(--border-hairline); border: 1px solid var(--border-hairline); }
+.channel { display: flex; height: 100%; flex-direction: column; gap: .7rem; padding: clamp(1.25rem, 2.5vw, 1.8rem); background: #fff; }
+.channelHead { display: flex; align-items: center; gap: .85rem; }
+.icon { display: grid; width: 44px; height: 44px; flex: none; place-items: center; border-radius: 50%; background: #000; color: var(--color-yellow); }
+.channel h3 { font-size: 1.15rem; letter-spacing: -.015em; }
+.stat { display: inline-block; margin-top: .25rem; padding: .1rem .5rem; border-radius: var(--radius-pill); background: var(--color-yellow); color: #000; font-size: .72rem; font-weight: 800; letter-spacing: .03em; }
+.channel p { font-size: .88rem; }
+.actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: auto; padding-top: .4rem; }
+.action { display: inline-flex; min-height: 40px; align-items: center; gap: .4rem; padding: .55rem 1rem; border: 1.5px solid #000; border-radius: var(--radius-pill); color: #000; font-size: .8rem; font-weight: 700; transition: background .18s var(--ease-standard), color .18s var(--ease-standard); }
+.action:hover { background: #000; color: #fff; }
+.primary { background: #000; color: #fff; }
+.primary:hover { background: var(--color-neutral-700); border-color: var(--color-neutral-700); }
+@media (max-width: 1000px) { .channels { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .channels { grid-template-columns: 1fr; } }

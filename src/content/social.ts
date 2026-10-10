@@ -22,3 +22,18 @@ export const socialLinks: Array<{ network: SocialNetwork; label: string; href: s
   { network: "tiktok", label: "TikTok", href: "https://www.tiktok.com/@suf.zen" },
   { network: "x", label: "X", href: "https://x.com/Suf_Zen" },
 ];
+
+const hrefOf = (network: SocialNetwork) => socialLinks.find((link) => link.network === network)!.href;
+
+/**
+ * "Follow the work": the main channels only (TikTok and X stay in the footer row), each
+ * with what people get there and the action, as a channel card. Order = priority.
+ */
+export const mainChannels: Array<{ id: SocialNetwork | "groups" | "email"; name: string; what: string; action: string; href: string; stat?: string }> = [
+  { id: "youtube", name: "YouTube", what: "Short videos from real projects, in Hebrew and English.", action: "Subscribe", href: `${youtubeChannelUrl}?sub_confirmation=1` },
+  { id: "linkedin", name: "LinkedIn", what: "Field notes, project updates and ideas, in English.", action: "Follow", href: hrefOf("linkedin") },
+  { id: "groups", name: "Portugal business groups", what: "Work, investment and business in Portugal: questions, deals, people.", action: "Join", href: communities[1].href, stat: `${(communities[0].members + communities[1].members).toLocaleString("en-US")}+ members` },
+  { id: "facebook", name: "Facebook", what: "Posts, reels and webinar news, in Hebrew.", action: "Follow", href: hrefOf("facebook") },
+  { id: "instagram", name: "Instagram", what: "Reels from the work and the places.", action: "Follow", href: hrefOf("instagram") },
+  { id: "email", name: "Realization updates", what: "Occasional email: new tools, case studies and events.", action: "Subscribe", href: newsletterUrl },
+];
