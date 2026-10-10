@@ -15,7 +15,7 @@ import { breadcrumbSchema, graph, ids } from "@/lib/schema";
 
 export const metadata: Metadata = pageMetadata(
   "Services — places, systems and teams",
-  "Realization realizes potential in three dimensions: places, systems and teams. Real estate development in Portugal, AI and operations systems, and delivery and team setup, each built to be handed over.",
+  "Realization realizes potential in three dimensions: places, systems and teams. Real estate development in Portugal, AI and operations systems, and team and process setup, each built to be handed over.",
   "/services",
 );
 

@@ -108,7 +108,7 @@ export function llmsIndex() {
     `- [Services](${siteUrl}/services): Realization realizes potential in three dimensions: places, systems and teams.`,
     `- [Real estate development](${siteUrl}/services/real-estate): free deal check, a 60-minute deal consultation (€150, credited), feasibility studies and financial models, and development management in Portugal.`,
     `- [AI and operations systems](${siteUrl}/services/ai-systems): a 60-minute strategy session (€150, credited), a fixed-price Audit Sprint, one measured pilot and tapering support; fixed-scope stages with a stop point after each. In Hebrew: ${siteUrl}/he/services/ai-systems.`,
-    `- [Delivery and team setup](${siteUrl}/services/delivery): roles, workflows, documentation and training with a handoff date; limited fractional operations and development-management roles.`,
+    `- [Team and process setup](${siteUrl}/services/team-setup): clear roles, working processes and a trained team for a development project or a growing firm, with a handoff date; limited fractional operations and development-management roles. Not construction management.`,
     ...partnerPaths.map((path) => `- [${plain(path.title)}](${siteUrl}/partners/${path.slug}): ${plain(path.summary)}`),
     "",
     "## Field notes",

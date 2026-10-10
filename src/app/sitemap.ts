@@ -12,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/services",
     "/services/real-estate",
     "/services/ai-systems",
-    "/services/delivery",
+    "/services/team-setup",
     "/he/services/ai-systems",
     "/partners",
     "/insights",

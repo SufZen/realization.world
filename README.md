@@ -28,7 +28,7 @@ The health endpoint is available at `GET /api/health`.
 ## Site structure
 
 - `/` — homepage: three pillar doors, proof strip, testimonials (when there are any), selected work, latest videos and field notes
-- `/services` — hub; `/services/real-estate`, `/services/ai-systems` (also in Hebrew at `/he/services/ai-systems`), `/services/delivery` — what can be bought, prices and how to start. Content in `src/content/services.ts`; decision record in `docs/strategy/2026-10-services-decision.md`. `/advisory` 301-redirects to `/services/ai-systems`
+- `/services` — hub; `/services/real-estate`, `/services/ai-systems` (also in Hebrew at `/he/services/ai-systems`), `/services/team-setup` — what can be bought, prices and how to start. Content in `src/content/services.ts`; decision record in `docs/strategy/2026-10-services-decision.md`. `/advisory` 301-redirects to `/services/ai-systems`, `/services/delivery` to `/services/team-setup`
 - `/work` and `/work/<slug>` — portfolio and case studies (`/ventures/*` 308-redirects here)
 - `/partners/*` — opportunity owner, operator, capital, and corporate/public journeys
 - `/insights` — Learn: field notes, the latest YouTube videos (read from the channel's RSS feed, `src/lib/youtube.ts`), webinars and the email signup; `/insights/<slug>` — field notes

@@ -31,11 +31,21 @@
   .offerCta :global(.button) { white-space: normal; }
 }
 
-/* Delivery: the three qualifying questions */
+/* Team and process setup: the three qualifying questions */
 .questions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; margin: 0; padding: 0; list-style: none; background: rgb(0 0 0 / 20%); border: 1px solid rgb(0 0 0 / 20%); counter-reset: question; }
 .questions li { padding: clamp(1.5rem, 3vw, 2.2rem); background: var(--color-yellow); color: #000; font-size: clamp(1.2rem, 1.8vw, 1.6rem); font-weight: 700; letter-spacing: -.02em; line-height: 1.25; counter-increment: question; }
 .questions li::before { display: block; margin-bottom: 2rem; content: counter(question, decimal-leading-zero); font-size: .72rem; letter-spacing: .1em; }
 @media (max-width: 900px) { .questions { grid-template-columns: 1fr; } }
+
+/* Team and process setup: the image and what a setup leaves behind */
+.setup { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+.setupImage { position: relative; overflow: hidden; aspect-ratio: 3 / 2; background: var(--color-neutral-100); }
+.setupImage img { object-fit: cover; }
+.outcomes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem 1.75rem; margin: 2rem 0 0; padding: 1.5rem 0 0; border-top: 2px solid #000; list-style: none; }
+.outcomes strong { display: block; color: #000; font-size: 1.02rem; }
+.outcomes span { display: block; margin-top: .35rem; font-size: .9rem; }
+@media (max-width: 900px) { .setup { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .outcomes { grid-template-columns: 1fr; } }
 
 /* Systems page: links to the systems, on the Hebrew page */
 .systemLinks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin: 0; padding: 0; list-style: none; }

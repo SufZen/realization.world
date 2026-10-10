@@ -97,8 +97,8 @@ export default async function HomePage() {
         <div className="container-wide">
           <SectionHeading
             eyebrow="SELECTED WORK"
-            title="One project | from each pillar."
-            intro="Development, systems and delivery, | from our own work and our clients’."
+            title="One example | from each pillar."
+            intro="A development, a system | and the way we set up teams."
             align="split"
           />
           <SelectedWork />
