@@ -64,11 +64,19 @@ export function sheetConfigured() {
   return Boolean(process.env.DEAL_CHECK_SHEET_WEBHOOK_URL && process.env.DEAL_CHECK_SHEET_SECRET);
 }
 
+/**
+ * Visitors type free text; a cell that starts with = + - @ (or a tab or carriage return)
+ * would run as a formula in the Sheet. A leading apostrophe makes Sheets store it as text.
+ * The Apps Script escapes too; this keeps the Sheet safe whatever script sits behind it.
+ */
+const asText = (value: string) => (/^[=+\-@\t\r]/.test(value) ? `'${value}` : value);
+
 /** Appends the deal check to the Sheet. Apps Script answers with a redirect; fetch follows it. */
 export async function appendToSheet(deal: DealCheck) {
   const url = process.env.DEAL_CHECK_SHEET_WEBHOOK_URL;
   const secret = process.env.DEAL_CHECK_SHEET_SECRET;
   if (!url || !secret) throw new Error("Deal check sheet is not configured");
+  const row = { ...deal, plan: planLabels.get(deal.plan) ?? deal.plan };
   const response = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -77,8 +85,7 @@ export async function appendToSheet(deal: DealCheck) {
       submittedAt: new Date().toISOString(),
       source: "deal-check",
       pillar: "real-estate",
-      ...deal,
-      plan: planLabels.get(deal.plan) ?? deal.plan,
+      ...Object.fromEntries(Object.entries(row).map(([key, value]) => [key, asText(value)])),
     }),
     signal: AbortSignal.timeout(8000),
   });
