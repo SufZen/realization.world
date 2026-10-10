@@ -41,6 +41,8 @@ const nextConfig: NextConfig = {
       // Lifebook's second generation is Dreamward (Sep 2026).
       { source: "/work/lifebook", destination: "/work/dreamward", permanent: true },
       { source: "/work/lifebook.md", destination: "/work/dreamward.md", permanent: true },
+      // Advisory became the Systems pillar of /services (Oct 2026). 301, not Next's default 308.
+      { source: "/advisory", destination: "/services/ai-systems", statusCode: 301 },
     ];
   },
   turbopack: {

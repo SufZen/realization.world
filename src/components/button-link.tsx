@@ -9,6 +9,8 @@ type ButtonLinkProps = {
   variant?: "primary" | "dark" | "light" | "outline" | "text";
   arrow?: boolean;
   className?: string;
+  /** Analytics attributes; defaults to lib/tracking.ts for the href. */
+  tracking?: Record<string, string>;
 };
 
 export function ButtonLink({
@@ -17,6 +19,7 @@ export function ButtonLink({
   variant = "primary",
   arrow = true,
   className = "",
+  tracking,
 }: ButtonLinkProps) {
   const external = href.startsWith("http");
   return (
@@ -24,7 +27,7 @@ export function ButtonLink({
       className={`button button--${variant} ${className}`}
       href={href}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-      {...trackingFor(href)}
+      {...(tracking ?? trackingFor(href))}
     >
       <span>{children}</span>
       {arrow && <ArrowRight className="r-flip-x" aria-hidden="true" size={17} strokeWidth={2.2} />}

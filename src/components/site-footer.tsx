@@ -30,7 +30,9 @@ export function SiteFooter() {
         </div>
         <div className="site-footer__nav">
           <p className="eyebrow">Work with us</p>
-          <Link href="/advisory">Advisory</Link>
+          <Link href="/services/real-estate">Real estate development</Link>
+          <Link href="/services/ai-systems">AI and operations systems</Link>
+          <Link href="/services/delivery">Delivery and team setup</Link>
           <Link href="/partners/opportunity-owners">Opportunity owners</Link>
           <Link href="/partners/operators">Operators</Link>
           <Link href="/partners/capital">Capital partners</Link>

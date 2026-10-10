@@ -65,15 +65,37 @@ export const services = {
   organization: about,
   services: [
     {
-      name: "Advisory — AI adoption and operations",
-      url: `${siteUrl}/advisory`,
+      name: "AI and operations systems (formerly Advisory)",
+      url: `${siteUrl}/services/ai-systems`,
       stages: [
         "Stage 0 · Focused discovery: 2–3 sessions → decisions document, tiered roadmap, success measures",
         "Stage 1 · Guided pilot: 3–5 weeks, one domain, two people → working process measured before and after",
         "Stage 2 · Tapering support: ~10–12 advisory hours a month, ending at month 12",
         "Add-on · Team workshops on the client's own cases",
       ],
+      first_steps: [
+        "AI Strategy Session · 60 min · €150, credited toward the Audit Sprint",
+        "Audit Sprint · Stage 0 as a fixed-price sprint, by proposal",
+      ],
       pricing: "Each stage is priced as a separate fixed unit before it starts; stop after any stage.",
+    },
+    {
+      name: "Real estate development (Portugal)",
+      url: `${siteUrl}/services/real-estate`,
+      first_steps: [
+        "Free deal check · send a listing link, get the numbers back",
+        "Portugal Deal & Investment Consultation · 60 min · €150, credited toward a feasibility study",
+        "Feasibility study and financial model · fixed scope, by proposal",
+        "Development management · limited number of projects",
+      ],
+    },
+    {
+      name: "Delivery and team setup",
+      url: `${siteUrl}/services/delivery`,
+      first_steps: [
+        "Delivery intro · 30 min · free",
+        "Team and process setup · fixed scope with a handoff date, by proposal",
+      ],
     },
     { name: "Real-estate development and capital partnerships (Portugal)", url: `${siteUrl}/partners/capital` },
     { name: "Stuck property resolution (Portugal)", url: "https://realization.pt" },
