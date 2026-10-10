@@ -20,11 +20,16 @@ export type IconComponent = ComponentType<{ size?: number; strokeWidth?: number 
 export const siteUrl = "https://realization.world";
 
 export const primaryNavigation = [
-  { label: "Work", href: "/work" },
   { label: "Services", href: "/services" },
-  { label: "Partners", href: "/partners" },
-  { label: "Insights", href: "/insights" },
+  { label: "Work", href: "/work" },
+  { label: "Learn", href: "/insights" },
   { label: "About", href: "/about" },
+] as const;
+
+/** Partnership paths for owners, operators and capital: menu and footer. */
+export const partnerNavigation = [
+  { label: "Partners", href: "/partners" },
+  { label: "Bring an opportunity", href: "/bring-an-opportunity" },
 ] as const;
 
 /** The model behind the work: secondary navigation (menu and footer). */

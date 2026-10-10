@@ -3,6 +3,7 @@ import { JsonLd } from "@/components/json-ld";
 import { Lines } from "@/components/lines";
 import { PageHero } from "@/components/page-hero";
 import { SectionHeading } from "@/components/section-heading";
+import { PillarVideos, Testimonials } from "@/components/media-blocks";
 import { CtaLink } from "@/components/services/cta-link";
 import { HeroStatement } from "@/components/services/hero-statement";
 import { CtaBand, FaqList, FitLists, InsightFeed, OfferList } from "@/components/services/sections";
@@ -74,7 +75,7 @@ export default function DeliveryPage() {
       <section className="section">
         <div className="container-wide">
           <SectionHeading eyebrow="HOW IT WORKS" title="Built to be | handed over." intro="Every engagement ends on a handoff date | agreed at the start." />
-          <div className="journey-grid">
+          <div className={`journey-grid ${styles.tabletTwo}`}>
             {delivery.steps.map(([title, text], index) => (
               <article className="journey-step" key={title}>
                 <span className="journey-step__number">0{index + 1}</span>
@@ -86,7 +87,7 @@ export default function DeliveryPage() {
         </div>
       </section>
 
-      <section className="section surface-muted">
+      <section className="section surface-muted" id="offers">
         <div className="container-wide">
           <SectionHeading eyebrow="WAYS TO START" title="Three ways in." intro="A free intro, a fixed-scope setup, | or a fractional role while the team grows." />
           <OfferList offers={pillar.offers} pageRef={pillar.ref} />
@@ -120,6 +121,10 @@ export default function DeliveryPage() {
           </div>
         </div>
       </section>
+
+      <Testimonials pillar="delivery" />
+
+      <PillarVideos pillar="delivery" title="Delivery and handoff, | in short videos." />
 
       <InsightFeed insights={pillarInsights(pillar, insights)} title="Ownership and handoff, | from real projects." />
 

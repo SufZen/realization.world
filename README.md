@@ -1,6 +1,6 @@
 # realization.world
 
-Production website for **Realization**: real estate in Portugal, and the ventures and AI systems built around it. The site has two conversion paths — real estate & capital, and AI & operations advisory — and is built to be read by people, search engines, LLMs and AI agents. Next.js App Router, TypeScript, a schema.org graph, and a standalone Docker build for Coolify.
+Production website for **Realization**: real estate in Portugal, and the ventures and AI systems built around it. The site has two conversion paths — services in three pillars (real estate development, AI and operations systems, delivery and team setup) and partnerships (owners, operators, capital) — and is built to be read by people, search engines, LLMs and AI agents. Next.js App Router, TypeScript, a schema.org graph, and a standalone Docker build for Coolify.
 
 The repository also holds the static `/asaf/` founder profile (`public/asaf/`), its plain-text source and line-break audit utility, and the brand assets.
 
@@ -27,11 +27,12 @@ The health endpoint is available at `GET /api/health`.
 
 ## Site structure
 
-- `/` — homepage: two audience doors, proof strip, selected work
+- `/` — homepage: three pillar doors, proof strip, testimonials (when there are any), selected work, latest videos and field notes
+- `/services` — hub; `/services/real-estate`, `/services/ai-systems` (also in Hebrew at `/he/services/ai-systems`), `/services/delivery` — what can be bought, prices and how to start. Content in `src/content/services.ts`; decision record in `docs/strategy/2026-10-services-decision.md`. `/advisory` 301-redirects to `/services/ai-systems`
 - `/work` and `/work/<slug>` — portfolio and case studies (`/ventures/*` 308-redirects here)
-- `/advisory` — AI adoption and operations engagement model, with FAQ
 - `/partners/*` — opportunity owner, operator, capital, and corporate/public journeys
-- `/insights/*` — field notes
+- `/insights` — Learn: field notes, the latest YouTube videos (read from the channel's RSS feed, `src/lib/youtube.ts`), webinars and the email signup; `/insights/<slug>` — field notes
+- `/links` — one link for every social bio (`src/content/links.ts`, not indexed)
 - `/about`, `/thesis`, `/how-we-build`, `/markets/*` — the model behind the work
 - `/bring-an-opportunity` — brief form (server action → email); `/thank-you` is the conversion page
 - `/privacy`, `/legal` — privacy notice and legal notice
@@ -54,7 +55,9 @@ For changes to the `/asaf/` profile, edit `public/asaf/index.html` and `public/a
 
 The opportunity form sends the brief by email through a server action (`src/app/bring-an-opportunity/actions.ts`, `src/lib/mail.ts`) using the same SMTP variables as the Live Lab; see `.env.example`. Nothing is stored on the website. Without SMTP settings the form keeps the visitor's text and offers "open in your email app" instead. Validation and rate limiting are shared with the MCP `submit_brief` tool (`src/lib/brief.ts`).
 
-Analytics are optional and cookieless (Umami, `src/components/analytics.tsx`). Links carry `data-umami-event` attributes: `book-intro`, `whatsapp`, `open-brief`, `submit-brief`, `outbound`; a `/thank-you` page view is a submitted brief.
+Analytics are optional and cookieless (Umami, `src/components/analytics.tsx`). Links carry `data-umami-event` attributes: `book-intro`, `whatsapp`, `open-brief`, `submit-brief`, `outbound`; a `/thank-you` page view is a submitted brief. The Services pages add `book-session-<pillar>`, `buy-audit`, `join-webinar`, `deal-check`, and elsewhere `join-newsletter`, `watch-video` and `social` (with `pillar`, `ref` and similar properties).
+
+Testimonials live in `src/content/testimonials.ts` (real, approved quotes only); their sections stay hidden until there is at least one. Videos are tagged to a pillar page in `src/content/videos.ts`.
 
 ## Content and claim governance
 

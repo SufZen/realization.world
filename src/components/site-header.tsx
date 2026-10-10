@@ -4,7 +4,7 @@ import { ArrowUpRight, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { approachNavigation, bookingUrl, primaryNavigation } from "@/content/site";
+import { approachNavigation, bookingUrl, partnerNavigation, primaryNavigation } from "@/content/site";
 import { BrandMark } from "./brand-mark";
 import { SocialLinks } from "./social-links";
 
@@ -65,6 +65,14 @@ export function SiteHeader() {
               <span>Home</span><ArrowUpRight aria-hidden="true" />
             </Link>
             {primaryNavigation.map((item) => (
+              <Link className={pathname === item.href ? "is-active" : ""} href={item.href} key={item.href} onClick={() => setOpen(false)}>
+                <span>{item.label}</span><ArrowUpRight aria-hidden="true" />
+              </Link>
+            ))}
+          </div>
+          <p className="menu-panel__group">Partner with us</p>
+          <div className="menu-panel__links menu-panel__links--minor">
+            {partnerNavigation.map((item) => (
               <Link className={pathname === item.href ? "is-active" : ""} href={item.href} key={item.href} onClick={() => setOpen(false)}>
                 <span>{item.label}</span><ArrowUpRight aria-hidden="true" />
               </Link>

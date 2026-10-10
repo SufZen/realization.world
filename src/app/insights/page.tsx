@@ -1,41 +1,85 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Lines } from "@/components/lines";
+import { VideoGrid } from "@/components/media-blocks";
 import { PageHero } from "@/components/page-hero";
 import { SectionHeading } from "@/components/section-heading";
+import { CtaLink } from "@/components/services/cta-link";
+import { InsightFeed } from "@/components/services/sections";
+import { SocialLinks } from "@/components/social-links";
 import { insights } from "@/content/site";
+import { isWebinarOpen, type Cta } from "@/content/services";
+import { communities, newsletterUrl, youtubeChannelUrl } from "@/content/social";
 import { pageMetadata } from "@/lib/metadata";
-import { Lines } from "@/components/lines";
+import { latestVideos } from "@/lib/youtube";
 
 export const metadata: Metadata = pageMetadata(
-  "Insights",
-  "Field notes from Realization on venture architecture, physical-world systems, market evidence and transfer.",
+  "Learn — field notes, videos and webinars",
+  "Field notes, short videos and webinars from Realization's real projects: property, development and AI in practice. Free, in English and Hebrew.",
   "/insights",
 );
 
-export default function InsightsPage() {
+// Videos come from the YouTube feed and the webinar offer ends on 20.10: regenerate hourly.
+export const revalidate = 3600;
+
+const ref = "learn";
+const updates: Cta = { label: "Get Realization updates", href: newsletterUrl, event: "join-newsletter", data: { place: "learn" } };
+const youtube: Cta = { label: "Subscribe on YouTube", href: `${youtubeChannelUrl}?sub_confirmation=1`, event: "social", data: { network: "youtube", place: "learn" } };
+const webinar: Cta = { label: "Save a seat · free", href: "/webinar", event: "join-webinar", data: { pillar: "learn" }, carryRef: true };
+
+export default async function LearnPage() {
+  const videos = await latestVideos(6);
+  const notes = [...insights].sort((a, b) => b.date.localeCompare(a.date));
+
   return (
     <>
       <PageHero
-        index="06"
-        eyebrow="INSIGHTS"
-        title="Field notes. | Real systems."
-        intro="Notes from real projects: | property, development and AI in practice."
+        index="L"
+        eyebrow="LEARN"
+        title="Learn from | the field."
+        intro="Field notes, videos and webinars | from real projects: property, development | and AI in practice."
         theme="light"
+        actions={<><CtaLink cta={updates} pageRef={ref} variant="dark" /><CtaLink cta={youtube} pageRef={ref} variant="outline" /></>}
       />
-      <section className="section surface-dark">
-        <div className="container-wide">
-          <SectionHeading eyebrow="FIELD NOTES" title="Built from reality." intro="Written by Asaf Eyzenkot (Suf Zen), | from the work itself." inverse />
-          <div className="insights-grid">
-            {insights.map(({ slug, category, title, excerpt, published, readTime, icon: Icon }) => (
-              <Link className="insight-card" href={`/insights/${slug}`} key={slug}>
-                <div className="insight-card__icon"><Icon size={25} strokeWidth={1.5} /></div>
-                <div><p className="eyebrow">{category}</p><h3><Lines text={title} /></h3><p><Lines text={excerpt} /></p><div className="insight-card__meta"><span>{published}</span><span>{readTime}</span></div></div>
-              </Link>
-            ))}
+
+      {isWebinarOpen() && (
+        <section className="section surface-brand">
+          <div className="container-wide diagram-row">
+            <SectionHeading eyebrow="FREE WEBINAR · IN HEBREW" title="Five real AI cases | from real-estate projects." intro="Tuesday 20 October, 20:00 Israel time. | Ninety minutes, and one audience problem | worked on screen." />
+            <div className="button-row"><CtaLink cta={webinar} pageRef={ref} variant="dark" /></div>
           </div>
+        </section>
+      )}
+
+      {videos.length > 0 && (
+        <section className="section">
+          <div className="container-wide">
+            <SectionHeading eyebrow="WATCH" title="Short videos | from the work." intro="New videos most weeks, in Hebrew and English. | They open on YouTube." />
+            <VideoGrid videos={videos} place="learn" />
+            <div className="button-row"><CtaLink cta={{ ...youtube, label: "All videos on YouTube" }} pageRef={ref} variant="dark" /></div>
+          </div>
+        </section>
+      )}
+
+      <InsightFeed insights={notes} title="Built from reality." intro="Written by Asaf Eyzenkot (Suf Zen), | from the work itself." />
+
+      <section className="cta-band">
+        <div className="container-wide cta-band__grid">
+          <div>
+            <p className="eyebrow">STAY IN TOUCH</p>
+            <h2><Lines text="Get the field notes | by email." /></h2>
+            <p><Lines text="Occasional updates: new tools, case studies and events. | Unsubscribe any time." /></p>
+            <SocialLinks />
+            <p>
+              Or join the conversation in our Portugal business groups:{" "}
+              {communities.map((group, index) => (
+                <span key={group.href}>{index > 0 && " · "}<a className="text-link" href={group.href} rel="noopener" data-umami-event="join-group" data-umami-event-group={group.lang}>{group.lang === "he" ? "Hebrew" : "English"}</a></span>
+              ))}
+              .
+            </p>
+          </div>
+          <div className="button-row"><CtaLink cta={updates} pageRef={ref} variant="dark" /></div>
         </div>
       </section>
-      <section className="cta-band"><div className="container-wide cta-band__grid"><div><p className="eyebrow">FIELD SIGNAL</p><h2><Lines text="See a system | others are missing?" /></h2><p><Lines text="The best insights can become briefs. | The best briefs can become ventures." /></p></div><Link className="button button--dark" href="/bring-an-opportunity">Bring an opportunity</Link></div></section>
     </>
   );
 }
