@@ -4,9 +4,12 @@ import { Suspense } from "react";
 import { ButtonLink } from "@/components/button-link";
 import { Lines } from "@/components/lines";
 import { SectionHeading } from "@/components/section-heading";
+import { Countdown } from "@/components/webinar/countdown";
+import { WebinarMotion } from "@/components/webinar/webinar-motion";
 import { WebinarForm } from "@/components/webinar-form";
 import { pageMetadata } from "@/lib/metadata";
 import { webinar } from "@/lib/webinar";
+import "./webinar-motion.css";
 
 const base = pageMetadata(
   "וובינר: לא עוד הרצאה על בינה מלאכותית",
@@ -97,6 +100,15 @@ const faq = [
   ["אני פעיל רק בישראל. זה רלוונטי?", "כן. רוב המקרים מגיעים מפורטוגל, אבל הבעיות, הכלים והשיטה זהים בכל שוק."],
 ];
 
+/** The case's 4-second line clip from the deck, laid over its image; webinar-motion.tsx decides when it plays. */
+function CaseClip({ index, kind }: { index: number; kind: "thumb" | "clip" }) {
+  return (
+    <video className="wm-clip" {...{ [`data-wm-${kind}`]: "" }} muted playsInline preload="none" aria-hidden="true" tabIndex={-1}>
+      <source src={`/webinar/motion/case-${index + 1}.mp4`} type="video/mp4" />
+    </video>
+  );
+}
+
 export default function WebinarPage() {
   return (
     <div dir="rtl" lang="he" className="webinar-page">
@@ -113,11 +125,15 @@ export default function WebinarPage() {
           <p className="wh-hero__brand">{webinar.hosts}</p>
         </div>
         <div className="wh-hero__media">
-          <Image src="/work/arena-barreiro/facade.webp" alt="הדמיית חזית של בניין מגורים בבריירו" fill priority sizes="(max-width: 900px) 100vw, 50vw" />
+          <Image className="wm-hero__still" src="/webinar/motion/hero-loop.webp" alt="" fill priority fetchPriority="high" unoptimized />
+          <video className="wm-hero__loop" data-wm-hero muted loop playsInline preload="none" aria-hidden="true" tabIndex={-1}>
+            <source src="/webinar/motion/hero-loop.mp4" type="video/mp4" />
+          </video>
           <div className="wh-hero__when">
             <p className="wh-hero__day">שלישי 20.10</p>
             <p className="wh-hero__hour">20:00</p>
             <p>שעון ישראל · 18:00 בליסבון</p>
+            <Countdown startUtc={webinar.startUtc} endUtc={webinar.endUtc} />
           </div>
         </div>
         <ol className="wh-path" aria-label="חמשת המקרים">
@@ -136,10 +152,11 @@ export default function WebinarPage() {
           />
           <div className="wh-cases">
             {cases.map((item, index) => (
-              <details className="wh-case" id={`case-${index + 1}`} key={item.title} open={index === 0}>
+              <details className="wh-case" id={`case-${index + 1}`} key={item.title} open={index === 0} data-reveal>
                 <summary>
                   <span className="wh-case__thumb">
                     <Image src={item.thumb ?? item.image} alt="" fill sizes="160px" />
+                    <CaseClip index={index} kind="thumb" />
                   </span>
                   <span className="wh-case__head">
                     <span className="wh-case__stage">{index + 1} · {item.stage}</span>
@@ -157,6 +174,7 @@ export default function WebinarPage() {
                   </div>
                   <div className={item.contain ? "wh-case__image wh-case__image--contain" : "wh-case__image"}>
                     <Image src={item.image} alt={item.alt} fill sizes="(max-width: 900px) 100vw, 40vw" />
+                    <CaseClip index={index} kind="clip" />
                   </div>
                 </div>
               </details>
@@ -167,8 +185,8 @@ export default function WebinarPage() {
 
       <section className="section surface-brand" id="your-problem">
         <div className="container-wide wh-problem">
-          <h2><Lines text="והבעיה שלכם | על המסך." /></h2>
-          <div>
+          <h2 data-reveal><Lines text="והבעיה שלכם | על המסך." /></h2>
+          <div data-reveal>
             <p className="wh-problem__text">בהרשמה אתם כותבים בעיה אחת שהייתם רוצים לפתור. כל בעיה שנשלחת בהרשמה נקראת, ואחת מהן ננתח בשידור, כמו אודיט אמיתי: מה קורה היום, לאן הולכים הזמן והכסף, ומה אפשר לשנות כבר מחר.</p>
             <ButtonLink href="#register" variant="dark">לכתוב את הבעיה שלי</ButtonLink>
           </div>
@@ -185,14 +203,24 @@ export default function WebinarPage() {
               intro="מערכת שבנינו ב־Realization, ושעליה מבוססת כל העבודה שלנו. | צוות של סוכני בינה מלאכותית שחולקים מאגר ידע אחד על העסק, | זוכרים את מה שכבר נעשה, ופועלים רק באישור שלכם."
             />
             <ul className="wh-os__points">
-              <li><strong>זוכרת את העסק.</strong> מסמכים, החלטות ושיחות, במקום אחד.</li>
-              <li><strong>עובדת רק באישור.</strong> שום פעולה לא יוצאת לפועל בלי שאדם מאשר אותה.</li>
-              <li><strong>נשארת שלכם.</strong> מותקנת אצלכם, והידע לא יושב אצל ספק.</li>
+              <li data-reveal><strong>זוכרת את העסק.</strong> מסמכים, החלטות ושיחות, במקום אחד.</li>
+              <li data-reveal><strong>עובדת רק באישור.</strong> שום פעולה לא יוצאת לפועל בלי שאדם מאשר אותה.</li>
+              <li data-reveal><strong>נשארת שלכם.</strong> מותקנת אצלכם, והידע לא יושב אצל ספק.</li>
             </ul>
           </div>
-          <figure className="wh-os__shot">
-            <Image src="/work/realizeos/dream-inbox.webp" alt="מסך האינבוקס של RealizeOS: עדכוני ידע שממתינים לאישור" width={1600} height={831} sizes="(max-width: 900px) 100vw, 50vw" />
-            <figcaption>עדכוני ידע שהסוכנים הציעו, בהמתנה לאישור · נתוני הדגמה</figcaption>
+          <figure className="wh-os__shot" data-reveal>
+            <div className="wm-brain">
+              <Image className="wm-brain__still" src="/webinar/motion/brain.webp" alt="המחשה: מסמכים, מייל, וואטסאפ ויומן נכנסים למוח אחד של הפרויקט, שעונה על שאלה עם המקורות שלה וממתין לאישור" width={1280} height={720} unoptimized />
+              <video className="wm-brain__clip" data-wm-brain muted playsInline preload="none" aria-hidden="true" tabIndex={-1}>
+                <source src="/webinar/motion/brain.mp4" type="video/mp4" />
+              </video>
+              <button type="button" className="wm-brain__replay" data-wm-replay>להפעיל שוב</button>
+            </div>
+            <Image className="wm-brain__shot" src="/work/realizeos/dream-inbox.webp" alt="מסך האינבוקס של RealizeOS: עדכוני ידע שממתינים לאישור" width={1600} height={831} sizes="(max-width: 900px) 100vw, 50vw" />
+            <figcaption>
+              <span className="wm-brain__caption">המוח של הפרויקט: מקורות, תשובה עם הפניות, ועדכון שממתין לאישור · נתוני הדגמה</span>
+              <span className="wm-brain__shot-caption">עדכוני ידע שהסוכנים הציעו, בהמתנה לאישור · נתוני הדגמה</span>
+            </figcaption>
           </figure>
         </div>
       </section>
@@ -202,7 +230,7 @@ export default function WebinarPage() {
           <SectionHeading title="למי זה מתאים" intro="לכל מי שעובד בנדל״ן: מי שבונה, מי שמתכנן, ומי שמלווה עסקאות." />
           <div className="webinar-audiences">
             {audiences.map(([title, text]) => (
-              <article className="fit-list" key={title}>
+              <article className="fit-list" key={title} data-reveal>
                 <h3>{title}</h3>
                 <p>{text}</p>
               </article>
@@ -213,7 +241,7 @@ export default function WebinarPage() {
 
       <section className="section surface-muted">
         <div className="container-wide webinar-split">
-          <div className="webinar-agenda">
+          <div className="webinar-agenda" data-reveal>
             <SectionHeading title="90 דקות, בלי חפירות." intro="עשר דקות לכל מקרה, ועשרים דקות לשאלות שלכם." />
             <ol>
               {agenda.map(([minutes, item]) => (
@@ -223,7 +251,7 @@ export default function WebinarPage() {
           </div>
           <div>
             <SectionHeading title="המארחים" intro={webinar.hosts} />
-            <div className="wh-hosts">
+            <div className="wh-hosts" data-reveal>
               <article>
                 <Image src="/webinar/asaf-eyzenkot.jpg" alt="אסף איזנקוט" width={112} height={112} />
                 <div>
@@ -263,7 +291,8 @@ export default function WebinarPage() {
         </div>
       </section>
 
-      <a className="wh-sticky" href="#register">שמרו לי מקום · וובינר חינמי ב־20.10</a>
+      <a className="wh-sticky" href="#register" data-umami-event="webinar-sticky">שמרו לי מקום · וובינר חינמי ב־20.10</a>
+      <WebinarMotion />
     </div>
   );
 }
