@@ -1,0 +1,142 @@
+/*
+ * Webinar page motion styles (/webinar and /webinar/thank-you), inlined into the page head by
+ * <WebinarMotionStyles /> so they cost no extra render-blocking request on slow phones.
+ * Rules: calm, never blocks the first paint, and prefers-reduced-motion gives a static page.
+ * The clips come from the deck (realization-studio campaigns/webinar-2026-10/deck/motion/),
+ * re-encoded for the web into public/webinar/motion/.
+ */
+const css = String.raw`
+.webinar-page { interpolate-size: allow-keywords; }
+
+/* Hero: the still frame is the first paint; the loop fades in over it once it plays. */
+.wh-hero__media { background: #000; overflow: hidden; }
+.webinar-page .wh-hero__media img.wm-hero__still,
+.wm-hero__loop { object-fit: cover; object-position: 56% 62%; }
+/* The loop is 4px shorter than the still (the strips are black either way), so its first frame is never
+   a larger paint than the still: the still stays the page's LCP and the loop can't push it later. */
+.wm-hero__loop { position: absolute; top: 2px; left: 0; width: 100%; height: calc(100% - 4px); opacity: 0; transition: opacity .9s var(--ease-standard); }
+.wm-hero__loop.is-on { opacity: 1; }
+
+/* Phones: the date box moves under the drawing instead of covering it. */
+@media (max-width: 900px) {
+  .webinar-page .wh-hero__media { min-height: 0; padding-top: min(68vw, 290px); }
+  .webinar-page .wh-hero__media img.wm-hero__still { height: min(68vw, 290px) !important; }
+  .webinar-page .wm-hero__loop { height: calc(min(68vw, 290px) - 4px); }
+  .webinar-page .wh-hero__media img.wm-hero__still, .webinar-page .wm-hero__loop { object-position: 56% 40%; }
+  .webinar-page .wh-hero__when { position: relative; grid-template-columns: auto 1fr; align-items: end; column-gap: 1.2rem; }
+  .webinar-page .wh-hero__hour { grid-row: span 2; }
+  .webinar-page .wh-hero__when .wm-countdown { grid-column: 1 / -1; }
+}
+
+/* Countdown in the yellow date box. The line is reserved before it fills in, so nothing moves. */
+.wm-countdown { box-sizing: content-box; display: flex; min-height: 1.6em; line-height: 1.6; align-items: center; gap: .55rem; margin-top: .55rem; padding-top: .55rem; border-top: 1px solid rgb(0 0 0 / 30%); font-weight: 700; font-variant-numeric: tabular-nums; }
+.wm-countdown:empty { border-top-color: transparent; }
+.wm-countdown:not(:empty)::before { content: ""; flex: none; width: .45rem; height: .45rem; background: currentColor; animation: wm-pulse 2.4s steps(1) infinite; }
+@keyframes wm-pulse { 50% { opacity: .2; } }
+
+/* Case clips: over the thumbnail (hover) and over the case image (on open). */
+.wm-clip { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: var(--color-yellow); opacity: 0; pointer-events: none; transition: opacity .35s var(--ease-standard); }
+.wm-clip.is-on { opacity: 1; }
+.wh-case__toggle { transition: transform .3s var(--ease-out); }
+.wh-case summary:hover .wh-case__toggle { transform: scale(1.07); }
+.wh-case { transition: border-color .2s var(--ease-standard); }
+/* Smooth open where the browser supports it; elsewhere the card opens at once, as before. */
+.wh-case::details-content { block-size: 0; overflow: clip; transition: block-size .45s var(--ease-out), content-visibility .45s allow-discrete; }
+.wh-case[open]::details-content { block-size: auto; }
+
+/* The "one brain" clip in the RealizeOS section. Phones keep the screenshot: the clip's text is too small there. */
+.wm-brain { position: relative; aspect-ratio: 16 / 9; border: 1px solid rgb(255 255 255 / 15%); background: #000; }
+.webinar-page .wh-os__shot .wm-brain img { border: 0; }
+.wm-brain__clip { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity .5s var(--ease-standard); }
+.wm-brain__clip.is-on { opacity: 1; }
+.wm-brain__replay { position: absolute; inset-inline-end: .75rem; bottom: .75rem; min-height: 40px; padding: .45rem 1rem; border: 1px solid var(--color-yellow); border-radius: var(--radius-pill); background: rgb(0 0 0 / 72%); color: var(--color-yellow); font-size: .8rem; font-weight: 700; cursor: pointer; opacity: 0; visibility: hidden; transition: opacity .3s var(--ease-standard), visibility .3s; }
+.wm-brain__replay.is-shown { opacity: 1; visibility: visible; }
+.wm-brain__replay:hover { background: var(--color-yellow); color: #000; }
+.wm-brain__shot, .wm-brain__shot-caption { display: none !important; }
+@media (max-width: 700px) {
+  .wm-brain, .wm-brain__caption { display: none !important; }
+  .wm-brain__shot { display: block !important; }
+  .wm-brain__shot-caption { display: inline !important; }
+}
+
+/* The line next to the main register button (Asaf, 13.10). */
+.wh-hero .button-row { align-items: center; column-gap: 1.1rem; }
+.wm-cta-note { color: #fff; font-weight: 700; font-size: .98rem; }
+.wh-sticky small { display: block; margin-top: .1rem; font-size: .78rem; font-weight: 600; }
+
+/* Phone register bar: off screen until the hero's button has scrolled away, and away again at the form. */
+@media (max-width: 900px) {
+  .webinar-page .wh-sticky { transform: translateY(110%); transition: transform .35s var(--ease-out); }
+  .webinar-page .wh-sticky.is-shown { transform: none; }
+}
+
+/* Scroll reveals: CSS only. Sections rise a little as they enter; siblings follow a step later. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .webinar-page [data-reveal],
+    .webinar-page .section > .container-wide > .section-heading {
+      animation: wm-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 50%;
+    }
+    .webinar-page [data-reveal]:nth-child(2) { animation-range: entry 6% entry 56%; }
+    .webinar-page [data-reveal]:nth-child(3) { animation-range: entry 12% entry 62%; }
+    .webinar-page [data-reveal]:nth-child(n + 4) { animation-range: entry 18% entry 68%; }
+  }
+}
+@keyframes wm-rise { from { opacity: 0; transform: translateY(18px); } }
+
+/* Thank-you page: the seal draws in, then the butterfly lands. */
+.wm-seal { flex: none; width: clamp(64px, 7vw, 84px); height: auto; overflow: visible; }
+.wm-seal circle { stroke-dasharray: 302; stroke-dashoffset: 302; animation: wm-draw 1s var(--ease-out) .15s forwards; }
+.wm-seal path { stroke-dasharray: 60; stroke-dashoffset: 60; animation: wm-draw .5s var(--ease-out) .95s forwards; }
+.wm-seal image { opacity: 0; animation: wm-land .6s var(--ease-out) 1.3s forwards; }
+@keyframes wm-draw { to { stroke-dashoffset: 0; } }
+@keyframes wm-land { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+.wm-ty-aside { display: grid; align-content: center; gap: 1.2rem; }
+.wm-ty-line { gap: 1.1rem; }
+.wm-ty-aside .wm-countdown { margin: 0; padding-top: .7rem; font-size: 1.1rem; }
+.wm-cal { flex-basis: 100%; display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .9rem; margin-top: .4rem; font-size: .95rem; }
+.wm-cal a { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.wm-cal a:hover { text-decoration-thickness: 2px; }
+
+/* Reduced motion: a static page. Stills only, no reveals, no drawing; the brain clip can still be replayed by hand. */
+@media (prefers-reduced-motion: reduce) {
+  .webinar-page *, .webinar-page *::before, .webinar-page *::after { animation: none !important; transition: none !important; }
+  .wm-seal circle, .wm-seal path { stroke-dashoffset: 0; }
+  .wm-seal image { opacity: 1; }
+  .wm-brain__replay { opacity: 1; visibility: visible; }
+}
+
+/* Registration form: progress line, check marks, example chips, a busy line on the button. */
+.wm-progress { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: .9rem; margin-top: -.5rem; }
+.wm-progress__track { display: block; height: 3px; overflow: hidden; background: rgb(0 0 0 / 14%); }
+.wm-progress__fill { display: block; height: 100%; background: #000; transform-origin: right; transition: transform .5s var(--ease-out); }
+.wm-progress__text { font-size: .74rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.wm-field { position: relative; display: block; }
+.webinar-form .wm-field input { padding-left: 2.8rem; }
+.wm-field__ok { position: absolute; top: 50%; left: 1rem; width: 1.05rem; height: 1.05rem; translate: 0 -50%; fill: none; stroke: #000; stroke-width: 2.4; opacity: 0; transition: opacity .2s var(--ease-standard); }
+.wm-field__ok path { stroke-dasharray: 20; stroke-dashoffset: 20; transition: stroke-dashoffset .4s var(--ease-out) .05s; }
+.wm-field.is-valid .wm-field__ok { opacity: 1; }
+.wm-field.is-valid .wm-field__ok path { stroke-dashoffset: 0; }
+.wm-pain { display: grid; gap: .7rem; }
+.wm-chips { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem; }
+.wm-chips > span { font-size: .78rem; font-weight: 700; }
+.wm-chip { min-height: 36px; padding: .35rem .9rem; border: 1.5px solid #000; border-radius: var(--radius-pill); background: transparent; color: #000; font-size: .78rem; font-weight: 700; cursor: pointer; transition: background .18s var(--ease-standard), color .18s var(--ease-standard); }
+.wm-chip:hover { background: #fff; }
+.wm-chip[aria-pressed="true"] { background: #000; color: var(--color-yellow); }
+.webinar-form .button[aria-busy="true"] { position: relative; overflow: hidden; }
+.webinar-form .button[aria-busy="true"]::after { content: ""; position: absolute; inset-inline: 1.2rem; bottom: .5rem; height: 2px; background: var(--color-yellow); transform-origin: right; animation: wm-busy 1.1s var(--ease-standard) infinite; }
+@keyframes wm-busy { from { transform: scaleX(0); } to { transform: scaleX(1); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .wm-field__ok path { stroke-dashoffset: 0; }
+}
+`;
+
+export function WebinarMotionStyles() {
+  return (
+    <style href="webinar-motion" precedence="medium">
+      {css}
+    </style>
+  );
+}
