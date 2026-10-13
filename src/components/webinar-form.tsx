@@ -69,7 +69,7 @@ export function WebinarForm() {
   const [done, setDone] = useState(0);
   const [valid, setValid] = useState<Partial<Record<CheckedField, boolean>>>({});
   // Messages from leaving a field. "" means checked and fine, which also clears an older server message.
-  const [inline, setInline] = useState<Partial<Record<CheckedField, string>>>({});
+  const [inline, setInline] = useState<Partial<Record<string, string>>>({});
   const [picked, setPicked] = useState<string[]>([]);
   const errors: Partial<Record<string, string>> = { ...state.fieldErrors };
   for (const [name, message] of Object.entries(inline)) errors[name] = message || undefined;
@@ -109,6 +109,10 @@ export function WebinarForm() {
   function changed() {
     setMailto(mailtoFrom(formRef.current));
     setDone(requiredDone(formRef.current));
+    // A choice that is now made clears its message from the last submit.
+    const data = new FormData(formRef.current ?? undefined);
+    const answered = (["role", "market", "consent"] as const).filter((name) => data.get(name) && errors[name]);
+    if (answered.length) setInline((current) => ({ ...current, ...Object.fromEntries(answered.map((name) => [name, ""])) }));
   }
 
   return (

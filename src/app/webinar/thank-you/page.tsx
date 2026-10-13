@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { ButtonLink } from "@/components/button-link";
 import { Lines } from "@/components/lines";
 import { Countdown } from "@/components/webinar/countdown";
+import { WebinarMotionStyles } from "@/components/webinar/webinar-motion-styles";
 import { whatsappUrl } from "@/content/site";
 import { webinar, webinarCalendarUrl } from "@/lib/webinar";
-import "../webinar-motion.css";
 
 export const metadata: Metadata = {
   title: "נרשמתם לוובינר",
@@ -25,6 +25,7 @@ function Seal() {
 export default function WebinarThankYouPage() {
   return (
     <div dir="rtl" lang="he" className="webinar-page">
+      <WebinarMotionStyles />
       {/* PageHero's markup, with the drawn seal in place of its ✓ index so the moment shows first on phones too. */}
       <section className="page-hero page-hero--brand">
         <div className="container-wide page-hero__grid">

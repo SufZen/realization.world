@@ -1,10 +1,11 @@
 /*
- * Webinar page motion (/webinar and /webinar/thank-you). Loaded only by those pages.
+ * Webinar page motion styles (/webinar and /webinar/thank-you), inlined into the page head by
+ * <WebinarMotionStyles /> so they cost no extra render-blocking request on slow phones.
  * Rules: calm, never blocks the first paint, and prefers-reduced-motion gives a static page.
  * The clips come from the deck (realization-studio campaigns/webinar-2026-10/deck/motion/),
  * re-encoded for the web into public/webinar/motion/.
  */
-
+const css = String.raw`
 .webinar-page { interpolate-size: allow-keywords; }
 
 /* Hero: the still frame is the first paint; the loop fades in over it once it plays. */
@@ -28,7 +29,7 @@
 }
 
 /* Countdown in the yellow date box. The line is reserved before it fills in, so nothing moves. */
-.wm-countdown { display: flex; min-height: 1.6em; line-height: 1.6; align-items: center; gap: .55rem; margin-top: .55rem; padding-top: .55rem; border-top: 1px solid rgb(0 0 0 / 30%); font-weight: 700; font-variant-numeric: tabular-nums; }
+.wm-countdown { box-sizing: content-box; display: flex; min-height: 1.6em; line-height: 1.6; align-items: center; gap: .55rem; margin-top: .55rem; padding-top: .55rem; border-top: 1px solid rgb(0 0 0 / 30%); font-weight: 700; font-variant-numeric: tabular-nums; }
 .wm-countdown:empty { border-top-color: transparent; }
 .wm-countdown:not(:empty)::before { content: ""; flex: none; width: .45rem; height: .45rem; background: currentColor; animation: wm-pulse 2.4s steps(1) infinite; }
 @keyframes wm-pulse { 50% { opacity: .2; } }
@@ -57,6 +58,11 @@
   .wm-brain__shot { display: block !important; }
   .wm-brain__shot-caption { display: inline !important; }
 }
+
+/* The line next to the main register button (Asaf, 13.10). */
+.wh-hero .button-row { align-items: center; column-gap: 1.1rem; }
+.wm-cta-note { color: #fff; font-weight: 700; font-size: .98rem; }
+.wh-sticky small { display: block; margin-top: .1rem; font-size: .78rem; font-weight: 600; }
 
 /* Phone register bar: off screen until the hero's button has scrolled away, and away again at the form. */
 @media (max-width: 900px) {
@@ -124,4 +130,13 @@
 @keyframes wm-busy { from { transform: scaleX(0); } to { transform: scaleX(1); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) {
   .wm-field__ok path { stroke-dashoffset: 0; }
+}
+`;
+
+export function WebinarMotionStyles() {
+  return (
+    <style href="webinar-motion" precedence="medium">
+      {css}
+    </style>
+  );
 }

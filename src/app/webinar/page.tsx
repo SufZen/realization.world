@@ -5,11 +5,11 @@ import { ButtonLink } from "@/components/button-link";
 import { Lines } from "@/components/lines";
 import { SectionHeading } from "@/components/section-heading";
 import { Countdown } from "@/components/webinar/countdown";
+import { WebinarMotionStyles } from "@/components/webinar/webinar-motion-styles";
 import { WebinarMotion } from "@/components/webinar/webinar-motion";
 import { WebinarForm } from "@/components/webinar-form";
 import { pageMetadata } from "@/lib/metadata";
 import { webinar } from "@/lib/webinar";
-import "./webinar-motion.css";
 
 const base = pageMetadata(
   "וובינר: לא עוד הרצאה על בינה מלאכותית",
@@ -112,6 +112,7 @@ function CaseClip({ index, kind }: { index: number; kind: "thumb" | "clip" }) {
 export default function WebinarPage() {
   return (
     <div dir="rtl" lang="he" className="webinar-page">
+      <WebinarMotionStyles />
       <section className="wh-hero">
         <div className="wh-hero__copy">
           <p className="wh-hero__kicker">וובינר חינמי בעברית</p>
@@ -120,6 +121,7 @@ export default function WebinarPage() {
           <p className="wh-hero__for">לכל מי שעובד בנדל״ן: מי שבונה, מי שמתכנן, ומי שמלווה עסקאות.</p>
           <div className="button-row">
             <ButtonLink href="#register" variant="primary">שמרו לי מקום</ButtonLink>
+            <p className="wm-cta-note">חינם, ובסוף לא נמכור לכם קורס.</p>
           </div>
           <p className="wh-hero__meta">חינם · 90 דקות · בשידור חי · מוקלט</p>
           <p className="wh-hero__brand">{webinar.hosts}</p>
@@ -291,7 +293,7 @@ export default function WebinarPage() {
         </div>
       </section>
 
-      <a className="wh-sticky" href="#register" data-umami-event="webinar-sticky">שמרו לי מקום · וובינר חינמי ב־20.10</a>
+      <a className="wh-sticky" href="#register" data-umami-event="webinar-sticky">שמרו לי מקום · וובינר חינמי ב־20.10<small>חינם, ובסוף לא נמכור לכם קורס.</small></a>
       <WebinarMotion />
     </div>
   );
