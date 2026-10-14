@@ -1,7 +1,8 @@
 import { createHash, randomUUID } from "node:crypto";
 
 /**
- * Server-side Meta Conversions API "Lead" event for /webinar form registrations, so Meta can
+ * Server-side Meta Conversions API "Lead" event for /webinar form registrations (and the
+ * /deal-check-guide email gate, content_name "deal-check-guide"), so Meta can
  * attribute sign-ups to our ads. No browser pixel and no cookies: the click id comes from the
  * `fbclid` URL parameter, and email/phone are SHA-256 hashed before they leave the server.
  * Config (VPS env only, never in git): META_DATASET_ID, META_CAPI_TOKEN, optional
@@ -21,6 +22,8 @@ export type LeadInput = {
   clientIp: string;
   userAgent: string;
   sourceUrl: string;
+  /** What the lead signed up for; defaults to the webinar. */
+  contentName?: string;
 };
 
 export function metaConfigured() {
@@ -87,7 +90,7 @@ export function buildLeadEvent(input: LeadInput, eventId: string, nowMs = Date.n
     event_source_url: input.sourceUrl,
     action_source: "website",
     user_data: userData,
-    custom_data: { content_name: "webinar-2026-10-20", ...(input.ref && { ref: input.ref }) },
+    custom_data: { content_name: input.contentName || "webinar-2026-10-20", ...(input.ref && { ref: input.ref }) },
   };
 }
 

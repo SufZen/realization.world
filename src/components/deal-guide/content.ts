@@ -208,3 +208,34 @@ export const resultIntro: Record<Role, string> = {
   agent: "רשימה לעבור עליה עם הלקוח, לפני שמתקדמים.",
   other: "הרשימה שלכם לעסקה הזו. קחו אותה לכל פגישה.",
 };
+
+export type ChecklistGroup = { who: Who; items: { id: string; title: string; ask: string }[] };
+
+/** The personal checklist: unanswered checks count as open. Shared by the page and the email. */
+export function buildChecklist(answers: Partial<Record<string, Answer>>, market: Market) {
+  const groups = new Map<Who, ChecklistGroup["items"]>();
+  const done: string[] = [];
+  for (const check of checks) {
+    const value = answers[check.id] ?? "open";
+    if (value === "done") done.push(check.title);
+    if (value !== "open") continue;
+    const items = groups.get(check.who) ?? [];
+    items.push({ id: check.id, title: check.title, ask: forMarket(check.ask, market)! });
+    groups.set(check.who, items);
+  }
+  const list: ChecklistGroup[] = [...groups.entries()].map(([who, items]) => ({ who, items }));
+  return { groups: list, done, openCount: list.reduce((sum, group) => sum + group.items.length, 0) };
+}
+
+/** Plain-text checklist for copy, WhatsApp and the email. */
+export function checklistText(checklist: ReturnType<typeof buildChecklist>, guideUrl: string) {
+  const lines = ["איך לבחון עסקה לפני שמתקדמים: מה לשאול", ""];
+  for (const group of checklist.groups) {
+    lines.push(`${whoLabels[group.who]}:`);
+    for (const item of group.items) lines.push(`• ${item.ask}`);
+    lines.push("");
+  }
+  if (checklist.done.length) lines.push(`כבר בידיים: ${checklist.done.join(", ")}`, "");
+  lines.push("המדריך לא מחליף שמאי, עורך דין או רואה חשבון.", `המדריך המלא: ${guideUrl}`);
+  return lines.join("\n");
+}
