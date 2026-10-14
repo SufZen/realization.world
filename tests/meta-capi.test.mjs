@@ -1,16 +1,16 @@
 // Run with `npm test` (Node 22.18+ strips the TypeScript types itself).
 import assert from "node:assert/strict";
 import { afterEach, test } from "node:test";
-import { buildLeadEvent, cleanFbclid, fbcFrom, metaConfigured, normalizeEmail, normalizePhone, sendLeadEvent, sha256 } from "../src/lib/meta-capi.ts";
+import { buildLeadEvent, cleanFbclid, isTestRef, fbcFrom, metaConfigured, normalizeEmail, normalizePhone, sendLeadEvent, sha256 } from "../src/lib/meta-capi.ts";
 
 const input = {
   email: "  Info+CAPI-Test@Realization.co.il ",
   phone: "054-123 4567",
-  ref: "test-capi",
+  ref: "meta-ads",
   fbclid: "IwAR0abc_DEF-123",
   clientIp: "203.0.113.7",
   userAgent: "Mozilla/5.0 test",
-  sourceUrl: "https://realization.world/webinar?ref=test-capi",
+  sourceUrl: "https://realization.world/webinar?ref=meta-ads",
 };
 
 afterEach(() => {
@@ -56,7 +56,7 @@ test("Lead event carries hashed data and no plain email or phone", () => {
     client_user_agent: "Mozilla/5.0 test",
     fbc: "fb.1.1760000000123.IwAR0abc_DEF-123",
   });
-  assert.deepEqual(event.custom_data, { content_name: "webinar-2026-10-20", ref: "test-capi" });
+  assert.deepEqual(event.custom_data, { content_name: "webinar-2026-10-20", ref: "meta-ads" });
   const text = JSON.stringify(event);
   assert.ok(!text.includes("realization.co.il") && !text.includes("4567"));
 });
@@ -111,4 +111,20 @@ test("a Meta failure or timeout never throws and never logs the token", async ()
   }
   assert.equal(logged.length, 2);
   assert.ok(logged.every((line) => !line.includes("secret-token") && !line.includes("realization.co.il")));
+});
+
+test("test registrations (ref test-…) send nothing", async () => {
+  process.env.META_DATASET_ID = "123";
+  process.env.META_CAPI_TOKEN = "secret-token";
+  assert.equal(isTestRef("test-2step"), true);
+  assert.equal(isTestRef(" TEST-capi"), true);
+  assert.equal(isTestRef("meta-ads"), false);
+  assert.equal(isTestRef(""), false);
+  let calls = 0;
+  const fetcher = async () => {
+    calls += 1;
+    return new Response("{}");
+  };
+  assert.equal(await sendLeadEvent({ ...input, ref: "Test-2step" }, fetcher), false);
+  assert.equal(calls, 0);
 });

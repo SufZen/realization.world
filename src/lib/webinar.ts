@@ -83,8 +83,9 @@ export function validateRegistration(reg: Registration, consent: boolean) {
   if (!reg.name) errors.name = "צריך למלא שם מלא.";
   if (!EMAIL.test(reg.email)) errors.email = "צריך כתובת מייל תקינה, כדי שנוכל לשלוח את הקישור.";
   if (reg.phone && !/^[+\d][\d\s()-]{6,}$/.test(reg.phone)) errors.phone = "מספר הטלפון לא נראה תקין. אפשר גם להשאיר את השדה ריק.";
-  if (!roleLabels.has(reg.role)) errors.role = "בחרו את התיאור שהכי מתאים לכם.";
-  if (!marketLabels.has(reg.market)) errors.market = "בחרו איפה אתם פעילים.";
+  // Role and market moved to the optional step 2; when sent (step 2 or the Instant Form API) they must be known values.
+  if (reg.role && !roleLabels.has(reg.role)) errors.role = "בחרו את התיאור שהכי מתאים לכם.";
+  if (reg.market && !marketLabels.has(reg.market)) errors.market = "בחרו איפה אתם פעילים.";
   if (!consent) errors.consent = "סמנו את תיבת האישור כדי שנוכל לשלוח לכם את הקישור והתזכורות.";
   return errors;
 }
@@ -119,4 +120,52 @@ export async function appendToSheet(reg: Registration) {
   });
   const text = await response.text();
   if (!response.ok || !text.includes('"ok":true')) throw new Error(`Webinar sheet rejected the row (${response.status})`);
+}
+
+/** Step 2: the optional questions answered on the thank-you page. */
+export type RegistrationDetails = Pick<Registration, "company" | "role" | "market" | "pain" | "liveAudit">;
+
+export function readDetails(input: (name: string) => unknown): RegistrationDetails {
+  const { company, role, market, pain, liveAudit } = readRegistration(input);
+  return {
+    company,
+    role: roleLabels.has(role) ? role : "",
+    market: marketLabels.has(market) ? market : "",
+    pain,
+    liveAudit,
+  };
+}
+
+export function detailsEmpty(details: RegistrationDetails) {
+  return !details.company && !details.role && !details.market && !details.pain && !details.liveAudit;
+}
+
+/**
+ * Adds step-2 answers to the registrant's latest row (matched by email) through the same Apps Script
+ * web app, action "details". The script fills only empty cells among company, role, market, liveAudit
+ * and pain, and appends to the automation column; it never touches the other columns.
+ */
+export async function addDetailsToSheet(registrant: { email: string; ref: string }, details: RegistrationDetails) {
+  const url = process.env.WEBINAR_SHEET_WEBHOOK_URL;
+  const secret = process.env.WEBINAR_SHEET_SECRET;
+  if (!url || !secret) throw new Error("Webinar sheet is not configured");
+  const response = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      secret,
+      action: "details",
+      email: registrant.email,
+      // Lets the script pick a row already marked "test" only for a test registration (ref test-…).
+      ref: registrant.ref,
+      company: details.company,
+      role: details.role ? roleLabels.get(details.role) : "",
+      market: details.market ? marketLabels.get(details.market) : "",
+      liveAudit: details.liveAudit,
+      pain: details.pain,
+    }),
+    signal: AbortSignal.timeout(8000),
+  });
+  const text = await response.text();
+  if (!response.ok || !text.includes('"ok":true')) throw new Error(`Webinar sheet did not take the details (${response.status})`);
 }
