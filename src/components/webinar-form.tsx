@@ -6,7 +6,6 @@ import { useSearchParams } from "next/navigation";
 import { startTransition, useActionState, useRef, useState, type FocusEvent, type FormEvent, type ReactNode } from "react";
 import { registerWebinar, type RegistrationState } from "@/app/webinar/actions";
 import { contactEmail, whatsappUrl } from "@/content/site";
-import { webinarMarkets, webinarRoles } from "@/lib/webinar";
 
 const initialState: RegistrationState = { status: "idle" };
 
@@ -20,15 +19,12 @@ const checks = {
 };
 type CheckedField = keyof typeof checks;
 
-// Example problems for the "pain" field: the same four as its placeholder.
-const examples = ["תשלומים לקבלנים", "השוואת הצעות מחיר", "מענה ללידים", "דוחות למשקיעים"];
-
-/** Counts the five required answers, for the progress line. */
+/** Counts the three required answers, for the progress line. The other questions are the optional step 2. */
 function requiredDone(form: HTMLFormElement | null) {
   if (!form) return 0;
   const data = new FormData(form);
   const get = (name: string) => String(data.get(name) ?? "").trim();
-  return [get("name") !== "", !checks.email(get("email")), get("role") !== "", get("market") !== "", data.get("consent") === "yes"].filter(Boolean).length;
+  return [get("name") !== "", !checks.email(get("email")), data.get("consent") === "yes"].filter(Boolean).length;
 }
 
 /** An input with a small check mark that draws in once its value is valid. */
@@ -50,12 +46,6 @@ function mailtoFrom(form: HTMLFormElement | null) {
     `שם: ${get("name")}`,
     `מייל: ${get("email")}`,
     `טלפון: ${get("phone") || "—"}`,
-    `חברה: ${get("company") || "—"}`,
-    `תפקיד: ${get("role") || "—"}`,
-    `פעילים: ${get("market") || "—"}`,
-    "",
-    "הבעיה שהכי חשוב לכם לפתור:",
-    get("pain") || "—",
   ].join("\n");
   return `mailto:${contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
@@ -67,13 +57,11 @@ export function WebinarForm() {
   const fbclid = params.get("fbclid") ?? "";
   const [state, action, pending] = useActionState(registerWebinar, initialState);
   const formRef = useRef<HTMLFormElement>(null);
-  const painRef = useRef<HTMLTextAreaElement>(null);
   const [mailto, setMailto] = useState(`mailto:${contactEmail}`);
   const [done, setDone] = useState(0);
   const [valid, setValid] = useState<Partial<Record<CheckedField, boolean>>>({});
   // Messages from leaving a field. "" means checked and fine, which also clears an older server message.
   const [inline, setInline] = useState<Partial<Record<string, string>>>({});
-  const [picked, setPicked] = useState<string[]>([]);
   const errors: Partial<Record<string, string>> = { ...state.fieldErrors };
   for (const [name, message] of Object.entries(inline)) errors[name] = message || undefined;
 
@@ -88,16 +76,6 @@ export function WebinarForm() {
     onBlur: (event: FocusEvent<HTMLInputElement>) => check(name, event.currentTarget.value, true),
     onInput: (event: FormEvent<HTMLInputElement>) => check(name, event.currentTarget.value, false),
   });
-
-  function addExample(example: string) {
-    const pain = painRef.current;
-    if (!pain) return;
-    const current = pain.value.trim();
-    if (!current.includes(example)) pain.value = current ? `${current}, ${example}` : example;
-    setPicked((list) => (list.includes(example) ? list : [...list, example]));
-    setMailto(mailtoFrom(formRef.current));
-    pain.focus();
-  }
 
   // Submit through the action without React's automatic form reset,
   // so a validation error or fallback never loses what the visitor typed.
@@ -114,7 +92,7 @@ export function WebinarForm() {
     setDone(requiredDone(formRef.current));
     // A choice that is now made clears its message from the last submit.
     const data = new FormData(formRef.current ?? undefined);
-    const answered = (["role", "market", "consent"] as const).filter((name) => data.get(name) && errors[name]);
+    const answered = (["consent"] as const).filter((name) => data.get(name) && errors[name]);
     if (answered.length) setInline((current) => ({ ...current, ...Object.fromEntries(answered.map((name) => [name, ""])) }));
   }
 
@@ -124,9 +102,9 @@ export function WebinarForm() {
         <p className="eyebrow">הרשמה · חינם</p>
         <h2 className="webinar-form__title">שמרו לי מקום</h2>
       </div>
-      <div className={`wm-progress${done === 5 ? " is-done" : ""}`} role="progressbar" aria-label="שדות חובה שמולאו" aria-valuemin={0} aria-valuemax={5} aria-valuenow={done} aria-valuetext={`${done} מתוך 5`}>
-        <span className="wm-progress__track"><span className="wm-progress__fill" style={{ transform: `scaleX(${done / 5})` }} /></span>
-        <span className="wm-progress__text" aria-hidden="true">{done} מתוך 5</span>
+      <div className={`wm-progress${done === 3 ? " is-done" : ""}`} role="progressbar" aria-label="שדות חובה שמולאו" aria-valuemin={0} aria-valuemax={3} aria-valuenow={done} aria-valuetext={`${done} מתוך 3`}>
+        <span className="wm-progress__track"><span className="wm-progress__fill" style={{ transform: `scaleX(${done / 3})` }} /></span>
+        <span className="wm-progress__text" aria-hidden="true">{done} מתוך 3</span>
       </div>
       <input type="hidden" name="ref" value={ref} />
       <input type="hidden" name="fbclid" value={fbclid} />
@@ -155,51 +133,7 @@ export function WebinarForm() {
           </Checked>
           {errors.phone && <em className="form-error" id="phone-error">{errors.phone}</em>}
         </label>
-        <label>
-          <span>חברה / משרד</span>
-          <input id="webinar-company" name="company" type="text" autoComplete="organization" maxLength={200} />
-        </label>
       </div>
-      <fieldset aria-describedby={errors.role ? "role-error" : undefined}>
-        <legend className="eyebrow">מה הכי מתאר אתכם? *</legend>
-        <div className="path-options">
-          {webinarRoles.map(([value, label]) => (
-            <label className="path-option" key={value}>
-              <input name="role" type="radio" value={value} required />
-              <span>{label}</span>
-            </label>
-          ))}
-        </div>
-        {errors.role && <p className="form-error" id="role-error">{errors.role}</p>}
-      </fieldset>
-      <fieldset aria-describedby={errors.market ? "market-error" : undefined}>
-        <legend className="eyebrow">איפה אתם פעילים? *</legend>
-        <div className="path-options path-options--three">
-          {webinarMarkets.map(([value, label]) => (
-            <label className="path-option" key={value}>
-              <input name="market" type="radio" value={value} required />
-              <span>{label}</span>
-            </label>
-          ))}
-        </div>
-        {errors.market && <p className="form-error" id="market-error">{errors.market}</p>}
-      </fieldset>
-      <div className="wm-pain">
-        <label>
-          <span>איזו בעיה הייתם רוצים לפתור? אולי ננתח אותה בשידור.</span>
-          <textarea id="webinar-pain" name="pain" rows={4} maxLength={2000} placeholder="למשל: תשלומים לקבלנים, השוואת הצעות מחיר, מענה ללידים, דוחות למשקיעים." ref={painRef} />
-        </label>
-        <div className="wm-chips" role="group" aria-label="דוגמאות לבעיה">
-          <span aria-hidden="true">למשל:</span>
-          {examples.map((example) => (
-            <button className="wm-chip" type="button" key={example} aria-pressed={picked.includes(example)} onClick={() => addExample(example)}>{example}</button>
-          ))}
-        </div>
-      </div>
-      <label className="form-consent">
-        <input id="webinar-live-audit" name="liveAudit" type="checkbox" value="yes" />
-        <span>אשמח שתנתחו את הבעיה שלנו בשידור (בתיאום מראש).</span>
-      </label>
       <label className="form-consent">
         <input id="webinar-consent" name="consent" type="checkbox" value="yes" required aria-invalid={Boolean(errors.consent)} />
         <span>אני מאשר/ת ש־Realization ו־Montreza, שמארחות יחד את הוובינר, ישתמשו בפרטים שלי כדי לשלוח לי את הקישור, את התזכורות, את ההקלטה ועדכון אחרי הוובינר, בהתאם ל<Link href="/privacy">מדיניות הפרטיות</Link>. *</span>

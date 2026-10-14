@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { ButtonLink } from "@/components/button-link";
 import { Lines } from "@/components/lines";
 import { Countdown } from "@/components/webinar/countdown";
+import { WebinarDetailsForm } from "@/components/webinar-details-form";
 import { WebinarMotionStyles } from "@/components/webinar/webinar-motion-styles";
 import { whatsappUrl } from "@/content/site";
 import { webinar, webinarCalendarUrl } from "@/lib/webinar";
+import { openRegistrant } from "@/lib/webinar-token";
 
 export const metadata: Metadata = {
   title: "נרשמתם לוובינר",
@@ -22,7 +24,12 @@ function Seal() {
   );
 }
 
-export default function WebinarThankYouPage() {
+type Props = { searchParams: Promise<{ t?: string | string[] }> };
+
+export default async function WebinarThankYouPage({ searchParams }: Props) {
+  // Step 2 shows only for a fresh registration from the site form (a valid token from step 1).
+  const { t } = await searchParams;
+  const token = typeof t === "string" && openRegistrant(t) ? t : "";
   return (
     <div dir="rtl" lang="he" className="webinar-page">
       <WebinarMotionStyles />
@@ -50,6 +57,13 @@ export default function WebinarThankYouPage() {
           </div>
         </div>
       </section>
+      {token && (
+        <section className="section">
+          <div className="container">
+            <WebinarDetailsForm token={token} />
+          </div>
+        </section>
+      )}
     </div>
   );
 }

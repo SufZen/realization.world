@@ -19,6 +19,17 @@ export function SiteHeader() {
     };
   }, [open]);
 
+  // The Hebrew webinar landing page and its thank-you page stay focused: logo only, no English navigation.
+  if (pathname === "/webinar" || pathname.startsWith("/webinar/")) {
+    return (
+      <header className="site-header">
+        <div className="site-header__inner">
+          <BrandMark />
+        </div>
+      </header>
+    );
+  }
+
   return (
     <header className="site-header">
       <div className="site-header__inner">

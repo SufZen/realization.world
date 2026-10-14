@@ -62,6 +62,11 @@ export function fbcFrom(fbclid: string, nowMs: number) {
   return fbclid ? `fb.1.${nowMs}.${fbclid}` : "";
 }
 
+/** Our own test registrations (ref test-…) are not Leads; they would pollute the ad numbers. */
+export function isTestRef(ref: string) {
+  return /^test/i.test(ref.trim());
+}
+
 export function buildLeadEvent(input: LeadInput, eventId: string, nowMs = Date.now()) {
   const email = normalizeEmail(input.email);
   const phone = normalizePhone(input.phone);
@@ -93,7 +98,7 @@ export function buildLeadEvent(input: LeadInput, eventId: string, nowMs = Date.n
 export async function sendLeadEvent(input: LeadInput, fetcher: typeof fetch = fetch) {
   const datasetId = process.env.META_DATASET_ID;
   const token = process.env.META_CAPI_TOKEN;
-  if (!datasetId || !token) return false;
+  if (!datasetId || !token || isTestRef(input.ref)) return false;
   try {
     const testCode = process.env.META_TEST_EVENT_CODE;
     const response = await fetcher(`https://graph.facebook.com/${GRAPH_VERSION}/${encodeURIComponent(datasetId)}/events`, {
