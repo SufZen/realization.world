@@ -2,8 +2,10 @@
 
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { after } from "next/server";
 import { clientKey, rateLimited } from "@/lib/brief";
 import { mailConfigured, sendWebinarRegistration } from "@/lib/mail";
+import { cleanFbclid, metaConfigured, sendLeadEvent } from "@/lib/meta-capi";
 import { appendToSheet, readRegistration, sheetConfigured, validateRegistration, type RegistrationField } from "@/lib/webinar";
 
 export type RegistrationState = {
@@ -28,7 +30,8 @@ export async function registerWebinar(_previous: RegistrationState, form: FormDa
   };
   if (!mailConfigured() && !sheetConfigured()) return unavailable;
 
-  if (rateLimited(clientKey(await headers()))) {
+  const requestHeaders = await headers();
+  if (rateLimited(clientKey(requestHeaders))) {
     return { status: "error", message: "יותר מדי הרשמות מהחיבור הזה. נסו שוב בעוד כמה דקות." };
   }
 
@@ -43,6 +46,20 @@ export async function registerWebinar(_previous: RegistrationState, form: FormDa
     }
   });
   if (!results.some((result) => result.status === "fulfilled")) return unavailable;
+
+  // Ad attribution for Meta, sent after the response so it can never slow or fail the registration.
+  if (metaConfigured()) {
+    const lead = {
+      email: reg.email,
+      phone: reg.phone,
+      ref: reg.ref,
+      fbclid: cleanFbclid(form.get("fbclid")),
+      clientIp: requestHeaders.get("x-forwarded-for")?.split(",")[0]?.trim() || requestHeaders.get("x-real-ip") || "",
+      userAgent: requestHeaders.get("user-agent") ?? "",
+      sourceUrl: requestHeaders.get("referer") || "https://realization.world/webinar",
+    };
+    after(() => sendLeadEvent(lead));
+  }
 
   redirect("/webinar/thank-you");
 }
