@@ -61,7 +61,10 @@ function mailtoFrom(form: HTMLFormElement | null) {
 }
 
 export function WebinarForm() {
-  const ref = useSearchParams().get("ref") ?? "";
+  const params = useSearchParams();
+  const ref = params.get("ref") ?? "";
+  // Meta ad click id from the landing URL (not a cookie); the server turns it into fbc for ad attribution.
+  const fbclid = params.get("fbclid") ?? "";
   const [state, action, pending] = useActionState(registerWebinar, initialState);
   const formRef = useRef<HTMLFormElement>(null);
   const painRef = useRef<HTMLTextAreaElement>(null);
@@ -126,6 +129,7 @@ export function WebinarForm() {
         <span className="wm-progress__text" aria-hidden="true">{done} מתוך 5</span>
       </div>
       <input type="hidden" name="ref" value={ref} />
+      <input type="hidden" name="fbclid" value={fbclid} />
       <div className="form-honeypot" aria-hidden="true">
         <label>Website <input name="website" type="text" tabIndex={-1} autoComplete="off" /></label>
       </div>
