@@ -3,7 +3,10 @@
 import { ArrowRight, Check as CheckIcon, Copy, MessageCircle, Printer, RotateCcw } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { submitGuideLead } from "@/app/deal-check-guide/actions";
 import {
+  buildChecklist,
+  checklistText,
   checks,
   forMarket,
   markets,
@@ -14,7 +17,6 @@ import {
   type Answer,
   type Market,
   type Role,
-  type Who,
   type YieldExample,
 } from "./content";
 import styles from "./deal-guide.module.css";
@@ -38,6 +40,7 @@ type WebinarInfo = { endsAt: number; when: string; href: string };
 const FIRST_CHECK = 3;
 const RESULT = FIRST_CHECK + checks.length;
 const GUIDE_URL = "https://realization.world/deal-check-guide";
+const UNLOCK_KEY = "deal-guide-unlocked";
 
 export function DealGuide({ webinar }: { webinar: WebinarInfo }) {
   const [step, setStep] = useState(0);
@@ -100,36 +103,61 @@ export function DealGuide({ webinar }: { webinar: WebinarInfo }) {
   const m: Market = market ?? "other";
   const r: Role = role ?? "other";
 
-  // The personal checklist: unanswered checks count as open.
-  const checklist = useMemo(() => {
-    const groups = new Map<Who, { id: string; title: string; ask: string }[]>();
-    const done: string[] = [];
-    for (const check of checks) {
-      const value = answers[check.id] ?? "open";
-      if (value === "done") done.push(check.title);
-      if (value !== "open") continue;
-      const list = groups.get(check.who) ?? [];
-      list.push({ id: check.id, title: check.title, ask: forMarket(check.ask, m)! });
-      groups.set(check.who, list);
-    }
-    return { groups: [...groups.entries()], done, openCount: [...groups.values()].reduce((sum, list) => sum + list.length, 0) };
-  }, [answers, m]);
+  const checklist = useMemo(() => buildChecklist(answers, m), [answers, m]);
+  const listText = () => checklistText(checklist, GUIDE_URL);
 
-  const checklistText = () => {
-    const lines = ["איך לבחון עסקה לפני שמתקדמים: מה לשאול", ""];
-    for (const [who, items] of checklist.groups) {
-      lines.push(`${whoLabels[who]}:`);
-      for (const item of items) lines.push(`• ${item.ask}`);
-      lines.push("");
+  // Email gate before the checklist (Asaf, 14.10). Once unlocked, this browser stays unlocked.
+  // Read once on mount; only the last screen uses it, and that screen is never server-rendered.
+  const [unlocked, setUnlocked] = useState(() => {
+    try {
+      return typeof window !== "undefined" && localStorage.getItem(UNLOCK_KEY) === "1";
+    } catch {
+      return false;
     }
-    if (checklist.done.length) lines.push(`כבר בידיים: ${checklist.done.join(", ")}`, "");
-    lines.push("המדריך לא מחליף שמאי, עורך דין או רואה חשבון.", `המדריך המלא: ${GUIDE_URL}`);
-    return lines.join("\n");
+  });
+  const [gate, setGate] = useState({ name: "", email: "", consent: false, website: "" });
+  const [gateState, setGateState] = useState<{ sending: boolean; message?: string; fields?: Partial<Record<"name" | "email" | "consent", string>> }>({ sending: false });
+  const [sentTo, setSentTo] = useState<{ email: string; ok: boolean } | null>(null);
+  const unlock = (emailed: { email: string; ok: boolean } | null) => {
+    setSentTo(emailed);
+    setUnlocked(true);
+    try {
+      localStorage.setItem(UNLOCK_KEY, "1");
+    } catch {}
+    headingRef.current?.focus({ preventScroll: true });
+  };
+
+  const submitGate = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (gateState.sending) return;
+    setGateState({ sending: true });
+    const params = new URLSearchParams(window.location.search);
+    try {
+      const result = await submitGuideLead({
+        ...gate,
+        role: role ?? "",
+        market: market ?? "",
+        answers,
+        ref: params.get("ref") ?? "",
+        fbclid: params.get("fbclid") ?? "",
+      });
+      if (result.status === "error") {
+        setGateState({ sending: false, message: result.message, fields: result.fields });
+        return;
+      }
+      track("guide-lead", { role: role ?? "none", market: market ?? "none" });
+      setGateState({ sending: false });
+      unlock(result.status === "ok" ? { email: gate.email, ok: result.emailed } : { email: gate.email, ok: false });
+    } catch {
+      // Network or deploy hiccup: they gave us their email, so the checklist opens anyway.
+      setGateState({ sending: false });
+      unlock({ email: gate.email, ok: false });
+    }
   };
 
   const copyList = async () => {
     try {
-      await navigator.clipboard.writeText(checklistText());
+      await navigator.clipboard.writeText(listText());
       setCopied(true);
       window.setTimeout(() => setCopied(false), 2400);
     } catch {}
@@ -146,7 +174,7 @@ export function DealGuide({ webinar }: { webinar: WebinarInfo }) {
       <div className={styles.stage} key={step} data-direction={direction}>
         {step === 0 && (
           <section className={styles.screen}>
-            <p className={styles.kicker}>מדריך אינטראקטיבי · כ־5 דקות · בלי הרשמה</p>
+            <p className={styles.kicker}>מדריך אינטראקטיבי · כ־5 דקות · חינם</p>
             <h1 className={styles.title} ref={headingRef} tabIndex={-1}>
               <span>איך לבחון עסקה</span> <span>לפני שמתקדמים</span>
             </h1>
@@ -268,88 +296,156 @@ export function DealGuide({ webinar }: { webinar: WebinarInfo }) {
               <strong>{checklist.openCount}</strong> שאלות פתוחות · <strong>{checklist.done.length}</strong> בדיקות כבר בידיים
             </p>
 
-            {checklist.groups.length > 0 ? (
-              <ol className={styles.groups}>
-                {checklist.groups.map(([who, items], groupIndex) => (
-                  <li key={who} className={styles.group} style={{ "--i": groupIndex } as React.CSSProperties}>
-                    <p className={styles.groupWho}>{whoLabels[who]}</p>
-                    <ul>
-                      {items.map((item) => (
-                        <li key={item.id}>
-                          <span className={styles.box} aria-hidden="true" />
-                          <span><span className={styles.itemTitle}>{item.title}.</span> {item.ask}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
-                ))}
-              </ol>
+            {!unlocked ? (
+              <form className={styles.gate} onSubmit={submitGate} noValidate>
+                <ol className={styles.gatePreview} aria-hidden="true">
+                  {checklist.groups.map(({ who, items }) => (
+                    <li key={who}>
+                      <p className={styles.groupWho}>{whoLabels[who]}</p>
+                      {items.map((item) => <p key={item.id} className={styles.blur}>{item.ask}</p>)}
+                    </li>
+                  ))}
+                </ol>
+                <div className={styles.gateBox}>
+                  <p className={styles.gateTitle}>לאן לשלוח את הרשימה?</p>
+                  <p className={styles.gateText}>הרשימה נפתחת כאן מיד, ועותק שלה מגיע אליכם למייל, כדי שתהיה בהישג יד בפגישה הבאה.</p>
+                  <label className={styles.field}>
+                    <span>שם</span>
+                    <input
+                      name="name"
+                      autoComplete="name"
+                      value={gate.name}
+                      onChange={(event) => setGate({ ...gate, name: event.target.value })}
+                      aria-invalid={Boolean(gateState.fields?.name)}
+                      aria-describedby={gateState.fields?.name ? "gate-name-error" : undefined}
+                    />
+                    {gateState.fields?.name && <small id="gate-name-error">{gateState.fields.name}</small>}
+                  </label>
+                  <label className={styles.field}>
+                    <span>מייל</span>
+                    <input
+                      name="email"
+                      type="email"
+                      dir="ltr"
+                      inputMode="email"
+                      autoComplete="email"
+                      value={gate.email}
+                      onChange={(event) => setGate({ ...gate, email: event.target.value })}
+                      aria-invalid={Boolean(gateState.fields?.email)}
+                      aria-describedby={gateState.fields?.email ? "gate-email-error" : undefined}
+                    />
+                    {gateState.fields?.email && <small id="gate-email-error">{gateState.fields.email}</small>}
+                  </label>
+                  <label className={styles.hp} aria-hidden="true">
+                    Website
+                    <input tabIndex={-1} autoComplete="off" value={gate.website} onChange={(event) => setGate({ ...gate, website: event.target.value })} />
+                  </label>
+                  <label className={styles.consent}>
+                    <input type="checkbox" checked={gate.consent} onChange={(event) => setGate({ ...gate, consent: event.target.checked })} />
+                    <span>
+                      מאשרים לקבל את הרשימה ומיילים מ־Realization על נדל״ן ו־AI. אפשר להסיר בכל רגע. <Link href="/privacy">מדיניות הפרטיות</Link>
+                    </span>
+                  </label>
+                  {gateState.fields?.consent && <small className={styles.fieldError}>{gateState.fields.consent}</small>}
+                  {gateState.message && <p className={styles.fieldError} role="alert">{gateState.message}</p>}
+                  <button type="submit" className="button button--primary" disabled={gateState.sending}>
+                    <span>{gateState.sending ? "שולחים…" : "לפתוח את הרשימה שלי"}</span>
+                    <ArrowRight className="r-flip-x" aria-hidden="true" size={17} strokeWidth={2.2} />
+                  </button>
+                </div>
+              </form>
             ) : (
-              <p className={styles.allDone}>
-                כל הבדיקות עם תשובה. נשארת השאלה החשובה מכולן: האם העסקה מתאימה לכם, למטרה, לזמן ולהון שלכם. את זה אף רשימה לא עונה.
-              </p>
-            )}
+              <>
+                {sentTo && (
+                  <p className={styles.sentNote} role="status">
+                    {sentTo.ok ? <>עותק של הרשימה בדרך אל <span dir="ltr">{sentTo.email}</span>.</> : "לא הצלחנו לשלוח את המייל כרגע, אבל הרשימה כאן. אפשר להעתיק אותה או לשלוח לעצמכם בוואטסאפ."}
+                  </p>
+                )}
 
-            {checklist.done.length > 0 && (
-              <p className={styles.doneList}>
-                <CheckIcon aria-hidden="true" size={16} strokeWidth={2.6} /> כבר בידיים: {checklist.done.join(" · ")}
-              </p>
-            )}
-
-            <div className={styles.tools}>
-              <button type="button" className={styles.tool} onClick={copyList}>
-                <Copy aria-hidden="true" size={16} /> {copied ? "הועתק" : "העתקת הרשימה"}
-              </button>
-              <a
-                className={styles.tool}
-                href={`https://wa.me/?text=${encodeURIComponent(checklistText())}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => track("guide-whatsapp")}
-              >
-                <MessageCircle aria-hidden="true" size={16} /> לשלוח לעצמי בוואטסאפ
-              </a>
-              <button type="button" className={styles.tool} onClick={() => { track("guide-print"); window.print(); }}>
-                <Printer aria-hidden="true" size={16} /> הדפסה או PDF
-              </button>
-              <button type="button" className={styles.tool} onClick={restart}>
-                <RotateCcw aria-hidden="true" size={16} /> מהתחלה
-              </button>
-            </div>
-
-            {webinarAhead ? (
-              <div className={styles.cta}>
-                <p className={styles.ctaWhen}>וובינר חינמי · {webinar.when}</p>
-                <p className={styles.ctaText}>
-                  ככה אנחנו בודקים עסקאות, ידנית, כבר שנים. ב־20.10 בוובינר נראה איך AI עושה את שבע הבדיקות האלה מלינק אחד, בזמן אמת, ואיפה עדיין צריך אדם.
+              {checklist.groups.length > 0 ? (
+                <ol className={styles.groups}>
+                  {checklist.groups.map(({ who, items }, groupIndex) => (
+                    <li key={who} className={styles.group} style={{ "--i": groupIndex } as React.CSSProperties}>
+                      <p className={styles.groupWho}>{whoLabels[who]}</p>
+                      <ul>
+                        {items.map((item) => (
+                          <li key={item.id}>
+                            <span className={styles.box} aria-hidden="true" />
+                            <span><span className={styles.itemTitle}>{item.title}.</span> {item.ask}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </li>
+                  ))}
+                </ol>
+              ) : (
+                <p className={styles.allDone}>
+                  כל הבדיקות עם תשובה. נשארת השאלה החשובה מכולן: האם העסקה מתאימה לכם, למטרה, לזמן ולהון שלכם. את זה אף רשימה לא עונה.
                 </p>
-                <div className={styles.ctaRow}>
-                  <Link className="button button--primary" href={webinar.href} data-umami-event="guide-cta-webinar">
-                    <span>שמרו לי מקום</span>
-                    <ArrowRight className="r-flip-x" aria-hidden="true" size={17} strokeWidth={2.2} />
-                  </Link>
-                  <p className={styles.ctaNote}>חינם, ובסוף לא נמכור לכם קורס.</p>
-                </div>
-              </div>
-            ) : (
-              <div className={styles.cta}>
-                <p className={styles.ctaText}>יש עסקה על השולחן? שלחו לנו אותה, ונעבור עליה איתכם.</p>
-                <div className={styles.ctaRow}>
-                  <Link className="button button--primary" href="/services/real-estate" data-umami-event="guide-cta-deal-check">
-                    <span>בדיקת עסקה</span>
-                    <ArrowRight className="r-flip-x" aria-hidden="true" size={17} strokeWidth={2.2} />
-                  </Link>
-                </div>
-              </div>
-            )}
-            <div className={styles.disclaimer}>
-              <p className={styles.label}>מה המדריך הזה לא עושה</p>
-              <p>
-                הוא לא מחליף שמאי, עורך דין או רואה חשבון. הוא נותן את השאלות הנכונות לפני שפונים אליהם, כך שהפגישה איתם קצרה יותר ומדויקת יותר. המספרים בדוגמאות הם להמחשה בלבד.
-              </p>
-            </div>
+              )}
 
-            <p className={styles.byline}>אסף איזנקוט, Realization · יבגני גורקוב, Montreza</p>
+              {checklist.done.length > 0 && (
+                <p className={styles.doneList}>
+                  <CheckIcon aria-hidden="true" size={16} strokeWidth={2.6} /> כבר בידיים: {checklist.done.join(" · ")}
+                </p>
+              )}
+
+              <div className={styles.tools}>
+                <button type="button" className={styles.tool} onClick={copyList}>
+                  <Copy aria-hidden="true" size={16} /> {copied ? "הועתק" : "העתקת הרשימה"}
+                </button>
+                <a
+                  className={styles.tool}
+                  href={`https://wa.me/?text=${encodeURIComponent(listText())}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => track("guide-whatsapp")}
+                >
+                  <MessageCircle aria-hidden="true" size={16} /> לשלוח לעצמי בוואטסאפ
+                </a>
+                <button type="button" className={styles.tool} onClick={() => { track("guide-print"); window.print(); }}>
+                  <Printer aria-hidden="true" size={16} /> הדפסה או PDF
+                </button>
+                <button type="button" className={styles.tool} onClick={restart}>
+                  <RotateCcw aria-hidden="true" size={16} /> מהתחלה
+                </button>
+              </div>
+
+              {webinarAhead ? (
+                <div className={styles.cta}>
+                  <p className={styles.ctaWhen}>וובינר חינמי · {webinar.when}</p>
+                  <p className={styles.ctaText}>
+                    ככה אנחנו בודקים עסקאות, ידנית, כבר שנים. ב־20.10 בוובינר נראה איך AI עושה את שבע הבדיקות האלה מלינק אחד, בזמן אמת, ואיפה עדיין צריך אדם.
+                  </p>
+                  <div className={styles.ctaRow}>
+                    <Link className="button button--primary" href={webinar.href} data-umami-event="guide-cta-webinar">
+                      <span>שמרו לי מקום</span>
+                      <ArrowRight className="r-flip-x" aria-hidden="true" size={17} strokeWidth={2.2} />
+                    </Link>
+                    <p className={styles.ctaNote}>חינם, ובסוף לא נמכור לכם קורס.</p>
+                  </div>
+                </div>
+              ) : (
+                <div className={styles.cta}>
+                  <p className={styles.ctaText}>יש עסקה על השולחן? שלחו לנו אותה, ונעבור עליה איתכם.</p>
+                  <div className={styles.ctaRow}>
+                    <Link className="button button--primary" href="/services/real-estate" data-umami-event="guide-cta-deal-check">
+                      <span>בדיקת עסקה</span>
+                      <ArrowRight className="r-flip-x" aria-hidden="true" size={17} strokeWidth={2.2} />
+                    </Link>
+                  </div>
+                </div>
+              )}
+              <div className={styles.disclaimer}>
+                <p className={styles.label}>מה המדריך הזה לא עושה</p>
+                <p>
+                  הוא לא מחליף שמאי, עורך דין או רואה חשבון. הוא נותן את השאלות הנכונות לפני שפונים אליהם, כך שהפגישה איתם קצרה יותר ומדויקת יותר. המספרים בדוגמאות הם להמחשה בלבד.
+                </p>
+              </div>
+
+              <p className={styles.byline}>אסף איזנקוט, Realization · יבגני גורקוב, Montreza</p>
+              </>
+            )}
           </section>
         )}
       </div>

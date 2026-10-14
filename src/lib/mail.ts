@@ -182,3 +182,67 @@ export async function sendBrief(brief: Brief) {
     ].join("\n"),
   });
 }
+
+export type GuideLead = { name: string; email: string; role: string; market: string; ref: string; openCount: number; checklist: string };
+
+/**
+ * Deal-check guide email gate (/deal-check-guide): a lead notification to our inbox, then the
+ * person's checklist to them. The notification must go through; the copy to the person is
+ * reported back, so the page can say whether it was sent.
+ */
+export async function sendGuideLead(lead: GuideLead) {
+  const to = process.env.SUBMISSION_NOTIFY_EMAIL;
+  const transporter = await createMailer();
+  if (!to || !transporter) throw new Error("Mail is not configured");
+  const from = process.env.SMTP_FROM || process.env.SMTP_USER || to;
+
+  await transporter.sendMail({
+    from,
+    to,
+    replyTo: { name: lead.name, address: lead.email },
+    subject: `Deal-check guide lead — ${lead.ref || "direct"} — ${lead.name}`,
+    text: [
+      `Name: ${lead.name}`,
+      `Email: ${lead.email}`,
+      `Role: ${lead.role}`,
+      `Market: ${lead.market}`,
+      `Open questions: ${lead.openCount} of 7`,
+      `Came from: ${lead.ref || "—"}`,
+      "",
+      "Their checklist:",
+      lead.checklist,
+    ].join("\n"),
+  });
+
+  const firstName = lead.name.trim().split(/\s+/)[0] || lead.name;
+  const body = [
+    `שלום ${firstName},`,
+    "",
+    "הנה הרשימה האישית שלכם מהמדריך, כדי שתהיה בהישג יד בפגישה הבאה:",
+    "",
+    lead.checklist,
+    "",
+    `ב־20.10 בוובינר נראה איך AI עושה את שבע הבדיקות האלה מלינק אחד, בזמן אמת, ואיפה עדיין צריך אדם. ${webinar.dateLabel}, ${webinar.timeLabel}. חינם: https://realization.world/webinar?ref=guide-email`,
+    "",
+    "שאלה על עסקה מסוימת? אפשר פשוט לענות למייל הזה.",
+    "",
+    "אסף איזנקוט, Realization · יבגני גורקוב, Montreza",
+  ];
+  try {
+    await transporter.sendMail({
+      from: { name: "אסף איזנקוט", address: from },
+      to: { name: lead.name, address: lead.email },
+      replyTo: to,
+      subject: "הרשימה שלכם: מה לשאול לפני שמתקדמים עם עסקה",
+      text: body.join("\n"),
+      html: `<div dir="rtl" style="max-width:600px;margin:0 auto;border:3px solid #000;font-family:Arial,sans-serif;font-size:16px;line-height:1.65;color:#141414;text-align:right"><div style="height:8px;background:#FDCC33"></div><div style="padding:24px 28px">${body
+        .map((row) => (row ? escapeHtml(row) : ""))
+        .join("<br>")
+        .replace(/\n/g, "<br>")}</div></div>`,
+    });
+    return true;
+  } catch (error) {
+    console.error("Guide checklist email failed to send", error instanceof Error ? error.message : "unknown error");
+    return false;
+  }
+}
