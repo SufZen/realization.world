@@ -98,7 +98,7 @@ export const services = {
       ],
     },
     { name: "Real-estate development and capital partnerships (Portugal)", url: `${siteUrl}/partners/capital` },
-    { name: "Stuck property resolution (Portugal)", url: "https://realization.pt" },
+    { name: "Stuck property resolution (Portugal): FLUII", url: "https://fluii.pt" },
     { name: "Fractional operations and development management (Asaf Eyzenkot)", url: `${siteUrl}/asaf` },
   ],
 };

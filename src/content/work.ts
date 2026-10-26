@@ -127,25 +127,25 @@ export const work: WorkItem[] = [
       { src: "/work/arena-barreiro/ground-floor.webp", alt: "Ground-floor plan of the Arena building showing entrance, stairs and ground-floor homes", caption: "Ground floor · plan by SFRG" },
     ],
     disclosure: "Renders are design-stage images and may change. Financial terms are shared only with qualified capital partners, on request. Nothing here is an offer of securities.",
-    source: "Arena project memorandum, 2026. Figures as of September 2026.",
+    source: "Arena project data, 2026. Figures as of September 2026.",
     related: ["design-first-then-ask-for-a-price", "turnkey-or-value-add"],
-    cta: { path: "capital", heading: "Capital partner? | Request the memorandum.", label: "Request the memorandum" },
+    cta: { path: "capital", heading: "Capital partner? | Start with a call; | details under NDA.", label: "Talk to us" },
     schema: "CreativeWork",
     icon: Building2,
     updated: "2026-09-28",
   },
   {
     slug: "realization-portugal",
-    name: "Realization Portugal",
+    name: "FLUII",
     kind: "venture",
-    eyebrow: "PROPERTY RESOLUTION VENTURE · PORTUGAL",
+    eyebrow: "STUCK-PROPERTY VENTURE · PORTUGAL",
     status: "In development",
     years: "2026",
     location: "Portugal · Setúbal, Lisbon, Porto, Braga first",
     role: "Founder and product lead; a development lead owns software delivery",
     descriptor: "A licensed platform that turns | legally or family-blocked homes | into a plan, a mandate and a buyer.",
     summary:
-      "Realization Portugal (realization.pt) resolves homes stuck in inheritance, co-owner deadlock or mismatched paperwork, then sells them to vetted investors. AI assistant Clara does the intake and drafting; licensed people make every decision about money and law.",
+      "FLUII (fluii.pt, launched as realization.pt) resolves homes stuck in inheritance, co-owner deadlock or mismatched paperwork, then sells them to vetted investors. AI assistant Clara does the intake and drafting; licensed people make every decision about money and law.",
     problem:
       "About 723,000 Portuguese homes stand empty | while prices hit records. | Most are stuck by people and paperwork — | unsplit inheritances, absent co-owners, | registries that disagree — not by the building.",
     approach:
@@ -169,13 +169,13 @@ export const work: WorkItem[] = [
       ],
     },
     stack: ["Next.js 16", "React 19", "Supabase Postgres (43 tables)", "Google Gemini via Vercel AI SDK", "Stripe", "DocuSeal", "Cal.com", "Resend", "Sentry"],
-    links: [{ label: "Visit realization.pt", href: "https://realization.pt" }],
+    links: [{ label: "Visit fluii.pt", href: "https://fluii.pt" }],
     cover: {
       src: "/media/venture-portugal.webp",
       alt: "Architectural plans, a house model and a key inside a Portuguese property",
     },
     gallery: [
-      { src: "/work/realization-portugal/owner-landing.webp", wide: true, alt: "realization.pt owner landing page with a chat panel where Clara asks what is stopping the sale", caption: "Owner landing page · demo data" },
+      { src: "/work/realization-portugal/owner-landing.webp", wide: true, alt: "FLUII owner landing page with a chat panel where Clara asks what is stopping the sale", caption: "Owner landing page · demo data" },
       { src: "/work/realization-portugal/clara-intake.webp", alt: "Owner portal showing Clara summarising an inherited T3 apartment case in Portuguese", caption: "Intake with Clara, in Portuguese · demo data" },
     ],
     diagram: "area-gap",
@@ -191,8 +191,8 @@ export const work: WorkItem[] = [
     slug: "realizeos",
     name: "RealizeOS",
     kind: "system",
-    eyebrow: "AI OPERATING SYSTEM · OPEN CORE",
-    status: "Live",
+    eyebrow: "AI OPERATING SYSTEM · OUR ENGINE",
+    status: "In daily use",
     location: "Self-hosted · runs anywhere",
     role: "Designed and built by Realization; runs our own operations",
     descriptor: "A self-hosted team of AI agents | that knows the business, remembers | and works under human approval.",
@@ -203,7 +203,7 @@ export const work: WorkItem[] = [
     approach:
       "Keep the durable asset — knowledge, | history and identity — in files the business owns. | Everything else is a swappable adapter: | models, agent runtimes, channels and interfaces.",
     outcome:
-      "Version 5.6 runs Realization’s research, | documentation and coordination daily. | The core is free to self-host; | setup and adaptation are available through Advisory.",
+      "Version 5.6 runs Realization’s research, | documentation and coordination daily. | It is the engine inside our own operations | and our client AI work, | not a product we sell on its own.",
     facts: [
       { value: "54.5k", label: "lines of Python, plus 11.5k of TSX" },
       { value: "2,032", label: "automated tests across 99 files" },
