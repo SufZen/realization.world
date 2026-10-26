@@ -92,7 +92,7 @@ export const work: WorkItem[] = [
     role: "GP, development manager and shareholder",
     descriptor: "Eleven compact homes | on Lisbon’s south bank, twenty minutes from the city by ferry.",
     summary:
-      "Arena is an eleven-home residential building in Barreiro, across the Tagus from Lisbon, developed by Realization as GP and development manager. The site is acquired and cleared, the licensing request is filed, and construction is planned for 2026–27.",
+      "Arena is an eleven-home residential building in Barreiro, across the Tagus from Lisbon, developed by Realization as GP and development manager. The site is acquired and cleared, the information request (PIP) is approved, and construction is planned for 2026–27.",
     problem:
       "Greater Lisbon is short of good homes | below the luxury segment. Young professionals | are priced out of the centre, | while Barreiro’s stock is old and inefficient.",
     approach:
