@@ -98,7 +98,7 @@ export const work: WorkItem[] = [
     approach:
       "We shifted the mix away from slow T2/T3 flats | toward the most liquid typologies: one T0, | nine T1 and a T2 penthouse, | each designed to qualify for Portugal’s | under-35 first-home tax exemption.",
     outcome:
-      "Site acquired and demolished (Q1 2026). | Information request (PIP) filed (June 2026). | Funding and construction are the next milestones.",
+      "Site acquired and demolished (Q1 2026). | Information request (PIP) approved (July 2026). | Funding and construction are the next milestones.",
     facts: [
       { value: "11", label: "homes · 1×T0, 9×T1, 1×T2" },
       { value: "596 m²", label: "net sellable area over 5 floors" },
@@ -110,7 +110,7 @@ export const work: WorkItem[] = [
       intro: "A single dedicated company (SPV) | with Realization running day-to-day execution.",
       items: [
         ["Acquire", "Site secured and demolished | in Q1 2026."],
-        ["License", "PIP information request | filed in June 2026."],
+        ["License", "PIP information request | approved in July 2026."],
         ["Fund & build", "Equity and bank facility; | a 12–15 month build."],
         ["Sell", "Units sized for young buyers | and yield investors."],
       ],
