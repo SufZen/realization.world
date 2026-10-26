@@ -250,7 +250,7 @@ export const insights: Insight[] = [
         heading: "The pattern behind it",
         paragraphs: [
           "Inheritance, co-ownership and old paperwork have created a large stock of homes that are valuable but not transactable. Fixing that is a system problem: legal, technical and human at once.",
-          "It is the problem Realization Portugal is being built around.",
+          "It is the problem FLUII (launched as Realization Portugal) is being built around.",
         ],
       },
     ],
@@ -641,7 +641,7 @@ export const insights: Insight[] = [
         heading: "Where AI helps, and where it must not",
         paragraphs: [
           "AI is good at the busy work: an intake conversation in Portuguese or English, reading the property registry extract and the tax record, and scoring what is solvable. It must not make decisions about money or law. Scores, roadmaps and dossiers stay drafts until a person approves them. A low AI score is never turned into a \"no\" for the owner.",
-          "That is the model behind Realization Portugal. The case study explains the owner and investor flows and the disclosure rules.",
+          "That is the model behind FLUII (launched as Realization Portugal). The case study explains the owner and investor flows and the disclosure rules.",
         ],
       },
     ],

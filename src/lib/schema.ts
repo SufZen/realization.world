@@ -14,6 +14,8 @@ const sameAs = [
   "https://www.linkedin.com/in/sufzen",
   "https://github.com/SufZen",
   "https://realization.pt",
+  "https://realization.es",
+  "https://fluii.pt",
   "https://realizeos.ai",
   "https://realization.co.il",
   "https://www.boaarc.com",

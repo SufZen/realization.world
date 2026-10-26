@@ -8,9 +8,11 @@ import { SocialLinks } from "./social-links";
 
 /** Sister sites: cross-links that tie the Realization entity together for people and search engines. */
 const networkLinks = [
-  ["realization.pt · property resolution", "https://realization.pt"],
-  ["realizeos.ai · AI operations system", "https://realizeos.ai"],
   ["realization.co.il · Israel", "https://realization.co.il"],
+  ["realization.pt · Portugal", "https://realization.pt"],
+  ["realization.es · España", "https://realization.es"],
+  ["fluii.pt · stuck properties", "https://fluii.pt"],
+  ["realizeos.ai · AI operations system", "https://realizeos.ai"],
   ["MeetSum", "https://meetsum.realization.co.il"],
   ["BOA Architecture", "https://www.boaarc.com"],
 ] as const;

@@ -167,9 +167,9 @@ export const pillars: Pillar[] = [
       },
       {
         name: "Problematic properties",
-        text: "Homes stuck in inheritance, co-owner deadlock | or paperwork go to realization.pt, | our licensed property-resolution venture.",
+        text: "Homes stuck in inheritance, co-owner deadlock | or paperwork go to FLUII, | our licensed stuck-property venture.",
         format: "Portugal",
-        cta: { label: "Go to realization.pt", href: "https://realization.pt" },
+        cta: { label: "Go to fluii.pt", href: "https://fluii.pt" },
       },
     ],
     work: ["arena-barreiro", "realization-portugal"],
