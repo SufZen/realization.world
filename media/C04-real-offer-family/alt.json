@@ -1,0 +1,44 @@
+{
+  "carousel": [
+    {
+      "file": "carousel-01.png",
+      "short": "Does every heir have to agree first?",
+      "long": "Does every heir have to agree first? Many of these homes aren't missing a buyer. They're missing an agreement."
+    },
+    {
+      "file": "carousel-02.png",
+      "short": "Waiting for an agreement, not a buyer.",
+      "long": "Waiting for an agreement, not a buyer. Several heirs, different lives, different needs. Nobody wants to spend money just to learn what the house is worth, so nothing happens, for years. It's the memories and the old hurts."
+    },
+    {
+      "file": "carousel-03.png",
+      "short": "One heir can ask, with no commitment.",
+      "long": "One heir can ask, with no commitment. Not every brother and sister has to agree first. The one with the incentive asks the market, with no commitment, and the thinking follows the proposal."
+    },
+    {
+      "file": "carousel-04.png",
+      "short": "Diagram: Money on the table moves the talk to terms.",
+      "long": "Diagram: Money on the table moves the talk to terms. Waiting for everyone keeps the talk in the past. A serious offer brings it to terms."
+    },
+    {
+      "file": "carousel-05.png",
+      "short": "A serious offer, and an honest read.",
+      "long": "A serious offer, and an honest read. The offer has to come from a buyer who means it. And if a case isn't worth pursuing, owners should hear that early, without illusions. I'd rather say so early than give anyone an illusion."
+    },
+    {
+      "file": "carousel-06.png",
+      "short": "The offer must be genuine and the read honest, even when it says 'not worth it'.",
+      "long": "The offer must be genuine and the read honest, even when it says 'not worth it'. If your family shares a house like this, send me a message and we'll talk it through."
+    }
+  ],
+  "quote": {
+    "file": "quote-1200x627.png",
+    "short": "Quote card: \"What I've learned is that families rarely agree on feelings, but they can agree…",
+    "long": "Quote card: \"What I've learned is that families rarely agree on feelings, but they can agree around a number.\" Asaf Eyzenkot, Suf Zen, founder of Realization."
+  },
+  "cover": {
+    "file": "cover-1080x1920.png",
+    "short": "Families agree around a number.",
+    "long": "Families agree around a number. Asaf Eyzenkot, Suf Zen, founder of Realization."
+  }
+}

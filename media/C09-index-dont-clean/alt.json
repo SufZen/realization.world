@@ -1,0 +1,44 @@
+{
+  "carousel": [
+    {
+      "file": "carousel-01.png",
+      "short": "Most see a mess to clean. I see an index to build.",
+      "long": "Most see a mess to clean. I see an index to build. You don't have to rename the old files. You have to be able to find them."
+    },
+    {
+      "file": "carousel-02.png",
+      "short": "The archive every office knows.",
+      "long": "The archive every office knows. Decades of project folders, the same form saved under names in two languages, and files called final, final, final. I'll let you guess which one is final."
+    },
+    {
+      "file": "carousel-03.png",
+      "short": "Forward, one standard. Backward, an index.",
+      "long": "Forward, one standard. Backward, an index. Every new project starts in the same structure, while a dedicated agent learns the quirks of the old archive and finds documents however they were named."
+    },
+    {
+      "file": "carousel-04.png",
+      "short": "Diagram: Don't clean the archive. Index it.",
+      "long": "Diagram: Don't clean the archive. Index it. Cleaning turns into a project that rarely ends. Indexing makes the mess findable exactly as it is."
+    },
+    {
+      "file": "carousel-05.png",
+      "short": "Separate tools, and memory you own.",
+      "long": "Separate tools, and memory you own. Keep files, project records and tasks in separate tools linked by an agent layer, and keep notes, decisions and context in files you control. Own the memory, rent the models."
+    },
+    {
+      "file": "carousel-06.png",
+      "short": "Standardise forward, index backward, and keep the memory in files you own.",
+      "long": "Standardise forward, index backward, and keep the memory in files you own. Take it, use it, and tell me what I missed."
+    }
+  ],
+  "quote": {
+    "file": "quote-1200x627.png",
+    "short": "Quote card: \"If your history lives only inside one vendor's workspace, you're not the owner of…",
+    "long": "Quote card: \"If your history lives only inside one vendor's workspace, you're not the owner of your own context.\" Asaf Eyzenkot, Suf Zen, founder of Realization."
+  },
+  "cover": {
+    "file": "cover-1080x1920.png",
+    "short": "Don't clean it. Index it.",
+    "long": "Don't clean it. Index it. Asaf Eyzenkot, Suf Zen, founder of Realization."
+  }
+}

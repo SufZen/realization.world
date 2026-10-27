@@ -1,0 +1,44 @@
+{
+  "carousel": [
+    {
+      "file": "carousel-01.png",
+      "short": "Is your stuck property as unique as it feels?",
+      "long": "Is your stuck property as unique as it feels? Most of them fit a handful of types, each with its own way through."
+    },
+    {
+      "file": "carousel-02.png",
+      "short": "Empty is a symptom, not a diagnosis.",
+      "long": "Empty is a symptom, not a diagnosis. Behind it sit heirs who can't agree, owners without money to renovate, old rents that never covered upkeep, distrust of rental rules, plain sentiment. Every owner feels their case is unique."
+    },
+    {
+      "file": "carousel-03.png",
+      "short": "Not all complexity is the same.",
+      "long": "Not all complexity is the same. Fragmented ownership is binary: either everyone signs, or there is no deal. Occupation is mostly a cost in time, and with patient capital, time can be priced."
+    },
+    {
+      "file": "carousel-04.png",
+      "short": "Diagram: Most stuck properties fit one of a few types.",
+      "long": "Diagram: Most stuck properties fit one of a few types. Name the type, and the case gets its template: a checklist, then the right specialists."
+    },
+    {
+      "file": "carousel-05.png",
+      "short": "Rank by quality, not by risk.",
+      "long": "Rank by quality, not by risk. The small, clean parcels needed the same professional work as the big ones, for far less upside. The complicated prime block was where the value was. The investors pushed back, and they were right."
+    },
+    {
+      "file": "carousel-06.png",
+      "short": "Name the type before you look for a buyer: it tells you the team, the timeline and the offer.",
+      "long": "Name the type before you look for a buyer: it tells you the team, the timeline and the offer. Take the list, use it, and tell me which type I missed."
+    }
+  ],
+  "quote": {
+    "file": "quote-1200x627.png",
+    "short": "Quote card: \"If an alien shows up, fine, but for the critical mass you can build a work template.\"",
+    "long": "Quote card: \"If an alien shows up, fine, but for the critical mass you can build a work template.\" Asaf Eyzenkot, Suf Zen, founder of Realization."
+  },
+  "cover": {
+    "file": "cover-1080x1920.png",
+    "short": "Stuck? Name the type first.",
+    "long": "Stuck? Name the type first. Asaf Eyzenkot, Suf Zen, founder of Realization."
+  }
+}
