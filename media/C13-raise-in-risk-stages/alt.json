@@ -1,0 +1,44 @@
+{
+  "carousel": [
+    {
+      "file": "carousel-01.png",
+      "short": "Most bank the raise early. I call it by stage.",
+      "long": "Most bank the raise early. I call it by stage. It sounds backwards, I know. Here's why it isn't."
+    },
+    {
+      "file": "carousel-02.png",
+      "short": "Size and timing are two different questions.",
+      "long": "Size and timing are two different questions. We find the people now, as soft commitments, and call the money when the project needs it. And we line up more than we need, because not every commitment arrives on call day."
+    },
+    {
+      "file": "carousel-03.png",
+      "short": "No mortgage before the project is approved.",
+      "long": "No mortgage before the project is approved. Until the planning answer comes, equity carries the land and the design. The bank comes in after the permit, not before."
+    },
+    {
+      "file": "carousel-04.png",
+      "short": "Diagram: Find the people now, call the money later.",
+      "long": "Diagram: Find the people now, call the money later. Each call waits for a milestone, so the money arrives as the risk falls, not before."
+    },
+    {
+      "file": "carousel-05.png",
+      "short": "The first check stays at the top.",
+      "long": "The first check stays at the top. Whoever puts money in first takes more risk for longer, and the structure has to reflect it. Someone who joins a year in can't be promised more than the first check. If I promise something I cannot deliver, what am I?"
+    },
+    {
+      "file": "carousel-06.png",
+      "short": "Size the raise by risk, call it by milestone, and keep the first check at the top.",
+      "long": "Size the raise by risk, call it by milestone, and keep the first check at the top. Staging a raise right now? Send me a message, and we'll find time to talk."
+    }
+  ],
+  "quote": {
+    "file": "quote-1200x627.png",
+    "short": "Quote card: \"I prefer to receive as little money as possible while I don't need it.\"",
+    "long": "Quote card: \"I prefer to receive as little money as possible while I don't need it.\" Asaf Eyzenkot, Suf Zen, founder of Realization."
+  },
+  "cover": {
+    "file": "cover-1080x1920.png",
+    "short": "Commit early, call late.",
+    "long": "Commit early, call late. Asaf Eyzenkot, Suf Zen, founder of Realization."
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "carousel": [
+    {
+      "file": "carousel-01.png",
+      "short": "I understand the bureaucracy. Explaining myself is harder.",
+      "long": "I understand the bureaucracy. Explaining myself is harder. So I built a bureaucrat for the bureaucracy."
+    },
+    {
+      "file": "carousel-02.png",
+      "short": "A phone line, a voice, a knowledge base.",
+      "long": "A phone line, a voice, a knowledge base. A messaging bot, a phone line, a multilingual voice and a knowledge base of every public entity and utility I deal with. It calls, answers, and sets up or cancels a service. Thanks to it, I didn't hire a personal assistant."
+    },
+    {
+      "file": "carousel-03.png",
+      "short": "It knows when to hand over.",
+      "long": "It knows when to hand over. When it's missing information, it brings me into the call instead of guessing, and that rule matters more than the voice."
+    },
+    {
+      "file": "carousel-04.png",
+      "short": "Diagram: What it does, and what it never gets.",
+      "long": "Diagram: What it does, and what it never gets. Everything it needs to make the call, a rule to hand it over, and the keys kept out on purpose."
+    },
+    {
+      "file": "carousel-05.png",
+      "short": "Where I stop trusting myself.",
+      "long": "Where I stop trusting myself. I'm an architect, not a programmer, so once the work on our platform became delicate, I added tests, reviews and a few hours a month of an experienced engineer. The engineer knows what questions to ask. I don't know them yet."
+    },
+    {
+      "file": "carousel-06.png",
+      "short": "Start from friction you actually have, and write down what the agent may never touch before it…",
+      "long": "Start from friction you actually have, and write down what the agent may never touch before it touches anything. Building one yourself? Tell me what it will never touch."
+    }
+  ],
+  "quote": {
+    "file": "quote-1200x627.png",
+    "short": "Quote card: \"AI lets you build for your own problem faster than ever, but it won't tell you what…",
+    "long": "Quote card: \"AI lets you build for your own problem faster than ever, but it won't tell you what to withhold or where your judgment ends.\" Asaf Eyzenkot, Suf Zen, founder of Realization."
+  },
+  "cover": {
+    "file": "cover-1080x1920.png",
+    "short": "A bureaucrat for the bureaucracy.",
+    "long": "A bureaucrat for the bureaucracy. Asaf Eyzenkot, Suf Zen, founder of Realization."
+  }
+}
