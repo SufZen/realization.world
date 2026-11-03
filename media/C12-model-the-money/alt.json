@@ -1,0 +1,44 @@
+{
+  "carousel": [
+    {
+      "file": "carousel-01.png",
+      "short": "Can a project company be in the red for months?",
+      "long": "Can a project company be in the red for months? There's no such creature. The model is just missing a line."
+    },
+    {
+      "file": "carousel-02.png",
+      "short": "The line that says when the money arrives.",
+      "long": "The line that says when the money arrives. A project company can't go negative, so the model has to show when each tranche of equity lands. That timing is strategy, and your early warning if the project runs late. The least exciting line in the file, and the one that matters."
+    },
+    {
+      "file": "carousel-03.png",
+      "short": "Buyers pay at signing and at the deed.",
+      "long": "Buyers pay at signing and at the deed. Off-plan buyers in Portugal usually pay 10 to 20 percent at the CPCV (the promissory contract), sometimes in stages, and the balance at the deed. A smooth curve flatters the return."
+    },
+    {
+      "file": "carousel-04.png",
+      "short": "Diagram: Equity and the bank loan carry construction.",
+      "long": "Diagram: Equity and the bank loan carry construction. Deposits sit on top, untouched until the end: a bonus that lets you draw less, never the plan."
+    },
+    {
+      "file": "carousel-05.png",
+      "short": "You can't count the same money twice.",
+      "long": "You can't count the same money twice. Equity and the bank loan fund the build, and early deposits are a bonus that lets you draw less. When investors are also buyers, their money is already in the budget as equity. If buyers sign early, great. You just don't plan on it."
+    },
+    {
+      "file": "carousel-06.png",
+      "short": "Build the plan so it balances without buyers' money. Anything they bring early is a bonus.",
+      "long": "Build the plan so it balances without buyers' money. Anything they bring early is a bonus. Run the checklist on your own model, and tell me what I missed."
+    }
+  ],
+  "quote": {
+    "file": "quote-1200x627.png",
+    "short": "Quote card: \"There's no such creature as a project company in deficit.\"",
+    "long": "Quote card: \"There's no such creature as a project company in deficit.\" Asaf Eyzenkot, Suf Zen, founder of Realization."
+  },
+  "cover": {
+    "file": "cover-1080x1920.png",
+    "short": "Deposits aren't your build budget.",
+    "long": "Deposits aren't your build budget. Asaf Eyzenkot, Suf Zen, founder of Realization."
+  }
+}

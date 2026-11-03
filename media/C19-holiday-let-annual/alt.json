@@ -1,0 +1,44 @@
+{
+  "carousel": [
+    {
+      "file": "carousel-01.png",
+      "short": "Most judge a holiday let by the month. I judge the year.",
+      "long": "Most judge a holiday let by the month. I judge the year. Some months will be negative, and that's normal."
+    },
+    {
+      "file": "carousel-02.png",
+      "short": "Judge it over the year.",
+      "long": "Judge it over the year. With high financing, some months will be negative. Start with a cash cushion so they don't scare you, and look at mid-term tenants for the quiet season. Only annually can you look at it."
+    },
+    {
+      "file": "carousel-03.png",
+      "short": "Measure against the cash you put in.",
+      "long": "Measure against the cash you put in. Not against what the deal cost. Interest is a cost, but the principal the rent repays is yours, even when little reaches your account."
+    },
+    {
+      "file": "carousel-04.png",
+      "short": "Diagram: Judge the year, and measure your own cash.",
+      "long": "Diagram: Judge the year, and measure your own cash. None of this is a return promise. It's how to look at a short let bought with a mortgage."
+    },
+    {
+      "file": "carousel-05.png",
+      "short": "Then put it next to a boring lease.",
+      "long": "Then put it next to a boring lease. Compare what it leaves after management, cleaning, platforms and tax with a steady tenant: longer leases are taxed at lower rates. And if tourism stopped, would it still work? If not, we don't do it."
+    },
+    {
+      "file": "carousel-06.png",
+      "short": "Judge the year, measure your own cash, and set the loan on purpose.",
+      "long": "Judge the year, measure your own cash, and set the loan on purpose. Run the year on your own numbers, and tell me what you find."
+    }
+  ],
+  "quote": {
+    "file": "quote-1200x627.png",
+    "short": "Quote card: \"Interest is an expense, but the principal the rent repays stays with you, even when…",
+    "long": "Quote card: \"Interest is an expense, but the principal the rent repays stays with you, even when little lands in the account.\" Asaf Eyzenkot, Suf Zen, founder of Realization."
+  },
+  "cover": {
+    "file": "cover-1080x1920.png",
+    "short": "Judge the year, not the month.",
+    "long": "Judge the year, not the month. Asaf Eyzenkot, Suf Zen, founder of Realization."
+  }
+}
