@@ -1,4 +1,8 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
+
+const logoDataUri = `data:image/svg+xml;base64,${readFileSync(join(process.cwd(), "public/brand/realization-logo-horizontal-reversed.svg")).toString("base64")}`;
 
 export const ogSize = { width: 1200, height: 630 };
 
@@ -8,8 +12,8 @@ export function ogCard({ eyebrow, title, footer }: { eyebrow: string; title: str
     <div style={{ display: "flex", width: "100%", height: "100%", background: "#000", color: "#fff", padding: 72 }}>
       <div style={{ display: "flex", flex: 1, flexDirection: "column", justifyContent: "space-between", borderTop: "2px solid #FDCC33", borderBottom: "1px solid #555", padding: "32px 0" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-          <div style={{ display: "flex", width: 54, height: 54, borderRadius: 27, alignItems: "center", justifyContent: "center", background: "#FDCC33", color: "#000", fontSize: 28, fontWeight: 900 }}>R</div>
-          <div style={{ fontSize: 24, fontWeight: 700 }}>REALIZATION</div>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={logoDataUri} width={296} height={44} alt="" />
         </div>
         <div style={{ display: "flex", maxWidth: 1000, flexDirection: "column" }}>
           <div style={{ color: "#FDCC33", fontSize: 20, letterSpacing: ".14em", fontWeight: 700 }}>{eyebrow}</div>

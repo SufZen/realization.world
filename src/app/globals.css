@@ -105,12 +105,9 @@ button { cursor: pointer; }
 
 .site-header { position: sticky; top: 0; z-index: 90; border-bottom: 1px solid rgb(0 0 0 / 9%); background: rgb(255 255 255 / 94%); backdrop-filter: saturate(140%) blur(12px); }
 .site-header__inner { display: flex; min-height: 76px; max-width: var(--container-wide); align-items: center; gap: 2rem; margin-inline: auto; padding-inline: var(--gutter); }
-.brand-mark { display: inline-flex; align-items: center; gap: .72rem; flex: none; }
-.brand-mark__image { position: relative; display: block; width: 42px; height: 42px; }
-.brand-mark__image img { object-fit: contain; }
-.brand-mark__type { display: flex; flex-direction: column; line-height: 1.1; }
-.brand-mark__type strong { color: #000; font-size: 1.02rem; font-weight: 800; letter-spacing: -.02em; }
-.brand-mark__type small { margin-top: .18rem; color: var(--text-muted); font-size: .58rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+.brand-mark { display: inline-flex; align-items: center; flex: none; }
+.brand-mark__logo { display: block; width: auto; height: 26px; }
+.brand-mark--compact .brand-mark__logo { height: 32px; }
 .desktop-nav { display: flex; align-items: center; gap: 1.45rem; margin-inline-start: auto; }
 .desktop-nav a { position: relative; color: var(--color-neutral-700); font-size: .76rem; font-weight: 600; }
 .desktop-nav a::after { position: absolute; right: 0; bottom: -.6rem; left: 0; height: 2px; background: var(--color-yellow); content: ""; transform: scaleX(0); transition: transform .2s var(--ease-standard); }
@@ -455,7 +452,7 @@ button { cursor: pointer; }
 @media (max-width: 760px) {
   :root { --section-y: 4.5rem; }
   .site-header__inner { min-height: 68px; gap: 1rem; }
-  .brand-mark__type small { display: none; }
+  .brand-mark__logo { height: 22px; }
   .header-opportunity { display: none; }
   .menu-trigger span { display: none; }
   .menu-trigger { width: 42px; justify-content: center; padding: 0; }

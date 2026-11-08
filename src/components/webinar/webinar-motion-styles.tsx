@@ -86,7 +86,7 @@ const css = String.raw`
 }
 @keyframes wm-rise { from { opacity: 0; transform: translateY(18px); } }
 
-/* Thank-you page: the seal draws in, then the butterfly lands. */
+/* Thank-you page: the seal draws in, then the symbol lands. */
 .wm-seal { flex: none; width: clamp(64px, 7vw, 84px); height: auto; overflow: visible; }
 .wm-seal circle { stroke-dasharray: 302; stroke-dashoffset: 302; animation: wm-draw 1s var(--ease-out) .15s forwards; }
 .wm-seal path { stroke-dasharray: 60; stroke-dashoffset: 60; animation: wm-draw .5s var(--ease-out) .95s forwards; }

@@ -13,13 +13,13 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 };
 
-/** A circle and a check that draw in, then the butterfly lands on them (static with reduced motion). */
+/** A circle and a check that draw in, then the Realization symbol lands on them (static with reduced motion). */
 function Seal() {
   return (
     <svg className="wm-seal" viewBox="0 0 120 120" aria-hidden="true">
       <circle cx="60" cy="60" r="48" fill="none" stroke="#000" strokeWidth="2" transform="rotate(-90 60 60)" />
       <path d="M40 61l13 13 27-29" fill="none" stroke="#000" strokeWidth="3" strokeLinecap="square" />
-      <image href="/brand/butterfly-mark-96.png" x="82" y="2" width="34" height="34" />
+      <image href="/brand/realization-symbol.svg" x="82" y="2" width="34" height="34" />
     </svg>
   );
 }

@@ -27,7 +27,7 @@ export const organizationSchema = {
   name: "Realization",
   legalName: "Realization Unipessoal LDA",
   url: siteUrl,
-  logo: `${siteUrl}/brand/butterfly-mark.png`,
+  logo: `${siteUrl}/brand/icon-512.png`,
   description:
     "Realization develops real estate in Portugal and builds the ventures and AI systems around it: residential development, property resolution, and advisory on AI adoption and operations.",
   founder: { "@id": ids.founder },
