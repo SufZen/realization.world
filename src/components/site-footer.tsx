@@ -24,7 +24,7 @@ export function SiteFooter() {
         <div className="site-footer__identity">
           <BrandMark onYellow />
           <p className="spaced-caps">PHYSICAL POTENTIAL. DIGITAL SYSTEMS. REALIZED VALUE.</p>
-          <p><Lines text="Realizing untapped potential | in the physical world." /></p>
+          <p><Lines text="Untapped potential. | Realized." /></p>
           <SocialLinks />
         </div>
         <div className="site-footer__nav">
