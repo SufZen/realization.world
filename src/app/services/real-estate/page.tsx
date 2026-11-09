@@ -96,7 +96,7 @@ export default function RealEstatePage() {
         <div className="container-wide opportunity-layout">
           <div className="opportunity-intro">
             <p className="eyebrow">FREE DEAL CHECK</p>
-            <h2><Lines text="Send a listing. | Get the real numbers back." /></h2>
+            <h2><Lines text="Send a listing. | Get back what it doesn’t say." /></h2>
             <p><Lines text="The return in a listing is usually gross: | before tax, fees and financing. | We work out what is left." /></p>
             <ul className="opportunity-checklist">
               {checks.map((item) => <li key={item}>{item}</li>)}

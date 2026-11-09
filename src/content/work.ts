@@ -252,7 +252,7 @@ export const work: WorkItem[] = [
     role: "Discovery, roadmap and pilot design",
     descriptor: "How one engagement moved a 25-person firm | from scattered experiments | to one measured programme.",
     summary:
-      "For a leading Israeli architecture practice of about 25 people, Realization mapped eight work domains, chose one visible pilot and modelled the programme over 24 months. The model breaks even in month seven and reaches 3.9 times value to investment by month 24, counting the firm’s own hours as a cost.",
+      "For an Israeli architecture practice of about 25 people, Realization mapped eight work domains, chose one visible pilot with a pass mark agreed in advance, and set four stop points before the budget opens.",
     problem:
       "The firm had the tools and the understanding. | What it lacked was a decision: | what to do first, who owns it, | and whether anyone had hours for it.",
     approach:
@@ -260,8 +260,6 @@ export const work: WorkItem[] = [
     outcome:
       "A decisions document the firm owns, | a pilot of three to five weeks | with an agreed pass mark, | and four stop points before the budget opens.",
     facts: [
-      { value: "Month 7", label: "modelled break-even" },
-      { value: "3.9×", label: "value to investment at 24 months" },
       { value: ">90%", label: "pilot accuracy pass mark" },
       { value: "~18%", label: "of the 24-month budget at risk before proof" },
     ],
@@ -304,7 +302,7 @@ export const work: WorkItem[] = [
       {
         heading: "Economics the approver can trust",
         paragraphs: [
-          "The 24-month model counts every cost, including the internal lead’s own hours, and prices only time saved. Break-even lands in month seven; value reaches about 3.9 times the investment by month 24. The number that converts a cautious approver is the exposure before proof: about 18% of the total, reached at week eight.",
+          "The 24-month model counts every cost, including the internal lead’s own hours, and prices only time saved. The number that converts a cautious approver is the exposure before proof: about 18% of the total, reached at week eight.",
         ],
       },
     ],
@@ -330,7 +328,7 @@ export const work: WorkItem[] = [
     summary:
       "MeetSum is a self-hosted meeting-intelligence platform that turns Google Meet, Drive, desktop and uploaded recordings into transcripts, decisions and tasks. It handles Hebrew and mixed Hebrew–English speech properly and pushes results into Google Workspace, n8n, RealizeOS and AI agents.",
     problem:
-      "AI note-takers are English-first, | hosted on someone else’s servers | and stop at an email summary. | Hebrew speech degrades, | and nothing reaches the systems where work happens.",
+      "Our meetings run in Hebrew and English, | often in the same sentence. | We needed transcripts that hold up, | on our own servers, | that reach the systems where the work happens.",
     approach:
       "One retry-safe job pipeline for every source. | Speech is routed by language and length: | a Hebrew-tuned local model for short meetings, | a cloud model for long or mixed ones, | with every stage’s model and confidence recorded.",
     outcome:

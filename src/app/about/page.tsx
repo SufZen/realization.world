@@ -52,7 +52,7 @@ export default function AboutPage() {
 
       <section className="section surface-brand">
         <div className="container-wide">
-          <SectionHeading eyebrow="GUIDING PRINCIPLES" title="Clarity compounds." intro="The monarch stands for transformation, | and the reach of one well-placed intervention." />
+          <SectionHeading eyebrow="GUIDING PRINCIPLES" title="Clarity compounds." />
           <div className="about-values">
             {values.map(([index, title, text]) => <article className="about-value" key={title}><span>{index}</span><h3><Lines text={title} /></h3><p><Lines text={text} /></p></article>)}
           </div>

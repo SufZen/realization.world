@@ -33,7 +33,7 @@ export default function WorkPage() {
       <PageHero
         index="W"
         eyebrow="WORK & PORTFOLIO"
-        title="Proof, | not promises."
+        title="Built, tested, | and where each one stands."
         intro="Real estate we develop, ventures we build, | systems we run and engagements we lead."
         actions={<><ButtonLink href="/bring-an-opportunity" variant="dark">Bring an opportunity</ButtonLink><ButtonLink href={bookingUrl} variant="outline">Book a 20-min intro</ButtonLink></>}
         theme="brand"

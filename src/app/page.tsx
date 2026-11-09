@@ -7,14 +7,13 @@ import { SectionHeading } from "@/components/section-heading";
 import { JsonLd } from "@/components/json-ld";
 import styles from "@/components/home-sections.module.css";
 import { SelectedWork } from "@/components/selected-work";
-import { FollowTheWork, LatestFeed } from "@/components/channel-feed";
-import { SocialLinks } from "@/components/social-links";
+import { LatestFeed } from "@/components/channel-feed";
 import { CtaLink } from "@/components/services/cta-link";
 import { PillarDoors } from "@/components/services/pillar-doors";
 import { insights, partnerPaths, siteUrl } from "@/content/site";
 import { introCta } from "@/content/services";
 import { graph, websiteSchema } from "@/lib/schema";
-import { Lines, plain } from "@/components/lines";
+import { Lines } from "@/components/lines";
 import { WebinarBanner } from "@/components/webinar-banner";
 import { latestFeed } from "@/lib/feed";
 
@@ -31,12 +30,6 @@ const proof = [
   ["6 ventures", "founded or co-founded since 2018"],
   ["11,800+", "members in the Portugal business groups we run"],
   ["3 AI systems", "built and in daily use"],
-] as const;
-
-const ideas = [
-  ["Highest and best use", "Every place has a best version. | We find it before anyone builds."],
-  ["Proof before scale", "One deal, one pilot, one process, | measured before anything grows."],
-  ["Built to be handed over", "We build the machine, train the team | and leave on a date agreed at the start."],
 ] as const;
 
 export default async function HomePage() {
@@ -56,14 +49,13 @@ export default async function HomePage() {
             <p className="eyebrow">REAL ESTATE · AI SYSTEMS · DELIVERY</p>
             <h1><span className="ln">Untapped potential.</span> <em className="ln">Realized.</em></h1>
             <p className="home-hero__lead">
-              <span className="ln">We realize potential in three dimensions:</span>
-              <span className="ln">places, systems and teams.</span>
+              <span className="ln">Property can hold value and still go nowhere.</span>
+              <span className="ln">We work on what holds it back.</span>
             </p>
             <div className="button-row">
               <ButtonLink href="/services">See our services</ButtonLink>
               <CtaLink cta={introCta("home")} pageRef="home" variant="outline" />
             </div>
-            <SocialLinks tone="dark" label="Follow the work" />
           </div>
         </div>
       </section>
@@ -74,9 +66,6 @@ export default async function HomePage() {
           <div>
             <h2><Lines text="The value is there. | The system isn’t." /></h2>
             <p><Lines text="We build the missing layer | between an underused place and a working venture." /></p>
-            <ul className={styles.ideas} aria-label="Ideas we work by">
-              {ideas.map(([title, text]) => <li key={title}><strong>{title}</strong><span><Lines text={plain(text)} /></span></li>)}
-            </ul>
           </div>
         </div>
       </section>
@@ -115,13 +104,6 @@ export default async function HomePage() {
             ))}
           </div>
           <div className="button-row"><ButtonLink href="/insights" variant="dark">Go to Learn</ButtonLink></div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container-wide">
-          <SectionHeading eyebrow="FOLLOW THE WORK" title="Six places | to keep up." intro="Projects, ideas and the people behind them, | on the channels you already use." align="split" />
-          <FollowTheWork place="home" />
         </div>
       </section>
 

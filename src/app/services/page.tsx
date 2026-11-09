@@ -62,7 +62,7 @@ export default function ServicesPage() {
 
       <section className="section">
         <div className="container-wide">
-          <SectionHeading eyebrow="THREE PILLARS" title="Pick the one | in front of you." intro="Each page lists what you can buy, | what it costs and how to start." />
+          <SectionHeading eyebrow="THREE PILLARS" title="Pick the one | in front of you." />
           <div className={styles.pillars}>
             {pillars.map(({ slug, href, dimension, title, subtitle, forWhom, icon: Icon, offers }, index) => (
               <article className={styles.pillar} key={slug}>

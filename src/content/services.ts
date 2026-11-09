@@ -138,7 +138,7 @@ export const pillars: Pillar[] = [
     offers: [
       {
         name: "Free deal check",
-        text: "Paste a listing link, from Idealista or anywhere else. | We send back the real numbers: purchase costs, | tax, financing and the yield that is left.",
+        text: "Paste a listing link, from Idealista or anywhere else. | We send back the assumptions and the checks still missing: | purchase costs, tax and financing.",
         format: "Online form · reply within two working days",
         price: "Free",
         cta: { label: "Check a deal", href: "#deal-check" },
@@ -160,8 +160,8 @@ export const pillars: Pillar[] = [
       },
       {
         name: "Development management",
-        text: "We take a limited number of projects | from site to sale, as we do at Arena, | our eleven-home building in Barreiro.",
-        format: "Limited number of projects",
+        text: "We take projects from site to sale, | as we do at Arena, | our eleven-home building in Barreiro.",
+        format: "Site to sale",
         price: "By proposal",
         cta: { label: "See Arena", href: "/work/arena-barreiro", event: "view-case", data: { pillar: "real-estate", case: "arena-barreiro" } },
       },
@@ -238,7 +238,7 @@ export const pillars: Pillar[] = [
     icon: UsersRound,
     ref: "services-team-setup",
     session: {
-      label: "Book a setup intro · 30 min",
+      label: "Book a setup call · 30 min",
       href: bookingTypes.deliveryIntro,
       event: "book-session-delivery",
       data: { pillar: "delivery" },
@@ -261,8 +261,8 @@ export const pillars: Pillar[] = [
       },
       {
         name: "Fractional operations or development management",
-        text: "Asaf Eyzenkot takes a limited number of fractional roles, | contracted through Realization Unipessoal LDA.",
-        format: "Limited availability",
+        text: "Asaf Eyzenkot takes fractional roles, | contracted through Realization Unipessoal LDA.",
+        format: "Fractional",
         price: "By proposal",
         cta: { label: "See Asaf’s profile", href: "/asaf", event: "view-profile", data: { pillar: "delivery" } },
       },
@@ -359,7 +359,7 @@ export const delivery = {
   },
   faqs: [
     ["Is this construction management?", "No. We set up how the project or the firm works: roles, decisions, workflows and reporting. Building stays with your architects and contractors. If you need someone to coordinate them for you, that is the fractional development-management role."],
-    ["Is this ongoing operations work?", "No. Setup ends on a handoff date written into the proposal. Ongoing fractional roles are possible, with limited availability."],
+    ["Is this ongoing operations work?", "No. Setup ends on a handoff date written into the proposal. Ongoing fractional roles are possible."],
     ["How is it priced?", "Team and process setup is a fixed scope, priced in a proposal before it starts. Fractional roles are priced in a proposal too, and contracted through Realization Unipessoal LDA."],
     ["Where do you work, and in which languages?", "Remotely, and in person in the Lisbon area and Barcelona. We work in English and Hebrew, with basic Portuguese and Spanish."],
   ],
@@ -448,7 +448,7 @@ export const systemsEn: SystemsCopy = {
   proof: {
     eyebrow: "PROOF",
     title: "The method, in a real firm.",
-    intro: "A 25-person architecture practice: | eight domains mapped, one pilot chosen, | break-even modelled at month seven.",
+    intro: "A 25-person architecture practice: | eight domains mapped, one pilot chosen, | a pass mark agreed before building.",
     link: { label: "Read the case study", href: "/work/ai-adoption-architecture-firm" },
   },
   systems: {
@@ -459,7 +459,7 @@ export const systemsEn: SystemsCopy = {
   alsoAvailable: {
     eyebrow: "ALSO AVAILABLE",
     title: "Fractional operations | and development management.",
-    intro: "Asaf Eyzenkot takes a limited number of B2B roles: | operating models, project coordination | and real-estate development management.",
+    intro: "Asaf Eyzenkot also takes B2B roles: | operating models, project coordination | and real-estate development management.",
     links: [
       { label: "See Asaf’s profile", href: "/asaf", event: "view-profile", data: { pillar: "ai-systems" } },
       { label: "Team and process setup", href: "/services/team-setup" },
@@ -469,12 +469,12 @@ export const systemsEn: SystemsCopy = {
     eyebrow: "QUESTIONS",
     title: "Before you ask.",
     items: [
-      ["How quickly will we see a result?", "The Audit Sprint starts with a 90-minute kickoff, and the written report arrives within 48 hours of the audit. A pilot runs three to five weeks, and most of that time is quality checks against real cases rather than building. In our modelled case, the programme breaks even in month seven."],
+      ["How quickly will we see a result?", "The Audit Sprint starts with a 90-minute kickoff, and the written report arrives within 48 hours of the audit. A pilot runs three to five weeks, and most of that time is quality checks against real cases rather than building."],
       ["How much of our team’s time does it take?", "Two kinds of time. One internal lead for four to six hours a week, and two to three hours a week from each pilot participant, mostly reviewing outputs. We ask for those hours in the proposal, because without them the work does not happen."],
       ["Do we have to use RealizeOS or your other systems?", "No. We start with what you already pay for and what the market offers. RealizeOS, MeetSum and our other systems are options when they fit the gap, not a requirement."],
       ["What does it cost?", "Each stage is priced as a separate, fixed unit before it starts, and you can stop after any stage. The Audit Sprint is deliberately a small first commitment. Ask for a proposal after a 20-minute intro call."],
       ["Where do you work, and in which languages?", "Remotely, and in person in the Lisbon area and Barcelona. We work in English and Hebrew, with basic Portuguese and Spanish."],
-      ["Can you also run operations or a development project for us?", "Yes. Asaf Eyzenkot takes a limited number of fractional operations and development-management roles, contracted through Realization Unipessoal LDA."],
+      ["Can you also run operations or a development project for us?", "Yes. Asaf Eyzenkot takes fractional operations and development-management roles, contracted through Realization Unipessoal LDA."],
     ],
   },
   cta: {
