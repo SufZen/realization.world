@@ -51,7 +51,7 @@ export function SiteFooter() {
           </Link>
           <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
           <a href={whatsappUrl} rel="noopener" data-umami-event="whatsapp">WhatsApp</a>
-          <a href={bookingUrl} rel="noopener" data-umami-event="book-intro">Book a 30-min intro</a>
+          <a href={bookingUrl} rel="noopener" data-umami-event="book-intro">Book a 20-min intro</a>
           <a href="/asaf">Founder · Asaf Eyzenkot</a>
           {communities.map((group) => (
             <a href={group.href} rel="noopener" data-umami-event="join-group" data-umami-event-group={group.lang} key={group.href}>

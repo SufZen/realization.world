@@ -7,13 +7,11 @@ import { SectionHeading } from "@/components/section-heading";
 import { JsonLd } from "@/components/json-ld";
 import styles from "@/components/home-sections.module.css";
 import { SelectedWork } from "@/components/selected-work";
-import servicesStyles from "@/components/services/services.module.css";
 import { FollowTheWork, LatestFeed } from "@/components/channel-feed";
-import { Testimonials } from "@/components/media-blocks";
 import { SocialLinks } from "@/components/social-links";
 import { CtaLink } from "@/components/services/cta-link";
 import { PillarDoors } from "@/components/services/pillar-doors";
-import { approachNavigation, framework, insights, partnerPaths, siteUrl } from "@/content/site";
+import { insights, partnerPaths, siteUrl } from "@/content/site";
 import { introCta } from "@/content/services";
 import { graph, websiteSchema } from "@/lib/schema";
 import { Lines, plain } from "@/components/lines";
@@ -70,16 +68,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <PillarDoors />
-
-      <section className="proof-strip" aria-label="Realization in numbers">
-        <dl className={`container-wide proof-strip__grid ${styles.numbers}`}>
-          {proof.map(([value, label]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
-        </dl>
-      </section>
-
-      <Testimonials />
-
       <section className="manifesto">
         <div className="container-wide manifesto__grid">
           <p className="eyebrow">THE PROBLEM</p>
@@ -91,6 +79,14 @@ export default async function HomePage() {
             </ul>
           </div>
         </div>
+      </section>
+
+      <PillarDoors />
+
+      <section className="proof-strip" aria-label="Realization in numbers">
+        <dl className={`container-wide proof-strip__grid ${styles.numbers}`}>
+          {proof.map(([value, label]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
+        </dl>
       </section>
 
       <section className="section">
@@ -126,30 +122,6 @@ export default async function HomePage() {
         <div className="container-wide">
           <SectionHeading eyebrow="FOLLOW THE WORK" title="Six places | to keep up." intro="Projects, ideas and the people behind them, | on the channels you already use." align="split" />
           <FollowTheWork place="home" />
-        </div>
-      </section>
-
-      <section className="section surface-dark">
-        <div className="container-wide">
-          <SectionHeading
-            eyebrow="OUR FRAMEWORK"
-            title="Potential → system → value."
-            intro="Three layers. One operating reality. | Every engagement ends with a handoff."
-            inverse
-          />
-          <div className={`framework-grid ${servicesStyles.tabletOne}`}>
-            {framework.map(({ title, text, icon: Icon }, index) => (
-              <article className="framework-card" key={title}>
-                <div className="framework-card__icon"><Icon size={25} strokeWidth={1.5} /></div>
-                <p className="eyebrow">0{index + 1}</p>
-                <h3><Lines text={title} /></h3>
-                <p><Lines text={text} /></p>
-              </article>
-            ))}
-          </div>
-          <div className="button-row">
-            {approachNavigation.map((item) => <ButtonLink href={item.href} variant="outline" key={item.href}>{item.label}</ButtonLink>)}
-          </div>
         </div>
       </section>
 

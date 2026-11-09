@@ -1,5 +1,5 @@
 import { Building2, Cpu, UsersRound } from "lucide-react";
-import { bookingUrl, type IconComponent } from "./site";
+import type { IconComponent } from "./site";
 
 /**
  * The Services section (Oct 2026): a hub and three pillar pages.
@@ -55,7 +55,7 @@ export const bookingTypes = {
   /** AI Strategy Session. For now: the 60-min consulting type. */
   aiStrategySession: `${tidycal}/60-minute-consulting-meeting`,
   /** Team and process setup intro. For now: the 30-min intro. */
-  deliveryIntro: bookingUrl,
+  deliveryIntro: "https://schedule.realization.co.il/30-minute-intro-meeting-asaf",
   realizeosSetup: `${tidycal}/realizeos-setup`,
 };
 

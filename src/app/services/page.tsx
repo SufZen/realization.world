@@ -4,7 +4,6 @@ import { JsonLd } from "@/components/json-ld";
 import { Lines, plain } from "@/components/lines";
 import { PageHero } from "@/components/page-hero";
 import { SectionHeading } from "@/components/section-heading";
-import { Testimonials } from "@/components/media-blocks";
 import { CtaLink } from "@/components/services/cta-link";
 import { CtaBand } from "@/components/services/sections";
 import styles from "@/components/services/services.module.css";
@@ -88,7 +87,6 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <Testimonials surface="surface-muted" />
 
       <section className="section surface-dark">
         <div className="container-wide">

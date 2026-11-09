@@ -65,7 +65,7 @@ export function workToMarkdown(item: WorkItem) {
   lines.push(
     `Source: ${item.source}`,
     "",
-    `Next step: ${plain(item.cta.heading)} → ${siteUrl}/bring-an-opportunity?path=${item.cta.path} · Book a 30-minute intro: ${bookingUrl}`,
+    `Next step: ${plain(item.cta.heading)} → ${siteUrl}/bring-an-opportunity?path=${item.cta.path} · Book a 20-minute intro: ${bookingUrl}`,
     "",
   );
   return lines.join("\n");
@@ -93,7 +93,7 @@ export function llmsIndex() {
     "",
     `> ${about}`,
     "",
-    "Contact: " + contactEmail + ` · Book a 30-minute intro: ${bookingUrl} · Send a brief: ${siteUrl}/bring-an-opportunity`,
+    "Contact: " + contactEmail + ` · Book a 20-minute intro: ${bookingUrl} · Send a brief: ${siteUrl}/bring-an-opportunity`,
     "",
     "Every page below has a plain-markdown version; the full text of all of them is at " + `${siteUrl}/llms-full.txt.`,
     "",

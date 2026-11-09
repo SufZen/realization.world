@@ -35,7 +35,7 @@ export default function WorkPage() {
         eyebrow="WORK & PORTFOLIO"
         title="Proof, | not promises."
         intro="Real estate we develop, ventures we build, | systems we run and engagements we lead."
-        actions={<><ButtonLink href="/bring-an-opportunity" variant="dark">Bring an opportunity</ButtonLink><ButtonLink href={bookingUrl} variant="outline">Book a 30-min intro</ButtonLink></>}
+        actions={<><ButtonLink href="/bring-an-opportunity" variant="dark">Bring an opportunity</ButtonLink><ButtonLink href={bookingUrl} variant="outline">Book a 20-min intro</ButtonLink></>}
         theme="brand"
       />
 

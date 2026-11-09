@@ -57,7 +57,7 @@ const tools = [
   {
     name: "get_contact_and_booking",
     title: "Contact and booking",
-    description: "Email, 30-minute intro booking link, WhatsApp, brief form, languages, locations and reply time.",
+    description: "Email, 20-minute intro booking link, WhatsApp, brief form, languages, locations and reply time.",
     inputSchema: { type: "object", properties: {} },
     annotations: { readOnlyHint: true },
   },
