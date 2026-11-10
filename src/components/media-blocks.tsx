@@ -48,7 +48,7 @@ export async function PillarVideos({ pillar, title, intro, eyebrow = "WATCH", su
  * Quotes from clients and partners (src/content/testimonials.ts). With a pillar, only
  * that pillar's quotes; without, one per person. Renders nothing until there are quotes.
  */
-export function Testimonials({ pillar, eyebrow = "IN THEIR WORDS", title = "What clients | and partners say.", surface = "" }: { pillar?: PillarSlug; eyebrow?: string; title?: string; surface?: string }) {
+export function Testimonials({ pillar, eyebrow = "IN THEIR WORDS", title = "What clients | and partners say.", surface = "", lang = "en" }: { pillar?: PillarSlug; eyebrow?: string; title?: string; surface?: string; lang?: "en" | "he" }) {
   // Without a pillar: one quote per person.
   const quotes = pillar
     ? testimonials.filter((item) => item.pillar === pillar)
@@ -64,7 +64,7 @@ export function Testimonials({ pillar, eyebrow = "IN THEIR WORDS", title = "What
               <blockquote dir="auto" lang={item.lang}>{item.quote}</blockquote>
               <figcaption>
                 <strong>{item.name}</strong>
-                <span>{[item.role, item.company].filter(Boolean).join(", ")}</span>
+                <span>{[lang === "he" && item.roleHe ? item.roleHe : item.role, item.company].filter(Boolean).join(", ")}</span>
                 {item.sourceUrl ? <a href={item.sourceUrl} target="_blank" rel="noopener">{item.source}</a> : <span>{item.source}</span>}
               </figcaption>
             </figure>

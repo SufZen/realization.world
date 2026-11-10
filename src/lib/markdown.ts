@@ -15,7 +15,7 @@ export const markdownHeaders = {
 };
 
 export const about =
-  "Realization (Realization Unipessoal LDA, Setúbal, Portugal; founded 2019 by Asaf Eyzenkot, also known as Suf Zen) develops residential real estate in the Lisbon metropolitan area and builds the ventures and AI systems around it. It works with two audiences: real-estate owners, capital partners and operators in Portugal, and organisations that want help adopting AI in their operations.";
+  "Realization (Realization Unipessoal LDA, Setúbal, Portugal; founded 2019 by Asaf Eyzenkot, also known as Suf Zen) works on unrealized real estate: homes, buildings and projects that got stuck. It develops residential real estate in the Lisbon metropolitan area and builds the AI systems and teams around it. It works with two audiences: real-estate owners, capital partners and operators in Portugal, and organisations that want help adopting AI in their operations.";
 
 export function workToMarkdown(item: WorkItem) {
   const lines = [

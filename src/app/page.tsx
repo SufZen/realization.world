@@ -36,21 +36,19 @@ export default async function HomePage() {
         </div>
         <div className="container-wide home-hero__grid">
           <div className="home-hero__content">
-            <p className="eyebrow">REAL ESTATE · AI SYSTEMS · DELIVERY</p>
+            <p className="eyebrow">UNREALIZED REAL ESTATE</p>
             <h1><span className="ln">Untapped potential.</span> <em className="ln">Realized.</em></h1>
             <p className="home-hero__lead">
               <span className="ln">Property can hold value and still go nowhere.</span>
               <span className="ln">We work on what holds it back.</span>
             </p>
             <div className="button-row">
-              <ButtonLink href="/services">See our services</ButtonLink>
-              <CtaLink cta={introCta("home")} pageRef="home" variant="outline" />
+              <CtaLink cta={introCta("home")} pageRef="home" variant="primary" />
+              <ButtonLink href="/work" variant="outline">See the work</ButtonLink>
             </div>
           </div>
         </div>
       </section>
-
-      <PillarDoors />
 
       <section className="section">
         <div className="container-wide">
@@ -62,6 +60,37 @@ export default async function HomePage() {
           />
           <SelectedWork />
           <div className="button-row"><ButtonLink href="/work" variant="dark">See all the work</ButtonLink></div>
+        </div>
+      </section>
+
+      <section className="section" style={{ paddingBottom: 0 }}>
+        <div className="container-wide">
+          <SectionHeading
+            eyebrow="WHERE A PROJECT GETS STUCK"
+            title="Property is the work. | Systems and teams help it move."
+            intro="Three ways in, | depending on what holds your project back."
+          />
+        </div>
+      </section>
+      <PillarDoors />
+
+      <section className="section">
+        <div className="container-wide">
+          <SectionHeading
+            eyebrow="PARTNER WITH US"
+            title="Bringing a property, | capital or a team?"
+            intro="Each partner comes in | through a path of their own."
+          />
+          <div className="audience-grid">
+            {partnerPaths.map(({ slug, title, summary, icon: Icon }) => (
+              <Link className="audience-card" href={`/partners/${slug}`} key={slug}>
+                <Icon size={32} strokeWidth={1.5} aria-hidden="true" />
+                <h3><Lines text={title} /></h3>
+                <p><Lines text={summary} /></p>
+                <span>Follow this path</span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -81,32 +110,12 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="section">
-        <div className="container-wide">
-          <SectionHeading
-            eyebrow="PARTNER WITH US"
-            title="Bringing a property, | capital or a team?"
-            intro="Owners, operators and capital partners | have their own paths into our projects."
-          />
-          <div className="audience-grid">
-            {partnerPaths.map(({ slug, title, summary, icon: Icon }) => (
-              <Link className="audience-card" href={`/partners/${slug}`} key={slug}>
-                <Icon size={32} strokeWidth={1.5} aria-hidden="true" />
-                <h3><Lines text={title} /></h3>
-                <p><Lines text={summary} /></p>
-                <span>Follow this path</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="cta-band">
         <div className="container-wide cta-band__grid">
           <div>
             <p className="eyebrow">NOT SURE WHERE TO START?</p>
             <h2><Lines text="Twenty minutes | is enough." /></h2>
-            <p><Lines text="One call to know which of the three | your problem sits in, or whether we fit at all." /></p>
+            <p><Lines text="One call to know where your project is stuck, | or whether we fit at all." /></p>
           </div>
           <div className="button-row">
             <CtaLink cta={introCta("home")} pageRef="home" variant="dark" />

@@ -145,7 +145,7 @@ export default function RealEstatePage() {
       <CtaBand
         eyebrow="ONE DEAL AT A TIME"
         title="Have a deal | on the table?"
-        text="Book an hour to go through it together. | The fee is credited toward a feasibility study."
+        text="Book an hour to go through it together, | before you commit to anything."
         primary={pillar.session}
         secondary={introCta("real-estate")}
         pageRef={pillar.ref}

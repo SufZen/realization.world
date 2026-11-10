@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { WorkItem } from "@/content/work";
 import { Lines } from "./lines";
 
-const liveStatuses = new Set<WorkItem["status"]>(["Live", "Launching", "Ongoing", "PIP approved · 7.2026", "In daily use"]);
+const liveStatuses = new Set<WorkItem["status"]>(["Live", "Launching", "Ongoing", "PIP approved · 7.2026", "In daily use", "Pre-launch"]);
 
 export function WorkCard({ item, featured = false }: { item: WorkItem; featured?: boolean }) {
   const Icon = item.icon;
@@ -23,7 +23,7 @@ export function WorkCard({ item, featured = false }: { item: WorkItem; featured?
         <span className={`status status--${liveStatuses.has(item.status) ? "active" : "verify"}`}>{item.status}</span>
       </div>
       <h3>{item.name}</h3>
-      <p><Lines text={item.descriptor} /></p>
+      <p><Lines text={item.teaser ?? item.descriptor} /></p>
       <p className="work-card__meta">{[item.role.split(";")[0], item.years].filter(Boolean).join(" · ")}</p>
       <Link href={`/work/${item.slug}`}>View the case <ArrowUpRight aria-hidden="true" size={18} /><span className="sr-only"> — {item.name}</span></Link>
     </article>

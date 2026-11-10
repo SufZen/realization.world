@@ -6,7 +6,7 @@ import { ButtonLink } from "@/components/button-link";
 import { AreaGapDiagram } from "@/components/diagrams";
 import { EditorialMedia } from "@/components/editorial-media";
 import { JsonLd } from "@/components/json-ld";
-import { Lines } from "@/components/lines";
+import { Lines, plain } from "@/components/lines";
 import { PageHero } from "@/components/page-hero";
 import { SectionHeading } from "@/components/section-heading";
 import { bookingUrl, insights } from "@/content/site";
@@ -37,7 +37,7 @@ export default async function WorkItemPage({ params }: PageProps<"/work/[slug]">
   const dark = item.kind === "system" || item.kind === "advisory";
   const formHref = `/bring-an-opportunity?path=${item.cta.path}&ref=${item.slug}`;
   const related = insights.filter((insight) => item.related?.includes(insight.slug));
-  const isLive = ["Live", "Launching", "Ongoing", "PIP approved · 7.2026", "In daily use"].includes(item.status);
+  const isLive = ["Live", "Launching", "Ongoing", "PIP approved · 7.2026", "Pre-launch", "In daily use"].includes(item.status);
 
   return (
     <>
@@ -61,42 +61,32 @@ export default async function WorkItemPage({ params }: PageProps<"/work/[slug]">
         }
       />
 
+      {/* One narrative and one compact fact strip (QA 10.11). The summary feeds metadata and cards. */}
       <section className="section">
         <div className="container-wide case-summary">
-          <div>
-            <p className="eyebrow">IN SHORT</p>
-            <p className="case-summary__lead">{item.summary}</p>
+          <div className="case-story">
+            <p className="eyebrow">THE STORY</p>
+            <p className="case-summary__lead">{plain(item.problem)}</p>
+            <p>{plain(item.approach)}</p>
+            <p>{plain(item.outcome)}</p>
           </div>
-          <dl className="case-facts">
-            {item.facts.map((fact) => (
-              <div className="case-fact" key={fact.label}><dt>{fact.label}</dt><dd>{fact.value}</dd></div>
-            ))}
-          </dl>
-        </div>
-      </section>
-
-      <section className="section surface-muted">
-        <div className="container-wide venture-detail">
-          <aside className="venture-detail__aside case-aside">
-            <p className="eyebrow">STATUS</p>
+          <aside className="case-aside">
             <span className={`status status--${isLive ? "active" : "verify"}`}>{item.status}</span>
             <dl>
               {item.years && <div><dt>Years</dt><dd>{item.years}</dd></div>}
               <div><dt>Where</dt><dd>{item.location}</dd></div>
               <div><dt>Our role</dt><dd>{item.role}</dd></div>
               {item.partners && <div><dt>Team</dt><dd><ul>{item.partners.map((partner) => <li key={partner}>{partner}</li>)}</ul></dd></div>}
-              {item.stack && <div><dt>Stack</dt><dd>{item.stack.join(" · ")}</dd></div>}
               {item.links.length > 0 && <div><dt>Links</dt><dd><ul>{item.links.map((link) => <li key={link.href}><a href={link.href} target="_blank" rel="noopener">{link.label}</a></li>)}</ul></dd></div>}
             </dl>
+            {item.facts.length > 0 && (
+              <dl className="case-facts">
+                {item.facts.map((fact) => (
+                  <div className="case-fact" key={fact.label}><dt>{fact.label}</dt><dd>{fact.value}</dd></div>
+                ))}
+              </dl>
+            )}
           </aside>
-          <div>
-            <SectionHeading eyebrow="CASE STUDY" title="Problem. Approach. | Outcome." align="stack" />
-            <dl className="venture-detail__facts">
-              <div className="venture-fact"><dt>The problem</dt><dd><Lines text={item.problem} /></dd></div>
-              <div className="venture-fact"><dt>The approach</dt><dd><Lines text={item.approach} /></dd></div>
-              <div className="venture-fact"><dt>The outcome</dt><dd><Lines text={item.outcome} /></dd></div>
-            </dl>
-          </div>
         </div>
       </section>
 
@@ -105,23 +95,6 @@ export default async function WorkItemPage({ params }: PageProps<"/work/[slug]">
           <div className="container-wide diagram-row">
             <SectionHeading eyebrow="THE PROBLEM, DRAWN" title="Three areas. | One building." intro="When registry, licence and building disagree, | the property cannot move." />
             <figure className="diagram diagram--panel"><AreaGapDiagram /><figcaption>Only the yellow part exists on paper.</figcaption></figure>
-          </div>
-        </section>
-      )}
-
-      {item.steps && (
-        <section className="section surface-dark">
-          <div className="container-wide">
-            <SectionHeading eyebrow="HOW IT WORKS" title={item.steps.title} intro={item.steps.intro} inverse />
-            <div className="principles-grid">
-              {item.steps.items.map(([title, text], index) => (
-                <article className="principle" key={title}>
-                  <span className="principle__index">0{index + 1}</span>
-                  <h3><Lines text={title} /></h3>
-                  <p><Lines text={text} /></p>
-                </article>
-              ))}
-            </div>
           </div>
         </section>
       )}

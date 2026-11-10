@@ -8,13 +8,13 @@ import { CtaLink } from "@/components/services/cta-link";
 import { CtaBand } from "@/components/services/sections";
 import styles from "@/components/services/services.module.css";
 import { siteUrl } from "@/content/site";
-import { currentOffers, hub, introCta, isWebinarOpen, pillars, type Cta } from "@/content/services";
+import { hub, introCta, isWebinarOpen, pillars, type Cta } from "@/content/services";
 import { pageMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, graph, ids } from "@/lib/schema";
 
 export const metadata: Metadata = pageMetadata(
-  "Services — places, systems and teams",
-  "A stalled project needs more than a plan: we work on the property, the paperwork and the team needed to move it. Real estate development in Portugal, AI and operations systems, and team and process setup, each built to be handed over.",
+  "Services — real estate, AI systems and team setup",
+  "A stalled project needs more than a plan: we work on the property, the paperwork and the team needed to move it. Real estate development in Portugal, AI and operations systems, and team and process setup.",
   "/services",
 );
 
@@ -39,7 +39,7 @@ export default function ServicesPage() {
               "@type": "Service",
               "@id": `${siteUrl}${pillar.href}#service`,
               name: pillar.title,
-              description: plain(pillar.subtitle),
+              description: plain(pillar.problem),
               provider: { "@id": ids.organization },
               url: `${siteUrl}${pillar.href}`,
             },
@@ -62,22 +62,15 @@ export default function ServicesPage() {
 
       <section className="section">
         <div className="container-wide">
-          <SectionHeading eyebrow="THREE PILLARS" title="Pick the one | in front of you." />
+          <SectionHeading eyebrow="WHERE IT IS STUCK" title="Pick the one | in front of you." />
           <div className={styles.pillars}>
-            {pillars.map(({ slug, href, dimension, title, subtitle, forWhom, icon: Icon, offers }, index) => (
+            {pillars.map(({ slug, href, title, problem, icon: Icon }, index) => (
               <article className={styles.pillar} key={slug}>
                 <div className={styles.pillarTop}>
-                  <span className={styles.pillarDimension}>0{index + 1} · {dimension}</span>
+                  <span className={styles.pillarDimension}>0{index + 1}</span>
                   <span className={styles.pillarIcon}><Icon size={25} strokeWidth={1.5} /></span>
                 </div>
-                <h3>{title}</h3>
-                <p className={styles.pillarSubtitle}><Lines text={subtitle} /></p>
-                <p className={styles.pillarFor}><Lines text={forWhom} /></p>
-                <ul className={styles.pillarOffers}>
-                  {currentOffers(offers).slice(0, 4).map((offer) => (
-                    <li key={offer.name}><span>{offer.name}</span>{offer.price && <small>{offer.price}</small>}</li>
-                  ))}
-                </ul>
+                <h3><Lines text={problem} /></h3>
                 <div className={styles.pillarLink}>
                   <ButtonLink href={href} variant="dark">{title}</ButtonLink>
                 </div>
@@ -86,7 +79,6 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
-
 
       <section className="section">
         <div className="container-wide">
@@ -115,7 +107,7 @@ export default function ServicesPage() {
       <CtaBand
         eyebrow="NOT SURE WHERE TO START?"
         title="Start with | twenty minutes."
-        text="One call is enough to know | which of the three your problem sits in."
+        text="One call is enough to know | where your project is stuck."
         primary={introCta("hub")}
         secondary={webinarOpen ? webinarCta : undefined}
         pageRef={hub.ref}

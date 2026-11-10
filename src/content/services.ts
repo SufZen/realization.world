@@ -2,10 +2,10 @@ import { Building2, Cpu, UsersRound } from "lucide-react";
 import type { IconComponent } from "./site";
 
 /**
- * The Services section (Oct 2026): a hub and three pillar pages.
- * Framing: the manifesto's three dimensions (places, systems, teams) as the idea,
- * with plain page titles a buyer understands. Decision record:
- * docs/strategy/2026-10-services-decision.md.
+ * The Services section: a hub and three pillar pages. Since 10.11.2026 the group leads with
+ * the field (unrealized real estate); systems and teams are the routes that serve it.
+ * Home doors and the hub show one reader problem and one link per route; offers and
+ * prices live only on the pillar pages. Decision record: docs/strategy/2026-10-services-decision.md.
  */
 
 export type PillarSlug = "real-estate" | "ai-systems" | "delivery";
@@ -84,6 +84,8 @@ export type Pillar = {
   dimension: string;
   /** Page title, in the buyer's words. */
   title: string;
+  /** The reader's problem, in one line: the home door and the hub card. */
+  problem: string;
   subtitle: string;
   forWhom: string;
   icon: IconComponent;
@@ -98,32 +100,13 @@ export type Pillar = {
   insights: { categories?: string[]; slugs?: string[] };
 };
 
-/** Free first step on the Systems page: the webinar until it ends, then the field notes. */
-const freeLearning: Offer[] = [
-  {
-    name: "Free webinar, in Hebrew",
-    text: "Five real cases from real-estate projects, | and one audience problem worked on screen.",
-    format: "Tue 20 Oct · 90 min · Google Meet",
-    price: "Free",
-    cta: { label: "Save a seat", href: "/webinar", event: "join-webinar", data: { pillar: "ai-systems" }, carryRef: true },
-    until: webinarEnds,
-  },
-  {
-    name: "Field notes",
-    text: "Short notes from real projects: | what worked, what did not and what it cost.",
-    format: "New notes every week",
-    price: "Free",
-    cta: { label: "Read the field notes", href: "/insights", event: "read-field-notes", data: { pillar: "ai-systems" } },
-    from: webinarEnds,
-  },
-];
-
 export const pillars: Pillar[] = [
   {
     slug: "real-estate",
     href: "/services/real-estate",
     dimension: "Places",
     title: "Real estate development",
+    problem: "A site can work on paper | and still be the wrong project.",
     subtitle: "We check the paperwork, buildable scope | and costs before you commit.",
     forWhom: "Investors and developers in Portugal, | and owners of stuck or problematic properties.",
     icon: Building2,
@@ -160,7 +143,7 @@ export const pillars: Pillar[] = [
       },
       {
         name: "Development management",
-        text: "At Arena in Barreiro we are the managing partner | and development manager. | PIP approved 7.2026; licensing is next.",
+        text: "At Arena in Barreiro we are the managing partner | and development manager. | Licensing is next.",
         format: "Site to sale",
         price: "By proposal",
         cta: { label: "See Arena", href: "/work/arena-barreiro", event: "view-case", data: { pillar: "real-estate", case: "arena-barreiro" } },
@@ -180,6 +163,7 @@ export const pillars: Pillar[] = [
     href: "/services/ai-systems",
     dimension: "Systems",
     title: "AI and operations systems",
+    problem: "The team has the tools. | Nobody has decided where they start.",
     subtitle: "Less manual work in planning, | building, selling and reporting.",
     forWhom: "Developers, construction firms, | architecture offices and agencies.",
     icon: Cpu,
@@ -191,40 +175,9 @@ export const pillars: Pillar[] = [
       data: { pillar: "ai-systems" },
       carryRef: true,
     },
-    offers: [
-      ...freeLearning,
-      {
-        name: "AI Strategy Session",
-        text: "An hour on your firm: where AI should start, | what you already pay for and what to measure. | The fee is credited toward the Audit Sprint.",
-        format: "60 min · Google Meet",
-        price: sessionPrice,
-        amount: 150,
-        cta: { label: "Book the session", href: bookingTypes.aiStrategySession, event: "book-session-ai-systems", data: { pillar: "ai-systems" }, carryRef: true },
-      },
-      {
-        name: "Audit Sprint",
-        text: "A joint, in-depth audit of your firm. | Within 48 hours, a written report: | what to fix first, in order of priority. | The fee is credited toward implementation.",
-        format: "90-min kickoff · optional RealizeOS setup session",
-        price: "€495 + VAT",
-        amount: 495,
-        cta: auditSprintCheckout
-          ? { label: "Buy the Audit Sprint", href: auditSprintCheckout, event: "buy-audit", data: { pillar: "ai-systems" } }
-          : { label: "Ask for a proposal", href: "/bring-an-opportunity?path=advisory", carryRef: true },
-      },
-      {
-        name: "Guided pilot and tapering support",
-        text: "A pilot on one work domain, | then support that tapers off | and ends at month twelve.",
-        format: "3–5 weeks, then up to 12 months",
-        price: "By proposal, after the sprint",
-      },
-      {
-        name: "RealizeOS setup assistance",
-        text: "An hour to install and adapt RealizeOS, | our self-hosted AI operations system.",
-        format: "60 min · online",
-        cta: { label: "Book a setup hour", href: bookingTypes.realizeosSetup, event: "book-session-ai-systems", data: { pillar: "ai-systems", offer: "realizeos-setup" }, carryRef: true },
-      },
-    ],
-    work: ["ai-adoption-architecture-firm", "realizeos", "meetsum", "dreamward"],
+    // Offers and fees for this pillar are its stages (systemsEn.stages), the single account of the work.
+    offers: [],
+    work: ["ai-adoption-architecture-firm", "realizeos", "meetsum"],
     insights: { categories: ["AI in practice"] },
   },
   {
@@ -233,7 +186,8 @@ export const pillars: Pillar[] = [
     href: "/services/team-setup",
     dimension: "Teams",
     title: "Team and process setup",
-    subtitle: "We build the machine, | train the team, and hand it over.",
+    problem: "Every decision on the project | still waits for one person.",
+    subtitle: "We set up the roles and the routines, | train the team, and hand it over.",
     forWhom: "Firms and projects that need clear roles, | working processes and a trained team, | not another permanent manager.",
     icon: UsersRound,
     ref: "services-team-setup",
@@ -244,29 +198,8 @@ export const pillars: Pillar[] = [
       data: { pillar: "delivery" },
       carryRef: true,
     },
-    offers: [
-      {
-        name: "Setup call",
-        text: "Thirty minutes and three questions (below). | If we are not the right fit, | you will know by the end of the call.",
-        format: "30 min · Google Meet",
-        price: "Free",
-        cta: { label: "Book a setup call", href: bookingTypes.deliveryIntro, event: "book-session-delivery", data: { pillar: "delivery" }, carryRef: true },
-      },
-      {
-        name: "Team and process setup",
-        text: "Roles, workflows, documentation and training, | with a handoff date written into the proposal.",
-        format: "Fixed scope",
-        price: "By proposal",
-        cta: { label: "Ask for a proposal", href: "/bring-an-opportunity?path=advisory", carryRef: true },
-      },
-      {
-        name: "Fractional operations or development management",
-        text: "Asaf Eyzenkot takes fractional roles, | contracted through Realization Unipessoal LDA.",
-        format: "Fractional",
-        price: "By proposal",
-        cta: { label: "See Asaf’s profile", href: "/asaf", event: "view-profile", data: { pillar: "delivery" } },
-      },
-    ],
+    // The deliverables (delivery.outcomes) are the page's one list; the setup call is its CTA.
+    offers: [],
     // No single project represents this pillar; the page describes the method instead.
     work: [],
     insights: { slugs: ["why-ai-adoption-fails-at-step-three", "five-hours-to-build-a-month-to-trust"] },
@@ -280,19 +213,9 @@ export const pillarBySlug = (slug: PillarSlug) => pillars.find((pillar) => pilla
 export const hub = {
   ref: "services",
   sentence: "We work on the property, the paperwork | and the team needed to move it.",
-  why: {
-    eyebrow: "WHY ONE COMPANY",
-    title: "One project, | three dimensions.",
-    intro: "A building needs a feasibility model, | systems for the paperwork | and a team to deliver it. | We work across all three, | then hand each one over.",
-    items: [
-      ["Places", "Land and buildings with value locked inside: | empty, underused or stuck."],
-      ["Systems", "The work around them: | planning, tenders, contractors and reports, | with less of it done by hand."],
-      ["Teams", "The people who carry it, | each working where they are strongest, | with a machine they own."],
-    ],
-  },
   principles: [
-    ["Scope, fee and stopping point", "Agreed before work starts, | for every engagement."],
-    ["Proof before scale", "One deal, one pilot or one process first, | measured before anything grows."],
+    ["Scope, fee and stopping point", "In writing, | for every engagement."],
+    ["One first", "One deal, one pilot or one process, | measured before anything grows."],
   ],
 } as const;
 
@@ -312,7 +235,7 @@ export const realEstate = {
     ],
   },
   faqs: [
-    ["Is the deal check really free?", "Yes. It is how we meet investors. If the numbers work and you want to go further, the 60-minute consultation is the next step, and its fee is credited toward a feasibility study."],
+    ["Is the deal check really free?", "Yes. It is how we meet investors. If the numbers work and you want to go further, the 60-minute consultation is the next step."],
     ["Is this investment advice?", "No. We share numbers, assumptions and the risks we see. Decisions, and legal and tax advice, stay with you and your own advisers."],
     ["Can I invest in Arena?", "Arena’s financial terms are shared only with qualified capital partners, on request. Start on the capital partners page or with a 20-minute intro."],
     ["Where do you work, and in which languages?", "In Portugal, mostly the Lisbon area, and remotely with investors in Israel and elsewhere. We work in English and Hebrew, with basic Portuguese and Spanish."],
@@ -326,18 +249,12 @@ export const delivery = {
     src: "/media/team-setup.webp",
     alt: "Hands arranging role cards for a project lead, architect, site coordinator, finance and sales around a workflow and a project timeline that ends in a handoff",
   },
-  /** What a setup leaves behind: shown next to the image. */
+  /** The one list of what a setup delivers, shown next to the image. */
   outcomes: [
-    ["A role map", "Who owns what, who decides, | and who signs off."],
-    ["Working processes", "The workflows written down, | with the tools that carry them."],
-    ["A trained team", "Practised on your own cases, | not on generic examples."],
-    ["A handoff date", "Agreed at the start, | with a short handbook the team keeps."],
-  ],
-  steps: [
-    ["Map the work", "Who does what today, | where decisions wait | and what only one person knows."],
-    ["Design the machine", "Roles, workflows and the tools | that carry them, written down | before anyone is hired or bought."],
-    ["Train the team", "On your own cases, | until the people who will run it | can run it without us."],
-    ["Hand it over", "On a date agreed at the start. | After that, support only if you ask."],
+    ["A role map", "Who owns what, who decides | and who signs off, | written down before anyone is hired."],
+    ["Working processes", "The workflows and the tools that carry them, | tested on your own cases."],
+    ["A trained team", "The people who will run it, | practised until they can run it without us."],
+    ["A handoff date", "Written into the proposal, | with a short handbook the team keeps."],
   ],
   questions: [
     "What are you delivering, | and by when?",
@@ -357,28 +274,50 @@ export const delivery = {
     ],
   },
   faqs: [
-    ["Is this construction management?", "No. We set up how the project or the firm works: roles, decisions, workflows and reporting. Building stays with your architects and contractors. If you need someone to coordinate them for you, that is the fractional development-management role."],
-    ["Is this ongoing operations work?", "No. Setup ends on a handoff date written into the proposal. Ongoing fractional roles are possible."],
-    ["How is it priced?", "Team and process setup is a fixed scope, priced in a proposal before it starts. Fractional roles are priced in a proposal too, and contracted through Realization Unipessoal LDA."],
-    ["Where do you work, and in which languages?", "Remotely, and in person in the Lisbon area and Barcelona. We work in English and Hebrew, with basic Portuguese and Spanish."],
+    ["Is this construction management?", "No. We set up how the project or the firm works: roles, decisions, workflows and reporting. Building stays with your architects and contractors. If you need someone to coordinate them for you, that is a separate engagement from the setup: Asaf Eyzenkot takes fractional development-management roles, contracted through Realization Unipessoal LDA."],
+    ["How is it priced?", "As a fixed scope, in a proposal, before it starts."],
+    ["Where do you work?", "Remotely, and in person in the Lisbon area and Barcelona."],
   ],
 } as const;
 
 /* ---- Systems: AI and operations systems (the former /advisory page, copy unchanged) ---- */
+
+/**
+ * One stage of the Systems engagement. The stages are the page's single account of
+ * scope, output, duration and fee (QA 10.11: no parallel offer list).
+ */
+export type Stage = {
+  index: string;
+  title: string;
+  scope: string;
+  output?: string;
+  duration?: string;
+  fee?: string;
+  /** Fee in euros, for schema.org. */
+  amount?: number;
+  cta?: Cta;
+};
 
 /** Labels and copy for the Systems page; English here, Hebrew in services-he.ts. */
 export type SystemsCopy = {
   lang: "en" | "he";
   ref: string;
   hero: { eyebrow: string; title: string; intro: string };
-  promise: { eyebrow: string; title: string; intro: string };
+  promise: { eyebrow: string; title: string };
   fit: { eyebrow: string; title: string; intro: string; strongTitle: string; strong: string[]; notYetTitle: string; notYet: string[] };
-  offers: { eyebrow: string; title: string; intro: string; items: Offer[] };
-  engagement: { eyebrow: string; title: string; intro: string; youGet: string; stages: ReadonlyArray<readonly [string, string, string, string]> };
-  principles: { eyebrow: string; title: string; intro: string; items: ReadonlyArray<readonly [string, string]> };
+  stages: {
+    eyebrow: string;
+    title: string;
+    intro: string;
+    labels: { output: string; duration: string; fee: string };
+    items: Stage[];
+    /** One plain line of what we don't sell. */
+    refuse: string;
+  };
   proof: { eyebrow: string; title: string; intro?: string; link: Cta };
-  systems: { eyebrow: string; title: string; intro: string };
-  alsoAvailable: { eyebrow: string; title: string; intro: string; links: Cta[] };
+  systems: { eyebrow: string; title: string; intro: string; setup: Cta };
+  /** The one related service, as a single link. */
+  related: { text: string; link: Cta };
   faq: { eyebrow: string; title: string; items: ReadonlyArray<readonly [string, string]> };
   cta: { eyebrow: string; title: string; text: string };
   session: Cta;
@@ -392,12 +331,8 @@ const systemsPillar = pillarBySlug("ai-systems");
 export const systemsEn: SystemsCopy = {
   lang: "en",
   ref: systemsPillar.ref,
-  hero: { eyebrow: "SERVICES · SYSTEMS", title: "AI and operations | systems.", intro: systemsPillar.subtitle },
-  promise: {
-    eyebrow: "THE APPROACH",
-    title: "Choose where AI starts, | then prove it there.",
-    intro: "We help professional firms and operators decide where AI starts, | prove it on one measured problem, | and hand over a system the team owns.",
-  },
+  hero: { eyebrow: "SERVICES · AI AND OPERATIONS SYSTEMS", title: "Choose where AI starts. | Then prove it there.", intro: systemsPillar.subtitle },
+  promise: { eyebrow: "WHERE IT STARTS", title: "One problem first, | measured before anything grows." },
   fit: {
     eyebrow: "WHO IT’S FOR",
     title: "Busy teams with the tools, | but not the time.",
@@ -415,34 +350,56 @@ export const systemsEn: SystemsCopy = {
       "Projects that must start with the most sensitive data",
     ],
   },
-  offers: {
-    eyebrow: "WAYS TO START",
-    title: "Start small. | Each step stands on its own.",
-    intro: "Start with the audit, | or book a free intro | if you need to check the fit first.",
-    items: systemsPillar.offers,
-  },
-  engagement: {
+  stages: {
     eyebrow: "THE ENGAGEMENT",
     title: "Separate stages. | A stop point after each.",
-    intro: "There is no commitment to the sequence. | The retainer tapers on a schedule written into the proposal.",
-    youGet: "You get:",
-    stages: [
-      ["Stage 0", "Audit Sprint", "A 90-minute kickoff, then a joint, in-depth audit: | how the work gets done today, | where it gets stuck | and what you already pay for.", "A written report within 48 hours: | what to fix first, in order of priority — yours to keep."],
-      ["Stage 1", "Guided pilot", "Three to five weeks, one work domain, | two people. We choose the tools and guide the build; | your team operates and tests it.", "A working process in production, | measured before and after on real cases."],
-      ["Stage 2", "Tapering support", "Around ten to twelve advisory hours a month, | tapering from full to half to a quarter | and ending at month twelve.", "A team that runs and extends | the system without us."],
-      ["Add-on", "Team workshops", "Sessions built on your own cases: | how to spot where AI fits | and match the right tool to it.", "People who find the next use case | themselves."],
-    ],
-  },
-  principles: {
-    eyebrow: "GROUND RULES",
-    title: "Four principles, | agreed before any tool.",
-    intro: "Tools change. | These are what keep a programme alive | in a busy organisation.",
+    intro: "Each stage is priced | before it starts.",
+    labels: { output: "You get", duration: "Time", fee: "Fee" },
     items: [
-      ["Buy first, build for the gap", "We test what the market offers and what you already license | before anyone writes code."],
-      ["Human in the loop, always", "The system prepares the work. | Professional judgement stays with your people."],
-      ["The knowledge stays with you", "Everything is documented and handed over. | Our support is designed to end."],
-      ["Start small, measure honestly", "One domain, a small group, a pass mark agreed in advance — | and a stop rule if it misses."],
+      {
+        index: "Start",
+        title: "AI Strategy Session",
+        scope: "An hour on your firm: where AI should start, | what you already pay for and what to measure.",
+        duration: "60 min · Google Meet",
+        fee: `${sessionPrice}, credited toward the Audit Sprint`,
+        amount: 150,
+        cta: { label: "Book the session", href: bookingTypes.aiStrategySession, event: "book-session-ai-systems", data: { pillar: "ai-systems" }, carryRef: true },
+      },
+      {
+        index: "Stage 0",
+        title: "Audit Sprint",
+        scope: "A 90-minute kickoff, then a joint, in-depth audit: | how the work gets done today, where it gets stuck | and what you already pay for. | An optional RealizeOS setup session is included.",
+        output: "A written report: what to fix first, | in order of priority. Yours to keep.",
+        duration: "Report within 48 hours of the audit",
+        fee: "€495 + VAT, credited toward implementation",
+        amount: 495,
+        cta: auditSprintCheckout
+          ? { label: "Buy the Audit Sprint", href: auditSprintCheckout, event: "buy-audit", data: { pillar: "ai-systems" } }
+          : { label: "Ask for a proposal", href: "/bring-an-opportunity?path=advisory", carryRef: true },
+      },
+      {
+        index: "Stage 1",
+        title: "Guided pilot",
+        scope: "One work domain, two people. | We choose the tools and guide the build; | your team operates and tests it. | Most of the time goes to checks against real cases.",
+        output: "A working process in production, | measured before and after on real cases.",
+        duration: "3–5 weeks",
+        fee: "By proposal, after the sprint",
+      },
+      {
+        index: "Stage 2",
+        title: "Tapering support",
+        scope: "Around ten to twelve advisory hours a month, | tapering from full to half to a quarter.",
+        output: "A team that runs and extends | the system without us.",
+        duration: "Ends at month twelve",
+        fee: "By proposal, after the sprint",
+      },
+      {
+        index: "Add-on",
+        title: "Team workshops",
+        scope: "Sessions built on your own cases: | how to spot where AI fits | and match the right tool to it.",
+      },
     ],
+    refuse: "What we won’t sell you: a course, a licence, | or a system only we can run.",
   },
   proof: {
     eyebrow: "PROOF",
@@ -452,33 +409,26 @@ export const systemsEn: SystemsCopy = {
   systems: {
     eyebrow: "SYSTEMS WE BUILT AND RUN",
     title: "We use what we recommend.",
-    intro: "Our own operations run on AI systems we designed. | They are options for you, never a requirement.",
+    intro: "Our own operations run on AI systems we designed. | Each one shows the method at work.",
+    setup: { label: "Book a RealizeOS setup hour", href: bookingTypes.realizeosSetup, event: "book-session-ai-systems", data: { pillar: "ai-systems", offer: "realizeos-setup" }, carryRef: true },
   },
-  alsoAvailable: {
-    eyebrow: "ALSO AVAILABLE",
-    title: "Fractional operations | and development management.",
-    intro: "Asaf Eyzenkot also takes B2B roles: | operating models, project coordination | and real-estate development management.",
-    links: [
-      { label: "See Asaf’s profile", href: "/asaf", event: "view-profile", data: { pillar: "ai-systems" } },
-      { label: "Team and process setup", href: "/services/team-setup" },
-    ],
+  related: {
+    text: "Need the roles and processes around it, too?",
+    link: { label: "Team and process setup", href: "/services/team-setup" },
   },
   faq: {
     eyebrow: "QUESTIONS",
     title: "Before you ask.",
     items: [
-      ["How quickly will we see a result?", "The Audit Sprint starts with a 90-minute kickoff, and the written report arrives within 48 hours of the audit. A pilot runs three to five weeks, and most of that time is quality checks against real cases rather than building."],
       ["How much of our team’s time does it take?", "Two kinds of time. One internal lead for four to six hours a week, and two to three hours a week from each pilot participant, mostly reviewing outputs. We ask for those hours in the proposal, because without them the work does not happen."],
       ["Do we have to use RealizeOS or your other systems?", "No. We start with what you already pay for and what the market offers. RealizeOS, MeetSum and our other systems are options when they fit the gap, not a requirement."],
-      ["What does it cost?", "The Audit Sprint is €495 + VAT. Implementation is scoped and priced separately, before it starts, and you can stop after any stage."],
-      ["Where do you work, and in which languages?", "Remotely, and in person in the Lisbon area and Barcelona. We work in English and Hebrew, with basic Portuguese and Spanish."],
-      ["Can you also run operations or a development project for us?", "Yes. Asaf Eyzenkot takes fractional operations and development-management roles, contracted through Realization Unipessoal LDA."],
+      ["Where do you work?", "Remotely, and in person in the Lisbon area and Barcelona."],
     ],
   },
   cta: {
-    eyebrow: "START WITH DISCOVERY",
+    eyebrow: "START WITH 20 MINUTES",
     title: "Where should AI | start in your firm?",
-    text: "Twenty minutes is enough | to know whether discovery is worth it.",
+    text: "Twenty minutes is enough | to know whether the audit is worth it.",
   },
   session: systemsPillar.session,
   intro: introCta("ai-systems"),

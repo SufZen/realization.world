@@ -13,11 +13,9 @@ import {
   resultIntro,
   roles,
   whoLabels,
-  yieldExample,
   type Answer,
   type Market,
   type Role,
-  type YieldExample,
 } from "./content";
 import styles from "./deal-guide.module.css";
 
@@ -181,7 +179,6 @@ export function DealGuide({ webinar }: { webinar: WebinarInfo }) {
             <p className={styles.lede}>
               שבע בדיקות שאנחנו עושים על כל עסקה, לפני שפונים לשמאי, לעורך דין או למימון. בדיקה אחת בכל מסך, ובסוף: רשימה אישית של מה לשאול.
             </p>
-            <YieldBars example={yieldExample("pt")} mode="leverage" compact />
             <div className={styles.actions}>
               <button type="button" className="button button--primary" onClick={() => { track("guide-start"); go(1); }}>
                 <span>מתחילים</span>
@@ -229,7 +226,6 @@ export function DealGuide({ webinar }: { webinar: WebinarInfo }) {
                 </div>
               </div>
               <p className={styles.body}>{check.body}</p>
-              {check.visual && <YieldBars example={yieldExample(m)} mode={check.visual} />}
               {example && (
                 <div className={styles.example}>
                   <p className={styles.label}>{check.exampleLabel}</p>
@@ -516,28 +512,5 @@ function Nav({ onBack, onNext, nextLabel, strong }: { onBack: () => void; onNext
       </button>
       <button type="button" className={styles.back} onClick={onBack}>חזרה</button>
     </div>
-  );
-}
-
-/** The listing's yield against what's left: bars grow in once, in order. Example numbers. */
-function YieldBars({ example, mode, compact = false }: { example: YieldExample; mode: "net" | "leverage"; compact?: boolean }) {
-  const rows = [
-    { label: "במודעה", value: example.gross, tone: "muted" },
-    { label: "נטו, אחרי עלויות", value: example.net, tone: mode === "net" ? "accent" : "muted" },
-    ...(mode === "leverage" ? [{ label: "על הכסף שלכם, עם הלוואה", value: example.equity, tone: "accent" }] : []),
-  ];
-  return (
-    <figure className={`${styles.bars} ${compact ? styles.barsCompact : ""}`}>
-      <ul>
-        {rows.map((row, index) => (
-          <li key={row.label} data-tone={row.tone} style={{ "--w": row.value / example.gross, "--i": index } as React.CSSProperties}>
-            <span className={styles.barLabel}>{row.label}</span>
-            <span className={styles.barTrack}><span className={styles.barFill} /></span>
-            <span className={styles.barValue} dir="ltr">{row.value.toFixed(1)}%</span>
-          </li>
-        ))}
-      </ul>
-      <figcaption>מספרים להמחשה{compact ? " · הדוגמה המלאה בפנים" : ""}</figcaption>
-    </figure>
   );
 }

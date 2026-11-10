@@ -10,6 +10,8 @@ export type Testimonial = {
   quote: string;
   name: string;
   role: string;
+  /** The role on Hebrew pages, where it differs. */
+  roleHe?: string;
   company?: string;
   /** Shown on this pillar's page too; untagged quotes appear on the homepage and the Services hub. */
   pillar?: PillarSlug;
@@ -48,7 +50,9 @@ export const testimonials: Testimonial[] = [
   {
     quote: "Asaf has developed strong expertise in helping design and build AI-driven systems that support smarter decision-making, efficiency, and scalable business structures.",
     name: "Meirav Gonen",
-    role: "Investment advisor and strategic deal maker, real estate",
+    // Role disclosed as on co.il and pt (Asaf, 10.11.2026).
+    role: "Former partner, Realization",
+    roleHe: "שותפה לשעבר ב־Realization",
     pillar: "ai-systems",
     ...linkedin,
   },

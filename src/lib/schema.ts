@@ -29,7 +29,7 @@ export const organizationSchema = {
   url: siteUrl,
   logo: `${siteUrl}/brand/icon-512.png`,
   description:
-    "Realization develops real estate in Portugal and builds the ventures and AI systems around it: residential development, property resolution, and advisory on AI adoption and operations.",
+    "Realization works on unrealized real estate: homes, buildings and projects that hold value and still go nowhere. Development in Portugal, with the AI systems and teams that move a stuck project.",
   founder: { "@id": ids.founder },
   foundingDate: "2019",
   email: contactEmail,
