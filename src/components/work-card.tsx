@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { WorkItem } from "@/content/work";
 import { Lines } from "./lines";
 
-const liveStatuses = new Set<WorkItem["status"]>(["Live", "Launching", "Ongoing", "In daily use"]);
+const liveStatuses = new Set<WorkItem["status"]>(["Live", "Launching", "Ongoing", "PIP approved · 7.2026", "In daily use"]);
 
 export function WorkCard({ item, featured = false }: { item: WorkItem; featured?: boolean }) {
   const Icon = item.icon;

@@ -5,7 +5,6 @@ import { ButtonLink } from "@/components/button-link";
 import Image from "next/image";
 import { SectionHeading } from "@/components/section-heading";
 import { JsonLd } from "@/components/json-ld";
-import styles from "@/components/home-sections.module.css";
 import { SelectedWork } from "@/components/selected-work";
 import { LatestFeed } from "@/components/channel-feed";
 import { CtaLink } from "@/components/services/cta-link";
@@ -22,15 +21,6 @@ export const metadata: Metadata = { alternates: { canonical: siteUrl } };
 
 // The latest videos come from the YouTube feed: regenerate hourly.
 export const revalidate = 3600;
-
-/* Sources: Asaf's founder profile (public/asaf/profile.md) and LinkedIn experience;
-   group sizes from the channel-growth session, 10.10.2026. */
-const proof = [
-  ["20 years", "leading complex work: intelligence, architecture, real estate development"],
-  ["6 ventures", "founded or co-founded since 2018"],
-  ["11,800+", "members in the Portugal business groups we run"],
-  ["3 AI systems", "built and in daily use"],
-] as const;
 
 export default async function HomePage() {
   const feed = await latestFeed(3);
@@ -60,30 +50,14 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="manifesto">
-        <div className="container-wide manifesto__grid">
-          <p className="eyebrow">THE PROBLEM</p>
-          <div>
-            <h2><Lines text="The value is there. | The system isn’t." /></h2>
-            <p><Lines text="We build the missing layer | between an underused place and a working venture." /></p>
-          </div>
-        </div>
-      </section>
-
       <PillarDoors />
-
-      <section className="proof-strip" aria-label="Realization in numbers">
-        <dl className={`container-wide proof-strip__grid ${styles.numbers}`}>
-          {proof.map(([value, label]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
-        </dl>
-      </section>
 
       <section className="section">
         <div className="container-wide">
           <SectionHeading
             eyebrow="SELECTED WORK"
-            title="One example | from each pillar."
-            intro="A development, a system | and the way we set up teams."
+            title="Work behind | the approach."
+            intro="A development in Barreiro | and the system we run it on."
             align="split"
           />
           <SelectedWork />

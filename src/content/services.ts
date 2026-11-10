@@ -246,11 +246,11 @@ export const pillars: Pillar[] = [
     },
     offers: [
       {
-        name: "Setup intro",
+        name: "Setup call",
         text: "Thirty minutes and three questions (below). | If we are not the right fit, | you will know by the end of the call.",
         format: "30 min · Google Meet",
         price: "Free",
-        cta: { label: "Book a setup intro", href: bookingTypes.deliveryIntro, event: "book-session-delivery", data: { pillar: "delivery" }, carryRef: true },
+        cta: { label: "Book a setup call", href: bookingTypes.deliveryIntro, event: "book-session-delivery", data: { pillar: "delivery" }, carryRef: true },
       },
       {
         name: "Team and process setup",
@@ -396,7 +396,7 @@ export const systemsEn: SystemsCopy = {
   hero: { eyebrow: "SERVICES · SYSTEMS", title: "AI and operations | systems.", intro: systemsPillar.subtitle },
   promise: {
     eyebrow: "THE APPROACH",
-    title: "AI that pays back, | in the right order.",
+    title: "Choose where AI starts, | then prove it there.",
     intro: "We help professional firms and operators decide where AI starts, | prove it on one measured problem, | and hand over a system the team owns.",
   },
   fit: {

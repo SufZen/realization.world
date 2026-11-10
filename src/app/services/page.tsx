@@ -88,24 +88,6 @@ export default function ServicesPage() {
       </section>
 
 
-      <section className="section surface-dark">
-        <div className="container-wide">
-          <SectionHeading eyebrow={hub.why.eyebrow} title={hub.why.title} intro={hub.why.intro} inverse />
-          <div className={`framework-grid ${styles.tabletOne}`}>
-            {hub.why.items.map(([title, text], index) => {
-              const Icon = pillars[index].icon;
-              return (
-                <article className="framework-card" key={title}>
-                  <div className="framework-card__icon"><Icon size={27} strokeWidth={1.5} /></div>
-                  <h3>{title}</h3>
-                  <p><Lines text={text} /></p>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
       <section className="section">
         <div className="container-wide">
           <SectionHeading eyebrow="HOW WE WORK" title="Every engagement | is built to end." />

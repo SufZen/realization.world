@@ -47,7 +47,7 @@ export type WorkItem = {
   name: string;
   kind: WorkKind;
   eyebrow: string;
-  status: "Ongoing" | "Live" | "Launching" | "In development" | "In daily use" | "Case study" | "Concluded";
+  status: "PIP approved · 7.2026" | "Ongoing" | "Live" | "Launching" | "In development" | "In daily use" | "Case study" | "Concluded";
   years?: string;
   location: string;
   role: string;
@@ -86,7 +86,7 @@ export const work: WorkItem[] = [
     name: "Arena",
     kind: "development",
     eyebrow: "RESIDENTIAL DEVELOPMENT · BARREIRO, LISBON",
-    status: "Ongoing",
+    status: "PIP approved · 7.2026",
     years: "2026–2028",
     location: "Barreiro, Lisbon metropolitan area, Portugal",
     role: "GP, development manager and shareholder",
@@ -337,7 +337,6 @@ export const work: WorkItem[] = [
       { value: "36k", label: "lines of TypeScript, SQL and scripts" },
       { value: "74", label: "REST API route handlers" },
       { value: "5", label: "interface languages, including RTL Hebrew" },
-      { value: "~63%", label: "illustrative saving vs per-seat SaaS at 50 users" },
     ],
     sections: [
       {
