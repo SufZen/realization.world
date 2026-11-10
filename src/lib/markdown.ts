@@ -105,7 +105,7 @@ export function llmsIndex() {
     ]),
     "## Services",
     "",
-    `- [Services](${siteUrl}/services): Realization realizes potential in three dimensions: places, systems and teams.`,
+    `- [Services](${siteUrl}/services): we work on the property, the paperwork and the team needed to move a stalled project.`,
     `- [Real estate development](${siteUrl}/services/real-estate): free deal check, a 60-minute deal consultation (€150, credited), feasibility studies and financial models, and development management in Portugal.`,
     `- [AI and operations systems](${siteUrl}/services/ai-systems): a 60-minute strategy session (€150, credited), the Audit Sprint (€495 + VAT, bought online: a joint audit with a written report within 48 hours), one measured pilot and tapering support; fixed-scope stages with a stop point after each. In Hebrew: ${siteUrl}/he/services/ai-systems.`,
     `- [Team and process setup](${siteUrl}/services/team-setup): clear roles, working processes and a trained team for a development project or a growing firm, with a handoff date; limited fractional operations and development-management roles. Not construction management.`,

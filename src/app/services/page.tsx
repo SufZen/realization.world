@@ -14,7 +14,7 @@ import { breadcrumbSchema, graph, ids } from "@/lib/schema";
 
 export const metadata: Metadata = pageMetadata(
   "Services — places, systems and teams",
-  "Realization realizes potential in three dimensions: places, systems and teams. Real estate development in Portugal, AI and operations systems, and team and process setup, each built to be handed over.",
+  "A stalled project needs more than a plan: we work on the property, the paperwork and the team needed to move it. Real estate development in Portugal, AI and operations systems, and team and process setup, each built to be handed over.",
   "/services",
 );
 
@@ -49,7 +49,7 @@ export default function ServicesPage() {
       <PageHero
         index="S"
         eyebrow="SERVICES"
-        title="Places, systems | and teams."
+        title="A stalled project | needs more than a plan."
         intro={hub.sentence}
         theme="light"
         actions={
@@ -90,7 +90,7 @@ export default function ServicesPage() {
 
       <section className="section">
         <div className="container-wide">
-          <SectionHeading eyebrow="HOW WE WORK" title="Every engagement | is built to end." />
+          <SectionHeading eyebrow="HOW WE WORK" title="Scope and responsibility, | agreed before work starts." />
           <div className="content-grid">
             {hub.principles.map(([title, text]) => (
               <article className="content-card" key={title}>

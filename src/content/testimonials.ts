@@ -29,7 +29,7 @@ const linkedin = { source: "LinkedIn recommendation", sourceUrl: "https://www.li
 export const testimonials: Testimonial[] = [
 
   {
-    quote: "He ensures he has the right data, the right tools and the right people to provide you with the best results to your investments and he keeps tracking, calculating, reporting out to completion ensuring you have the full potential fulfilled.",
+    quote: "…He keeps tracking, calculating, reporting out to completion ensuring you have the full potential fulfilled.",
     name: "Yaniv Keren",
     role: "Head of IT & Information Systems",
     company: "Ondas",

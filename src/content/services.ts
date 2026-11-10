@@ -279,7 +279,7 @@ export const pillarBySlug = (slug: PillarSlug) => pillars.find((pillar) => pilla
 
 export const hub = {
   ref: "services",
-  sentence: "Realization realizes potential in three dimensions: | places, systems and teams.",
+  sentence: "We work on the property, the paperwork | and the team needed to move it.",
   why: {
     eyebrow: "WHY ONE COMPANY",
     title: "One project, | three dimensions.",
@@ -292,7 +292,7 @@ export const hub = {
   },
   principles: [
     ["Fixed scope, an exit after each stage", "Every engagement is a separate, priced unit. | You can stop after any of them."],
-    ["Built to be handed over", "We build the machine, train the team | and leave on a date agreed at the start."],
+    ["Scope agreed first", "Each service says on its own page | how it ends and what you keep."],
     ["Proof before scale", "One deal, one pilot or one process first, | measured before anything grows."],
   ],
 } as const;
@@ -419,7 +419,7 @@ export const systemsEn: SystemsCopy = {
   offers: {
     eyebrow: "WAYS TO START",
     title: "Start small. | Each step stands on its own.",
-    intro: "Free to learn, a paid hour to decide, | a fixed-price sprint to prove it.",
+    intro: "A paid hour to assess the fit, | an audit to choose the first process, | a pilot to test it.",
     items: systemsPillar.offers,
   },
   engagement: {
@@ -472,7 +472,7 @@ export const systemsEn: SystemsCopy = {
       ["How quickly will we see a result?", "The Audit Sprint starts with a 90-minute kickoff, and the written report arrives within 48 hours of the audit. A pilot runs three to five weeks, and most of that time is quality checks against real cases rather than building."],
       ["How much of our team’s time does it take?", "Two kinds of time. One internal lead for four to six hours a week, and two to three hours a week from each pilot participant, mostly reviewing outputs. We ask for those hours in the proposal, because without them the work does not happen."],
       ["Do we have to use RealizeOS or your other systems?", "No. We start with what you already pay for and what the market offers. RealizeOS, MeetSum and our other systems are options when they fit the gap, not a requirement."],
-      ["What does it cost?", "Each stage is priced as a separate, fixed unit before it starts, and you can stop after any stage. The Audit Sprint is deliberately a small first commitment. Ask for a proposal after a 20-minute intro call."],
+      ["What does it cost?", "The Audit Sprint is €495 + VAT. Implementation is scoped and priced separately, before it starts, and you can stop after any stage."],
       ["Where do you work, and in which languages?", "Remotely, and in person in the Lisbon area and Barcelona. We work in English and Hebrew, with basic Portuguese and Spanish."],
       ["Can you also run operations or a development project for us?", "Yes. Asaf Eyzenkot takes fractional operations and development-management roles, contracted through Realization Unipessoal LDA."],
     ],

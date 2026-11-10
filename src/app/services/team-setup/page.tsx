@@ -10,7 +10,7 @@ import { HeroStatement } from "@/components/services/hero-statement";
 import { CtaBand, FaqList, FitLists, InsightFeed, OfferList } from "@/components/services/sections";
 import styles from "@/components/services/services.module.css";
 import { insights, siteUrl } from "@/content/site";
-import { delivery, introCta, pillarBySlug, pillarInsights } from "@/content/services";
+import { delivery, pillarBySlug, pillarInsights } from "@/content/services";
 import { pageMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, graph, ids } from "@/lib/schema";
 
@@ -65,7 +65,6 @@ export default function TeamSetupPage() {
         actions={
           <>
             <CtaLink cta={pillar.session} pageRef={pillar.ref} variant="dark" />
-            <CtaLink cta={introCta("delivery")} pageRef={pillar.ref} variant="outline" />
           </>
         }
       />
@@ -138,7 +137,6 @@ export default function TeamSetupPage() {
         title="Need the machine built, | not another manager?"
         text="Thirty minutes and three questions | tell us both whether it fits."
         primary={pillar.session}
-        secondary={introCta("delivery")}
         pageRef={pillar.ref}
       />
     </>
