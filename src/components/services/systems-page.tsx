@@ -122,7 +122,7 @@ export function SystemsPage({ copy, path }: { copy: SystemsCopy; path: string })
         </div>
       </section>
 
-      {he ? <Testimonials pillar="ai-systems" eyebrow="במילים שלהם" title="מה אומרים | לקוחות ושותפים." surface="surface-muted" /> : <Testimonials pillar="ai-systems" surface="surface-muted" />}
+      {he ? <Testimonials pillar="ai-systems" eyebrow="במילים שלהם" title="מה אומרים | לקוחות ושותפים." surface="surface-muted" lang="he" /> : <Testimonials pillar="ai-systems" surface="surface-muted" />}
 
       <PillarVideos pillar="ai-systems" eyebrow={he ? "צפו" : "WATCH"} title={he ? "בינה מלאכותית בפרויקטים, | בסרטונים קצרים." : "AI in real projects, | in short videos."} />
 
