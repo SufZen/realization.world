@@ -75,7 +75,7 @@ export const services = {
       ],
       first_steps: [
         "AI Strategy Session · 60 min · €150, credited toward the Audit Sprint",
-        "Audit Sprint · €495 + VAT, buy online: 90-min kickoff, joint audit, written report within 48 hours; RealizeOS setup session included; fee credited toward implementation",
+        "Audit Sprint · €495 + VAT, buy online: 90-min kickoff, joint audit, written report within 48 hours; optional RealizeOS setup session; fee credited toward implementation",
       ],
       pricing: "Each stage is priced as a separate fixed unit before it starts; stop after any stage.",
     },

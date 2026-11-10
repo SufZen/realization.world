@@ -96,7 +96,7 @@ export const work: WorkItem[] = [
     problem:
       "Greater Lisbon is short of good homes | below the luxury segment. Young professionals | are priced out of the centre, | while Barreiro’s stock is old and inefficient.",
     approach:
-      "We shifted the mix away from slow T2/T3 flats | toward the most liquid typologies: one T0, | nine T1 and a T2 penthouse, | each designed to qualify for Portugal’s | under-35 first-home tax exemption.",
+      "We changed the mix away from slow T2/T3 flats | to smaller homes: one T0, | nine T1 and a T2 penthouse, | each designed to qualify for Portugal’s | under-35 first-home tax exemption.",
     outcome:
       "Site acquired and demolished (Q1 2026). | Information request (PIP) approved (July 2026). | Next: the licensing application, then funding and construction.",
     facts: [
@@ -110,9 +110,10 @@ export const work: WorkItem[] = [
       intro: "A single dedicated company (SPV) | with Realization running day-to-day execution.",
       items: [
         ["Acquire", "Site secured and demolished | in Q1 2026."],
-        ["License", "PIP information request | approved in July 2026."],
+        ["PIP", "Information request | approved in July 2026."],
+        ["License", "Next: submit the | licensing application."],
         ["Fund & build", "Equity and bank facility; | a 12–15 month build."],
-        ["Sell", "Units sized for young buyers | and yield investors."],
+        ["Sell", "Units sized for young buyers."],
       ],
     },
     partners: ["SFRG Architects — design and licensing", "FocoFIN — financial modelling and structuring", "Partner contractor — in discussion"],

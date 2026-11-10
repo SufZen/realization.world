@@ -124,7 +124,7 @@ export const pillars: Pillar[] = [
     href: "/services/real-estate",
     dimension: "Places",
     title: "Real estate development",
-    subtitle: "From empty or underused | to highest and best use.",
+    subtitle: "Before buying the site, | find what could stop it.",
     forWhom: "Investors and developers in Portugal, | and owners of stuck or problematic properties.",
     icon: Building2,
     ref: "services-real-estate",
@@ -204,7 +204,7 @@ export const pillars: Pillar[] = [
       {
         name: "Audit Sprint",
         text: "A joint, in-depth audit of your firm. | Within 48 hours, a written report: | what to fix first, in order of priority. | The fee is credited toward implementation.",
-        format: "90-min kickoff · RealizeOS setup session included",
+        format: "90-min kickoff · optional RealizeOS setup session",
         price: "€495 + VAT",
         amount: 495,
         cta: auditSprintCheckout
@@ -291,8 +291,7 @@ export const hub = {
     ],
   },
   principles: [
-    ["Fixed scope, an exit after each stage", "Every engagement is a separate, priced unit. | You can stop after any of them."],
-    ["Scope agreed first", "Each service says on its own page | how it ends and what you keep."],
+    ["Scope, fee and stopping point", "Agreed before work starts, | for every engagement."],
     ["Proof before scale", "One deal, one pilot or one process first, | measured before anything grows."],
   ],
 } as const;
@@ -377,7 +376,7 @@ export type SystemsCopy = {
   offers: { eyebrow: string; title: string; intro: string; items: Offer[] };
   engagement: { eyebrow: string; title: string; intro: string; youGet: string; stages: ReadonlyArray<readonly [string, string, string, string]> };
   principles: { eyebrow: string; title: string; intro: string; items: ReadonlyArray<readonly [string, string]> };
-  proof: { eyebrow: string; title: string; intro: string; link: Cta };
+  proof: { eyebrow: string; title: string; intro?: string; link: Cta };
   systems: { eyebrow: string; title: string; intro: string };
   alsoAvailable: { eyebrow: string; title: string; intro: string; links: Cta[] };
   faq: { eyebrow: string; title: string; items: ReadonlyArray<readonly [string, string]> };
@@ -419,7 +418,7 @@ export const systemsEn: SystemsCopy = {
   offers: {
     eyebrow: "WAYS TO START",
     title: "Start small. | Each step stands on its own.",
-    intro: "A paid hour to assess the fit, | an audit to choose the first process, | a pilot to test it.",
+    intro: "Start with the audit, | or book a free intro | if you need to check the fit first.",
     items: systemsPillar.offers,
   },
   engagement: {
@@ -448,7 +447,6 @@ export const systemsEn: SystemsCopy = {
   proof: {
     eyebrow: "PROOF",
     title: "The method, in a real firm.",
-    intro: "A 25-person architecture practice: | eight domains mapped, one pilot chosen, | a pass mark agreed before building.",
     link: { label: "Read the case study", href: "/work/ai-adoption-architecture-firm" },
   },
   systems: {
