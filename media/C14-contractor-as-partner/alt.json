@@ -1,0 +1,44 @@
+{
+  "carousel": [
+    {
+      "file": "carousel-01.png",
+      "short": "Why would I pay a builder more than I'd pay investors?",
+      "long": "Why would I pay a builder more than I'd pay investors? On paper it sounds wrong. Here's why I'd still do it."
+    },
+    {
+      "file": "carousel-02.png",
+      "short": "Investor money doesn't care when you finish.",
+      "long": "Investor money doesn't care when you finish. A builder who leaves part of his margin in the project as equity stops thinking in change orders. He can't accept the usual delay excuses, because he shares the outcome. I'd lose your dedication and your commitment."
+    },
+    {
+      "file": "carousel-03.png",
+      "short": "A strong builder can bring a bigger loan.",
+      "long": "A strong builder can bring a bigger loan. If the bank finances more of the works because a strong builder is in the deal, I'm more than happy to pay him for that difference, openly."
+    },
+    {
+      "file": "carousel-04.png",
+      "short": "Diagram: When he shares the outcome, delay is his problem too.",
+      "long": "Diagram: When he shares the outcome, delay is his problem too. Every extra seat at the table is paid from a thin slice, so model what his share costs every other investor."
+    },
+    {
+      "file": "carousel-05.png",
+      "short": "Partner or not, never pay in advance.",
+      "long": "Partner or not, never pay in advance. Labour after each stage, materials on order. When a bank funds the works, the contract follows the bank's milestones, so your equity doesn't end up filling the hole. Milestones, not months."
+    },
+    {
+      "file": "carousel-06.png",
+      "short": "Pay openly for commitment, and never for work that hasn't been done yet.",
+      "long": "Pay openly for commitment, and never for work that hasn't been done yet. Would you give your builder equity? Tell me why, or why not."
+    }
+  ],
+  "quote": {
+    "file": "quote-1200x627.png",
+    "short": "Quote card: \"Investor money doesn't care when the building is finished.\"",
+    "long": "Quote card: \"Investor money doesn't care when the building is finished.\" Asaf Eyzenkot, Suf Zen, founder of Realization."
+  },
+  "cover": {
+    "file": "cover-1080x1920.png",
+    "short": "Pay for commitment, not in advance.",
+    "long": "Pay for commitment, not in advance. Asaf Eyzenkot, Suf Zen, founder of Realization."
+  }
+}

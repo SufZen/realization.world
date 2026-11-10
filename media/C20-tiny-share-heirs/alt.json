@@ -1,0 +1,44 @@
+{
+  "carousel": [
+    {
+      "file": "carousel-01.png",
+      "short": "Not a feud. A share too small to call about.",
+      "long": "Not a feud. A share too small to call about. Nobody is fighting. Nobody has a reason to start."
+    },
+    {
+      "file": "carousel-02.png",
+      "short": "One house, every heir must agree.",
+      "long": "One house, every heir must agree. While an inheritance is undivided (herança indivisa), the heirs act together. To sell one house, every one of them has to say yes. With two siblings, easy. With twelve cousins, less so."
+    },
+    {
+      "file": "carousel-03.png",
+      "short": "Small shares, no reason to organise.",
+      "long": "Small shares, no reason to organise. When your slice is tiny, gathering everyone costs more than your say is worth. So nobody starts, and the house waits. The most extreme case I've seen: 120+ heirs in one building."
+    },
+    {
+      "file": "carousel-04.png",
+      "short": "Diagram: Give every share a reason to answer.",
+      "long": "Diagram: Give every share a reason to answer. A sliver stays silent until there is something concrete to answer."
+    },
+    {
+      "file": "carousel-05.png",
+      "short": "The usual case is smaller.",
+      "long": "The usual case is smaller. Up to five heirs, and often one who lacks the time, the knowledge or the money to move things along. Start there."
+    },
+    {
+      "file": "carousel-06.png",
+      "short": "Give every share a reason to answer, and the house starts to move.",
+      "long": "Give every share a reason to answer, and the house starts to move. Take it, send it to your co-heirs, and tell me what happened."
+    }
+  ],
+  "quote": {
+    "file": "quote-1200x627.png",
+    "short": "Quote card: \"Most stuck houses aren't blocked by a feud. They're blocked by a share too small to…",
+    "long": "Quote card: \"Most stuck houses aren't blocked by a feud. They're blocked by a share too small to bother about.\" Asaf Eyzenkot, Suf Zen, founder of Realization."
+  },
+  "cover": {
+    "file": "cover-1080x1920.png",
+    "short": "Too small to call about.",
+    "long": "Too small to call about. Asaf Eyzenkot, Suf Zen, founder of Realization."
+  }
+}

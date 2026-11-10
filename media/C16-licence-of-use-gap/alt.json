@@ -1,0 +1,44 @@
+{
+  "carousel": [
+    {
+      "file": "carousel-01.png",
+      "short": "The building's done. So why can't you sell?",
+      "long": "The building's done. So why can't you sell? The Excel is nice, it's cute. But reality doesn't live by it."
+    },
+    {
+      "file": "carousel-02.png",
+      "short": "Two dates, not one.",
+      "long": "Two dates, not one. In Portugal, the last payment to the builder and the first deed are two different dates. Most buyers need a mortgage, and their bank has to be satisfied first. In my experience, it shows up in almost every project."
+    },
+    {
+      "file": "carousel-03.png",
+      "short": "What the 2024 reform changed, and what it didn't.",
+      "long": "What the 2024 reform changed, and what it didn't. Licensed works no longer need a separate licença de utilização (licence of use). But many banks still want proof of legal use before they lend."
+    },
+    {
+      "file": "carousel-04.png",
+      "short": "Diagram: Complete and sellable are two different dates.",
+      "long": "Diagram: Complete and sellable are two different dates. Put both dates on the timeline, with a window of several months between them."
+    },
+    {
+      "file": "carousel-05.png",
+      "short": "Model it honestly, and the returns move.",
+      "long": "Model it honestly, and the returns move. Sales move later, investor money stays in longer, and the return per year looks different. Better to see that in the plan than in a call with your investors. It isn't marketing time; it's how this market behaves."
+    },
+    {
+      "file": "carousel-06.png",
+      "short": "Give every Portuguese feasibility two dates, complete and sellable, with a paperwork window…",
+      "long": "Give every Portuguese feasibility two dates, complete and sellable, with a paperwork window between them. If your plan has one date for both, move the sales and tell me what changes."
+    }
+  ],
+  "quote": {
+    "file": "quote-1200x627.png",
+    "short": "Quote card: \"You finished building, you paid the contractor, you paid everyone, and in practice…",
+    "long": "Quote card: \"You finished building, you paid the contractor, you paid everyone, and in practice you still can't close a sale.\" Asaf Eyzenkot, Suf Zen, founder of Realization."
+  },
+  "cover": {
+    "file": "cover-1080x1920.png",
+    "short": "Finished isn't the same as sellable.",
+    "long": "Finished isn't the same as sellable. Asaf Eyzenkot, Suf Zen, founder of Realization."
+  }
+}

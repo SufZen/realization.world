@@ -1,0 +1,44 @@
+{
+  "carousel": [
+    {
+      "file": "carousel-01.png",
+      "short": "How do you value buildings you can't walk into?",
+      "long": "How do you value buildings you can't walk into? One spreadsheet on day one would be false precision."
+    },
+    {
+      "file": "carousel-02.png",
+      "short": "Shortlist from the desk first.",
+      "long": "Shortlist from the desk first. Some buildings are occupied, some have no floors or roofs, some have several heirs behind one door. Shortlist from desk research by potential, complexity and risk. You can't enter half the buildings, so don't pretend."
+    },
+    {
+      "file": "carousel-03.png",
+      "short": "Label each building by its move.",
+      "long": "Label each building by its move. Go up, build on the empty plot, or merge plots and find more area. Then pay for proper valuations on a few representative typologies to anchor the rest."
+    },
+    {
+      "file": "carousel-04.png",
+      "short": "Diagram: Tag each building by its move before you price it.",
+      "long": "Diagram: Tag each building by its move before you price it. Three moves: go up, build on the empty plot, or merge plots. And some you can't enter."
+    },
+    {
+      "file": "carousel-05.png",
+      "short": "Rank by quality, not by risk.",
+      "long": "Rank by quality, not by risk. Parcels with the fewest surprises are often too small to be worth the effort. The complicated prime block is where the uplift sits. The investors challenged my ranking, and they were right."
+    },
+    {
+      "file": "carousel-06.png",
+      "short": "Before the first euro, agree two limits: what you'll spend learning and what you'll spend buying.",
+      "long": "Before the first euro, agree two limits: what you'll spend learning and what you'll spend buying. Weighing a portfolio like this? Send me a message and we'll talk it through."
+    }
+  ],
+  "quote": {
+    "file": "quote-1200x627.png",
+    "short": "Quote card: \"Across buildings like these, an average price per metre is a shot in the dark.\"",
+    "long": "Quote card: \"Across buildings like these, an average price per metre is a shot in the dark.\" Asaf Eyzenkot, Suf Zen, founder of Realization."
+  },
+  "cover": {
+    "file": "cover-1080x1920.png",
+    "short": "Buildings you can't walk into.",
+    "long": "Buildings you can't walk into. Asaf Eyzenkot, Suf Zen, founder of Realization."
+  }
+}
