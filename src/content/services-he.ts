@@ -57,7 +57,7 @@ export const systemsHe: SystemsCopy = {
   offers: {
     eyebrow: "דרכים להתחיל",
     title: "מתחילים בקטן. | כל צעד עומד בפני עצמו.",
-    intro: "ללמוד בחינם, שעה בתשלום כדי להחליט, | וספרינט במחיר קבוע כדי להוכיח.",
+    intro: "מתחילים באודיט, | או בשיחת היכרות אם רוצים לבדוק התאמה.",
     items: [
       ...freeLearning,
       {
@@ -71,7 +71,7 @@ export const systemsHe: SystemsCopy = {
       {
         name: "אודיט משותף (Audit Sprint)",
         text: "בודקים את העסק לעומק, | ותוך 48 שעות מקבלים דוח כתוב: | מה לתקן קודם, לפי סדר עדיפות. | דמי האודיט מתקזזים מההטמעה.",
-        format: "פגישת פתיחה של 90 דקות · כולל סשן התקנה של RealizeOS",
+        format: "פגישת פתיחה של 90 דקות · התקנת RealizeOS לפי הצורך",
         price: "495 יורו + IVA",
         amount: 495,
         cta: auditSprintCheckout

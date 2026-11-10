@@ -124,7 +124,7 @@ export const pillars: Pillar[] = [
     href: "/services/real-estate",
     dimension: "Places",
     title: "Real estate development",
-    subtitle: "Before buying the site, | find what could stop it.",
+    subtitle: "We check the paperwork, buildable scope | and costs before you commit.",
     forWhom: "Investors and developers in Portugal, | and owners of stuck or problematic properties.",
     icon: Building2,
     ref: "services-real-estate",
@@ -160,7 +160,7 @@ export const pillars: Pillar[] = [
       },
       {
         name: "Development management",
-        text: "We take projects from site to sale, | as we do at Arena, | our eleven-home building in Barreiro.",
+        text: "At Arena in Barreiro we are the managing partner | and development manager. | PIP approved 7.2026; licensing is next.",
         format: "Site to sale",
         price: "By proposal",
         cta: { label: "See Arena", href: "/work/arena-barreiro", event: "view-case", data: { pillar: "real-estate", case: "arena-barreiro" } },

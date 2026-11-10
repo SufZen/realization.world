@@ -208,7 +208,7 @@ export const work: WorkItem[] = [
     ],
     steps: {
       title: "Context → | coordinated action.",
-      intro: "Six hard problems, | solved as one stack.",
+      intro: "Knowledge, memory, tasks and approvals | in one system.",
       items: [
         ["Knowledge", "FABRIC: plain markdown the team can edit, | round-tripped into typed entities."],
         ["Memory", "Synapse: a four-tier index | that recalls the cheapest context first."],
@@ -402,7 +402,7 @@ export const work: WorkItem[] = [
     ],
     disclosure: "Counts are measured from the public repository at v0.4.0 (September 2026). Screens show fictional demo data.",
     source: "Dreamward repository and changelog, v0.4.0, September 2026; Lifebook project overview v0.3.1.",
-    cta: { path: "advisory", heading: "Need a private, | agent-ready product built fast?", label: "Start a conversation" },
+    cta: { path: "advisory", heading: "Explore Dreamward.", label: "Start a conversation" },
     schema: "SoftwareApplication",
     icon: BookOpen,
     updated: "2026-09-29",
