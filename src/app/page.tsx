@@ -79,7 +79,7 @@ export default async function HomePage() {
           <SectionHeading
             eyebrow="PARTNER WITH US"
             title="Bringing a property, | capital or a team?"
-            intro="Owners, operators and capital partners | have their own paths into our projects."
+            intro="Each partner comes in | through a path of their own."
           />
           <div className="audience-grid">
             {partnerPaths.map(({ slug, title, summary, icon: Icon }) => (

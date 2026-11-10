@@ -37,7 +37,7 @@ export default function AboutPage() {
           <div className="about-founder__copy">
             <p className="eyebrow">ARCHITECT AND FOUNDER</p>
             <h2>Asaf Eyzenkot</h2>
-            <h3>He does not advise from outside. | He is inside the deal or the venture.</h3>
+            <h3>In property, he does not advise from outside. | He is inside the deal or the venture.</h3>
             <p><Lines text="An architecture graduate of Tel Aviv University. | In Portugal he co-founded BOA Architecture in Setúbal, | and before it Burtucala, a bridge between investors abroad | and partners in Portugal." /></p>
             <p><Lines text="Today he is the managing partner and development manager of Arena in Barreiro, | and works between Israel, Portugal and Barcelona." /></p>
             <div className="button-row"><a className="button button--dark" href="/asaf"><span>Founder profile</span></a><ButtonLink href="/work/arena-barreiro" variant="outline">See Arena</ButtonLink></div>

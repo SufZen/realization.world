@@ -154,7 +154,7 @@ export const work: WorkItem[] = [
     summary:
       "FLUII is in pre-launch, with a waiting list and its first owners invited. It resolves homes stuck in inheritance, co-owner deadlock or mismatched paperwork, then sells them to vetted investors; AI assistant Clara does the intake and drafting, and licensed people make every decision about money and law.",
     problem:
-      "Across Portugal, homes stand empty | while prices hit records. | Most are stuck by people and paperwork — | unsplit inheritances, absent co-owners, | registries that disagree — not by the building.",
+      "Across Portugal, homes stand empty | while prices hit records. | Many are stuck by people and paperwork — | unsplit inheritances, absent co-owners, | registries that disagree — not by the building.",
     approach:
       "The planned process: owners describe the case to Clara | in Portuguese or English. | The case is scored, checked and turned into | a roadmap our team approves. | Under a signed mediation mandate, | lawyers and architects resolve it, | and investors see the address only at negotiation.",
     outcome:
@@ -209,9 +209,9 @@ export const work: WorkItem[] = [
     approach:
       "Keep the knowledge, the history | and the record of decisions | in files the business owns, | so models and tools can change | without losing any of it.",
     outcome:
-      "It runs Realization’s research, | documentation and coordination daily. | It is the engine inside our own operations | and our client AI work, | not a product we sell on its own.",
+      "It runs Realization’s research, | documentation and coordination. | It is the engine inside our own operations | and our client AI work, | not a product we sell on its own.",
     facts: [
-      { value: "v5.6", label: "in daily use at Realization" },
+      { value: "v5.6", label: "current version" },
     ],
     steps: {
       title: "Context → | coordinated action.",

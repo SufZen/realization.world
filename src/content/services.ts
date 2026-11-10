@@ -143,7 +143,7 @@ export const pillars: Pillar[] = [
       },
       {
         name: "Development management",
-        text: "At Arena in Barreiro we are the managing partner | and development manager. | PIP approved 7.2026; licensing is next.",
+        text: "At Arena in Barreiro we are the managing partner | and development manager. | Licensing is next.",
         format: "Site to sale",
         price: "By proposal",
         cta: { label: "See Arena", href: "/work/arena-barreiro", event: "view-case", data: { pillar: "real-estate", case: "arena-barreiro" } },

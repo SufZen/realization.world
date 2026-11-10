@@ -43,12 +43,14 @@ export default function ThesisPage() {
         aside={<EditorialMedia src="/media/hero-physical-world.webp" alt="A team working around an architectural model of a stuck property" label="UNREALIZED REAL ESTATE" className="page-hero__media" />}
       />
 
+      <div className="statement-band"><div className="container"><p>We earn from the release, not from the distress. The owner has to come out better off.</p></div></div>
+
       <section className="section">
         <div className="container-wide">
           <SectionHeading
             eyebrow="OUR WORK NOW: PROPERTY"
             title="One problem, | four forms."
-            intro="Portugal is our lab, because there the problem is plainest. | It exists in every market, in different clothes."
+            intro="Portugal is our lab, because it is where we work. | The problem exists in every market, in different clothes."
           />
           <div className="content-grid">
             {forms.map(([title, text]) => (
@@ -81,7 +83,6 @@ export default function ThesisPage() {
         </div>
       </section>
 
-      <div className="statement-band"><div className="container"><p>We earn from the release, not from the distress. The owner has to come out better off.</p></div></div>
     </>
   );
 }
