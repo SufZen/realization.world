@@ -95,13 +95,13 @@ export const work: WorkItem[] = [
     location: "Barreiro, Lisbon metropolitan area, Portugal",
     role: "GP, development manager and shareholder",
     descriptor: "Compact homes for young buyers | on Lisbon’s south bank.",
-    teaser: "Why a south-bank site | became smaller homes.",
+    teaser: "Small homes, planned around | Portugal’s first-home tax rule.",
     summary:
       "Arena is an eleven-home residential building in Barreiro, across the Tagus from Lisbon, developed by Realization as GP and development manager. The site is acquired and cleared, the information request (PIP) is approved, and construction is planned for 2026–27.",
     problem:
       "Greater Lisbon is short of good homes | below the luxury segment. Young professionals | are priced out of the centre, | while Barreiro’s stock is old and inefficient.",
     approach:
-      "We changed the mix away from T2/T3 flats, | which were slow to sell [missing: the evidence], | to smaller homes: one T0, | nine T1 and a T2 penthouse, | each designed to qualify for Portugal’s | under-35 first-home tax exemption.",
+      "We sized the homes for first-time buyers: one T0, | nine T1 and a T2 penthouse, | each planned to qualify for Portugal’s | under-35 first-home tax exemption.",
     outcome:
       "The site was bought and cleared in Q1 2026. | Next: the licensing application, | then funding and construction.",
     facts: [
