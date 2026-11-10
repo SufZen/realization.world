@@ -5,18 +5,14 @@ import { ButtonLink } from "@/components/button-link";
 import Image from "next/image";
 import { SectionHeading } from "@/components/section-heading";
 import { JsonLd } from "@/components/json-ld";
-import styles from "@/components/home-sections.module.css";
 import { SelectedWork } from "@/components/selected-work";
-import servicesStyles from "@/components/services/services.module.css";
-import { FollowTheWork, LatestFeed } from "@/components/channel-feed";
-import { Testimonials } from "@/components/media-blocks";
-import { SocialLinks } from "@/components/social-links";
+import { LatestFeed } from "@/components/channel-feed";
 import { CtaLink } from "@/components/services/cta-link";
 import { PillarDoors } from "@/components/services/pillar-doors";
-import { approachNavigation, framework, insights, partnerPaths, siteUrl } from "@/content/site";
+import { insights, partnerPaths, siteUrl } from "@/content/site";
 import { introCta } from "@/content/services";
 import { graph, websiteSchema } from "@/lib/schema";
-import { Lines, plain } from "@/components/lines";
+import { Lines } from "@/components/lines";
 import { WebinarBanner } from "@/components/webinar-banner";
 import { latestFeed } from "@/lib/feed";
 
@@ -25,21 +21,6 @@ export const metadata: Metadata = { alternates: { canonical: siteUrl } };
 
 // The latest videos come from the YouTube feed: regenerate hourly.
 export const revalidate = 3600;
-
-/* Sources: Asaf's founder profile (public/asaf/profile.md) and LinkedIn experience;
-   group sizes from the channel-growth session, 10.10.2026. */
-const proof = [
-  ["20 years", "leading complex work: intelligence, architecture, real estate development"],
-  ["6 ventures", "founded or co-founded since 2018"],
-  ["11,800+", "members in the Portugal business groups we run"],
-  ["3 AI systems", "built and in daily use"],
-] as const;
-
-const ideas = [
-  ["Highest and best use", "Every place has a best version. | We find it before anyone builds."],
-  ["Proof before scale", "One deal, one pilot, one process, | measured before anything grows."],
-  ["Built to be handed over", "We build the machine, train the team | and leave on a date agreed at the start."],
-] as const;
 
 export default async function HomePage() {
   const feed = await latestFeed(3);
@@ -58,47 +39,25 @@ export default async function HomePage() {
             <p className="eyebrow">REAL ESTATE · AI SYSTEMS · DELIVERY</p>
             <h1><span className="ln">Untapped potential.</span> <em className="ln">Realized.</em></h1>
             <p className="home-hero__lead">
-              <span className="ln">We realize potential in three dimensions:</span>
-              <span className="ln">places, systems and teams.</span>
+              <span className="ln">Property can hold value and still go nowhere.</span>
+              <span className="ln">We work on what holds it back.</span>
             </p>
             <div className="button-row">
               <ButtonLink href="/services">See our services</ButtonLink>
               <CtaLink cta={introCta("home")} pageRef="home" variant="outline" />
             </div>
-            <SocialLinks tone="dark" label="Follow the work" />
           </div>
         </div>
       </section>
 
       <PillarDoors />
 
-      <section className="proof-strip" aria-label="Realization in numbers">
-        <dl className={`container-wide proof-strip__grid ${styles.numbers}`}>
-          {proof.map(([value, label]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
-        </dl>
-      </section>
-
-      <Testimonials />
-
-      <section className="manifesto">
-        <div className="container-wide manifesto__grid">
-          <p className="eyebrow">THE PROBLEM</p>
-          <div>
-            <h2><Lines text="The value is there. | The system isn’t." /></h2>
-            <p><Lines text="We build the missing layer | between an underused place and a working venture." /></p>
-            <ul className={styles.ideas} aria-label="Ideas we work by">
-              {ideas.map(([title, text]) => <li key={title}><strong>{title}</strong><span><Lines text={plain(text)} /></span></li>)}
-            </ul>
-          </div>
-        </div>
-      </section>
-
       <section className="section">
         <div className="container-wide">
           <SectionHeading
             eyebrow="SELECTED WORK"
-            title="One example | from each pillar."
-            intro="A development, a system | and the way we set up teams."
+            title="Work behind | the approach."
+            intro="A development in Barreiro | and the system we run it on."
             align="split"
           />
           <SelectedWork />
@@ -119,37 +78,6 @@ export default async function HomePage() {
             ))}
           </div>
           <div className="button-row"><ButtonLink href="/insights" variant="dark">Go to Learn</ButtonLink></div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container-wide">
-          <SectionHeading eyebrow="FOLLOW THE WORK" title="Six places | to keep up." intro="Projects, ideas and the people behind them, | on the channels you already use." align="split" />
-          <FollowTheWork place="home" />
-        </div>
-      </section>
-
-      <section className="section surface-dark">
-        <div className="container-wide">
-          <SectionHeading
-            eyebrow="OUR FRAMEWORK"
-            title="Potential → system → value."
-            intro="Three layers. One operating reality. | Every engagement ends with a handoff."
-            inverse
-          />
-          <div className={`framework-grid ${servicesStyles.tabletOne}`}>
-            {framework.map(({ title, text, icon: Icon }, index) => (
-              <article className="framework-card" key={title}>
-                <div className="framework-card__icon"><Icon size={25} strokeWidth={1.5} /></div>
-                <p className="eyebrow">0{index + 1}</p>
-                <h3><Lines text={title} /></h3>
-                <p><Lines text={text} /></p>
-              </article>
-            ))}
-          </div>
-          <div className="button-row">
-            {approachNavigation.map((item) => <ButtonLink href={item.href} variant="outline" key={item.href}>{item.label}</ButtonLink>)}
-          </div>
         </div>
       </section>
 

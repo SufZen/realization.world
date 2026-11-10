@@ -4,7 +4,6 @@ import { JsonLd } from "@/components/json-ld";
 import { Lines, plain } from "@/components/lines";
 import { PageHero } from "@/components/page-hero";
 import { SectionHeading } from "@/components/section-heading";
-import { Testimonials } from "@/components/media-blocks";
 import { CtaLink } from "@/components/services/cta-link";
 import { CtaBand } from "@/components/services/sections";
 import styles from "@/components/services/services.module.css";
@@ -15,7 +14,7 @@ import { breadcrumbSchema, graph, ids } from "@/lib/schema";
 
 export const metadata: Metadata = pageMetadata(
   "Services — places, systems and teams",
-  "Realization realizes potential in three dimensions: places, systems and teams. Real estate development in Portugal, AI and operations systems, and team and process setup, each built to be handed over.",
+  "A stalled project needs more than a plan: we work on the property, the paperwork and the team needed to move it. Real estate development in Portugal, AI and operations systems, and team and process setup, each built to be handed over.",
   "/services",
 );
 
@@ -50,7 +49,7 @@ export default function ServicesPage() {
       <PageHero
         index="S"
         eyebrow="SERVICES"
-        title="Places, systems | and teams."
+        title="A stalled project | needs more than a plan."
         intro={hub.sentence}
         theme="light"
         actions={
@@ -63,7 +62,7 @@ export default function ServicesPage() {
 
       <section className="section">
         <div className="container-wide">
-          <SectionHeading eyebrow="THREE PILLARS" title="Pick the one | in front of you." intro="Each page lists what you can buy, | what it costs and how to start." />
+          <SectionHeading eyebrow="THREE PILLARS" title="Pick the one | in front of you." />
           <div className={styles.pillars}>
             {pillars.map(({ slug, href, dimension, title, subtitle, forWhom, icon: Icon, offers }, index) => (
               <article className={styles.pillar} key={slug}>
@@ -88,29 +87,10 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <Testimonials surface="surface-muted" />
-
-      <section className="section surface-dark">
-        <div className="container-wide">
-          <SectionHeading eyebrow={hub.why.eyebrow} title={hub.why.title} intro={hub.why.intro} inverse />
-          <div className={`framework-grid ${styles.tabletOne}`}>
-            {hub.why.items.map(([title, text], index) => {
-              const Icon = pillars[index].icon;
-              return (
-                <article className="framework-card" key={title}>
-                  <div className="framework-card__icon"><Icon size={27} strokeWidth={1.5} /></div>
-                  <h3>{title}</h3>
-                  <p><Lines text={text} /></p>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
 
       <section className="section">
         <div className="container-wide">
-          <SectionHeading eyebrow="HOW WE WORK" title="Every engagement | is built to end." />
+          <SectionHeading eyebrow="HOW WE WORK" title="Scope and responsibility, | agreed before work starts." />
           <div className="content-grid">
             {hub.principles.map(([title, text]) => (
               <article className="content-card" key={title}>

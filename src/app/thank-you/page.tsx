@@ -26,7 +26,7 @@ export default async function ThankYouPage({ searchParams }: PageProps<"/thank-y
         title="Thank you. | We’ll be in touch."
         intro="Your brief reached our inbox. | We reply within two working days — | usually with a question or a time to talk."
         theme="brand"
-        actions={<><ButtonLink href={bookingUrl} variant="dark">Book a 30-min intro now</ButtonLink><ButtonLink href={href} variant="outline">{label}</ButtonLink></>}
+        actions={<><ButtonLink href={bookingUrl} variant="dark">Book a 20-min intro now</ButtonLink><ButtonLink href={href} variant="outline">{label}</ButtonLink></>}
       />
       <section className="section">
         <div className="container-wide">

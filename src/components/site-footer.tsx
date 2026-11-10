@@ -23,7 +23,6 @@ export function SiteFooter() {
       <div className="container-wide site-footer__grid">
         <div className="site-footer__identity">
           <BrandMark onYellow />
-          <p className="spaced-caps">PHYSICAL POTENTIAL. DIGITAL SYSTEMS. REALIZED VALUE.</p>
           <p><Lines text="Untapped potential. | Realized." /></p>
           <SocialLinks />
         </div>
@@ -51,7 +50,7 @@ export function SiteFooter() {
           </Link>
           <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
           <a href={whatsappUrl} rel="noopener" data-umami-event="whatsapp">WhatsApp</a>
-          <a href={bookingUrl} rel="noopener" data-umami-event="book-intro">Book a 30-min intro</a>
+          <a href={bookingUrl} rel="noopener" data-umami-event="book-intro">Book a 20-min intro</a>
           <a href="/asaf">Founder · Asaf Eyzenkot</a>
           {communities.map((group) => (
             <a href={group.href} rel="noopener" data-umami-event="join-group" data-umami-event-group={group.lang} key={group.href}>

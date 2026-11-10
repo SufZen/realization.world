@@ -10,7 +10,7 @@ import { HeroStatement } from "@/components/services/hero-statement";
 import { CtaBand, FaqList, FitLists, InsightFeed, OfferList } from "@/components/services/sections";
 import styles from "@/components/services/services.module.css";
 import { insights, siteUrl } from "@/content/site";
-import { delivery, introCta, pillarBySlug, pillarInsights } from "@/content/services";
+import { delivery, pillarBySlug, pillarInsights } from "@/content/services";
 import { pageMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, graph, ids } from "@/lib/schema";
 
@@ -65,7 +65,6 @@ export default function TeamSetupPage() {
         actions={
           <>
             <CtaLink cta={pillar.session} pageRef={pillar.ref} variant="dark" />
-            <CtaLink cta={introCta("delivery")} pageRef={pillar.ref} variant="outline" />
           </>
         }
       />
@@ -101,14 +100,14 @@ export default function TeamSetupPage() {
 
       <section className="section" id="offers">
         <div className="container-wide">
-          <SectionHeading eyebrow="WAYS TO START" title="Three ways in." intro="A free intro, a fixed-scope setup, | or a fractional role while the team grows." />
+          <SectionHeading eyebrow="WAYS TO START" title="Three ways in." intro="A free setup call, a fixed-scope setup, | or a fractional role while the team grows." />
           <OfferList offers={pillar.offers} pageRef={pillar.ref} />
         </div>
       </section>
 
       <section className="section surface-brand">
         <div className="container-wide">
-          <SectionHeading eyebrow="BEFORE THE INTRO" title="Three questions | we will ask." intro="Rough answers are enough. | They tell us both whether this fits." />
+          <SectionHeading eyebrow="BEFORE THE SETUP CALL" title="Three questions | we will ask." intro="Rough answers are enough. | They tell us both whether this fits." />
           <ol className={styles.questions}>
             {delivery.questions.map((question) => <li key={question}><Lines text={question} /></li>)}
           </ol>
@@ -135,10 +134,9 @@ export default function TeamSetupPage() {
 
       <CtaBand
         eyebrow="START WITH 30 MINUTES"
-        title="Need the machine built, | not another manager?"
+        title="Too many decisions | still waiting for you?"
         text="Thirty minutes and three questions | tell us both whether it fits."
         primary={pillar.session}
-        secondary={introCta("delivery")}
         pageRef={pillar.ref}
       />
     </>

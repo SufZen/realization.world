@@ -47,7 +47,7 @@ export type WorkItem = {
   name: string;
   kind: WorkKind;
   eyebrow: string;
-  status: "Ongoing" | "Live" | "Launching" | "In development" | "In daily use" | "Case study" | "Concluded";
+  status: "PIP approved · 7.2026" | "Ongoing" | "Live" | "Launching" | "In development" | "In daily use" | "Case study" | "Concluded";
   years?: string;
   location: string;
   role: string;
@@ -86,7 +86,7 @@ export const work: WorkItem[] = [
     name: "Arena",
     kind: "development",
     eyebrow: "RESIDENTIAL DEVELOPMENT · BARREIRO, LISBON",
-    status: "Ongoing",
+    status: "PIP approved · 7.2026",
     years: "2026–2028",
     location: "Barreiro, Lisbon metropolitan area, Portugal",
     role: "GP, development manager and shareholder",
@@ -96,9 +96,9 @@ export const work: WorkItem[] = [
     problem:
       "Greater Lisbon is short of good homes | below the luxury segment. Young professionals | are priced out of the centre, | while Barreiro’s stock is old and inefficient.",
     approach:
-      "We shifted the mix away from slow T2/T3 flats | toward the most liquid typologies: one T0, | nine T1 and a T2 penthouse, | each designed to qualify for Portugal’s | under-35 first-home tax exemption.",
+      "We changed the mix away from slow T2/T3 flats | to smaller homes: one T0, | nine T1 and a T2 penthouse, | each designed to qualify for Portugal’s | under-35 first-home tax exemption.",
     outcome:
-      "Site acquired and demolished (Q1 2026). | Information request (PIP) approved (July 2026). | Funding and construction are the next milestones.",
+      "Site acquired and demolished (Q1 2026). | Information request (PIP) approved (July 2026). | Next: the licensing application, then funding and construction.",
     facts: [
       { value: "11", label: "homes · 1×T0, 9×T1, 1×T2" },
       { value: "596 m²", label: "net sellable area over 5 floors" },
@@ -110,9 +110,10 @@ export const work: WorkItem[] = [
       intro: "A single dedicated company (SPV) | with Realization running day-to-day execution.",
       items: [
         ["Acquire", "Site secured and demolished | in Q1 2026."],
-        ["License", "PIP information request | approved in July 2026."],
+        ["PIP", "Information request | approved in July 2026."],
+        ["License", "Next: submit the | licensing application."],
         ["Fund & build", "Equity and bank facility; | a 12–15 month build."],
-        ["Sell", "Units sized for young buyers | and yield investors."],
+        ["Sell", "Units sized for young buyers."],
       ],
     },
     partners: ["SFRG Architects — design and licensing", "FocoFIN — financial modelling and structuring", "Partner contractor — in discussion"],
@@ -147,16 +148,13 @@ export const work: WorkItem[] = [
     summary:
       "FLUII (fluii.pt, launched as realization.pt) resolves homes stuck in inheritance, co-owner deadlock or mismatched paperwork, then sells them to vetted investors. AI assistant Clara does the intake and drafting; licensed people make every decision about money and law.",
     problem:
-      "About 723,000 Portuguese homes stand empty | while prices hit records. | Most are stuck by people and paperwork — | unsplit inheritances, absent co-owners, | registries that disagree — not by the building.",
+      "Across Portugal, homes stand empty | while prices hit records. | Most are stuck by people and paperwork — | unsplit inheritances, absent co-owners, | registries that disagree — not by the building.",
     approach:
       "Owners describe the case to Clara | in Portuguese or English. | The case is scored, checked and turned into | a roadmap our team approves. | Investors see anonymised matches | and pay a small fee to unlock one deal room.",
     outcome:
       "Pre-launch is live with a waiting list | and the first owners invited. | A 10-case pilot decides pricing | before a wider launch.",
     facts: [
-      { value: "723k", label: "empty homes in Portugal (INE Census 2021)" },
       { value: "AMI 25459", label: "licensed real-estate mediation" },
-      { value: "164", label: "row-level security policies in Postgres" },
-      { value: "683", label: "automated tests, plus 9 nightly browser journeys" },
     ],
     steps: {
       title: "Deadlock → | resolution.",
@@ -205,14 +203,12 @@ export const work: WorkItem[] = [
     outcome:
       "Version 5.6 runs Realization’s research, | documentation and coordination daily. | It is the engine inside our own operations | and our client AI work, | not a product we sell on its own.",
     facts: [
-      { value: "54.5k", label: "lines of Python, plus 11.5k of TSX" },
-      { value: "2,032", label: "automated tests across 99 files" },
       { value: "24", label: "MCP tools exposed to other agents" },
       { value: "4", label: "LLM providers, routed by task and cost" },
     ],
     steps: {
       title: "Context → | coordinated action.",
-      intro: "Six hard problems, | solved as one stack.",
+      intro: "Knowledge, memory, tasks and approvals | in one system.",
       items: [
         ["Knowledge", "FABRIC: plain markdown the team can edit, | round-tripped into typed entities."],
         ["Memory", "Synapse: a four-tier index | that recalls the cheapest context first."],
@@ -250,9 +246,9 @@ export const work: WorkItem[] = [
     years: "2026",
     location: "Israel · a leading architecture practice (anonymised)",
     role: "Discovery, roadmap and pilot design",
-    descriptor: "How one engagement moved a 25-person firm | from scattered experiments | to one measured programme.",
+    descriptor: "A 25-person architecture firm | chose one pilot | before committing to a wider programme.",
     summary:
-      "For a leading Israeli architecture practice of about 25 people, Realization mapped eight work domains, chose one visible pilot and modelled the programme over 24 months. The model breaks even in month seven and reaches 3.9 times value to investment by month 24, counting the firm’s own hours as a cost.",
+      "For an Israeli architecture practice of about 25 people, Realization mapped eight work domains, chose one visible pilot with a pass mark agreed in advance, and set four stop points before the budget opens.",
     problem:
       "The firm had the tools and the understanding. | What it lacked was a decision: | what to do first, who owns it, | and whether anyone had hours for it.",
     approach:
@@ -260,13 +256,11 @@ export const work: WorkItem[] = [
     outcome:
       "A decisions document the firm owns, | a pilot of three to five weeks | with an agreed pass mark, | and four stop points before the budget opens.",
     facts: [
-      { value: "Month 7", label: "modelled break-even" },
-      { value: "3.9×", label: "value to investment at 24 months" },
       { value: ">90%", label: "pilot accuracy pass mark" },
       { value: "~18%", label: "of the 24-month budget at risk before proof" },
     ],
     steps: {
-      title: "Five steps, | each ending in a decision.",
+      title: "Four steps, | each ending in a decision.",
       intro: "Nothing is built | before the problem is named and measured.",
       items: [
         ["Listen", "In-depth sessions with partners and staff. | Output: the firm’s own problem statements."],
@@ -304,7 +298,7 @@ export const work: WorkItem[] = [
       {
         heading: "Economics the approver can trust",
         paragraphs: [
-          "The 24-month model counts every cost, including the internal lead’s own hours, and prices only time saved. Break-even lands in month seven; value reaches about 3.9 times the investment by month 24. The number that converts a cautious approver is the exposure before proof: about 18% of the total, reached at week eight.",
+          "The 24-month model counts every cost, including the internal lead’s own hours, and prices only time saved. The number that converts a cautious approver is the exposure before proof: about 18% of the total, reached at week eight.",
         ],
       },
     ],
@@ -330,16 +324,13 @@ export const work: WorkItem[] = [
     summary:
       "MeetSum is a self-hosted meeting-intelligence platform that turns Google Meet, Drive, desktop and uploaded recordings into transcripts, decisions and tasks. It handles Hebrew and mixed Hebrew–English speech properly and pushes results into Google Workspace, n8n, RealizeOS and AI agents.",
     problem:
-      "AI note-takers are English-first, | hosted on someone else’s servers | and stop at an email summary. | Hebrew speech degrades, | and nothing reaches the systems where work happens.",
+      "Our meetings run in Hebrew and English, | often in the same sentence. | We needed transcripts that hold up, | on our own servers, | that reach the systems where the work happens.",
     approach:
       "One retry-safe job pipeline for every source. | Speech is routed by language and length: | a Hebrew-tuned local model for short meetings, | a cloud model for long or mixed ones, | with every stage’s model and confidence recorded.",
     outcome:
       "Live in production with import, processing, | review, sharing, export and automation working end to end. | Cost scales with usage, not seats.",
     facts: [
-      { value: "36k", label: "lines of TypeScript, SQL and scripts" },
-      { value: "74", label: "REST API route handlers" },
       { value: "5", label: "interface languages, including RTL Hebrew" },
-      { value: "~63%", label: "illustrative saving vs per-seat SaaS at 50 users" },
     ],
     sections: [
       {
@@ -355,7 +346,6 @@ export const work: WorkItem[] = [
       { src: "/work/meetsum/meeting-summary.webp", wide: true, alt: "MeetSum meeting workspace with a meeting list, processing pipeline and an AI summary of an acquisition review", caption: "Meeting workspace: summary, decisions, tasks and the processing pipeline · demo data" },
       { src: "/work/meetsum/hebrew-interface.webp", wide: true, alt: "The same MeetSum workspace in the Hebrew right-to-left interface", caption: "The same workspace in Hebrew, right to left · demo data" },
     ],
-    disclosure: "The cost comparison is illustrative (SaaS at $19 per seat per month vs a $100 VPS plus usage) and excludes engineering time.",
     source: "MeetSum project overview v0.6.0, September 2026.",
     related: ["making-hebrew-speech-recognition-production-safe"],
     cta: { path: "advisory", heading: "Meetings that should | feed your systems?", label: "Talk about MeetSum" },
@@ -384,7 +374,6 @@ export const work: WorkItem[] = [
     facts: [
       { value: "37", label: "MCP tools for external AI agents" },
       { value: "13", label: "AI provider presets, from OpenAI to local Ollama" },
-      { value: "25.6k", label: "lines of TypeScript across 219 files" },
       { value: "0", label: "AI cost to the server: users bring their own AI" },
     ],
     steps: {
@@ -413,7 +402,7 @@ export const work: WorkItem[] = [
     ],
     disclosure: "Counts are measured from the public repository at v0.4.0 (September 2026). Screens show fictional demo data.",
     source: "Dreamward repository and changelog, v0.4.0, September 2026; Lifebook project overview v0.3.1.",
-    cta: { path: "advisory", heading: "Need a private, | agent-ready product built fast?", label: "Start a conversation" },
+    cta: { path: "advisory", heading: "Explore Dreamward.", label: "Start a conversation" },
     schema: "SoftwareApplication",
     icon: BookOpen,
     updated: "2026-09-29",

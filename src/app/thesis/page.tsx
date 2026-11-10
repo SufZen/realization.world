@@ -38,7 +38,7 @@ export default function ThesisPage() {
       <section className="section">
         <div className="container-wide">
           <SectionHeading
-            eyebrow="WHERE WE LOOK"
+            eyebrow="AREAS WE MAY EXPLORE"
             title="Where systems shape reality."
             intro="We focus where a better system | changes a lasting physical outcome."
           />

@@ -1,5 +1,5 @@
 import { Building2, Cpu, UsersRound } from "lucide-react";
-import { bookingUrl, type IconComponent } from "./site";
+import type { IconComponent } from "./site";
 
 /**
  * The Services section (Oct 2026): a hub and three pillar pages.
@@ -55,7 +55,7 @@ export const bookingTypes = {
   /** AI Strategy Session. For now: the 60-min consulting type. */
   aiStrategySession: `${tidycal}/60-minute-consulting-meeting`,
   /** Team and process setup intro. For now: the 30-min intro. */
-  deliveryIntro: bookingUrl,
+  deliveryIntro: "https://schedule.realization.co.il/30-minute-intro-meeting-asaf",
   realizeosSetup: `${tidycal}/realizeos-setup`,
 };
 
@@ -124,7 +124,7 @@ export const pillars: Pillar[] = [
     href: "/services/real-estate",
     dimension: "Places",
     title: "Real estate development",
-    subtitle: "From empty or underused | to highest and best use.",
+    subtitle: "We check the paperwork, buildable scope | and costs before you commit.",
     forWhom: "Investors and developers in Portugal, | and owners of stuck or problematic properties.",
     icon: Building2,
     ref: "services-real-estate",
@@ -138,7 +138,7 @@ export const pillars: Pillar[] = [
     offers: [
       {
         name: "Free deal check",
-        text: "Paste a listing link, from Idealista or anywhere else. | We send back the real numbers: purchase costs, | tax, financing and the yield that is left.",
+        text: "Paste a listing link, from Idealista or anywhere else. | We send back the assumptions and the checks still missing: | purchase costs, tax and financing.",
         format: "Online form · reply within two working days",
         price: "Free",
         cta: { label: "Check a deal", href: "#deal-check" },
@@ -160,8 +160,8 @@ export const pillars: Pillar[] = [
       },
       {
         name: "Development management",
-        text: "We take a limited number of projects | from site to sale, as we do at Arena, | our eleven-home building in Barreiro.",
-        format: "Limited number of projects",
+        text: "At Arena in Barreiro we are the managing partner | and development manager. | PIP approved 7.2026; licensing is next.",
+        format: "Site to sale",
         price: "By proposal",
         cta: { label: "See Arena", href: "/work/arena-barreiro", event: "view-case", data: { pillar: "real-estate", case: "arena-barreiro" } },
       },
@@ -204,7 +204,7 @@ export const pillars: Pillar[] = [
       {
         name: "Audit Sprint",
         text: "A joint, in-depth audit of your firm. | Within 48 hours, a written report: | what to fix first, in order of priority. | The fee is credited toward implementation.",
-        format: "90-min kickoff · RealizeOS setup session included",
+        format: "90-min kickoff · optional RealizeOS setup session",
         price: "€495 + VAT",
         amount: 495,
         cta: auditSprintCheckout
@@ -238,7 +238,7 @@ export const pillars: Pillar[] = [
     icon: UsersRound,
     ref: "services-team-setup",
     session: {
-      label: "Book a setup intro · 30 min",
+      label: "Book a setup call · 30 min",
       href: bookingTypes.deliveryIntro,
       event: "book-session-delivery",
       data: { pillar: "delivery" },
@@ -246,11 +246,11 @@ export const pillars: Pillar[] = [
     },
     offers: [
       {
-        name: "Setup intro",
+        name: "Setup call",
         text: "Thirty minutes and three questions (below). | If we are not the right fit, | you will know by the end of the call.",
         format: "30 min · Google Meet",
         price: "Free",
-        cta: { label: "Book a setup intro", href: bookingTypes.deliveryIntro, event: "book-session-delivery", data: { pillar: "delivery" }, carryRef: true },
+        cta: { label: "Book a setup call", href: bookingTypes.deliveryIntro, event: "book-session-delivery", data: { pillar: "delivery" }, carryRef: true },
       },
       {
         name: "Team and process setup",
@@ -261,8 +261,8 @@ export const pillars: Pillar[] = [
       },
       {
         name: "Fractional operations or development management",
-        text: "Asaf Eyzenkot takes a limited number of fractional roles, | contracted through Realization Unipessoal LDA.",
-        format: "Limited availability",
+        text: "Asaf Eyzenkot takes fractional roles, | contracted through Realization Unipessoal LDA.",
+        format: "Fractional",
         price: "By proposal",
         cta: { label: "See Asaf’s profile", href: "/asaf", event: "view-profile", data: { pillar: "delivery" } },
       },
@@ -279,7 +279,7 @@ export const pillarBySlug = (slug: PillarSlug) => pillars.find((pillar) => pilla
 
 export const hub = {
   ref: "services",
-  sentence: "Realization realizes potential in three dimensions: | places, systems and teams.",
+  sentence: "We work on the property, the paperwork | and the team needed to move it.",
   why: {
     eyebrow: "WHY ONE COMPANY",
     title: "One project, | three dimensions.",
@@ -291,8 +291,7 @@ export const hub = {
     ],
   },
   principles: [
-    ["Fixed scope, an exit after each stage", "Every engagement is a separate, priced unit. | You can stop after any of them."],
-    ["Built to be handed over", "We build the machine, train the team | and leave on a date agreed at the start."],
+    ["Scope, fee and stopping point", "Agreed before work starts, | for every engagement."],
     ["Proof before scale", "One deal, one pilot or one process first, | measured before anything grows."],
   ],
 } as const;
@@ -359,7 +358,7 @@ export const delivery = {
   },
   faqs: [
     ["Is this construction management?", "No. We set up how the project or the firm works: roles, decisions, workflows and reporting. Building stays with your architects and contractors. If you need someone to coordinate them for you, that is the fractional development-management role."],
-    ["Is this ongoing operations work?", "No. Setup ends on a handoff date written into the proposal. Ongoing fractional roles are possible, with limited availability."],
+    ["Is this ongoing operations work?", "No. Setup ends on a handoff date written into the proposal. Ongoing fractional roles are possible."],
     ["How is it priced?", "Team and process setup is a fixed scope, priced in a proposal before it starts. Fractional roles are priced in a proposal too, and contracted through Realization Unipessoal LDA."],
     ["Where do you work, and in which languages?", "Remotely, and in person in the Lisbon area and Barcelona. We work in English and Hebrew, with basic Portuguese and Spanish."],
   ],
@@ -377,7 +376,7 @@ export type SystemsCopy = {
   offers: { eyebrow: string; title: string; intro: string; items: Offer[] };
   engagement: { eyebrow: string; title: string; intro: string; youGet: string; stages: ReadonlyArray<readonly [string, string, string, string]> };
   principles: { eyebrow: string; title: string; intro: string; items: ReadonlyArray<readonly [string, string]> };
-  proof: { eyebrow: string; title: string; intro: string; link: Cta };
+  proof: { eyebrow: string; title: string; intro?: string; link: Cta };
   systems: { eyebrow: string; title: string; intro: string };
   alsoAvailable: { eyebrow: string; title: string; intro: string; links: Cta[] };
   faq: { eyebrow: string; title: string; items: ReadonlyArray<readonly [string, string]> };
@@ -396,7 +395,7 @@ export const systemsEn: SystemsCopy = {
   hero: { eyebrow: "SERVICES · SYSTEMS", title: "AI and operations | systems.", intro: systemsPillar.subtitle },
   promise: {
     eyebrow: "THE APPROACH",
-    title: "AI that pays back, | in the right order.",
+    title: "Choose where AI starts, | then prove it there.",
     intro: "We help professional firms and operators decide where AI starts, | prove it on one measured problem, | and hand over a system the team owns.",
   },
   fit: {
@@ -419,7 +418,7 @@ export const systemsEn: SystemsCopy = {
   offers: {
     eyebrow: "WAYS TO START",
     title: "Start small. | Each step stands on its own.",
-    intro: "Free to learn, a paid hour to decide, | a fixed-price sprint to prove it.",
+    intro: "Start with the audit, | or book a free intro | if you need to check the fit first.",
     items: systemsPillar.offers,
   },
   engagement: {
@@ -448,7 +447,6 @@ export const systemsEn: SystemsCopy = {
   proof: {
     eyebrow: "PROOF",
     title: "The method, in a real firm.",
-    intro: "A 25-person architecture practice: | eight domains mapped, one pilot chosen, | break-even modelled at month seven.",
     link: { label: "Read the case study", href: "/work/ai-adoption-architecture-firm" },
   },
   systems: {
@@ -459,7 +457,7 @@ export const systemsEn: SystemsCopy = {
   alsoAvailable: {
     eyebrow: "ALSO AVAILABLE",
     title: "Fractional operations | and development management.",
-    intro: "Asaf Eyzenkot takes a limited number of B2B roles: | operating models, project coordination | and real-estate development management.",
+    intro: "Asaf Eyzenkot also takes B2B roles: | operating models, project coordination | and real-estate development management.",
     links: [
       { label: "See Asaf’s profile", href: "/asaf", event: "view-profile", data: { pillar: "ai-systems" } },
       { label: "Team and process setup", href: "/services/team-setup" },
@@ -469,12 +467,12 @@ export const systemsEn: SystemsCopy = {
     eyebrow: "QUESTIONS",
     title: "Before you ask.",
     items: [
-      ["How quickly will we see a result?", "The Audit Sprint starts with a 90-minute kickoff, and the written report arrives within 48 hours of the audit. A pilot runs three to five weeks, and most of that time is quality checks against real cases rather than building. In our modelled case, the programme breaks even in month seven."],
+      ["How quickly will we see a result?", "The Audit Sprint starts with a 90-minute kickoff, and the written report arrives within 48 hours of the audit. A pilot runs three to five weeks, and most of that time is quality checks against real cases rather than building."],
       ["How much of our team’s time does it take?", "Two kinds of time. One internal lead for four to six hours a week, and two to three hours a week from each pilot participant, mostly reviewing outputs. We ask for those hours in the proposal, because without them the work does not happen."],
       ["Do we have to use RealizeOS or your other systems?", "No. We start with what you already pay for and what the market offers. RealizeOS, MeetSum and our other systems are options when they fit the gap, not a requirement."],
-      ["What does it cost?", "Each stage is priced as a separate, fixed unit before it starts, and you can stop after any stage. The Audit Sprint is deliberately a small first commitment. Ask for a proposal after a 20-minute intro call."],
+      ["What does it cost?", "The Audit Sprint is €495 + VAT. Implementation is scoped and priced separately, before it starts, and you can stop after any stage."],
       ["Where do you work, and in which languages?", "Remotely, and in person in the Lisbon area and Barcelona. We work in English and Hebrew, with basic Portuguese and Spanish."],
-      ["Can you also run operations or a development project for us?", "Yes. Asaf Eyzenkot takes a limited number of fractional operations and development-management roles, contracted through Realization Unipessoal LDA."],
+      ["Can you also run operations or a development project for us?", "Yes. Asaf Eyzenkot takes fractional operations and development-management roles, contracted through Realization Unipessoal LDA."],
     ],
   },
   cta: {

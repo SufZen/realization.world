@@ -100,7 +100,7 @@ export function SiteHeader() {
           <div className="menu-panel__foot">
             <p>Founder-led vision and validation.<br />Partner-operated scale and continuity.</p>
             <Link href="/bring-an-opportunity" onClick={() => setOpen(false)}>Start with an opportunity <ArrowUpRight aria-hidden="true" size={16} /></Link>
-            <a href={bookingUrl} target="_blank" rel="noopener" data-umami-event="book-intro">Book a 30-min intro <ArrowUpRight aria-hidden="true" size={16} /></a>
+            <a href={bookingUrl} target="_blank" rel="noopener" data-umami-event="book-intro">Book a 20-min intro <ArrowUpRight aria-hidden="true" size={16} /></a>
             <SocialLinks tone="dark" />
           </div>
         </nav>

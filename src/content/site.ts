@@ -39,8 +39,8 @@ export const approachNavigation = [
   { label: "Markets", href: "/markets" },
 ] as const;
 
-/** Booking link for a 30-minute intro call (TidyCal). */
-export const bookingUrl = "https://schedule.realization.co.il/30-minute-intro-meeting-asaf";
+/** Booking link for the 20-minute intro call (TidyCal), the same call co.il and pt offer (QA 9.11). */
+export const bookingUrl = "https://schedule.realization.co.il/20-minute-intro-meeting-asaf";
 export const whatsappUrl = "https://wa.me/972528289437";
 export const contactEmail = "hello@realization.world";
 

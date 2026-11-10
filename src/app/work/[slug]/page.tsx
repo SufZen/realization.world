@@ -37,7 +37,7 @@ export default async function WorkItemPage({ params }: PageProps<"/work/[slug]">
   const dark = item.kind === "system" || item.kind === "advisory";
   const formHref = `/bring-an-opportunity?path=${item.cta.path}&ref=${item.slug}`;
   const related = insights.filter((insight) => item.related?.includes(insight.slug));
-  const isLive = ["Live", "Launching", "Ongoing", "In daily use"].includes(item.status);
+  const isLive = ["Live", "Launching", "Ongoing", "PIP approved · 7.2026", "In daily use"].includes(item.status);
 
   return (
     <>
@@ -227,7 +227,7 @@ export default async function WorkItemPage({ params }: PageProps<"/work/[slug]">
           <div>
             <p className="eyebrow">NEXT STEP</p>
             <h2><Lines text={item.cta.heading} /></h2>
-            <p>Or <a className="text-link" href={bookingUrl} target="_blank" rel="noopener">book a 30-minute intro call</a> with Asaf.</p>
+            <p>Or <a className="text-link" href={bookingUrl} target="_blank" rel="noopener">book a 20-minute intro call</a> with Asaf.</p>
           </div>
           <ButtonLink href={formHref} variant="dark">{item.cta.label}</ButtonLink>
         </div>

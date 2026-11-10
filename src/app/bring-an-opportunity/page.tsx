@@ -22,7 +22,7 @@ export default function BringOpportunityPage() {
         title="Show us what’s stuck."
         intro="What exists? Who holds the rights? | What blocks the outcome — or what should AI take off your team?"
         theme="dark"
-        actions={<ButtonLink href={bookingUrl} variant="primary">Prefer to talk? Book 30 minutes</ButtonLink>}
+        actions={<ButtonLink href={bookingUrl} variant="primary">Prefer to talk? Book 20 minutes</ButtonLink>}
       />
       <section className="section">
         <div className="container-wide opportunity-layout">

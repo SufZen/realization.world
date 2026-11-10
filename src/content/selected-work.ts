@@ -3,8 +3,8 @@ import type { PillarSlug } from "./services";
 type Image = { src: string; alt: string };
 
 /**
- * Homepage "Selected work": one example per pillar, each with its strongest image. A
- * project from /work, or (for a pillar shown best by its method) a card for the service.
+ * Homepage "Selected work": documented work only, each with its strongest image (QA 9.11:
+ * the team-setup offer was a service shown as evidence). Add a team case when one exists.
  * The full portfolio stays on /work. Swap an entry here when a stronger project arrives.
  */
 export type SelectedItem =
@@ -28,18 +28,5 @@ export const selectedWork: SelectedItem[] = [
     pillar: "ai-systems",
     dimension: "Systems",
     image: { src: "/media/venture-realizeos.webp", alt: "Operators connecting field equipment beside a tablet and process map" },
-  },
-  {
-    kind: "service",
-    title: "Team and process setup",
-    text: "Clear roles, working processes | and a trained team, handed over | on a date agreed at the start.",
-    status: "How we work",
-    href: "/services/team-setup",
-    pillar: "delivery",
-    dimension: "Teams",
-    image: {
-      src: "/media/team-setup.webp",
-      alt: "Hands arranging role cards for a project lead, architect, site coordinator, finance and sales around a workflow and a project timeline that ends in a handoff",
-    },
   },
 ];

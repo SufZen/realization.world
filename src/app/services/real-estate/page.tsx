@@ -21,7 +21,7 @@ const pillar = pillarBySlug("real-estate");
 
 export const metadata: Metadata = pageMetadata(
   "Real estate development in Portugal — deal checks, feasibility, development management",
-  "From empty or underused to highest and best use. A free deal check, a 60-minute deal consultation, feasibility studies and financial models, and development management in Portugal.",
+  "Before buying a site in Portugal, find what could stop it. A free deal check, a 60-minute deal consultation, feasibility studies and financial models, and development management in Portugal.",
   pillar.href,
 );
 
@@ -73,7 +73,7 @@ export default function RealEstatePage() {
       <PageHero
         index="01"
         eyebrow="SERVICES · PLACES"
-        title="Real estate | development."
+        title="Before buying the site, | find what could stop it."
         intro={pillar.subtitle}
         theme="brand"
         aside={<HeroStatement eyebrow="FOR" statement={pillar.forWhom} />}
@@ -96,8 +96,8 @@ export default function RealEstatePage() {
         <div className="container-wide opportunity-layout">
           <div className="opportunity-intro">
             <p className="eyebrow">FREE DEAL CHECK</p>
-            <h2><Lines text="Send a listing. | Get the real numbers back." /></h2>
-            <p><Lines text="The return in a listing is usually gross: | before tax, fees and financing. | We work out what is left." /></p>
+            <h2><Lines text="Send a listing. | Get back what it doesn’t say." /></h2>
+            <p><Lines text="We check purchase costs, financing | and gaps in the paperwork." /></p>
             <ul className="opportunity-checklist">
               {checks.map((item) => <li key={item}>{item}</li>)}
             </ul>
