@@ -114,7 +114,7 @@ export const partnerPaths = [
     title: "Operators",
     headline: "Take a proven system further.",
     summary:
-      "For experienced operators | who want a validated system, not a raw idea.",
+      "For experienced operators | who want to take a venture further, | with its status shown as it is.",
     promise:
       "Transparent status | and a structured transfer conversation.",
     cta: "Explore operator fit",

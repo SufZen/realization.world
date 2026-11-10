@@ -54,6 +54,9 @@ export type WorkItem = {
   role: string;
   /** Card and hero line. Authored breaks allowed. */
   descriptor: string;
+  /** Card line on pages other than the case itself: a reason to open the case, without repeating its facts. */
+  teaser?: string;
+  teaserHe?: string;
   /** Answer-first summary: two plain sentences, quotable by people and machines. */
   summary: string;
   problem: string;
@@ -91,15 +94,16 @@ export const work: WorkItem[] = [
     years: "2026–2028",
     location: "Barreiro, Lisbon metropolitan area, Portugal",
     role: "GP, development manager and shareholder",
-    descriptor: "Eleven compact homes | on Lisbon’s south bank, twenty minutes from the city by ferry.",
+    descriptor: "Compact homes for young buyers | on Lisbon’s south bank.",
+    teaser: "Why a south-bank site | became smaller homes.",
     summary:
       "Arena is an eleven-home residential building in Barreiro, across the Tagus from Lisbon, developed by Realization as GP and development manager. The site is acquired and cleared, the information request (PIP) is approved, and construction is planned for 2026–27.",
     problem:
       "Greater Lisbon is short of good homes | below the luxury segment. Young professionals | are priced out of the centre, | while Barreiro’s stock is old and inefficient.",
     approach:
-      "We changed the mix away from slow T2/T3 flats | to smaller homes: one T0, | nine T1 and a T2 penthouse, | each designed to qualify for Portugal’s | under-35 first-home tax exemption.",
+      "We changed the mix away from T2/T3 flats, | which were slow to sell [missing: the evidence], | to smaller homes: one T0, | nine T1 and a T2 penthouse, | each designed to qualify for Portugal’s | under-35 first-home tax exemption.",
     outcome:
-      "Site acquired and demolished (Q1 2026). | Information request (PIP) approved (July 2026). | Next: the licensing application, then funding and construction.",
+      "The site was bought and cleared in Q1 2026. | Next: the licensing application, | then funding and construction.",
     facts: [
       { value: "11", label: "homes" },
       { value: "596 m²", label: "net sellable area over 5 floors" },
@@ -146,12 +150,13 @@ export const work: WorkItem[] = [
     location: "Portugal · Setúbal, Lisbon, Porto, Braga first",
     role: "Founder and product lead; a development lead owns software delivery",
     descriptor: "In pre-launch: a licensed platform | for homes stuck in inheritance, | co-ownership or paperwork.",
+    teaser: "What keeps an inherited home | off the market, and how it gets back.",
     summary:
       "FLUII is in pre-launch, with a waiting list and its first owners invited. It resolves homes stuck in inheritance, co-owner deadlock or mismatched paperwork, then sells them to vetted investors; AI assistant Clara does the intake and drafting, and licensed people make every decision about money and law.",
     problem:
       "Across Portugal, homes stand empty | while prices hit records. | Most are stuck by people and paperwork — | unsplit inheritances, absent co-owners, | registries that disagree — not by the building.",
     approach:
-      "Owners describe the case to Clara | in Portuguese or English. | The case is scored, checked and turned into | a roadmap our team approves. | Under a signed mediation mandate, | lawyers and architects resolve it, | and investors see the address only at negotiation.",
+      "The planned process: owners describe the case to Clara | in Portuguese or English. | The case is scored, checked and turned into | a roadmap our team approves. | Under a signed mediation mandate, | lawyers and architects resolve it, | and investors see the address only at negotiation.",
     outcome:
       "Pre-launch opened with a waiting list | and the first owners invited. | A 10-case pilot decides pricing | before a wider launch.",
     facts: [
@@ -195,12 +200,14 @@ export const work: WorkItem[] = [
     location: "Self-hosted · runs anywhere",
     role: "Designed and built by Realization; runs our own operations",
     descriptor: "A self-hosted team of AI agents | that knows the business, remembers | and works under human approval.",
+    teaser: "The system Realization | runs its own work on.",
+    teaserHe: "המערכת שעליה Realization | מנהלת את העבודה שלה.",
     summary:
       "RealizeOS is a self-hosted AI operations system: coordinated agents that share one knowledge base about the business, remember past work and act only within approval gates. Realization built it to run its own operations and publishes the core under a source-available licence.",
     problem:
-      "Most teams adopted chatbots, | not an AI operation. | Every chat starts from zero, | work isn’t followed through, | and the knowledge lives with the model vendor.",
+      "We needed AI that keeps what it learns: | the business’s knowledge, its history | and who approved what, | in one place the business owns.",
     approach:
-      "Keep the durable asset — knowledge, | history and identity — in files the business owns. | Everything else is a swappable adapter: | models, agent runtimes, channels and interfaces.",
+      "Keep the knowledge, the history | and the record of decisions | in files the business owns, | so models and tools can change | without losing any of it.",
     outcome:
       "It runs Realization’s research, | documentation and coordination daily. | It is the engine inside our own operations | and our client AI work, | not a product we sell on its own.",
     facts: [
@@ -247,18 +254,17 @@ export const work: WorkItem[] = [
     location: "Israel · a leading architecture practice (anonymised)",
     role: "Discovery, roadmap and pilot design",
     descriptor: "A 25-person architecture firm | chose one pilot | before committing to a wider programme.",
+    teaser: "How one firm decided | where AI starts.",
+    teaserHe: "איך משרד אחד החליט | מאיפה הבינה המלאכותית מתחילה.",
     summary:
       "For an Israeli architecture practice of about 25 people, Realization mapped eight work domains, chose one visible pilot with a pass mark agreed in advance, and set four stop points before the budget opens.",
     problem:
       "The firm had the tools and the understanding. | What it lacked was a decision: | what to do first, who owns it, | and whether anyone had hours for it.",
     approach:
-      "Listen before mapping. | Score every work domain on visible impact | against setup effort. | Prove the method on one problem, | then scale in waves — and plan our own exit.",
+      "We listened before mapping, | scored every work domain on visible impact | against setup effort, | and chose one problem to prove the method on.",
     outcome:
-      "A decisions document the firm owns, | a pilot of three to five weeks | with an agreed pass mark, | and four stop points before the budget opens.",
-    facts: [
-      { value: ">90%", label: "pilot accuracy pass mark" },
-      { value: "~18%", label: "of the 24-month budget at risk before proof" },
-    ],
+      "Delivered: a decisions document the firm owns. | Designed, with results not yet measured: | a pilot of three to five weeks with an agreed pass mark, | and four stop points before the budget opens.",
+    facts: [],
     steps: {
       title: "Four steps, | each ending in a decision.",
       intro: "Nothing is built | before the problem is named and measured.",
@@ -321,6 +327,7 @@ export const work: WorkItem[] = [
     location: "Self-hosted · meetsum.realization.co.il",
     role: "Designed, built and operated by Realization",
     descriptor: "Every meeting becomes searchable memory, | tasks and automation — | in Hebrew and English.",
+    teaserHe: "כל פגישה הופכת לזיכרון שאפשר לחפש בו, | למשימות ולאוטומציה.",
     summary:
       "MeetSum is a self-hosted meeting-intelligence platform that turns Google Meet, Drive, desktop and uploaded recordings into transcripts, decisions and tasks. It handles Hebrew and mixed Hebrew–English speech properly and pushes results into Google Workspace, n8n, RealizeOS and AI agents.",
     problem:

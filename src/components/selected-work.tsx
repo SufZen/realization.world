@@ -15,7 +15,7 @@ export function SelectedWork() {
           entry.kind === "work"
             ? (() => {
                 const item = workBySlug(entry.slug);
-                return item && { href: `/work/${entry.slug}`, title: item.name, text: item.descriptor, status: item.status, more: "View the case" };
+                return item && { href: `/work/${entry.slug}`, title: item.name, text: item.teaser ?? item.descriptor, status: item.status, more: "View the case" };
               })()
             : { href: entry.href, title: entry.title, text: entry.text, status: entry.status, more: "See how it works" };
         if (!card) return null;

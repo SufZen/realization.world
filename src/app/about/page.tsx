@@ -23,7 +23,7 @@ export default function AboutPage() {
       <PageHero
         index="07"
         eyebrow="ABOUT REALIZATION"
-        title="Bringing places | back to life."
+        title="Each venture | releases one blockage."
         intro="Homes, buildings and projects that got stuck | still hold their value. We work on releasing it."
         actions={<ButtonLink href="/thesis" variant="dark">Read the thesis</ButtonLink>}
         theme="brand"
@@ -45,7 +45,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section surface-dark"><div className="container-wide"><SectionHeading eyebrow="HOW THE GROUP GROWS" title="Each venture releases one blockage. | Together they form a chain." intro="Arena works inside one project. | FLUII works on homes stuck in inheritance and paperwork." inverse /><div className="button-row"><ButtonLink href="/work" variant="primary">Explore the work</ButtonLink><ButtonLink href="/partners" variant="outline">See partner paths</ButtonLink></div></div></section>
+      <section className="section surface-dark"><div className="container-wide"><SectionHeading eyebrow="HOW THE GROUP GROWS" title="Two ventures, | two kinds of blockage." intro="Arena moves one stalled site from land to homes. | FLUII works on homes stuck in inheritance and paperwork." inverse /><div className="button-row"><ButtonLink href="/work" variant="primary">Explore the work</ButtonLink><ButtonLink href="/partners" variant="outline">See partner paths</ButtonLink></div></div></section>
     </>
   );
 }

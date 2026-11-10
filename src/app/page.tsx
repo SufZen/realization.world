@@ -50,8 +50,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <PillarDoors />
-
       <section className="section">
         <div className="container-wide">
           <SectionHeading
@@ -65,21 +63,16 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="section surface-muted">
+      <section className="section" style={{ paddingBottom: 0 }}>
         <div className="container-wide">
-          <SectionHeading eyebrow="LATEST FROM THE CHANNELS" title="Posts, videos and notes | from real projects." intro="What worked, what did not | and what it cost." />
-          <LatestFeed items={feed} place="home" />
-          <div className="insights-grid" style={feed.length ? { marginTop: "clamp(2rem, 4vw, 3rem)" } : undefined}>
-            {notes.map(({ slug, category, title, excerpt, published, readTime, icon: Icon }) => (
-              <Link className="insight-card" href={`/insights/${slug}`} key={slug}>
-                <div className="insight-card__icon"><Icon size={25} strokeWidth={1.5} /></div>
-                <div><p className="eyebrow">{category}</p><h3><Lines text={title} /></h3><p><Lines text={excerpt} /></p><div className="insight-card__meta"><span>{published}</span><span>{readTime}</span></div></div>
-              </Link>
-            ))}
-          </div>
-          <div className="button-row"><ButtonLink href="/insights" variant="dark">Go to Learn</ButtonLink></div>
+          <SectionHeading
+            eyebrow="WHERE A PROJECT GETS STUCK"
+            title="Property is the work. | Systems and teams help it move."
+            intro="Three ways in, | depending on what holds your project back."
+          />
         </div>
       </section>
+      <PillarDoors />
 
       <section className="section">
         <div className="container-wide">
@@ -98,6 +91,22 @@ export default async function HomePage() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="section surface-muted">
+        <div className="container-wide">
+          <SectionHeading eyebrow="LATEST FROM THE CHANNELS" title="Posts, videos and notes | from real projects." intro="What worked, what did not | and what it cost." />
+          <LatestFeed items={feed} place="home" />
+          <div className="insights-grid" style={feed.length ? { marginTop: "clamp(2rem, 4vw, 3rem)" } : undefined}>
+            {notes.map(({ slug, category, title, excerpt, published, readTime, icon: Icon }) => (
+              <Link className="insight-card" href={`/insights/${slug}`} key={slug}>
+                <div className="insight-card__icon"><Icon size={25} strokeWidth={1.5} /></div>
+                <div><p className="eyebrow">{category}</p><h3><Lines text={title} /></h3><p><Lines text={excerpt} /></p><div className="insight-card__meta"><span>{published}</span><span>{readTime}</span></div></div>
+              </Link>
+            ))}
+          </div>
+          <div className="button-row"><ButtonLink href="/insights" variant="dark">Go to Learn</ButtonLink></div>
         </div>
       </section>
 

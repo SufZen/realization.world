@@ -52,7 +52,7 @@ export default function TeamSetupPage() {
       <PageHero
         index="03"
         eyebrow="SERVICES · TEAMS"
-        title="Team and | process setup."
+        title="A project that runs | without waiting on you."
         intro={pillar.subtitle}
         theme="light"
         actions={

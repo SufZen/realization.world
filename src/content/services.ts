@@ -177,7 +177,7 @@ export const pillars: Pillar[] = [
     },
     // Offers and fees for this pillar are its stages (systemsEn.stages), the single account of the work.
     offers: [],
-    work: ["ai-adoption-architecture-firm", "realizeos", "meetsum", "dreamward"],
+    work: ["ai-adoption-architecture-firm", "realizeos", "meetsum"],
     insights: { categories: ["AI in practice"] },
   },
   {
@@ -187,7 +187,7 @@ export const pillars: Pillar[] = [
     dimension: "Teams",
     title: "Team and process setup",
     problem: "Every decision on the project | still waits for one person.",
-    subtitle: "We build the machine, | train the team, and hand it over.",
+    subtitle: "We set up the roles and the routines, | train the team, and hand it over.",
     forWhom: "Firms and projects that need clear roles, | working processes and a trained team, | not another permanent manager.",
     icon: UsersRound,
     ref: "services-team-setup",
@@ -235,7 +235,7 @@ export const realEstate = {
     ],
   },
   faqs: [
-    ["Is the deal check really free?", "Yes. It is how we meet investors. If the numbers work and you want to go further, the 60-minute consultation is the next step, and its fee is credited toward a feasibility study."],
+    ["Is the deal check really free?", "Yes. It is how we meet investors. If the numbers work and you want to go further, the 60-minute consultation is the next step."],
     ["Is this investment advice?", "No. We share numbers, assumptions and the risks we see. Decisions, and legal and tax advice, stay with you and your own advisers."],
     ["Can I invest in Arena?", "Arena’s financial terms are shared only with qualified capital partners, on request. Start on the capital partners page or with a 20-minute intro."],
     ["Where do you work, and in which languages?", "In Portugal, mostly the Lisbon area, and remotely with investors in Israel and elsewhere. We work in English and Hebrew, with basic Portuguese and Spanish."],
@@ -274,9 +274,9 @@ export const delivery = {
     ],
   },
   faqs: [
-    ["Is this construction management?", "No. We set up how the project or the firm works: roles, decisions, workflows and reporting. Building stays with your architects and contractors. If you need someone to coordinate them for you, Asaf Eyzenkot takes fractional development-management roles, contracted through Realization Unipessoal LDA."],
+    ["Is this construction management?", "No. We set up how the project or the firm works: roles, decisions, workflows and reporting. Building stays with your architects and contractors. If you need someone to coordinate them for you, that is a separate engagement from the setup: Asaf Eyzenkot takes fractional development-management roles, contracted through Realization Unipessoal LDA."],
     ["How is it priced?", "As a fixed scope, in a proposal, before it starts."],
-    ["Where do you work, and in which languages?", "Remotely, and in person in the Lisbon area and Barcelona. We work in English and Hebrew, with basic Portuguese and Spanish."],
+    ["Where do you work?", "Remotely, and in person in the Lisbon area and Barcelona."],
   ],
 } as const;
 
@@ -331,8 +331,8 @@ const systemsPillar = pillarBySlug("ai-systems");
 export const systemsEn: SystemsCopy = {
   lang: "en",
   ref: systemsPillar.ref,
-  hero: { eyebrow: "SERVICES · SYSTEMS", title: "AI and operations | systems.", intro: systemsPillar.subtitle },
-  promise: { eyebrow: "THE APPROACH", title: "Choose where AI starts, | then prove it there." },
+  hero: { eyebrow: "SERVICES · AI AND OPERATIONS SYSTEMS", title: "Choose where AI starts. | Then prove it there.", intro: systemsPillar.subtitle },
+  promise: { eyebrow: "WHERE IT STARTS", title: "One problem first, | measured before anything grows." },
   fit: {
     eyebrow: "WHO IT’S FOR",
     title: "Busy teams with the tools, | but not the time.",
@@ -397,7 +397,6 @@ export const systemsEn: SystemsCopy = {
         index: "Add-on",
         title: "Team workshops",
         scope: "Sessions built on your own cases: | how to spot where AI fits | and match the right tool to it.",
-        output: "People who find the next use case | themselves.",
       },
     ],
     refuse: "What we won’t sell you: a course, a licence, | or a system only we can run.",
@@ -410,7 +409,7 @@ export const systemsEn: SystemsCopy = {
   systems: {
     eyebrow: "SYSTEMS WE BUILT AND RUN",
     title: "We use what we recommend.",
-    intro: "Our own operations run on AI systems we designed. | They are options for you, never a requirement.",
+    intro: "Our own operations run on AI systems we designed. | Each one shows the method at work.",
     setup: { label: "Book a RealizeOS setup hour", href: bookingTypes.realizeosSetup, event: "book-session-ai-systems", data: { pillar: "ai-systems", offer: "realizeos-setup" }, carryRef: true },
   },
   related: {
@@ -423,7 +422,7 @@ export const systemsEn: SystemsCopy = {
     items: [
       ["How much of our team’s time does it take?", "Two kinds of time. One internal lead for four to six hours a week, and two to three hours a week from each pilot participant, mostly reviewing outputs. We ask for those hours in the proposal, because without them the work does not happen."],
       ["Do we have to use RealizeOS or your other systems?", "No. We start with what you already pay for and what the market offers. RealizeOS, MeetSum and our other systems are options when they fit the gap, not a requirement."],
-      ["Where do you work, and in which languages?", "Remotely, and in person in the Lisbon area and Barcelona. We work in English and Hebrew, with basic Portuguese and Spanish."],
+      ["Where do you work?", "Remotely, and in person in the Lisbon area and Barcelona."],
     ],
   },
   cta: {

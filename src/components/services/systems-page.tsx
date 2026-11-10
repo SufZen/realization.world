@@ -105,7 +105,7 @@ export function SystemsPage({ copy, path }: { copy: SystemsCopy; path: string })
           {he ? (
             <ul className={styles.systemLinks}>
               {systems.map((item) => (
-                <li key={item.slug}><Link href={`/work/${item.slug}`} lang="en" dir="ltr">{item.name}<small><Lines text={item.descriptor} /></small></Link></li>
+                <li key={item.slug}><Link href={`/work/${item.slug}`}><span lang="en" dir="ltr">{item.name}</span><small {...(he && item.teaserHe ? {} : { lang: "en", dir: "ltr" })}><Lines text={(he && item.teaserHe) || item.teaser || item.descriptor} /></small></Link></li>
               ))}
             </ul>
           ) : (
