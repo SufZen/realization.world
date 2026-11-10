@@ -16,7 +16,7 @@ export const selectedWork: SelectedItem[] = [
     kind: "work",
     slug: "arena-barreiro",
     pillar: "real-estate",
-    dimension: "Places",
+    dimension: "Property",
     image: {
       src: "/work/arena-barreiro/facade.webp",
       alt: "Architectural render of the Arena building: a five-storey facade with timber slats and planted balconies between two older houses in Barreiro",

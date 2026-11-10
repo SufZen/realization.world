@@ -8,27 +8,23 @@ import { Lines } from "@/components/lines";
 
 export const metadata: Metadata = pageMetadata(
   "About",
-  "The purpose, founder role and operating principles behind Realization: real estate, ventures and systems.",
+  "Realization is Asaf Eyzenkot’s company for unrealized real estate: homes, buildings and projects that got stuck. An architect by training, he works inside the deal or the venture.",
   "/about",
 );
 
-const values = [
-  ["01", "Integration", "Connect potential, architecture | and technology into one system."],
-  ["02", "Evidence", "Move on observed reality. | State uncertainty plainly."],
-  ["03", "Ownership", "Make rights, operation | and data control visible."],
-  ["04", "Leverage", "Put founder attention | where architecture matters most."],
-  ["05", "Continuity", "Design for an operator | who can grow beyond the studio."],
-  ["06", "Meaning", "Create value that matters | to owners, users and places."],
-] as const;
-
+/*
+ * Approved facts only (QA 10.11): realization-studio brand/field-definition.md sections 1, 8 and 10,
+ * and the BOA, Burtucala and Arena records in src/content/work.ts. The six values block is gone;
+ * the field's values are the stance behind the copy, not a list on the page.
+ */
 export default function AboutPage() {
   return (
     <>
       <PageHero
         index="07"
         eyebrow="ABOUT REALIZATION"
-        title="Vision | into reality."
-        intro="Founded by Asaf Eyzenkot (Suf Zen). | Real estate, ventures and the systems that connect them."
+        title="Bringing places | back to life."
+        intro="Homes, buildings and projects that got stuck | still hold their value. We work on releasing it."
         actions={<ButtonLink href="/thesis" variant="dark">Read the thesis</ButtonLink>}
         theme="brand"
       />
@@ -36,30 +32,20 @@ export default function AboutPage() {
       <section className="section">
         <div className="container-wide about-founder">
           <div className="founder-mark">
-            <Image className="founder-portrait" src="/asaf/asaf-eyzenkot.jpg" alt="Asaf Eyzenkot (Suf Zen), founder of Realization" width={480} height={480} sizes="(max-width: 760px) 60vw, 26vw" />
+            <Image className="founder-portrait" src="/asaf/asaf-eyzenkot.jpg" alt="Asaf Eyzenkot, founder of Realization" width={480} height={480} sizes="(max-width: 760px) 60vw, 26vw" />
           </div>
           <div className="about-founder__copy">
-            <p className="eyebrow">FOUNDER</p>
-            <h2>Asaf Eyzenkot<br />(Suf Zen)</h2>
-            <h3>Connecting the abstract with the tangible.</h3>
-            <p><Lines text="Asaf is drawn to the logic behind complex systems, | and to making it clear, useful and real." /></p>
-            <p><Lines text="He works between Israel, Portugal and Barcelona: | real estate development, venture architecture | and the systems behind them." /></p>
-            <p><Lines text="He leads vision, architecture and validation, | and builds ventures that do not depend on him to run." /></p>
-            <div className="button-row"><a className="button button--dark" href="/asaf"><span>Founder profile</span></a><ButtonLink href="/how-we-build" variant="outline">How the role works</ButtonLink></div>
+            <p className="eyebrow">ARCHITECT AND FOUNDER</p>
+            <h2>Asaf Eyzenkot</h2>
+            <h3>He does not advise from outside. | He is inside the deal or the venture.</h3>
+            <p><Lines text="An architecture graduate of Tel Aviv University. | In Portugal he co-founded BOA Architecture in Setúbal, | and before it Burtucala, a bridge between investors abroad | and partners in Portugal." /></p>
+            <p><Lines text="Today he is the managing partner and development manager of Arena in Barreiro, | and works between Israel, Portugal and Barcelona." /></p>
+            <div className="button-row"><a className="button button--dark" href="/asaf"><span>Founder profile</span></a><ButtonLink href="/work/arena-barreiro" variant="outline">See Arena</ButtonLink></div>
           </div>
         </div>
       </section>
 
-      <section className="section surface-brand">
-        <div className="container-wide">
-          <SectionHeading eyebrow="GUIDING PRINCIPLES" title="Clarity compounds." />
-          <div className="about-values">
-            {values.map(([index, title, text]) => <article className="about-value" key={title}><span>{index}</span><h3><Lines text={title} /></h3><p><Lines text={text} /></p></article>)}
-          </div>
-        </div>
-      </section>
-
-      <section className="section surface-dark"><div className="container-wide"><SectionHeading eyebrow="THE STUDIO ROLE" title="Build the conditions. | Transfer the operation." intro="We originate and architect. | Partners own the operation." inverse /><div className="button-row"><ButtonLink href="/work" variant="primary">Explore the work</ButtonLink><ButtonLink href="/partners" variant="outline">See partner paths</ButtonLink></div></div></section>
+      <section className="section surface-dark"><div className="container-wide"><SectionHeading eyebrow="HOW THE GROUP GROWS" title="Each venture releases one blockage. | Together they form a chain." intro="Arena works inside one project. | FLUII works on homes stuck in inheritance and paperwork." inverse /><div className="button-row"><ButtonLink href="/work" variant="primary">Explore the work</ButtonLink><ButtonLink href="/partners" variant="outline">See partner paths</ButtonLink></div></div></section>
     </>
   );
 }

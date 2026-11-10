@@ -48,7 +48,8 @@ export const testimonials: Testimonial[] = [
   {
     quote: "Asaf has developed strong expertise in helping design and build AI-driven systems that support smarter decision-making, efficiency, and scalable business structures.",
     name: "Meirav Gonen",
-    role: "Investment advisor and strategic deal maker, real estate",
+    // Role disclosed as on co.il and pt (Asaf, 10.11.2026).
+    role: "Former partner, Realization",
     pillar: "ai-systems",
     ...linkedin,
   },

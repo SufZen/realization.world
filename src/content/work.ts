@@ -13,7 +13,8 @@ import type { IconComponent } from "./site";
 /**
  * The portfolio ("Work"). One record per project, venture, system or engagement.
  * Content governance (README): every number carries a source and a date,
- * and Built by / Operated by / Owned by are stated separately.
+ * and Built by / Operated by / Owned by are stated separately. Since QA 10.11 the case page
+ * shows one narrative (problem, approach, outcome) and one fact strip: no tool or provider counts.
  * Copy uses " | " for authored line breaks (see components/lines.tsx).
  */
 
@@ -47,7 +48,7 @@ export type WorkItem = {
   name: string;
   kind: WorkKind;
   eyebrow: string;
-  status: "PIP approved · 7.2026" | "Ongoing" | "Live" | "Launching" | "In development" | "In daily use" | "Case study" | "Concluded";
+  status: "PIP approved · 7.2026" | "Pre-launch" | "Ongoing" | "Live" | "Launching" | "In development" | "In daily use" | "Case study" | "Concluded";
   years?: string;
   location: string;
   role: string;
@@ -59,7 +60,7 @@ export type WorkItem = {
   approach: string;
   outcome: string;
   facts: WorkFact[];
-  /** Optional numbered method or flow, shown on a dark band. */
+  /** Optional numbered method or flow: Markdown and JSON exports only, not the case page. */
   steps?: { title: string; intro: string; items: Array<[string, string]> };
   /** Optional list of individual projects (architecture portfolio). */
   projects?: Array<{ name: string; place: string; status: string; image?: string }>;
@@ -100,7 +101,7 @@ export const work: WorkItem[] = [
     outcome:
       "Site acquired and demolished (Q1 2026). | Information request (PIP) approved (July 2026). | Next: the licensing application, then funding and construction.",
     facts: [
-      { value: "11", label: "homes · 1×T0, 9×T1, 1×T2" },
+      { value: "11", label: "homes" },
       { value: "596 m²", label: "net sellable area over 5 floors" },
       { value: "20 min", label: "ferry to Terreiro do Paço" },
       { value: "~24 months", label: "planned path from acquisition to exit" },
@@ -140,19 +141,19 @@ export const work: WorkItem[] = [
     name: "FLUII",
     kind: "venture",
     eyebrow: "STUCK-PROPERTY VENTURE · PORTUGAL",
-    status: "In development",
+    status: "Pre-launch",
     years: "2026",
     location: "Portugal · Setúbal, Lisbon, Porto, Braga first",
     role: "Founder and product lead; a development lead owns software delivery",
-    descriptor: "A licensed platform that turns | legally or family-blocked homes | into a plan, a mandate and a buyer.",
+    descriptor: "In pre-launch: a licensed platform | for homes stuck in inheritance, | co-ownership or paperwork.",
     summary:
-      "FLUII (fluii.pt, launched as realization.pt) resolves homes stuck in inheritance, co-owner deadlock or mismatched paperwork, then sells them to vetted investors. AI assistant Clara does the intake and drafting; licensed people make every decision about money and law.",
+      "FLUII is in pre-launch, with a waiting list and its first owners invited. It resolves homes stuck in inheritance, co-owner deadlock or mismatched paperwork, then sells them to vetted investors; AI assistant Clara does the intake and drafting, and licensed people make every decision about money and law.",
     problem:
       "Across Portugal, homes stand empty | while prices hit records. | Most are stuck by people and paperwork — | unsplit inheritances, absent co-owners, | registries that disagree — not by the building.",
     approach:
-      "Owners describe the case to Clara | in Portuguese or English. | The case is scored, checked and turned into | a roadmap our team approves. | Investors see anonymised matches | and pay a small fee to unlock one deal room.",
+      "Owners describe the case to Clara | in Portuguese or English. | The case is scored, checked and turned into | a roadmap our team approves. | Under a signed mediation mandate, | lawyers and architects resolve it, | and investors see the address only at negotiation.",
     outcome:
-      "Pre-launch is live with a waiting list | and the first owners invited. | A 10-case pilot decides pricing | before a wider launch.",
+      "Pre-launch opened with a waiting list | and the first owners invited. | A 10-case pilot decides pricing | before a wider launch.",
     facts: [
       { value: "AMI 25459", label: "licensed real-estate mediation" },
     ],
@@ -166,7 +167,7 @@ export const work: WorkItem[] = [
         ["Resolve & sell", "A task force of lawyers and architects executes; | investors see the address only at negotiation."],
       ],
     },
-    stack: ["Next.js 16", "React 19", "Supabase Postgres (43 tables)", "Google Gemini via Vercel AI SDK", "Stripe", "DocuSeal", "Cal.com", "Resend", "Sentry"],
+    stack: ["Next.js 16", "React 19", "Supabase Postgres", "Google Gemini via Vercel AI SDK", "Stripe", "DocuSeal", "Cal.com", "Resend", "Sentry"],
     links: [{ label: "Visit fluii.pt", href: "https://fluii.pt" }],
     cover: {
       src: "/media/venture-portugal.webp",
@@ -178,7 +179,7 @@ export const work: WorkItem[] = [
     ],
     diagram: "area-gap",
     disclosure: "Screens show demo data. Case studies are published only once documented and cleared by the owners.",
-    source: "Realization project overview, September 2026 (repository counts as of 28 Sep 2026; market data INE 2021 and 2025).",
+    source: "Realization project overview, September 2026.",
     related: ["portugals-empty-homes-why-they-are-stuck", "when-the-registry-and-the-building-disagree"],
     cta: { path: "opportunity", heading: "Own a stuck property, | or want to operate this?", label: "Bring a property case" },
     schema: "Organization",
@@ -201,10 +202,9 @@ export const work: WorkItem[] = [
     approach:
       "Keep the durable asset — knowledge, | history and identity — in files the business owns. | Everything else is a swappable adapter: | models, agent runtimes, channels and interfaces.",
     outcome:
-      "Version 5.6 runs Realization’s research, | documentation and coordination daily. | It is the engine inside our own operations | and our client AI work, | not a product we sell on its own.",
+      "It runs Realization’s research, | documentation and coordination daily. | It is the engine inside our own operations | and our client AI work, | not a product we sell on its own.",
     facts: [
-      { value: "24", label: "MCP tools exposed to other agents" },
-      { value: "4", label: "LLM providers, routed by task and cost" },
+      { value: "v5.6", label: "in daily use at Realization" },
     ],
     steps: {
       title: "Context → | coordinated action.",
@@ -229,7 +229,7 @@ export const work: WorkItem[] = [
       { src: "/work/realizeos/missions.webp", wide: true, alt: "RealizeOS Missions dashboard showing mission totals, tracked cost and a completed property-search mission", caption: "Missions: goals planned into steps, with cost tracked per step · demo data" },
       { src: "/work/realizeos/dream-inbox.webp", wide: true, alt: "RealizeOS Dream Inbox listing knowledge updates proposed by background agents, each waiting for approval", caption: "Dream Inbox: agents propose knowledge updates, a person approves · demo data" },
     ],
-    disclosure: "Source-available under BSL 1.1. Counts are measured from the repository.",
+    disclosure: "Source-available under BSL 1.1.",
     source: "RealizeOS project overview v5.6.0, September 2026.",
     related: ["own-the-heart-local-first-ai-operations", "ai-in-the-office-start-with-knowledge"],
     cta: { path: "advisory", heading: "Want an AI operation | that belongs to you?", label: "Talk about a setup" },
@@ -370,11 +370,9 @@ export const work: WorkItem[] = [
     approach:
       "Start from meaning — a life chapter, | a life wheel and IKIGAI — | then break it into goals and actions. | Every account gets its own database; | AI proposes, the person approves.",
     outcome:
-      "First public release, v0.4.0, | with desktop installers and one-line self-hosting. | Its first generation, Lifebook, | went from first release to v0.3.1 in 26 days.",
+      "Released with desktop installers | and one-line self-hosting. | Its first generation, Lifebook, | went from first release to v0.3.1 in 26 days.",
     facts: [
-      { value: "37", label: "MCP tools for external AI agents" },
-      { value: "13", label: "AI provider presets, from OpenAI to local Ollama" },
-      { value: "0", label: "AI cost to the server: users bring their own AI" },
+      { value: "v0.4.0", label: "first public release" },
     ],
     steps: {
       title: "Meaning → | focus → | action.",
@@ -400,7 +398,7 @@ export const work: WorkItem[] = [
       { src: "/work/dreamward/ikigai.webp", alt: "Dreamward IKIGAI wizard mapping answers to the four circles, with a live Venn diagram", caption: "IKIGAI wizard with a live four-circle diagram · demo data" },
       { src: "/work/dreamward/dashboard-hebrew.webp", alt: "The Dreamward dashboard in the Hebrew right-to-left interface", caption: "The same dashboard in Hebrew, right to left · demo data" },
     ],
-    disclosure: "Counts are measured from the public repository at v0.4.0 (September 2026). Screens show fictional demo data.",
+    disclosure: "Screens show fictional demo data.",
     source: "Dreamward repository and changelog, v0.4.0, September 2026; Lifebook project overview v0.3.1.",
     cta: { path: "advisory", heading: "Explore Dreamward.", label: "Start a conversation" },
     schema: "SoftwareApplication",
@@ -424,12 +422,11 @@ export const work: WorkItem[] = [
     approach:
       "Combine architecture with | real-estate and investment judgement: | plan, license and manage the renovation | as one decision.",
     outcome:
-      "Nine projects across Setúbal’s Baixa, | Bairro do Liceu, Troino and Montijo. | Seven finished, two under way.",
+      "Homes in Setúbal’s Baixa, | Bairro do Liceu, Troino and Montijo.",
     facts: [
       { value: "9", label: "residential and interior projects" },
       { value: "7", label: "finished" },
       { value: "2", label: "in progress" },
-      { value: "2", label: "towns: Setúbal and Montijo" },
     ],
     projects: [
       { name: "Santa Maria", place: "Travessa Santa Maria, Setúbal", status: "In progress" , image: "/work/boa-architecture/santa-maria.webp" },

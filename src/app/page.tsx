@@ -36,15 +36,15 @@ export default async function HomePage() {
         </div>
         <div className="container-wide home-hero__grid">
           <div className="home-hero__content">
-            <p className="eyebrow">REAL ESTATE · AI SYSTEMS · DELIVERY</p>
+            <p className="eyebrow">UNREALIZED REAL ESTATE</p>
             <h1><span className="ln">Untapped potential.</span> <em className="ln">Realized.</em></h1>
             <p className="home-hero__lead">
               <span className="ln">Property can hold value and still go nowhere.</span>
               <span className="ln">We work on what holds it back.</span>
             </p>
             <div className="button-row">
-              <ButtonLink href="/services">See our services</ButtonLink>
-              <CtaLink cta={introCta("home")} pageRef="home" variant="outline" />
+              <CtaLink cta={introCta("home")} pageRef="home" variant="primary" />
+              <ButtonLink href="/work" variant="outline">See the work</ButtonLink>
             </div>
           </div>
         </div>
@@ -106,7 +106,7 @@ export default async function HomePage() {
           <div>
             <p className="eyebrow">NOT SURE WHERE TO START?</p>
             <h2><Lines text="Twenty minutes | is enough." /></h2>
-            <p><Lines text="One call to know which of the three | your problem sits in, or whether we fit at all." /></p>
+            <p><Lines text="One call to know where your project is stuck, | or whether we fit at all." /></p>
           </div>
           <div className="button-row">
             <CtaLink cta={introCta("home")} pageRef="home" variant="dark" />

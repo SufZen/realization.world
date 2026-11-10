@@ -7,11 +7,6 @@
 .pillarIcon { display: grid; width: 54px; height: 54px; flex: none; place-items: center; border: 1px solid #000; border-radius: 50%; color: #000; }
 .pillarDimension { color: var(--text-muted); font-size: .72rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
 .pillar h3 { margin-top: 2.5rem; font-size: clamp(1.7rem, 2.6vw, 2.5rem); }
-.pillarSubtitle { margin-top: .9rem; color: #000; font-size: 1.05rem; font-weight: 600; line-height: 1.4; }
-.pillarFor { margin-top: .8rem; font-size: .9rem; }
-.pillarOffers { display: grid; margin: 2rem 0 0; padding: 0; list-style: none; border-top: 1px solid #000; }
-.pillarOffers li { display: flex; justify-content: space-between; gap: 1rem; padding-block: .7rem; border-bottom: 1px solid var(--border-hairline); color: #000; font-size: .84rem; font-weight: 600; line-height: 1.35; }
-.pillarOffers small { flex: none; color: var(--text-muted); font-size: .76rem; font-weight: 500; }
 .pillarLink { margin-top: auto; padding-top: 2rem; }
 .pillarLink :global(.button) { margin-top: 0; }
 @media (max-width: 1000px) { .pillars { grid-template-columns: 1fr; } }
@@ -23,6 +18,11 @@
 .offer h3 { font-size: clamp(1.25rem, 1.8vw, 1.6rem); letter-spacing: -.02em; }
 .offer p { max-width: 52ch; margin-top: .6rem; font-size: .92rem; }
 .offerMeta { display: grid; gap: .3rem; padding-top: .3rem; font-size: .82rem; }
+.offerMeta dd { margin: 0; }
+.offerOutput strong { color: #000; }
+.refuse { max-width: 60ch; margin-top: 2rem; font-weight: 700; }
+.related { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+.related p { margin: 0; font-size: clamp(1.15rem, 1.6vw, 1.4rem); font-weight: 700; }
 .offerPrice { color: #000; font-size: 1.05rem; font-weight: 700; }
 .offerCta :global(.button) { white-space: nowrap; }
 @media (max-width: 900px) {
@@ -64,12 +64,12 @@
 :global(.page-hero--dark) .heroStatement :global(.eyebrow) { color: var(--color-yellow); }
 @media (max-width: 1120px) { .heroStatement { padding-inline: 0; border-inline-start: 0; border-top: 1px solid currentColor; } }
 
-/* Homepage: three pillar doors (the global .door styles, three columns) */
+/* Homepage: three doors, one problem and one link each (the global .door styles, three columns) */
 :global(.doors__grid).doors3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .doorLight { background: #fff; color: #000; }
+.doors3 :global(.door) h2 { margin-bottom: 2.5rem; font-size: clamp(1.6rem, 2.4vw, 2.4rem); }
+.doors3 :global(.door) :global(.button) { margin-top: auto; }
 .doorLight :global(.eyebrow) { color: var(--color-neutral-700); }
-.doors3 :global(.door__links) a { grid-template-columns: minmax(0, 1fr) auto auto; }
-.doors3 :global(.door__links) small { white-space: nowrap; }
 @media (max-width: 1000px) { :global(.doors__grid).doors3 { grid-template-columns: 1fr; } }
 
 /* Tablet (761–1000 px): the global four-step and three-card grids are too narrow here.

@@ -42,7 +42,7 @@ export const approachNavigation = [
 /** Booking link for the 20-minute intro call (TidyCal), the same call co.il and pt offer (QA 9.11). */
 export const bookingUrl = "https://schedule.realization.co.il/20-minute-intro-meeting-asaf";
 export const whatsappUrl = "https://wa.me/972528289437";
-export const contactEmail = "hello@realization.world";
+export const contactEmail = "info@realization.world";
 
 export const processSteps = [
   {
@@ -96,7 +96,7 @@ export const partnerPaths = [
     title: "Opportunity owners",
     headline: "Bring what others cannot unlock.",
     summary:
-      "For owners of assets, places or systems | who see the potential, but need a venture to unlock it.",
+      "For owners of a property | that holds value and still goes nowhere.",
     promise:
       "A clear fit assessment, | not an open-ended engagement.",
     cta: "Bring an opportunity",
@@ -132,7 +132,7 @@ export const partnerPaths = [
     title: "Capital partners",
     headline: "Back evidence. Not theatre.",
     summary:
-      "For angels, family offices, funds and corporates | aligned with the physical-world thesis.",
+      "For angels, family offices and funds | looking at stuck property in Portugal.",
     promise:
       "Briefs and data rooms | only where mandate and stage align.",
     cta: "Share your mandate",
@@ -150,7 +150,7 @@ export const partnerPaths = [
     title: "Corporate & public partners",
     headline: "Turn a challenge into a venture.",
     summary:
-      "For organizations with authority and data | and a physical-world problem worth a pilot.",
+      "For cities and organizations | with empty or stalled buildings of their own.",
     promise:
       "A venture pathway with defined outcomes, | not an open-ended consultancy.",
     cta: "Frame a strategic venture",
@@ -1043,12 +1043,3 @@ export const insights: Insight[] = [
     ],
   },
 ];
-
-export const thesisDomains = [
-  { title: "Places & property", text: "Ownership, use, regeneration | and spatial value.", icon: Building2 },
-  { title: "Infrastructure", text: "Systems that connect | essential physical activity.", icon: Network },
-  { title: "Water & energy", text: "Resource systems where efficiency | and resilience compound.", icon: Waves },
-  { title: "Construction", text: "Methods, data and coordination | that make building work better.", icon: Factory },
-  { title: "Public systems", text: "Shared challenges | with clear authority and evidence.", icon: Landmark },
-  { title: "Operating intelligence", text: "Digital infrastructure | that helps physical-world teams act.", icon: Cpu },
-] satisfies Array<{ title: string; text: string; icon: IconComponent }>;

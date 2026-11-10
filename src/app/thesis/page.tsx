@@ -1,25 +1,33 @@
 import type { Metadata } from "next";
+import { Building2, Factory, Landmark, Waves } from "lucide-react";
 import { ButtonLink } from "@/components/button-link";
 import { EditorialMedia } from "@/components/editorial-media";
 import { PageHero } from "@/components/page-hero";
 import { SectionHeading } from "@/components/section-heading";
-import { thesisDomains } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 import { Lines } from "@/components/lines";
 
 export const metadata: Metadata = pageMetadata(
   "Thesis",
-  "Why Realization builds ventures around untapped potential in property, infrastructure, places, water, energy and physical-world operations.",
+  "Empty homes are rarely a market problem: they are stuck on paper, between people, or with no one holding the whole chain. Our current work is property; water, energy and cities are partnerships where the domain experts lead.",
   "/thesis",
 );
 
-const principles = [
-  ["Potential precedes product", "We begin with a real physical need, | not a software feature looking for a market."],
-  ["Systems unlock value", "The blocker is rarely one missing service. | It is a fragmented system."],
-  ["Digital creates leverage", "Technology matters when it organizes | the real-world process."],
-  ["Evidence earns expansion", "A venture advances on demand, economics, | regulation and an operator path."],
-  ["Operation is a distinct craft", "The team that imagines a venture | may not be the one to run it."],
-  ["Clarity compounds trust", "Ownership, operation, data and status | stay visible."],
+/* Source: realization-studio brand/field-definition.md sections 1, 3, 6 and 10 (locked 7.11.2026). */
+
+/** The four forms the problem takes: our current work. */
+const forms = [
+  ["Inheritances and partnerships", "Estates that were never split, | co-owners who disagree, | owners who live far away."],
+  ["Paper that doesn’t match", "Extensions never registered, | the wrong designated use, | a registry that disagrees with the building."],
+  ["Abandoned buildings", "Buildings left empty | until they became a problem | for the street or the town."],
+  ["Stalled projects", "Sites and projects stuck | on a permit, on financing, | or with a developer who fell."],
+] as const;
+
+/** Adjacent fields: partnerships, not our current work. */
+const adjacent = [
+  { title: "Water and energy", icon: Waves },
+  { title: "Cities and public systems", icon: Landmark },
+  { title: "Construction", icon: Factory },
 ] as const;
 
 export default function ThesisPage() {
@@ -28,24 +36,24 @@ export default function ThesisPage() {
       <PageHero
         index="01"
         eyebrow="OUR THESIS"
-        title="Value hides | in broken systems."
-        intro="Assets stay stuck when rights, people and operations don’t connect. | That missing system is the opportunity."
-        actions={<><ButtonLink href="/how-we-build" variant="dark">See how we build</ButtonLink><ButtonLink href="/bring-an-opportunity" variant="outline">Bring a case</ButtonLink></>}
+        title="An empty home | is rarely a market problem."
+        intro="It is stuck on paper, between people, | or with no one holding the whole chain."
+        actions={<><ButtonLink href="/work" variant="dark">See the work</ButtonLink><ButtonLink href="/bring-an-opportunity" variant="outline">Bring a case</ButtonLink></>}
         theme="brand"
-        aside={<EditorialMedia src="/media/hero-physical-world.webp" alt="A team mapping a physical-world venture around an architectural model" label="THE MISSING LAYER" className="page-hero__media" />}
+        aside={<EditorialMedia src="/media/hero-physical-world.webp" alt="A team working around an architectural model of a stuck property" label="UNREALIZED REAL ESTATE" className="page-hero__media" />}
       />
 
       <section className="section">
         <div className="container-wide">
           <SectionHeading
-            eyebrow="AREAS WE MAY EXPLORE"
-            title="Where systems shape reality."
-            intro="We focus where a better system | changes a lasting physical outcome."
+            eyebrow="OUR WORK NOW: PROPERTY"
+            title="One problem, | four forms."
+            intro="Portugal is our lab, because there the problem is plainest. | It exists in every market, in different clothes."
           />
           <div className="content-grid">
-            {thesisDomains.map(({ title, text, icon: Icon }) => (
+            {forms.map(([title, text]) => (
               <article className="content-card" key={title}>
-                <div className="content-card__icon"><Icon size={24} strokeWidth={1.5} /></div>
+                <div className="content-card__icon"><Building2 size={24} strokeWidth={1.5} /></div>
                 <h3><Lines text={title} /></h3>
                 <p><Lines text={text} /></p>
               </article>
@@ -57,38 +65,23 @@ export default function ThesisPage() {
       <section className="section surface-dark">
         <div className="container-wide">
           <SectionHeading
-            eyebrow="SIX PRINCIPLES"
-            title="Six rules. No theatre."
-            intro="The discipline behind every venture decision."
+            eyebrow="PARTNERSHIPS AND AREAS TO EXPLORE"
+            title="Next to property, | the experts lead."
+            intro="What we learn from property carries into these fields. | We join as partners and bring what we do best; | we don’t run them."
             inverse
           />
           <div className="principles-grid">
-            {principles.map(([title, text], index) => (
+            {adjacent.map(({ title, icon: Icon }) => (
               <article className="principle" key={title}>
-                <span className="principle__index">0{index + 1}</span>
+                <span className="principle__index"><Icon size={22} strokeWidth={1.5} /></span>
                 <h3><Lines text={title} /></h3>
-                <p><Lines text={text} /></p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <div className="statement-band"><div className="container"><p>Physical potential → digital systems → realized value.</p></div></div>
-
-      <section className="section">
-        <div className="container-wide">
-          <SectionHeading
-            eyebrow="A DELIBERATE BOUNDARY"
-            title="Build the venture. | End the dependency."
-            intro="The outcome is a defined system with clear ownership and an operating future."
-          />
-          <div className="fit-grid">
-            <article className="fit-list"><h3>What Realization owns at the start</h3><ul><li>Vision and problem definition</li><li>Venture and system architecture</li><li>Product, workflow and technology design</li><li>Evidence design and early validation</li><li>Operator criteria and transfer architecture</li></ul></article>
-            <article className="fit-list"><h3>What scale requires next</h3><ul><li>A capable and accountable operator</li><li>Explicit legal, data and regulatory roles</li><li>Repeatable operating knowledge</li><li>Capital matched to stage and instrument</li><li>Governance for continuity beyond the founder</li></ul></article>
-          </div>
-        </div>
-      </section>
+      <div className="statement-band"><div className="container"><p>We earn from the release, not from the distress. The owner has to come out better off.</p></div></div>
     </>
   );
 }

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Lines, plain } from "@/components/lines";
 import { SectionHeading } from "@/components/section-heading";
 import type { Insight } from "@/content/site";
-import { currentOffers, type Cta, type Offer } from "@/content/services";
+import { currentOffers, type Cta, type Offer, type Stage } from "@/content/services";
 import { CtaLink } from "./cta-link";
 import styles from "./services.module.css";
 
@@ -24,6 +24,31 @@ export function OfferList({ offers, pageRef }: { offers: Offer[]; pageRef: strin
           </div>
           <div className={styles.offerCta}>
             {offer.cta && <CtaLink cta={offer.cta} pageRef={pageRef} variant={offer.cta.event?.startsWith("book-") || offer.cta.event === "buy-audit" ? "dark" : "outline"} />}
+          </div>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+/** The Systems stages: scope, output, time and fee, each said once. */
+export function StageList({ stages, labels, pageRef }: { stages: Stage[]; labels: { output: string; duration: string; fee: string }; pageRef: string }) {
+  return (
+    <ol className={styles.offers}>
+      {stages.map((stage) => (
+        <li className={styles.offer} key={stage.title}>
+          <span className={styles.offerIndex}>{stage.index.toUpperCase()}</span>
+          <div>
+            <h3>{stage.title}</h3>
+            <p><Lines text={plain(stage.scope)} /></p>
+            {stage.output && <p className={styles.offerOutput}><strong>{labels.output}:</strong> <Lines text={plain(stage.output)} /></p>}
+          </div>
+          <dl className={styles.offerMeta}>
+            {stage.fee && <div><dt className="sr-only">{labels.fee}</dt><dd className={styles.offerPrice}>{stage.fee}</dd></div>}
+            {stage.duration && <div><dt className="sr-only">{labels.duration}</dt><dd>{stage.duration}</dd></div>}
+          </dl>
+          <div className={styles.offerCta}>
+            {stage.cta && <CtaLink cta={stage.cta} pageRef={pageRef} variant="dark" />}
           </div>
         </li>
       ))}

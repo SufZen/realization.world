@@ -104,22 +104,6 @@
 .back { min-height: 44px; padding: .5rem .25rem; border: 0; background: none; color: var(--text-muted); font: inherit; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 .back:hover { color: var(--ink); }
 
-/* Yield bars: the listing against what's left (example numbers). */
-.bars { margin: .2rem 0 0; padding: 1rem; border: 2px solid var(--ink); }
-.bars ul { display: grid; gap: .65rem; margin: 0; padding: 0; list-style: none; }
-.bars li { display: grid; grid-template-columns: minmax(7.5rem, 11rem) 1fr auto; gap: .75rem; align-items: center; }
-.barLabel { font-size: .86rem; font-weight: 700; }
-.barTrack { position: relative; height: 14px; background: var(--color-neutral-100); }
-.barFill {
-  position: absolute; inset-block: 0; right: 0; width: calc(var(--w) * 100%); background: var(--color-neutral-400);
-  transform-origin: right; animation: grow .9s var(--ease-out) both; animation-delay: calc(var(--i, 0) * 260ms + 200ms);
-}
-.bars li[data-tone="accent"] .barFill { background: var(--color-yellow); }
-.barValue { min-width: 3.4rem; font-size: 1.15rem; font-weight: 800; text-align: left; font-variant-numeric: tabular-nums; }
-.bars figcaption { margin-top: .6rem; font-size: .76rem; color: var(--text-muted); }
-@keyframes grow { from { transform: scaleX(0); } }
-.barsCompact { max-width: 30rem; }
-
 /* The checklist. */
 .tally { margin: 0; font-size: 1rem; }
 .tally strong { font-size: 1.35rem; }
@@ -155,14 +139,8 @@
   .cta { padding: 2rem; }
 }
 
-@media (max-width: 420px) {
-  .bars li { grid-template-columns: 1fr auto; }
-  .barLabel { grid-column: 1 / -1; }
-  .barTrack { grid-column: 1; }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .stage, .bigChoice, .num, .group, .barFill, .trap p { animation: none; }
+  .stage, .bigChoice, .num, .group, .trap p { animation: none; }
   .segments li::after { transition: none; }
 }
 

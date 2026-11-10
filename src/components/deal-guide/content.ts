@@ -1,8 +1,8 @@
 /**
  * Content of the interactive deal-check guide (/deal-check-guide).
  * Sources: the strategy draft (realization-studio campaigns/webinar-2026-10/direction/guide/)
- * and Evgeni Gurkov's deal-guide.pdf (14.10), whose worked example and market points (check 7) are used here.
- * All numbers are examples and are labelled as such on the page.
+ * and Evgeni Gurkov's deal-guide.pdf (14.10), whose market points (check 7) are used here.
+ * No yield or return figures (site rule, Asaf 10.11.2026): checks 1–2 give the cost sequence in words.
  */
 
 export type Role = "investor" | "developer" | "agent" | "other";
@@ -35,11 +35,6 @@ export const markets: { id: Market; label: string }[] = [
   { id: "other", label: "מדינה אחרת" },
 ];
 
-/** The worked example behind checks 1–2 (example numbers). Portugal and other markets use Evgeni's example. */
-export type YieldExample = { currency: "₪" | "€"; gross: number; net: number; equity: number };
-export const yieldExample = (market: Market): YieldExample =>
-  market === "il" ? { currency: "₪", gross: 3.6, net: 2.7, equity: 1.3 } : { currency: "€", gross: 6.0, net: 3.4, equity: 2.4 };
-
 type ByMarket = string | Partial<Record<Market, string>> & { default: string };
 export const forMarket = (value: ByMarket | undefined, market: Market) =>
   value === undefined ? undefined : typeof value === "string" ? value : value[market] ?? value.default;
@@ -57,7 +52,6 @@ export type Check = {
   /** A few short points (check 7: Evgeni's market points). */
   points?: string[];
   pointsLabel?: string;
-  visual?: "net" | "leverage";
   trap: string;
   /** The one question to ask; goes into the personal checklist when the answer is "open". */
   ask: ByMarket;
@@ -73,12 +67,6 @@ export const checks: Check[] = [
     id: "net",
     title: "ברוטו מול נטו",
     body: "התשואה במודעה היא שכירות שנתית חלקי מחיר. זו לא התשואה שנשארת. מורידים שורה אחר שורה: עלויות רכישה ושיפוץ, חודש ריק, ניהול, ועד בית, מס נכס, ביטוח ותחזוקה. מה שנשאר, חלקי כל הכסף שנכנס לעסקה, הוא הנטו.",
-    exampleLabel: "דוגמה, מספרים להמחשה",
-    example: {
-      il: "דירה ב־₪2,500,000 עם שכירות של ₪7,500 בחודש: במודעה 3.6%. אחרי מס רכישה, עורך דין, תיווך ושיפוץ, חודש ריק, תחזוקה וביטוח, נשארים בערך 2.7% נטו.",
-      default: "נכס ב־€250,000 עם שכירות של €1,250 בחודש: במודעה 6%. אחרי עלויות רכישה ושיפוץ (€30,000), חודש ריק, ניהול, ועד בית, מס נכס, ביטוח ותחזוקה, נשארים 3.4% נטו.",
-    },
-    visual: "net",
     trap: "לשכוח הוצאה קטנה כי היא ״רק כמה עשרות בחודש״. כמה כאלה ביחד הופכות ברוטו יפה לנטו נמוך.",
     ask: { il: "מה נשאר בשנה, אחרי כל העלויות, על כל שקל שנכנס לעסקה?", default: "מה נשאר בשנה, אחרי כל העלויות, על כל אירו שנכנס לעסקה?" },
     who: "self",
@@ -94,12 +82,8 @@ export const checks: Check[] = [
     id: "leverage",
     title: "מימון מול תשואה",
     body: "הלוואה מגדילה את התשואה על ההון רק כשהריבית נמוכה מהתשואה נטו. כשהיא גבוהה ממנה, כל שקל או אירו שהבנק נותן מוריד את התשואה על הכסף שלכם. ובמשכנתה שנפרעת כל חודש, בודקים גם כמה יוצא מהחשבון בפועל.",
-    exampleLabel: "דוגמה, מספרים להמחשה",
-    example: {
-      il: "נטו 2.7%, ריבית 4.5%, משכנתה של 50% מהמחיר: על הכסף שלכם נשארים בערך 1.3% בשנה, לפני החזר הקרן.",
-      default: "נטו 3.4%, ריבית 4.2%, הלוואה של 60% מהמחיר: על הכסף שלכם נשארים בערך 2.4%. ובמשכנתה נפרעת ל־25 שנה, התזרים השנתי יוצא בערך מינוס €226.",
-    },
-    visual: "leverage",
+    exampleLabel: "הסדר, במילים",
+    example: "התשואה במודעה, פחות כל העלויות, היא הנטו. הנטו, פחות ריבית שגבוהה ממנו, משאיר עוד פחות על הכסף שלכם. ואחרי החזר הקרן החודשי, התזרים יכול לצאת במינוס.",
     trap: "לראות 60% מימון ולהרגיש שהעסקה ״יעילה״. אם הריבית גבוהה מהנטו, ההלוואה לא עובדת לטובתכם.",
     ask: "מה הריבית בפועל, והאם היא נמוכה מהתשואה נטו? וכמה יוצא מהחשבון כל חודש, כולל החזר הקרן?",
     who: "bank",
