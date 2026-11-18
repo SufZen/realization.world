@@ -12,7 +12,7 @@ export function GET() {
         title: "Realization public content API",
         version: "1.0.0",
         description: "Read-only JSON about Realization's work (projects, ventures, systems, advisory cases) and field notes. The same data is available to MCP clients at /api/mcp.",
-        contact: { email: "hello@realization.world", url: siteUrl },
+        contact: { email: "info@realization.world", url: siteUrl },
       },
       servers: [{ url: siteUrl }],
       paths: {

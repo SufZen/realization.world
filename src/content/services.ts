@@ -139,7 +139,7 @@ export const pillars: Pillar[] = [
       {
         name: "Free deal check",
         text: "Paste a listing link, from Idealista or anywhere else. | We send back the assumptions and the checks still missing: | purchase costs, tax and financing.",
-        format: "Online form · reply within two working days",
+        format: "Online form · reply by email",
         price: "Free",
         cta: { label: "Check a deal", href: "#deal-check" },
       },

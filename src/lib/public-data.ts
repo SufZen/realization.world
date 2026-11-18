@@ -111,7 +111,6 @@ export const contact = {
   brief_paths: formPaths.map(([value, label]) => ({ value, label })),
   languages: ["English", "Hebrew"],
   locations: ["Remote", "Lisbon metropolitan area, Portugal", "Barcelona, Spain"],
-  reply_time: "Within two working days",
 };
 
 export const findWork = (slug: string) => work.find((item) => item.slug === slug);

@@ -44,7 +44,7 @@ export const bookingUrl = "https://schedule.realization.co.il/20-minute-intro-me
 export const whatsappUrl = "https://wa.me/972528289437";
 /** WhatsApp with a short opener already typed, in the page language. */
 export const whatsappLink = (text: string) => `${whatsappUrl}?text=${encodeURIComponent(text)}`;
-export const contactEmail = "hello@realization.world";
+export const contactEmail = "info@realization.world";
 
 export const processSteps = [
   {

@@ -19,7 +19,7 @@ export default function DealCheckThankYouPage() {
         index="✓"
         eyebrow="DEAL CHECK RECEIVED"
         title="Thank you. | The numbers are on their way."
-        intro="We read the listing and reply by email | within two working days, | usually with the numbers and one or two questions."
+        intro="We read the listing and reply by email, | usually with the numbers and one or two questions."
         theme="brand"
         actions={
           <>
