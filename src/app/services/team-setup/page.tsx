@@ -135,7 +135,7 @@ export default function TeamSetupPage() {
       <CtaBand
         eyebrow="START WITH 30 MINUTES"
         title="Too many decisions | still waiting for you?"
-        text="Thirty minutes and three questions | tell us both whether it fits."
+        text="Twenty minutes and three questions | tell us both whether it fits."
         primary={pillar.session}
         pageRef={pillar.ref}
       />

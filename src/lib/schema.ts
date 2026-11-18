@@ -49,7 +49,7 @@ export const organizationSchema = {
       availableLanguage: ["English", "Hebrew", "Portuguese"],
     },
   ],
-  potentialAction: { "@type": "ScheduleAction", name: "Book a 30-minute intro call", target: bookingUrl },
+  potentialAction: { "@type": "ScheduleAction", name: "Book a 20-minute intro call", target: bookingUrl },
 };
 
 export const websiteSchema = {

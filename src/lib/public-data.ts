@@ -93,7 +93,7 @@ export const services = {
       name: "Team and process setup",
       url: `${siteUrl}/services/team-setup`,
       first_steps: [
-        "Setup intro · 30 min · free",
+        "Setup intro · 20 min · free",
         "Team and process setup · fixed scope with a handoff date, by proposal",
       ],
     },
