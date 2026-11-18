@@ -578,6 +578,11 @@ section[id] { scroll-margin-top: 90px; }
   .header-book { display: none; }
   .proof-strip__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
+/* Phones: the intro call stays one tap away in the sticky header, as a small yellow pill (c02). */
+@media (max-width: 760px) {
+  .header-book { display: inline-flex; min-height: 42px; align-items: center; padding: .6rem .95rem; border-color: var(--color-yellow); background: var(--color-yellow); white-space: nowrap; }
+  .header-book:hover { border-color: #000; }
+}
 @media (max-width: 760px) {
   .case-summary, .doors__grid, .case-gallery { grid-template-columns: 1fr; }
   .proof-strip__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
