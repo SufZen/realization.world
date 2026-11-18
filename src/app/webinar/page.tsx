@@ -141,7 +141,7 @@ export default function WebinarPage() {
       <section className="section" id="cases">
         <div className="container-wide">
           <SectionHeading
-            title="חמישה מקרים, | עשר דקות לכל אחד."
+            title="חמישה מקרים, עשר דקות לכל אחד."
             intro="מחזור החיים של פרויקט נדל״ן, מהעסקה ועד המשקיעים. | לחצו על מקרה כדי לראות על מה דיברנו."
           />
           <div className="wh-cases">

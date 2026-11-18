@@ -133,7 +133,7 @@ export default function TeamSetupPage() {
       <FaqList eyebrow="QUESTIONS" title="Before you ask." items={delivery.faqs} />
 
       <CtaBand
-        eyebrow="START WITH 30 MINUTES"
+        eyebrow="START WITH 20 MINUTES"
         title="Too many decisions | still waiting for you?"
         text="Twenty minutes and three questions | tell us both whether it fits."
         primary={pillar.session}

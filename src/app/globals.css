@@ -589,6 +589,11 @@ section[id] { scroll-margin-top: 90px; }
   .header-book { display: inline-flex; min-height: 42px; align-items: center; padding: .6rem .95rem; border-color: var(--color-yellow); background: var(--color-yellow); white-space: nowrap; }
   .header-book:hover { border-color: #000; }
 }
+/* Very narrow phones (320–360px): keep the logo, the pill and the menu button all visible. */
+@media (max-width: 360px) {
+  .site-header__inner { gap: .5rem; }
+  .header-book { min-height: 40px; padding: .5rem .7rem; font-size: .8rem; }
+}
 @media (max-width: 760px) {
   .case-summary, .doors__grid, .case-gallery { grid-template-columns: 1fr; }
   .proof-strip__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }

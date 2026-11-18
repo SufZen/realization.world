@@ -103,7 +103,6 @@ export const work: WorkItem[] = [
       { value: "11", label: "homes · 1×T0, 9×T1, 1×T2" },
       { value: "596 m²", label: "net sellable area over 5 floors" },
       { value: "20 min", label: "ferry to Terreiro do Paço" },
-      { value: "~24 months", label: "planned path from acquisition to exit" },
     ],
     steps: {
       title: "Site → licence → | build → sell.",
@@ -111,7 +110,7 @@ export const work: WorkItem[] = [
       items: [
         ["Acquire", "Secure the site | and clear it."],
         ["License", "Design and licensing | with the architects."],
-        ["Fund & build", "Equity and bank facility; | a 12–15 month build."],
+        ["Fund & build", "Equity and bank facility, | then the build."],
         ["Sell", "Units sized for young buyers."],
       ],
     },
