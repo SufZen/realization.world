@@ -53,7 +53,7 @@ export default async function LearnPage() {
       {feed.length > 0 && (
         <section className="section">
           <div className="container-wide">
-            <SectionHeading eyebrow="LATEST" title="Latest from | the channels." intro="Videos and posts as they are published, | in Hebrew and English. Each opens on its network." />
+            <SectionHeading eyebrow="LATEST" title="Latest from | the channels." intro="Videos and posts as they are published. | Each opens on its network." />
             <LatestFeed items={feed} place="learn" />
             <div className="button-row"><CtaLink cta={{ ...youtube, label: "All videos on YouTube" }} pageRef={ref} variant="dark" /></div>
           </div>

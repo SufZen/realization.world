@@ -9,3 +9,9 @@ export const videoPillars: Record<string, PillarSlug> = {
   qPkljccmJ9g: "real-estate", // The yield in the listing is not your yield (Short, 9 Oct 2026)
   WWLFpApZfVk: "ai-systems", // Webinar 20.10 invite (Short, 8 Oct 2026)
 };
+
+/**
+ * Hebrew videos that carry English subtitles on YouTube. Only these may appear on English
+ * pages, and they show a "Hebrew · English subtitles" label. Add an ID once its subtitles are live.
+ */
+export const englishSubtitled = new Set<string>([]);

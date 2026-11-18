@@ -1,3 +1,4 @@
+import { englishSubtitled } from "@/content/videos";
 import { latestPosts } from "@/lib/buffer";
 import { enginePosts } from "@/lib/engine-feed";
 import { latestVideos } from "@/lib/youtube";
@@ -15,7 +16,24 @@ export type FeedItem = {
   thumbnail?: string;
   /** YouTube Shorts and videos are shown with a play button. */
   video?: boolean;
+  /** A Hebrew video with English subtitles, shown on an English page with a label. */
+  subtitled?: boolean;
 };
+
+/** The language a page is written in; the feed and video blocks only show items in it. */
+export type PageLang = "en" | "he";
+
+const HEBREW = /\p{Script=Hebrew}/u;
+export const isHebrew = (text: string) => HEBREW.test(text);
+
+/**
+ * Whether an item fits a page in `lang`. Hebrew pages show Hebrew items. English pages show
+ * non-Hebrew items, plus Hebrew videos listed as English-subtitled (src/content/videos.ts).
+ */
+export function fitsLanguage(text: string, lang: PageLang, videoId?: string) {
+  if (lang === "he") return isHebrew(text);
+  return !isHebrew(text) || (videoId !== undefined && englishSubtitled.has(videoId));
+}
 
 /**
  * The same piece often goes out on several networks (a Short, a reel, a post): match on
@@ -23,12 +41,15 @@ export type FeedItem = {
  */
 const signature = (text: string) => text.replace(/https?:\/\/\S+/g, "").replace(/[^\p{L}\p{N}]+/gu, "").slice(0, 24).toLowerCase();
 
-export async function latestFeed(limit = 6): Promise<FeedItem[]> {
-  const [videos, engine, posts] = await Promise.all([latestVideos(limit), enginePosts(limit * 3), latestPosts(limit * 3)]);
+export async function latestFeed(limit = 6, lang: PageLang = "en"): Promise<FeedItem[]> {
+  // The whole RSS feed (15 videos): filtering by language can drop many of them.
+  const [videos, engine, posts] = await Promise.all([latestVideos(15), enginePosts(limit * 3), latestPosts(limit * 3)]);
   const items: FeedItem[] = [
-    ...videos.map((video) => ({ id: `yt-${video.id}`, network: "youtube", text: video.title, published: video.published, url: video.url, thumbnail: video.thumbnail, video: true })),
-    ...engine.map((post) => ({ id: `engine-${post.url}`, network: post.network, text: post.text, published: post.date, url: post.url, thumbnail: post.thumbnail, video: post.network === "youtube" })),
-    ...posts.map((post) => ({ id: `buffer-${post.id}`, network: post.network, text: post.text, published: post.published, url: post.url, thumbnail: post.thumbnail })),
+    ...videos
+      .filter((video) => fitsLanguage(video.title, lang, video.id))
+      .map((video) => ({ id: `yt-${video.id}`, network: "youtube", text: video.title, published: video.published, url: video.url, thumbnail: video.thumbnail, video: true, subtitled: lang === "en" && isHebrew(video.title) })),
+    ...engine.filter((post) => fitsLanguage(post.text, lang)).map((post) => ({ id: `engine-${post.url}`, network: post.network, text: post.text, published: post.date, url: post.url, thumbnail: post.thumbnail, video: post.network === "youtube" })),
+    ...posts.filter((post) => fitsLanguage(post.text, lang)).map((post) => ({ id: `buffer-${post.id}`, network: post.network, text: post.text, published: post.published, url: post.url, thumbnail: post.thumbnail })),
   ];
   // Priority when the same piece is on several networks: YouTube (the video), then LinkedIn, Instagram, Facebook, TikTok, X.
   const rank: Record<string, number> = { youtube: 0, linkedin: 1, instagram: 2, facebook: 3, tiktok: 4, twitter: 5 };
