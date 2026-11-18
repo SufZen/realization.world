@@ -1,4 +1,4 @@
-import { socialLinks, type SocialNetwork } from "@/content/social";
+import { shownSocialLinks, type SocialNetwork } from "@/content/social";
 import styles from "./social-links.module.css";
 
 /* Brand marks from Simple Icons 11.0.0 (CC0), 24×24. */
@@ -22,7 +22,7 @@ export function SocialLinks({ tone = "light", label = "Follow us" }: { tone?: "l
     <nav className={`${styles.social} ${styles[tone]}`} aria-label={label}>
       <p className="eyebrow">{label}</p>
       <ul>
-        {socialLinks.map(({ network, label: name, href }) => (
+        {shownSocialLinks.map(({ network, label: name, href }) => (
           <li key={network}>
             <a href={href} target="_blank" rel="noopener me" aria-label={name} title={name} data-umami-event="social" data-umami-event-network={network}>
               <SocialIcon network={network} />

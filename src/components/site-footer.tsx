@@ -6,11 +6,16 @@ import { BrandMark } from "./brand-mark";
 import { Lines } from "./lines";
 import { SocialLinks } from "./social-links";
 
-/** Sister sites: cross-links that tie the Realization entity together for people and search engines. */
-const networkLinks = [
-  ["realization.co.il · Israel", "https://realization.co.il"],
-  ["realization.pt · Portugal", "https://realization.pt"],
-  ["realization.es · España", "https://realization.es"],
+/** Realization's country sites: one company, a site per market. */
+const countryLinks = [
+  ["World", "realization.world", "/", "en"],
+  ["Israel", "realization.co.il", "https://realization.co.il", "he"],
+  ["Portugal", "realization.pt", "https://realization.pt", "pt"],
+  ["Spain", "realization.es", "https://realization.es", "es"],
+] as const;
+
+/** Ventures we built and partners we work with: separate from the country sites. */
+const ventureLinks = [
   ["fluii.pt · stuck properties", "https://fluii.pt"],
   ["realizeos.ai · AI operations system", "https://realizeos.ai"],
   ["MeetSum", "https://meetsum.realization.co.il"],
@@ -58,12 +63,19 @@ export function SiteFooter() {
               {group.lang === "he" ? "Portugal business group (Hebrew)" : "Portugal business group (English)"}
             </a>
           ))}
-          <p>Israel · Portugal · Europe</p>
         </div>
       </div>
-      <nav className="container-wide site-footer__network" aria-label="Realization network">
-        <p className="eyebrow">Network</p>
-        {networkLinks.map(([label, href]) => <a href={href} key={href} rel="noopener">{label}</a>)}
+      <nav className="container-wide site-footer__network" aria-label="Realization countries">
+        <p className="eyebrow">Countries</p>
+        {countryLinks.map(([country, domain, href, lang]) => (
+          <a href={href} key={href} hrefLang={lang} rel={href.startsWith("http") ? "noopener" : undefined}>
+            <strong>{country}</strong> · {domain}
+          </a>
+        ))}
+      </nav>
+      <nav className="container-wide site-footer__network site-footer__network--minor" aria-label="Ventures and partners">
+        <p className="eyebrow">Ventures and partners</p>
+        {ventureLinks.map(([label, href]) => <a href={href} key={href} rel="noopener">{label}</a>)}
       </nav>
       <div className="container-wide site-footer__legal">
         <p>© {new Date().getFullYear()} Realization Unipessoal LDA · <Link href="/privacy">Privacy</Link> · <Link href="/legal">Legal</Link></p>
