@@ -178,6 +178,8 @@ button { cursor: pointer; }
 .home-hero .eyebrow { color: var(--color-yellow); }
 .home-hero h1 { margin-top: 1.4rem; color: #fff; font-size: clamp(2.1rem, 4.7vw, 5.4rem); }
 .home-hero h1 .ln { white-space: nowrap; }
+/* 320-359px phones: the nowrap line must still fit inside the gutter. */
+@media (max-width: 359px) { .home-hero h1 { font-size: 1.7rem; } }
 .home-hero h1 em { color: var(--color-yellow); font-style: normal; }
 .home-hero__lead { max-width: 54ch; margin-top: 2rem; color: rgb(255 255 255 / 86%); font-size: var(--text-lead); text-shadow: 0 1px 12px rgb(0 0 0 / 45%); }
 .home-hero .button--outline { color: #fff; }
