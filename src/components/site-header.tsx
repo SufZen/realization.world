@@ -31,7 +31,8 @@ export function SiteHeader() {
       return;
     }
     wasOpen.current = true;
-    closeRef.current?.focus();
+    // Next frame: the overlay must be visible before it can take focus.
+    const frame = requestAnimationFrame(() => closeRef.current?.focus());
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         event.preventDefault();
@@ -52,7 +53,10 @@ export function SiteHeader() {
       }
     };
     document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
+    return () => {
+      cancelAnimationFrame(frame);
+      document.removeEventListener("keydown", onKey);
+    };
   }, [open]);
 
   // The Hebrew webinar landing page and its thank-you page stay focused: logo only, no English navigation.
