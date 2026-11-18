@@ -16,6 +16,8 @@
   --color-neutral-100: #f4f4f2;
   --color-neutral-50: #fafaf8;
   --color-teal: #19c2c2;
+  --focus-ring: 3px solid var(--color-ink);
+  --focus-halo: 0 0 0 7px var(--color-yellow);
   --surface-page: var(--color-white);
   --surface-brand: var(--color-yellow);
   --surface-dark: var(--color-black);
@@ -68,7 +70,10 @@ button { cursor: pointer; }
 @media (max-width: 760px) { .project-row { grid-template-columns: 1fr; gap: .6rem; } }
 
 ::selection { background: var(--color-yellow); color: var(--color-black); }
-:focus-visible { outline: 3px solid var(--color-yellow); outline-offset: 4px; }
+:focus-visible { outline: var(--focus-ring); outline-offset: 2px; box-shadow: var(--focus-halo); }
+/* Design-system focus: a dark ring with a yellow halo. The ring stays visible on white and on yellow
+   (footer, brand bands, forms); on black grounds the ring turns yellow and the halo white. */
+:where(.surface-dark, .page-hero--dark, .home-hero, .wh-hero, .menu-panel, .insight-card, .principle, .evidence-track, .doors, .door--dark, .editorial-media) :focus-visible { outline-color: var(--color-yellow); box-shadow: 0 0 0 7px #fff; }
 [dir="rtl"], :lang(he) { --font-sans: var(--font-open-sans), sans-serif; --font-display: var(--font-open-sans), sans-serif; --font-body: var(--font-open-sans), sans-serif; }
 [dir="rtl"] { direction: rtl; }
 [dir="rtl"] :where(h1,h2,h3,h4), :lang(he) :where(h1,h2,h3,h4) { letter-spacing: 0; line-height: 1.22; }
@@ -357,12 +362,13 @@ button { cursor: pointer; }
 .path-option input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; pointer-events: none; }
 .path-option span { display: flex; min-height: 48px; align-items: center; padding: .8rem 1rem; border: 1.5px solid #000; border-radius: var(--radius-pill); font-size: .78rem; font-weight: 700; }
 .path-option input:checked + span { background: #000; color: #fff; }
-.path-option input:focus-visible + span { outline: 3px solid #fff; outline-offset: 3px; }
+.path-option input:focus-visible + span { outline: var(--focus-ring); outline-offset: 3px; }
 .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
 .opportunity-form label { display: grid; gap: .5rem; font-size: .8rem; font-weight: 700; }
 .opportunity-form input, .opportunity-form textarea { width: 100%; padding: .92rem 1rem; border: 1.5px solid #000; border-radius: var(--radius-pill); outline: 0; background: transparent; color: #000; font-size: .9rem; font-weight: 400; }
 .opportunity-form textarea { border-radius: 18px; resize: vertical; }
 .opportunity-form input:focus, .opportunity-form textarea:focus { background: #fff; }
+.opportunity-form input:focus-visible, .opportunity-form textarea:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
 .form-submit { display: flex; align-items: center; gap: 1.2rem; }
 .form-submit p { max-width: 33ch; color: rgb(0 0 0 / 62%); font-size: .72rem; }
 .form-status { padding: 1rem; border: 1px solid #000; background: #fff; color: #000; font-size: .82rem; }
@@ -651,7 +657,7 @@ section[id] { scroll-margin-top: 90px; }
 .wh-case { border: 2px solid #000; background: #fff; scroll-margin-top: 6rem; }
 .wh-case summary { display: grid; grid-template-columns: 160px minmax(0, 1fr) auto; gap: clamp(1rem, 2.5vw, 2rem); align-items: center; padding: 1rem; cursor: pointer; list-style: none; }
 .wh-case summary::-webkit-details-marker { display: none; }
-.wh-case summary:focus-visible { outline: 3px solid var(--color-yellow); outline-offset: 2px; }
+.wh-case summary:focus-visible { outline: var(--focus-ring); outline-offset: -5px; box-shadow: none; }
 .wh-case__thumb { position: relative; display: block; width: 160px; aspect-ratio: 4 / 3; overflow: hidden; background: var(--color-neutral-100); }
 .wh-case__thumb img { object-fit: cover; }
 .wh-case__head { display: grid; gap: .25rem; }
