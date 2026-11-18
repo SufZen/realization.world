@@ -23,6 +23,8 @@ export default function ContactPage() {
         title="A few lines | are enough."
         intro="A question, an idea or a first hello. | Write here, or pick the channel you already use."
         theme="light"
+        // No decorative mark: on phones the channels and the form come straight after the intro.
+        aside={<div aria-hidden="true" />}
       />
       <section className="section">
         <div className="container-wide opportunity-layout">
