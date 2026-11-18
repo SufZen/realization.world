@@ -1,6 +1,6 @@
 import { timingSafeEqual } from "node:crypto";
 import { mailConfigured, sendWebinarRegistration } from "@/lib/mail";
-import { appendToSheet, readRegistration, sheetConfigured, validateRegistration } from "@/lib/webinar";
+import { appendToSheet, readRegistration, sheetConfigured, validateRegistration, webinarEnded } from "@/lib/webinar";
 
 /**
  * Server-to-server webinar registration, for leads collected outside the site
@@ -21,6 +21,8 @@ function authorized(request: Request) {
 
 export async function POST(request: Request) {
   if (!authorized(request)) return Response.json({ ok: false, error: "unauthorized" }, { status: 401 });
+  // Registration closed when the webinar ended; 410 tells the automation the event is gone.
+  if (webinarEnded()) return Response.json({ ok: false, error: "webinar ended" }, { status: 410 });
 
   let body: Record<string, unknown>;
   try {

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import { ButtonLink } from "@/components/button-link";
 import { Lines } from "@/components/lines";
 import { Countdown } from "@/components/webinar/countdown";
 import { WebinarDetailsForm } from "@/components/webinar-details-form";
 import { WebinarMotionStyles } from "@/components/webinar/webinar-motion-styles";
 import { whatsappUrl } from "@/content/site";
-import { webinar, webinarCalendarUrl } from "@/lib/webinar";
+import { webinar, webinarCalendarUrl, webinarEnded } from "@/lib/webinar";
 import { openRegistrant } from "@/lib/webinar-token";
 
 export const metadata: Metadata = {
@@ -27,6 +28,8 @@ function Seal() {
 type Props = { searchParams: Promise<{ t?: string | string[] }> };
 
 export default async function WebinarThankYouPage({ searchParams }: Props) {
+  // After the event this page has nothing left to confirm: send people to the recording.
+  if (webinarEnded()) redirect("/webinar");
   // Step 2 shows only for a fresh registration from the site form (a valid token from step 1).
   const { t } = await searchParams;
   const token = typeof t === "string" && openRegistrant(t) ? t : "";

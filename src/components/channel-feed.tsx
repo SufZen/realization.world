@@ -29,7 +29,7 @@ export function LatestFeed({ items, place }: { items: FeedItem[]; place: string 
               ) : (
                 <span className={`${styles.thumb} ${styles.blank}`} aria-hidden="true">{icon && <SocialIcon network={icon} size={38} />}</span>
               )}
-              <span className={styles.meta}>{icon && <SocialIcon network={icon} size={14} />}{name} · {dateLabel(item.published)}</span>
+              <span className={styles.meta}>{icon && <SocialIcon network={icon} size={14} />}{name} · {dateLabel(item.published)}{item.subtitled && " · Hebrew, English subtitles"}</span>
               <span className={styles.text} dir="auto">{item.text}</span>
               <span className={styles.open}>Open on {name} <ArrowUpRight aria-hidden="true" size={14} style={{ display: "inline", verticalAlign: "-2px" }} /></span>
             </a>

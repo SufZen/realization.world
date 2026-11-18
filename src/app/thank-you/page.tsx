@@ -5,7 +5,7 @@ import { SectionHeading } from "@/components/section-heading";
 import { bookingUrl } from "@/content/site";
 
 export const metadata: Metadata = {
-  title: "Brief received",
+  title: "Received",
   robots: { index: false, follow: true },
 };
 
@@ -17,16 +17,18 @@ const nextByPath: Record<string, [label: string, href: string]> = {
 
 export default async function ThankYouPage({ searchParams }: PageProps<"/thank-you">) {
   const { path } = await searchParams;
-  const [label, href] = nextByPath[typeof path === "string" ? path : ""] ?? ["Explore the work", "/work"];
+  const key = typeof path === "string" ? path : "";
+  const [label, href] = nextByPath[key] ?? ["Explore the work", "/work"];
+  // No reply time is promised until one is agreed (18.11.2026).
   return (
     <>
       <PageHero
         index="✓"
-        eyebrow="BRIEF RECEIVED"
-        title="Thank you. | We’ll be in touch."
-        intro="Your brief reached our inbox. | We reply within two working days — | usually with a question or a time to talk."
+        eyebrow={key === "general" ? "RECEIVED · MESSAGE" : "RECEIVED · BRIEF"}
+        title="Thank you. | It’s in our inbox."
+        intro={`Your ${key === "general" ? "message" : "brief"} reached us, | and a person will reply by email. | Want to talk sooner? Book 20 minutes.`}
         theme="brand"
-        actions={<><ButtonLink href={bookingUrl} variant="dark">Book a 20-min intro now</ButtonLink><ButtonLink href={href} variant="outline">{label}</ButtonLink></>}
+        actions={<><ButtonLink href={bookingUrl} variant="dark">Book a 20-minute intro</ButtonLink><ButtonLink href={href} variant="outline">{label}</ButtonLink></>}
       />
       <section className="section">
         <div className="container-wide">

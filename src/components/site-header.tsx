@@ -3,7 +3,7 @@
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { approachNavigation, bookingUrl, partnerNavigation, primaryNavigation } from "@/content/site";
 import { BrandMark } from "./brand-mark";
 import { SocialLinks } from "./social-links";
@@ -11,11 +11,51 @@ import { SocialLinks } from "./social-links";
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const wasOpen = useRef(false);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  // Menu as a modal: focus moves in on open, Tab stays inside, Escape closes, focus returns to the trigger.
+  useEffect(() => {
+    if (!open) {
+      if (wasOpen.current) triggerRef.current?.focus();
+      wasOpen.current = false;
+      return;
+    }
+    wasOpen.current = true;
+    // Next frame: the overlay must be visible before it can take focus.
+    const frame = requestAnimationFrame(() => closeRef.current?.focus());
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setOpen(false);
+        return;
+      }
+      if (event.key !== "Tab" || !panelRef.current) return;
+      const focusable = [...panelRef.current.querySelectorAll<HTMLElement>("a[href], button:not([disabled])")];
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && (document.activeElement === first || !panelRef.current.contains(document.activeElement))) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && (document.activeElement === last || !panelRef.current.contains(document.activeElement))) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => {
+      cancelAnimationFrame(frame);
+      document.removeEventListener("keydown", onKey);
     };
   }, [open]);
 
@@ -49,6 +89,7 @@ export function SiteHeader() {
             Bring an opportunity
           </Link>
           <button
+            ref={triggerRef}
             className="menu-trigger"
             type="button"
             onClick={() => setOpen(true)}
@@ -62,12 +103,12 @@ export function SiteHeader() {
         </div>
       </div>
 
-      <div className={`menu-overlay ${open ? "is-open" : ""}`} aria-hidden={!open}>
-        <button className="menu-overlay__scrim" type="button" aria-label="Close menu" onClick={() => setOpen(false)} />
-        <nav id="site-menu" className="menu-panel" aria-label="Site menu">
+      <div className={`menu-overlay ${open ? "is-open" : ""}`} role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden={!open}>
+        <button className="menu-overlay__scrim" type="button" aria-label="Close menu" tabIndex={-1} onClick={() => setOpen(false)} />
+        <nav id="site-menu" ref={panelRef} className="menu-panel" aria-label="Site menu">
           <div className="menu-panel__head">
             <BrandMark inverse />
-            <button className="menu-close" type="button" onClick={() => setOpen(false)} aria-label="Close menu">
+            <button ref={closeRef} className="menu-close" type="button" onClick={() => setOpen(false)} aria-label="Close menu">
               <X aria-hidden="true" />
             </button>
           </div>

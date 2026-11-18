@@ -57,14 +57,14 @@ const tools = [
   {
     name: "get_contact_and_booking",
     title: "Contact and booking",
-    description: "Email, 20-minute intro booking link, WhatsApp, brief form, languages, locations and reply time.",
+    description: "Email, 20-minute intro booking link, WhatsApp, brief form, languages and locations.",
     inputSchema: { type: "object", properties: {} },
     annotations: { readOnlyHint: true },
   },
   {
     name: "submit_brief",
     title: "Send a brief to Realization",
-    description: "Send a short brief to a person at Realization, who replies by email within two working days. Only use this when the user has asked you to contact Realization and has confirmed the details and consent.",
+    description: "Send a short brief to a person at Realization, who replies by email. Only use this when the user has asked you to contact Realization and has confirmed the details and consent.",
     inputSchema: {
       type: "object",
       properties: {
@@ -118,7 +118,7 @@ async function callTool(name: string, args: Record<string, unknown>, request: Re
         console.error("MCP brief failed to send", error);
         return fail(`The brief could not be sent. Ask the user to email ${contact.email}.`);
       }
-      return ok({ sent: true, message: "Brief sent. Realization replies by email within two working days.", booking_url: contact.booking_url });
+      return ok({ sent: true, message: "Brief sent. A person at Realization replies by email.", booking_url: contact.booking_url });
     }
     default:
       throw Object.assign(new Error(`Unknown tool: ${name}`), { code: -32602 });

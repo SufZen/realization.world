@@ -13,7 +13,6 @@ import { insights, partnerPaths, siteUrl } from "@/content/site";
 import { introCta } from "@/content/services";
 import { graph, websiteSchema } from "@/lib/schema";
 import { Lines } from "@/components/lines";
-import { WebinarBanner } from "@/components/webinar-banner";
 import { latestFeed } from "@/lib/feed";
 
 // Title and description come from the root layout; canonical is set per page.
@@ -29,7 +28,6 @@ export default async function HomePage() {
   return (
     <>
       <JsonLd data={graph(websiteSchema)} />
-      <WebinarBanner />
       <section className="home-hero">
         <div className="home-hero__bg" aria-hidden="true">
           <Image src="/media/hero-physical-world.webp" alt="" fill priority sizes="100vw" />

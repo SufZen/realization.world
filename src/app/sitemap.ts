@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/how-we-build",
     "/markets",
     "/bring-an-opportunity",
+    "/contact",
     "/webinar",
     "/deal-check-guide",
     "/asaf",

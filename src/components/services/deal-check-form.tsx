@@ -115,7 +115,7 @@ export function DealCheckForm() {
         <button className="button button--dark" type="submit" disabled={pending} data-umami-event="deal-check" data-umami-event-pillar="real-estate" data-umami-event-ref={ref}>
           {pending ? "Sending…" : "Check this deal"} <ArrowRight className="r-flip-x" aria-hidden="true" size={17} />
         </button>
-        <p>Free. We reply within two working days, by email.</p>
+        <p>Free. We reply by email.</p>
       </div>
       {state.message && (
         <div className="form-status" role={state.status === "error" ? "alert" : "status"}>

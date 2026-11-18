@@ -23,6 +23,12 @@ export const socialLinks: Array<{ network: SocialNetwork; label: string; href: s
   { network: "x", label: "X", href: "https://x.com/Suf_Zen" },
 ];
 
+/**
+ * The channels the site shows (18.11.2026): Asaf's LinkedIn and the YouTube channel only, until
+ * Realization-brand accounts are confirmed. The full list above stays for the founder's schema.
+ */
+export const shownSocialLinks = socialLinks.filter((link) => link.network === "linkedin" || link.network === "youtube");
+
 const hrefOf = (network: SocialNetwork) => socialLinks.find((link) => link.network === network)!.href;
 
 /**
@@ -33,7 +39,5 @@ export const mainChannels: Array<{ id: SocialNetwork | "groups" | "email"; name:
   { id: "youtube", name: "YouTube", what: "Short videos from real projects, in Hebrew and English.", action: "Subscribe", href: `${youtubeChannelUrl}?sub_confirmation=1` },
   { id: "linkedin", name: "LinkedIn", what: "Field notes, project updates and ideas, in English.", action: "Follow", href: hrefOf("linkedin") },
   { id: "groups", name: "Portugal business groups", what: "Work, investment and business in Portugal: questions, deals, people.", action: "Join", href: communities[1].href, stat: `${(communities[0].members + communities[1].members).toLocaleString("en-US")}+ members` },
-  { id: "facebook", name: "Facebook", what: "Posts, reels and webinar news, in Hebrew.", action: "Follow", href: hrefOf("facebook") },
-  { id: "instagram", name: "Instagram", what: "Reels from the work and the places.", action: "Follow", href: hrefOf("instagram") },
   { id: "email", name: "Realization updates", what: "Occasional email: new tools, case studies and events.", action: "Subscribe", href: newsletterUrl },
 ];

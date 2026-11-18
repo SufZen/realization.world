@@ -100,7 +100,7 @@ export function OpportunityForm() {
         <button className="button button--dark" type="submit" disabled={pending} data-umami-event="submit-brief">
           {pending ? "Sending…" : "Send the brief"} <ArrowRight aria-hidden="true" size={17} />
         </button>
-        <p>We reply within two working days. Leave out sensitive personal or financial data.</p>
+        <p>Leave out sensitive personal or financial data.</p>
       </div>
       {state.message && (
         <div className="form-status" role={state.status === "error" ? "alert" : "status"}>

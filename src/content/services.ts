@@ -54,8 +54,8 @@ export const bookingTypes = {
   dealConsultation: `${tidycal}/60-minute-consulting-meeting`,
   /** AI Strategy Session. For now: the 60-min consulting type. */
   aiStrategySession: `${tidycal}/60-minute-consulting-meeting`,
-  /** Team and process setup intro. For now: the 30-min intro. */
-  deliveryIntro: "https://schedule.realization.co.il/30-minute-intro-meeting-asaf",
+  /** Team and process setup intro: the same 20-minute intro as everywhere (x02, 18.11.2026). */
+  deliveryIntro: `${tidycal}/20-minute-intro-meeting-asaf`,
   realizeosSetup: `${tidycal}/realizeos-setup`,
 };
 
@@ -139,7 +139,7 @@ export const pillars: Pillar[] = [
       {
         name: "Free deal check",
         text: "Paste a listing link, from Idealista or anywhere else. | We send back the assumptions and the checks still missing: | purchase costs, tax and financing.",
-        format: "Online form · reply within two working days",
+        format: "Online form · reply by email",
         price: "Free",
         cta: { label: "Check a deal", href: "#deal-check" },
       },
@@ -160,7 +160,7 @@ export const pillars: Pillar[] = [
       },
       {
         name: "Development management",
-        text: "At Arena in Barreiro we are the managing partner | and development manager. | PIP approved 7.2026; licensing is next.",
+        text: "At Arena in Barreiro we are the managing partner | and development manager. | Construction planned to start in Q1 2027.",
         format: "Site to sale",
         price: "By proposal",
         cta: { label: "See Arena", href: "/work/arena-barreiro", event: "view-case", data: { pillar: "real-estate", case: "arena-barreiro" } },
@@ -238,7 +238,7 @@ export const pillars: Pillar[] = [
     icon: UsersRound,
     ref: "services-team-setup",
     session: {
-      label: "Book a setup call · 30 min",
+      label: "Book a setup call · 20 min",
       href: bookingTypes.deliveryIntro,
       event: "book-session-delivery",
       data: { pillar: "delivery" },
@@ -247,8 +247,8 @@ export const pillars: Pillar[] = [
     offers: [
       {
         name: "Setup call",
-        text: "Thirty minutes and three questions (below). | If we are not the right fit, | you will know by the end of the call.",
-        format: "30 min · Google Meet",
+        text: "Twenty minutes and three questions (below). | If we are not the right fit, | you will know by the end of the call.",
+        format: "20 min · Google Meet",
         price: "Free",
         cta: { label: "Book a setup call", href: bookingTypes.deliveryIntro, event: "book-session-delivery", data: { pillar: "delivery" }, carryRef: true },
       },

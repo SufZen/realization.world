@@ -155,7 +155,7 @@ export function SystemsPage({ copy, path }: { copy: SystemsCopy; path: string })
 
       {he ? <Testimonials pillar="ai-systems" eyebrow="במילים שלהם" title="מה אומרים | לקוחות ושותפים." /> : <Testimonials pillar="ai-systems" />}
 
-      <PillarVideos pillar="ai-systems" eyebrow={he ? "צפו" : "WATCH"} title={he ? "בינה מלאכותית בפרויקטים, | בסרטונים קצרים." : "AI in real projects, | in short videos."} />
+      <PillarVideos pillar="ai-systems" lang={he ? "he" : "en"} eyebrow={he ? "צפו" : "WATCH"} title={he ? "בינה מלאכותית בפרויקטים, | בסרטונים קצרים." : "AI in real projects, | in short videos."} />
 
       {!he && <InsightFeed insights={pillarInsights(pillar, insights)} title="AI in practice, | from real projects." intro="Short notes on what worked, | what did not and what it cost." />}
 

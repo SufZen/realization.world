@@ -93,7 +93,7 @@ export const services = {
       name: "Team and process setup",
       url: `${siteUrl}/services/team-setup`,
       first_steps: [
-        "Setup intro · 30 min · free",
+        "Setup intro · 20 min · free",
         "Team and process setup · fixed scope with a handoff date, by proposal",
       ],
     },
@@ -111,7 +111,6 @@ export const contact = {
   brief_paths: formPaths.map(([value, label]) => ({ value, label })),
   languages: ["English", "Hebrew"],
   locations: ["Remote", "Lisbon metropolitan area, Portugal", "Barcelona, Spain"],
-  reply_time: "Within two working days",
 };
 
 export const findWork = (slug: string) => work.find((item) => item.slug === slug);

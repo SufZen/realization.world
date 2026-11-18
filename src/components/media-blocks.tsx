@@ -3,14 +3,15 @@ import Image from "next/image";
 import { SectionHeading } from "@/components/section-heading";
 import type { PillarSlug } from "@/content/services";
 import { testimonials } from "@/content/testimonials";
-import { videoPillars } from "@/content/videos";
+import { englishSubtitled, videoPillars } from "@/content/videos";
+import { fitsLanguage, isHebrew, type PageLang } from "@/lib/feed";
 import { latestVideos, type Video } from "@/lib/youtube";
 import styles from "./media-blocks.module.css";
 
 const dateLabel = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
 
 /** YouTube videos as cards that open on YouTube (no embedded player, so no YouTube cookies here). */
-export function VideoGrid({ videos, place }: { videos: Video[]; place: string }) {
+export function VideoGrid({ videos, place, lang = "en" }: { videos: Video[]; place: string; lang?: PageLang }) {
   if (!videos.length) return null;
   return (
     <ul className={styles.videos}>
@@ -21,7 +22,10 @@ export function VideoGrid({ videos, place }: { videos: Video[]; place: string })
               <Image src={video.thumbnail} alt="" fill sizes="(max-width: 560px) 100vw, (max-width: 900px) 50vw, 33vw" />
               <span className={styles.play} aria-hidden="true"><span><Play size={22} fill="currentColor" /></span></span>
             </span>
-            <span className={styles.videoMeta}>{video.short ? "Short" : "Video"} · {dateLabel(video.published)}</span>
+            <span className={styles.videoMeta}>
+              {video.short ? "Short" : "Video"} · {dateLabel(video.published)}
+              {lang === "en" && isHebrew(video.title) && englishSubtitled.has(video.id) && " · Hebrew, English subtitles"}
+            </span>
             <span className={styles.videoTitle} dir="auto">{video.title}</span>
           </a>
         </li>
@@ -30,15 +34,18 @@ export function VideoGrid({ videos, place }: { videos: Video[]; place: string })
   );
 }
 
-/** A pillar page's videos (tagged in src/content/videos.ts). Renders nothing until there are some. */
-export async function PillarVideos({ pillar, title, intro, eyebrow = "WATCH", surface = "" }: { pillar: PillarSlug; title: string; intro?: string; eyebrow?: string; surface?: string }) {
-  const videos = (await latestVideos(15)).filter((video) => videoPillars[video.id] === pillar).slice(0, 3);
+/**
+ * A pillar page's videos (tagged in src/content/videos.ts), only those in the page's language
+ * (see fitsLanguage). Renders nothing until there are some.
+ */
+export async function PillarVideos({ pillar, title, intro, eyebrow = "WATCH", surface = "", lang = "en" }: { pillar: PillarSlug; title: string; intro?: string; eyebrow?: string; surface?: string; lang?: PageLang }) {
+  const videos = (await latestVideos(15)).filter((video) => videoPillars[video.id] === pillar && fitsLanguage(video.title, lang, video.id)).slice(0, 3);
   if (!videos.length) return null;
   return (
     <section className={`section ${surface}`}>
       <div className="container-wide">
         <SectionHeading eyebrow={eyebrow} title={title} intro={intro} />
-        <VideoGrid videos={videos} place={pillar} />
+        <VideoGrid videos={videos} place={pillar} lang={lang} />
       </div>
     </section>
   );

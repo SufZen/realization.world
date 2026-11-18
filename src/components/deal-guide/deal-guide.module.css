@@ -32,7 +32,7 @@
 
 .screen { display: grid; gap: 1.1rem; }
 .screen :where(h1, h2):focus { outline: none; }
-.screen :where(h1, h2):focus-visible { outline: 3px solid var(--color-yellow); outline-offset: 4px; }
+.screen :where(h1, h2):focus-visible { outline: var(--focus-ring); outline-offset: 4px; box-shadow: var(--focus-halo); }
 
 .kicker, .eyebrow { margin: 0; font-size: .82rem; font-weight: 700; color: var(--text-muted); }
 .kicker { color: var(--ink); display: inline-flex; align-items: center; gap: .55rem; }
@@ -54,7 +54,7 @@
 .bigChoice:hover { background: var(--color-yellow-wash); }
 .bigChoice:active { transform: scale(.985); }
 .bigChoice[aria-pressed="true"] { background: var(--color-yellow); }
-.bigChoice:focus-visible, .pill:focus-visible, .tool:focus-visible, .back:focus-visible { outline: 3px solid var(--color-yellow); outline-offset: 2px; }
+.bigChoice:focus-visible, .pill:focus-visible, .tool:focus-visible, .back:focus-visible { outline: var(--focus-ring); outline-offset: 2px; box-shadow: var(--focus-halo); }
 @keyframes rise { from { opacity: 0; transform: translateY(10px); } }
 
 /* A check. */
@@ -183,7 +183,7 @@
 .gateText { margin: 0; line-height: 1.6; color: var(--text-body); }
 .field { display: grid; gap: .35rem; font-weight: 700; }
 .field input { min-height: 48px; padding: .6rem .8rem; border: 2px solid var(--ink); border-radius: 0; background: #fff; font: inherit; font-weight: 400; }
-.field input:focus-visible { outline: 3px solid var(--color-yellow); outline-offset: 1px; }
+.field input:focus-visible { outline: var(--focus-ring); outline-offset: 1px; box-shadow: var(--focus-halo); }
 .field input[aria-invalid="true"] { border-color: #b93c28; }
 .field small, .fieldError { margin: 0; color: #b93c28; font-size: .86rem; font-weight: 700; }
 .consent { display: grid; grid-template-columns: auto 1fr; gap: .6rem; align-items: start; font-size: .9rem; line-height: 1.5; }
