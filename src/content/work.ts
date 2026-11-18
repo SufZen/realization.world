@@ -47,7 +47,7 @@ export type WorkItem = {
   name: string;
   kind: WorkKind;
   eyebrow: string;
-  status: "PIP approved · 7.2026" | "Ongoing" | "Live" | "Launching" | "In development" | "In daily use" | "Case study" | "Concluded";
+  status: "Ongoing" | "Live" | "Launching" | "In development" | "In daily use" | "Case study" | "Concluded";
   years?: string;
   location: string;
   role: string;
@@ -86,19 +86,19 @@ export const work: WorkItem[] = [
     name: "Arena",
     kind: "development",
     eyebrow: "RESIDENTIAL DEVELOPMENT · BARREIRO, LISBON",
-    status: "PIP approved · 7.2026",
+    status: "In development",
     years: "2026–2028",
     location: "Barreiro, Lisbon metropolitan area, Portugal",
     role: "GP, development manager and shareholder",
     descriptor: "Eleven compact homes | on Lisbon’s south bank, twenty minutes from the city by ferry.",
     summary:
-      "Arena is an eleven-home residential building in Barreiro, across the Tagus from Lisbon, developed by Realization as GP and development manager. The site is acquired and cleared, the information request (PIP) is approved, and construction is planned for 2026–27.",
+      "Arena is an eleven-home residential building in Barreiro, across the Tagus from Lisbon, developed by Realization as GP and development manager. The site is acquired and cleared. Construction is planned to start in Q1 2027.",
     problem:
       "Greater Lisbon is short of good homes | below the luxury segment. Young professionals | are priced out of the centre, | while Barreiro’s stock is old and inefficient.",
     approach:
       "We changed the mix away from slow T2/T3 flats | to smaller homes: one T0, | nine T1 and a T2 penthouse, | each designed to qualify for Portugal’s | under-35 first-home tax exemption.",
     outcome:
-      "Site acquired and demolished (Q1 2026). | Information request (PIP) approved (July 2026). | Next: the licensing application, then funding and construction.",
+      "Site acquired and cleared. | Construction planned to start in Q1 2027.",
     facts: [
       { value: "11", label: "homes · 1×T0, 9×T1, 1×T2" },
       { value: "596 m²", label: "net sellable area over 5 floors" },
@@ -109,9 +109,8 @@ export const work: WorkItem[] = [
       title: "Site → licence → | build → sell.",
       intro: "A single dedicated company (SPV) | with Realization running day-to-day execution.",
       items: [
-        ["Acquire", "Site secured and demolished | in Q1 2026."],
-        ["PIP", "Information request | approved in July 2026."],
-        ["License", "Next: submit the | licensing application."],
+        ["Acquire", "Secure the site | and clear it."],
+        ["License", "Design and licensing | with the architects."],
         ["Fund & build", "Equity and bank facility; | a 12–15 month build."],
         ["Sell", "Units sized for young buyers."],
       ],
@@ -133,7 +132,7 @@ export const work: WorkItem[] = [
     cta: { path: "capital", heading: "Capital partner? | Start with a call; | details under NDA.", label: "Talk to us" },
     schema: "CreativeWork",
     icon: Building2,
-    updated: "2026-09-28",
+    updated: "2026-11-18",
   },
   {
     slug: "realization-portugal",
