@@ -6,7 +6,7 @@ import { after } from "next/server";
 import { clientKey, rateLimited } from "@/lib/brief";
 import { mailConfigured, sendWebinarRegistration } from "@/lib/mail";
 import { cleanFbclid, metaConfigured, sendLeadEvent } from "@/lib/meta-capi";
-import { addDetailsToSheet, appendToSheet, detailsEmpty, readDetails, readRegistration, sheetConfigured, validateRegistration, type RegistrationField } from "@/lib/webinar";
+import { addDetailsToSheet, appendToSheet, detailsEmpty, readDetails, readRegistration, sheetConfigured, validateRegistration, webinarEnded, type RegistrationField } from "@/lib/webinar";
 import { openRegistrant, sealRegistrant } from "@/lib/webinar-token";
 
 export type RegistrationState = {
@@ -18,6 +18,11 @@ export type RegistrationState = {
 export async function registerWebinar(_previous: RegistrationState, form: FormData): Promise<RegistrationState> {
   // Honeypot: real people never see or fill this field.
   if (String(form.get("website") ?? "").trim()) redirect("/webinar/thank-you");
+
+  // The webinar is over: old forms or cached pages can still post here, but nobody gets registered.
+  if (webinarEnded()) {
+    return { status: "unavailable", message: "הוובינר כבר התקיים, וההרשמה סגורה. ההקלטה המלאה מחכה בעמוד הוובינר." };
+  }
 
   const reg = readRegistration((name) => form.get(name));
   const fieldErrors = validateRegistration(reg, form.get("consent") === "yes");

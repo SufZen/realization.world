@@ -3,14 +3,13 @@
 import { useEffect } from "react";
 
 /**
- * Wires the webinar page's clips and the phone register bar. The markup is server-rendered
+ * Wires the webinar page's clips. The markup is server-rendered
  * (poster images first, videos with preload="none"); this only decides when a clip plays.
  * With reduced motion nothing plays by itself; the brain clip's replay button still works.
  *
  *   [data-wm-hero]   the hero loop: starts once the page is idle, pauses off screen
  *   .wh-case         thumb clip on hover (fine pointers), body clip once on open
  *   [data-wm-brain]  plays once when half in view, holds its last frame; [data-wm-replay] replays
- *   .wh-sticky       shown once the hero's button has scrolled away, hidden while the form section is in view
  */
 export function WebinarMotion() {
   useEffect(() => {
@@ -100,26 +99,6 @@ export function WebinarMotion() {
           runBrain(false);
         }
       }, 0.5);
-    }
-
-    // Phone register bar (CSS keeps it off screen until this shows it).
-    const sticky = document.querySelector<HTMLElement>(".wh-sticky");
-    const heroButton = document.querySelector(".wh-hero .button");
-    // The form itself renders on the client (Suspense), so watch its server-rendered section.
-    const form = document.querySelector(".webinar-split--form");
-    if (sticky && heroButton && form) {
-      let pastHero = false;
-      let atForm = false;
-      const sync = () => sticky.classList.toggle("is-shown", pastHero && !atForm);
-      observe(heroButton, (entry) => {
-        pastHero = !entry.isIntersecting && entry.boundingClientRect.top < 0;
-        sync();
-      }, 0);
-      observe(form, (entry) => {
-        atForm = entry.isIntersecting;
-        sync();
-      }, 0.15);
-      cleanups.push(() => sticky.classList.remove("is-shown"));
     }
 
     return () => cleanups.forEach((fn) => fn());

@@ -16,7 +16,12 @@ export const webinar = {
   timeLabel: "20:00 שעון ישראל · 18:00 שעון ליסבון",
   durationLabel: "90 דקות",
   platform: "Google Meet",
+  /** The full recording (unlisted on YouTube, approved for the site 18.11.2026). */
+  recordingUrl: "https://youtu.be/-4i69Y4egPI",
 };
+
+/** True once the webinar has ended: registration closes and /webinar shows the recording. */
+export const webinarEnded = (now = Date.now()) => now >= Date.parse("2026-10-20T18:30:00Z");
 
 export const webinarCalendarUrl = (() => {
   const params = new URLSearchParams({

@@ -1,19 +1,17 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Suspense } from "react";
 import { ButtonLink } from "@/components/button-link";
 import { Lines } from "@/components/lines";
 import { SectionHeading } from "@/components/section-heading";
-import { Countdown } from "@/components/webinar/countdown";
 import { WebinarMotionStyles } from "@/components/webinar/webinar-motion-styles";
 import { WebinarMotion } from "@/components/webinar/webinar-motion";
-import { WebinarForm } from "@/components/webinar-form";
+import { bookingUrl, whatsappLink } from "@/content/site";
 import { pageMetadata } from "@/lib/metadata";
 import { webinar } from "@/lib/webinar";
 
 const base = pageMetadata(
   "וובינר: לא עוד הרצאה על בינה מלאכותית",
-  "וובינר חינמי בעברית לכל מי שעובד בנדל״ן: מי שבונה, מי שמתכנן, ומי שמלווה עסקאות. חמישה מקרים אמיתיים מפרויקטי נדל״ן, ובעיה אחת שלכם שננתח בשידור. שלישי 20.10, 20:00 שעון ישראל.",
+  "וובינר בעברית לכל מי שעובד בנדל״ן: מי שבונה, מי שמתכנן, ומי שמלווה עסקאות. חמישה מקרים אמיתיים מפרויקטי נדל״ן, ובעיה אחת מהקהל שנותחה בשידור. ההקלטה המלאה ביוטיוב.",
   "/webinar",
   { imagePath: "/webinar/og.jpg" },
 );
@@ -87,17 +85,9 @@ const agenda = [
   ["25–35", "שלוש הצעות מחיר, טבלה אחת"],
   ["35–45", "הקבלן מבקש תשלום, ואתם בחו״ל"],
   ["45–55", "הדוח למשקיעים, בשעה"],
-  ["55–65", "הבעיה שלכם על המסך: מיני־אודיט בזמן אמת"],
+  ["55–65", "בעיה מהקהל על המסך: מיני־אודיט בזמן אמת"],
   ["65–70", "איך ממשיכים מכאן"],
   ["70–90", "שאלות ותשובות"],
-];
-
-const faq = [
-  ["כמה זה עולה?", "הוובינר בחינם, ומי שמגיע לשידור החי מקבל גם לא מעט בונוסים."],
-  ["תהיה הקלטה?", "כן. ההקלטה תישלח לכל הנרשמים. ובכל זאת, שווה להצטרף לשידור החי: רק שם אפשר לשאול שאלות ולראות את הבעיה מהקהל מנותחת על המסך."],
-  ["מה קורה אחרי הוובינר?", "מי שרוצה יכול לקבוע איתנו שיחת היכרות קצרה. אם יש התאמה, נעשה יחד אודיט לעסק שלכם: לאן הולכים הזמן והכסף, ובמה כדאי להתחיל. בלי התחייבות."],
-  ["זה טכני? צריך לדעת לתכנת?", "לא. מדברים על תהליכים, החלטות ומספרים. אנחנו מציגים את הכלים כדי להראות מה אפשר לעשות, לא כדי ללמד תכנות."],
-  ["אני פעיל רק בישראל. זה רלוונטי?", "כן. רוב המקרים מגיעים מפורטוגל, אבל הבעיות, הכלים והשיטה זהים בכל שוק."],
 ];
 
 /** The case's 4-second line clip from the deck, laid over its image; webinar-motion.tsx decides when it plays. */
@@ -109,21 +99,24 @@ function CaseClip({ index, kind }: { index: number; kind: "thumb" | "clip" }) {
   );
 }
 
+const recordingTracking = (place: string) => ({ "data-umami-event": "webinar-recording", "data-umami-event-place": place });
+
+/** After the event (20.10): the recording, what it covers, and the 20-minute intro as the next step. */
 export default function WebinarPage() {
   return (
     <div dir="rtl" lang="he" className="webinar-page">
       <WebinarMotionStyles />
       <section className="wh-hero">
         <div className="wh-hero__copy">
-          <p className="wh-hero__kicker">וובינר חינמי בעברית</p>
+          <p className="wh-hero__kicker">וובינר בעברית · התקיים ב־20.10</p>
           <h1><Lines text="לא עוד הרצאה | על בינה מלאכותית." /></h1>
-          <p className="wh-hero__sub"><Lines text="5 מקרים אמיתיים מפרויקטי נדל״ן, | והבעיה שלכם על המסך." /></p>
+          <p className="wh-hero__sub"><Lines text="5 מקרים אמיתיים מפרויקטי נדל״ן. | ההקלטה המלאה, ביוטיוב." /></p>
           <p className="wh-hero__for">לכל מי שעובד בנדל״ן: מי שבונה, מי שמתכנן, ומי שמלווה עסקאות.</p>
           <div className="button-row">
-            <ButtonLink href="#register" variant="primary">שמרו לי מקום</ButtonLink>
-            <p className="wm-cta-note">חינם, ובסוף לא נמכור לכם קורס.</p>
+            <ButtonLink href={webinar.recordingUrl} variant="primary" tracking={recordingTracking("hero")}>לצפייה בהקלטה</ButtonLink>
+            <ButtonLink href={bookingUrl} variant="light">שיחת היכרות של 20 דקות</ButtonLink>
           </div>
-          <p className="wh-hero__meta">חינם · 90 דקות · בשידור חי · מוקלט</p>
+          <p className="wh-hero__meta">חינם · 90 דקות · ביוטיוב</p>
           <p className="wh-hero__brand">{webinar.hosts}</p>
         </div>
         <div className="wh-hero__media">
@@ -133,9 +126,8 @@ export default function WebinarPage() {
           </video>
           <div className="wh-hero__when">
             <p className="wh-hero__day">שלישי 20.10</p>
-            <p className="wh-hero__hour">20:00</p>
-            <p>שעון ישראל · 18:00 בליסבון</p>
-            <Countdown startUtc={webinar.startUtc} endUtc={webinar.endUtc} />
+            <p className="wh-hero__hour">בהקלטה</p>
+            <p>90 דקות · ביוטיוב</p>
           </div>
         </div>
         <ol className="wh-path" aria-label="חמשת המקרים">
@@ -150,7 +142,7 @@ export default function WebinarPage() {
         <div className="container-wide">
           <SectionHeading
             title="חמישה מקרים, | עשר דקות לכל אחד."
-            intro="מחזור החיים של פרויקט נדל״ן, מהעסקה ועד המשקיעים. | לחצו על מקרה כדי לראות על מה נדבר."
+            intro="מחזור החיים של פרויקט נדל״ן, מהעסקה ועד המשקיעים. | לחצו על מקרה כדי לראות על מה דיברנו."
           />
           <div className="wh-cases">
             {cases.map((item, index) => (
@@ -169,7 +161,7 @@ export default function WebinarPage() {
                 </summary>
                 <div className="wh-case__body">
                   <div>
-                    <h3>על מה נדבר</h3>
+                    <h3>על מה דיברנו</h3>
                     <p>{item.about}</p>
                     <h3>הרעיון המרכזי</h3>
                     <p className="wh-case__idea">{item.idea}</p>
@@ -181,16 +173,6 @@ export default function WebinarPage() {
                 </div>
               </details>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section surface-brand" id="your-problem">
-        <div className="container-wide wh-problem">
-          <h2 data-reveal><Lines text="והבעיה שלכם | על המסך." /></h2>
-          <div data-reveal>
-            <p className="wh-problem__text">בהרשמה אתם כותבים בעיה אחת שהייתם רוצים לפתור. כל בעיה שנשלחת בהרשמה נקראת, ואחת מהן ננתח בשידור, כמו אודיט אמיתי: מה קורה היום, לאן הולכים הזמן והכסף, ומה אפשר לשנות כבר מחר.</p>
-            <ButtonLink href="#register" variant="dark">לכתוב את הבעיה שלי</ButtonLink>
           </div>
         </div>
       </section>
@@ -244,7 +226,7 @@ export default function WebinarPage() {
       <section className="section surface-muted">
         <div className="container-wide webinar-split">
           <div className="webinar-agenda" data-reveal>
-            <SectionHeading title="90 דקות, בלי חפירות." intro="עשר דקות לכל מקרה, ועשרים דקות לשאלות שלכם." />
+            <SectionHeading title="מה יש בהקלטה." intro="עשר דקות לכל מקרה, ועשרים דקות לשאלות מהקהל." />
             <ol>
               {agenda.map(([minutes, item]) => (
                 <li key={minutes}><span dir="ltr">{minutes}</span><p>{item}</p></li>
@@ -274,26 +256,20 @@ export default function WebinarPage() {
         </div>
       </section>
 
-      <section className="section">
-        <div className="container-wide webinar-split webinar-split--form">
-          <div>
-            <SectionHeading title="לפני שנרשמים" />
-            <div className="faq-list">
-              {faq.map(([question, answer]) => (
-                <details className="faq-item" key={question}>
-                  <summary>{question}</summary>
-                  <p>{answer}</p>
-                </details>
-              ))}
+      <section className="section surface-brand" id="your-problem">
+        <div className="container-wide wh-problem">
+          <h2 data-reveal>והבעיה שלכם? נבדוק אותה בשיחה.</h2>
+          <div data-reveal>
+            <p className="wh-problem__text">שיחת היכרות של 20 דקות: מה קורה היום, לאן הולכים הזמן והכסף, ובמה כדאי להתחיל. בלי התחייבות.</p>
+            <div className="button-row">
+              <ButtonLink href={bookingUrl} variant="dark">לקבוע שיחת היכרות</ButtonLink>
+              <ButtonLink href={webinar.recordingUrl} variant="outline" tracking={recordingTracking("closing")}>לצפייה בהקלטה</ButtonLink>
             </div>
+            <p className="wh-problem__alt">מעדיפים לכתוב? <a href={whatsappLink("היי, ראיתי את הקלטת הוובינר ואשמח לדבר.")} rel="noopener" data-umami-event="whatsapp" data-umami-event-place="webinar">בוואטסאפ</a></p>
           </div>
-          <Suspense fallback={<div className="opportunity-form">טוען את טופס ההרשמה…</div>}>
-            <WebinarForm />
-          </Suspense>
         </div>
       </section>
 
-      <a className="wh-sticky" href="#register" data-umami-event="webinar-sticky">שמרו לי מקום · וובינר חינמי ב־20.10<small>חינם, ובסוף לא נמכור לכם קורס.</small></a>
       <WebinarMotion />
     </div>
   );

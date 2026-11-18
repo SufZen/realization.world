@@ -59,16 +59,8 @@ const css = String.raw`
   .wm-brain__shot-caption { display: inline !important; }
 }
 
-/* The line next to the main register button (Asaf, 13.10). */
+/* Hero buttons: the recording and the intro call. */
 .wh-hero .button-row { align-items: center; column-gap: 1.1rem; }
-.wm-cta-note { color: #fff; font-weight: 700; font-size: .98rem; }
-.wh-sticky small { display: block; margin-top: .1rem; font-size: .78rem; font-weight: 600; }
-
-/* Phone register bar: off screen until the hero's button has scrolled away, and away again at the form. */
-@media (max-width: 900px) {
-  .webinar-page .wh-sticky { transform: translateY(110%); transition: transform .35s var(--ease-out); }
-  .webinar-page .wh-sticky.is-shown { transform: none; }
-}
 
 /* Scroll reveals: CSS only. Sections rise a little as they enter; siblings follow a step later. */
 @media (prefers-reduced-motion: no-preference) {
