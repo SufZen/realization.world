@@ -48,6 +48,7 @@ export function SiteFooter() {
           <Link className="footer-cta" href="/bring-an-opportunity">
             Bring an opportunity <ArrowUpRight aria-hidden="true" />
           </Link>
+          <Link href="/contact">Contact</Link>
           <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
           <a href={whatsappUrl} rel="noopener" data-umami-event="whatsapp">WhatsApp</a>
           <a href={bookingUrl} rel="noopener" data-umami-event="book-intro">Book a 20-min intro</a>

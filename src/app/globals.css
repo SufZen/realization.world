@@ -355,6 +355,11 @@ button { cursor: pointer; }
 .opportunity-intro > p { margin-top: 1rem; }
 .opportunity-checklist { display: grid; gap: .8rem; margin-top: 2rem; padding: 0; list-style: none; }
 .opportunity-checklist li { padding-top: .8rem; border-top: 1px solid var(--border-hairline); color: #000; font-size: .88rem; font-weight: 600; }
+.contact-channels { display: grid; margin: 0; padding: 0; list-style: none; border-top: 2px solid #000; }
+.contact-channels a { display: grid; grid-template-columns: auto 1fr auto; gap: .8rem; align-items: center; min-height: 56px; padding-block: .9rem; border-bottom: 1px solid var(--border-hairline); color: #000; font-weight: 700; overflow-wrap: anywhere; }
+.contact-channels a:hover span { text-decoration: underline; text-underline-offset: .2rem; }
+.contact-brief { margin-top: 1.6rem; max-width: 36ch; }
+.contact-brief a { color: #000; font-weight: 700; text-decoration: underline; text-underline-offset: .2rem; }
 .opportunity-form { display: grid; gap: 1.5rem; padding: clamp(1.5rem, 4vw, 3rem); background: var(--color-yellow); color: #000; }
 .opportunity-form fieldset { margin: 0; padding: 0; border: 0; }
 .path-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: .6rem; margin-top: 1rem; }
@@ -598,6 +603,8 @@ section[id] { scroll-margin-top: 90px; }
 .form-consent a { text-decoration: underline; }
 .form-status { display: grid; gap: .8rem; }
 .form-status__fallback { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
+.form-status__head svg { display: inline; margin-inline-end: .4rem; vertical-align: -3px; }
+.form-status__head strong { margin-inline-end: .3rem; }
 .opportunity-form button:disabled { opacity: .6; cursor: wait; }
 .principle__output { padding-top: 1rem; border-top: 1px solid rgb(255 255 255 / 18%); }
 .principle__output strong { color: var(--color-yellow); }
